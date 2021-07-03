@@ -668,7 +668,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
             private: false,
             barkbackTo: null,
             rebarkOf: null,
-            bark_id: expect.any(String),
+            meme_id: expect.any(String),
             likes: 0,
             rebarks: 0,
             barkbacks: 0
@@ -820,7 +820,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'PUT',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: { status: 200 }
     },
@@ -830,7 +830,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'PUT',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: { status: 200 }
     },
@@ -854,7 +854,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIds,
       method: 'GET',
       params: ({ getResultAt }) => ({
-        bark_ids: [getResultAt<string>('bark-user-test-1', 'bark.bark_id')]
+        meme_ids: [getResultAt<string>('bark-user-test-1', 'bark.meme_id')]
       }),
       response: {
         status: 200,
@@ -877,7 +877,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         status: 200,
         json: (json, { getResultAt }) => {
           expect(json?.barks as string[]).toStrictEqual([
-            getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+            getResultAt<string>('bark-user-test-1', 'bark.meme_id')
           ]);
           return undefined;
         }
@@ -889,7 +889,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: { status: 200 }
     },
@@ -899,7 +899,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: { status: 200 }
     },
@@ -919,7 +919,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIdLikes,
       method: 'GET',
       params: ({ getResultAt }) => ({
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: {
         status: 200,
@@ -937,7 +937,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'DELETE',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: { status: 200 }
     },
@@ -947,11 +947,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'DELETE',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),mockedUpdateMemes
       method: 'GET',
       params: ({ getResultAt }) => ({
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: {
         status: 200,
@@ -964,7 +964,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: { status: 404 }
     },
@@ -974,7 +974,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+        meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
       }),
       response: { status: 404 }
     },
@@ -998,7 +998,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIds,
       method: 'GET',
       params: ({ getResultAt }) => ({
-        bark_ids: [getResultAt<string>('bark-user-test-1', 'bark.bark_id')]
+        meme_ids: [getResultAt<string>('bark-user-test-1', 'bark.meme_id')]
       }),
       response: {
         status: 200,
@@ -1038,8 +1038,8 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIds,
       method: 'DELETE',
       params: ({ getResultAt }) => ({
-        bark_ids: [
-          getResultAt<string>('bark-user-test-1', 'bark.bark_id'),
+        meme_ids: [
+          getResultAt<string>('bark-user-test-1', 'bark.meme_id'),
           ...targetedForDeletion
         ]
       }),
@@ -1050,8 +1050,8 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIds,
       method: 'GET',
       params: ({ getResultAt }) => ({
-        bark_ids: [
-          getResultAt<string>('bark-user-test-1', 'bark.bark_id'),
+        meme_ids: [
+          getResultAt<string>('bark-user-test-1', 'bark.meme_id'),
           ...targetedForDeletion
         ]
       }),
@@ -1069,8 +1069,8 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIds,
       method: 'DELETE',
       params: ({ getResultAt }) => ({
-        bark_ids: [
-          getResultAt<string>('bark-user-test-1', 'bark.bark_id'),
+        meme_ids: [
+          getResultAt<string>('bark-user-test-1', 'bark.meme_id'),
           ...targetedForDeletion
         ]
       }),
@@ -1438,7 +1438,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: dummyDbData.barks[0]._id.toHexString()
+        meme_id: dummyDbData.barks[0]._id.toHexString()
       }),
       response: { status: 404 }
     },
@@ -1448,7 +1448,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'PUT',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: dummyDbData.barks[0]._id.toHexString()
+        meme_id: dummyDbData.barks[0]._id.toHexString()
       }),
       response: { status: 200 }
     },
@@ -1458,7 +1458,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'PUT',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: dummyDbData.barks[0]._id.toHexString()
+        meme_id: dummyDbData.barks[0]._id.toHexString()
       }),
       response: { status: 200 }
     },
@@ -1468,7 +1468,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: dummyDbData.barks[0]._id.toHexString()
+        meme_id: dummyDbData.barks[0]._id.toHexString()
       }),
       response: { status: 200 }
     },
@@ -1510,7 +1510,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'DELETE',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: dummyDbData.barks[0]._id.toHexString()
+        meme_id: dummyDbData.barks[0]._id.toHexString()
       }),
       response: { status: 200 }
     },
@@ -1531,7 +1531,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'DELETE',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: dummyDbData.barks[0]._id.toHexString()
+        meme_id: dummyDbData.barks[0]._id.toHexString()
       }),
       response: { status: 200 }
     },
@@ -1541,7 +1541,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id'),
-        bark_id: dummyDbData.barks[0]._id.toHexString()
+        meme_id: dummyDbData.barks[0]._id.toHexString()
       }),
       response: { status: 404 }
     },
@@ -1581,7 +1581,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       response: {
         status: 200,
         json: (json) => {
-          expect((json?.barks as PublicMeme[])[0].bark_id).toEqual(
+          expect((json?.barks as PublicMeme[])[0].meme_id).toEqual(
             dummyDbData.barks[28]._id.toHexString()
           );
           return undefined;
@@ -1593,7 +1593,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIds,
       method: 'GET',
       params: {
-        bark_ids: Array.from({ length: getEnv().RESULTS_PER_PAGE + 1 }).map(() =>
+        meme_ids: Array.from({ length: getEnv().RESULTS_PER_PAGE + 1 }).map(() =>
           new ObjectId().toHexString()
         )
       },
@@ -1607,7 +1607,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       handler: api.barksIdLikes,
       method: 'GET',
       params: {
-        bark_id: dummyDbData.barks[29]._id.toHexString(),
+        meme_id: dummyDbData.barks[29]._id.toHexString(),
         after: dummyDbData.barks[29].likes[0].toHexString()
       },
       response: {
@@ -1720,7 +1720,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       response: {
         status: 200,
         json: (json) => {
-          expect((json?.barks as PublicMeme[])[0].bark_id).toEqual(
+          expect((json?.barks as PublicMeme[])[0].meme_id).toEqual(
             dummyDbData.barks[28]._id.toHexString()
           );
           return undefined;
@@ -1737,7 +1737,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       response: {
         status: 200,
         json: (json) => {
-          expect((json?.barks as PublicMeme[])[0].bark_id).toEqual(
+          expect((json?.barks as PublicMeme[])[0].meme_id).toEqual(
             dummyDbData.barks
               .find((bark) => bark.content == '#28 bark contents')
               ?._id.toHexString() || toss(new GuruMeditationError())
@@ -1757,7 +1757,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         status: 200,
         json: (json) => {
           expect(
-            (json?.barks as PublicMeme[]).map((bark) => bark.bark_id)
+            (json?.barks as PublicMeme[]).map((bark) => bark.meme_id)
           ).toIncludeSameMembers(
             dummyDbData.barks
               .filter((bark) => bark.totalLikes > 50)
@@ -1778,7 +1778,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         status: 200,
         json: (json) => {
           expect(
-            (json?.barks as PublicMeme[]).map((bark) => bark.bark_id)
+            (json?.barks as PublicMeme[]).map((bark) => bark.meme_id)
           ).toIncludeSameMembers(
             dummyDbData.barks
               .filter((bark) => bark.totalLikes >= 25)
@@ -1799,7 +1799,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         status: 200,
         json: (json) => {
           expect(
-            (json?.barks as PublicMeme[]).map((bark) => bark.bark_id)
+            (json?.barks as PublicMeme[]).map((bark) => bark.meme_id)
           ).toIncludeSameMembers(
             dummyDbData.barks
               .filter((bark) => bark.totalLikes < 75 && bark.totalLikes > 0)
@@ -1820,7 +1820,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         status: 200,
         json: (json) => {
           expect(
-            (json?.barks as PublicMeme[]).map((bark) => bark.bark_id)
+            (json?.barks as PublicMeme[]).map((bark) => bark.meme_id)
           ).toIncludeSameMembers(
             dummyDbData.barks
               .filter((bark) => bark.totalLikes <= 100 && bark.totalLikes > 0)
@@ -1851,8 +1851,8 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       response: {
         status: 200,
         json: (json, { getResultAt }) => {
-          expect((json?.barks as PublicMeme[]).map((bark) => bark.bark_id)).toStrictEqual(
-            [getResultAt<string>('bark-user-test-1', 'bark.bark_id')]
+          expect((json?.barks as PublicMeme[]).map((bark) => bark.meme_id)).toStrictEqual(
+            [getResultAt<string>('bark-user-test-1', 'bark.meme_id')]
           );
           return undefined;
         }
@@ -1903,7 +1903,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       }
     },
     {
-      subject: 'search barkbackTo bark_id via regexMatch',
+      subject: 'search barkbackTo meme_id via regexMatch',
       handler: api.barksSearch,
       method: 'GET',
       params: {
@@ -1922,7 +1922,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       }
     },
     {
-      subject: 'search rebarkOf bark_id via regexMatch',
+      subject: 'search rebarkOf meme_id via regexMatch',
       handler: api.barksSearch,
       method: 'GET',
       params: {
@@ -1941,12 +1941,12 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       }
     },
     {
-      subject: 'cannot search bark_ids via match',
+      subject: 'cannot search meme_ids via match',
       handler: api.barksSearch,
       method: 'GET',
       params: ({ getResultAt }) => ({
         match: JSON.stringify({
-          bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+          meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
         })
       }),
       response: {
@@ -1955,12 +1955,12 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       }
     },
     {
-      subject: 'cannot search bark_ids via regexMatch',
+      subject: 'cannot search meme_ids via regexMatch',
       handler: api.barksSearch,
       method: 'GET',
       params: ({ getResultAt }) => ({
         regexMatch: JSON.stringify({
-          bark_id: getResultAt<string>('bark-user-test-1', 'bark.bark_id')
+          meme_id: getResultAt<string>('bark-user-test-1', 'bark.meme_id')
         })
       }),
       response: {
@@ -2009,13 +2009,13 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
           deleted: false
         }),
         regexMatch: JSON.stringify({ content: '\\d\\d' }),
-        after: getResultAt<PublicMeme[]>(-1, 'barks')[1].bark_id
+        after: getResultAt<PublicMeme[]>(-1, 'barks')[1].meme_id
       }),
       response: {
         status: 200,
         json: (json, { getResultAt }) => {
-          expect((json?.barks as PublicMeme[])[0].bark_id).toStrictEqual(
-            getResultAt<PublicMeme[]>(-1, 'barks')[2].bark_id
+          expect((json?.barks as PublicMeme[])[0].meme_id).toStrictEqual(
+            getResultAt<PublicMeme[]>(-1, 'barks')[2].meme_id
           );
           return undefined;
         }

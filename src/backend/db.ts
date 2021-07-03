@@ -98,6 +98,7 @@ export async function initializeDb(db: Db) {
   // ]);
 }
 
+// TODO: XXX: turn this into a package of some sort (and abstract away key type)
 /**
  * Checks if an item identified by some `key` (default identifier is `"_id"`)
  * exists within `collection`.
@@ -105,7 +106,7 @@ export async function initializeDb(db: Db) {
 export async function itemExists(
   collection: Collection,
   id: ObjectId,
-  key?: '_id' | 'owner' | 'rebarkOf' | 'barkbackTo'
+  key?: '_id' | 'owner' | 'receiver' | 'replyTo'
 ): Promise<boolean>;
 export async function itemExists(
   collection: Collection,

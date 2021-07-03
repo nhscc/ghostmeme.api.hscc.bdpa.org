@@ -1,5 +1,5 @@
 import { wrapHandler } from 'universe/backend/middleware';
-import { getUserLikedBarkIds } from 'universe/backend';
+import { getUserLikedMemeIds } from 'universe/backend';
 import { sendHttpOk } from 'multiverse/next-respond';
 import { ValidationError } from 'universe/backend/error';
 import { ObjectId } from 'mongodb';
@@ -18,7 +18,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       try {
         after = req.query.after ? new ObjectId(req.query.after.toString()) : null;
       } catch {
-        throw new ValidationError(`invalid bark_id "${req.query.after.toString()}"`);
+        throw new ValidationError(`invalid meme_id "${req.query.after.toString()}"`);
       }
 
       try {
@@ -27,7 +27,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         throw new ValidationError(`invalid user_id "${req.query.user_id.toString()}"`);
       }
 
-      sendHttpOk(res, { barks: await getUserLikedBarkIds({ user_id, after }) });
+      sendHttpOk(res, { memes: await getUserLikedMemeIds({ user_id, after }) });
     },
     {
       req,

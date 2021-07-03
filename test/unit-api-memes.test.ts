@@ -178,7 +178,7 @@ describe('api/v1/memes', () => {
         handler: api.memesIds,
         test: async ({ fetch }) => {
           // ? fetch is async, so to use params we need to wait
-          // TODO: fix w/ paramsPatcher
+          // TODO: fix w/ paramsPatcher (and the others too)
           for (const item of items) {
             params.meme_ids = item;
 
@@ -249,7 +249,7 @@ describe('api/v1/memes', () => {
           for (const item of items) {
             params.meme_ids = item;
 
-            const json = await fetch({ method: 'DELETE', headers: { KEY } }).then((r) =>
+            const json = await fetch({ method: 'PUT', headers: { KEY } }).then((r) =>
               r.json()
             );
 
@@ -267,7 +267,7 @@ describe('api/v1/memes', () => {
         handler: api.memesIds,
         test: async ({ fetch }) => {
           expect(
-            await fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
+            await fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
           ).toStrictEqual(400);
         }
       });

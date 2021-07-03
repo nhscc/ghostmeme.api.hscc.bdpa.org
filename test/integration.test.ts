@@ -12,7 +12,7 @@ import EndpointInfo, { config as ConfigInfo } from 'universe/pages/api/v1/info';
 
 import EndpointBarksIds, {
   config as ConfigBarksIds
-} from 'universe/pages/api/v1/barks/[...bark_ids]';
+} from 'universe/pages/api/v1/barks/[...meme_ids]';
 
 import EndpointBarksSearch, {
   config as ConfigBarksSearch
@@ -20,11 +20,11 @@ import EndpointBarksSearch, {
 
 import EndpointBarksIdLikes, {
   config as ConfigBarksIdLikes
-} from 'universe/pages/api/v1/barks/[bark_id]/likes';
+} from 'universe/pages/api/v1/barks/[meme_id]/likes';
 
 import EndpointBarksIdLikesId, {
   config as ConfigBarksIdLikesId
-} from 'universe/pages/api/v1/barks/[bark_id]/likes/[user_id]';
+} from 'universe/pages/api/v1/barks/[meme_id]/likes/[user_id]';
 
 import EndpointUsersId, {
   config as ConfigUsersId
@@ -36,7 +36,7 @@ import EndpointUsersIdLiked, {
 
 import EndpointUsersIdLikedId, {
   config as ConfigUsersIdLikedId
-} from 'universe/pages/api/v1/users/[user_id]/liked/[bark_id]';
+} from 'universe/pages/api/v1/users/[user_id]/liked/[meme_id]';
 
 import EndpointUsersIdFollowing, {
   config as ConfigUsersIdFollowing
@@ -60,7 +60,7 @@ import EndpointUsersIdBookmarks, {
 
 import EndpointUsersIdBookmarksId, {
   config as ConfigUsersIdBookmarksId
-} from 'universe/pages/api/v1/users/[user_id]/bookmarks/[bark_id]';
+} from 'universe/pages/api/v1/users/[user_id]/bookmarks/[meme_id]';
 
 import type {
   NextApiHandlerMixin,
@@ -110,18 +110,18 @@ api.info.config = ConfigInfo;
 api.users.url = '/users';
 api.usersId.url = '/users/:user_id';
 api.usersIdLiked.url = '/users/:user_id/liked';
-api.usersIdLikedId.url = '/users/:user_id/liked/:bark_id';
+api.usersIdLikedId.url = '/users/:user_id/liked/:meme_id';
 api.usersIdFollowing.url = '/users/:user_id/following';
 api.usersIdFollowingId.url = '/users/:user_id/following/:followed_id';
 api.usersIdPack.url = '/users/:user_id/pack';
 api.usersIdPackId.url = '/users/:user_id/pack/:packmate_id';
 api.usersIdBookmarks.url = '/users/:user_id/bookmarks';
-api.usersIdBookmarksId.url = '/users/:user_id/bookmarks/:bark_id';
+api.usersIdBookmarksId.url = '/users/:user_id/bookmarks/:meme_id';
 api.barks.url = '/barks';
-api.barksIds.url = '/barks/:bark_id1/:bark_id2/.../:bark_idN';
+api.barksIds.url = '/barks/:meme_id1/:meme_id2/.../:meme_idN';
 api.barksSearch.url = '/barks/search';
-api.barksIdLikes.url = '/barks/:bark_id/likes';
-api.barksIdLikesId.url = '/barks/:bark_id/likes/:user_id';
+api.barksIdLikes.url = '/barks/:meme_id/likes';
+api.barksIdLikesId.url = '/barks/:meme_id/likes/:user_id';
 api.info.url = '/info';
 
 const withMockedEnv = mockEnvFactory({}, { replace: false });

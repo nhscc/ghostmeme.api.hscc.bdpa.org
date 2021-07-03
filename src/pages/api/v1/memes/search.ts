@@ -1,10 +1,11 @@
 import { sendHttpOk } from 'multiverse/next-respond';
-import { searchBarks } from 'universe/backend';
+import { searchMemes } from 'universe/backend';
 import { wrapHandler } from 'universe/backend/middleware';
 import { ValidationError } from 'universe/backend/error';
 import { ObjectId } from 'mongodb';
 
 import type { NextApiResponse, NextApiRequest } from 'next';
+import type { MemeId } from 'types/global';
 
 // ? This is a NextJS special "config" export
 export { defaultConfig as config } from 'universe/backend/middleware';
@@ -12,14 +13,14 @@ export { defaultConfig as config } from 'universe/backend/middleware';
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   await wrapHandler(
     async ({ req, res }) => {
-      let after: ObjectId | null | undefined = undefined;
+      let after: MemeId | null | undefined = undefined;
       let match: Record<string, unknown> | undefined = undefined;
       let regexMatch: Record<string, unknown> | undefined = undefined;
 
       try {
         after = req.query.after ? new ObjectId(req.query.after.toString()) : null;
       } catch {
-        throw new ValidationError(`invalid bark_id "${req.query.after.toString()}"`);
+        throw new ValidationError(`invalid meme_id "${req.query.after.toString()}"`);
       }
 
       try {
@@ -31,7 +32,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
       if (match && regexMatch) {
         sendHttpOk(res, {
-          barks: await searchBarks({
+          memes: await searchMemes({
             after,
             // @ts-expect-error: validation is handled
             match,
