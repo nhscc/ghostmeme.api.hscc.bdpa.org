@@ -147,6 +147,10 @@ export async function createMeme({
     throw new InvalidKeyError();
   } else if (data.imageUrl !== null && typeof data.imageUrl != 'string') {
     throw new ValidationError('`imageUrl` must be a string or null');
+  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+    throw new ValidationError(
+      '`imageBase64` must be a valid base64 string, data uri, or null'
+    );
   } else if (data.imageBase64 && data.imageUrl) {
     throw new ValidationError('cannot use `imageUrl` and `imageBase64` at the same time');
   } else if (typeof data.expiredAt != 'number') {
@@ -168,7 +172,7 @@ export async function createMeme({
     try {
       receiver = new ObjectId(data.receiver);
     } catch {
-      throw new ValidationError('invalid user_id for `replyTo`');
+      throw new ValidationError('invalid user_id for `receiver`');
     }
   } else receiver = null;
 
@@ -192,7 +196,7 @@ export async function createMeme({
   const memes = db.collection<InternalMeme>('memes');
   const users = db.collection<InternalUser>('users');
 
-  if (Object.keys(rest).length > 0) {
+  if (Object.keys(rest).length != 5) {
     throw new ValidationError('unexpected properties encountered');
   } else if (
     !(receiver && priv && !replyTo) &&
@@ -509,9 +513,17 @@ export async function createUser({
     throw new InvalidKeyError();
   }
 
-  const { email, name, phone, username, imageBase64, ...rest } = data;
+  let imageUrl: string | null = null;
 
-  if (Object.keys(rest).length > 0) {
+  if (data.imageBase64) {
+    // TODO: validate and use imageBase64 to resolve new imageUrl
+    // eslint-disable-next-line no-self-assign
+    imageUrl = imageUrl;
+  }
+
+  const { email, name, phone, username, ...rest } = data;
+
+  if (Object.keys(rest).length != 1) {
     throw new ValidationError('unexpected properties encountered');
   }
 
@@ -525,11 +537,6 @@ export async function createUser({
   } else if (phone && (await itemExists(users, phone, 'phone'))) {
     throw new ValidationError('a user with that phone number already exists');
   }
-
-  // TODO: validate and use imageBase64
-  void imageBase64;
-  // TODO: resolve real imageUrl
-  const imageUrl = null;
 
   // * At this point, we can finally trust this data is not malicious
   const newUser: InternalUser = {
@@ -613,9 +620,8 @@ export async function updateUser({
     throw new ValidationError('a user with that phone number already exists');
   }
 
-  // TODO: validate and use imageBase64
+  // TODO: validate and use imageBase64 to resolve new imageUrl
   void imageBase64;
-  // TODO: resolve real imageUrl
   const imageUrl = null;
 
   // * At this point, we can finally trust this data is not malicious
