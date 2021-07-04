@@ -1024,12 +1024,20 @@ describe('::getAllUsers', () => {
 });
 
 describe('::getUser', () => {
-  it('returns user', async () => {
+  it('returns user by user_id', async () => {
     expect.hasAssertions();
 
     expect(await Backend.getUser({ user_id: dummyDbData.users[0]._id })).toStrictEqual(
       toPublicUser(dummyDbData.users[0])
     );
+  });
+
+  it('returns user by username', async () => {
+    expect.hasAssertions();
+
+    expect(
+      await Backend.getUser({ username: dummyDbData.users[0].username })
+    ).toStrictEqual(toPublicUser(dummyDbData.users[0]));
   });
 
   it('rejects if id not found', async () => {
@@ -1038,6 +1046,24 @@ describe('::getUser', () => {
     const id = new ObjectId();
 
     await expect(Backend.getUser({ user_id: id })).rejects.toMatchObject({
+      message: expect.stringContaining(id.toString())
+    });
+  });
+
+  it('rejects if id and username not passed', async () => {
+    expect.hasAssertions();
+
+    await expect(Backend.getUser({})).rejects.toMatchObject({
+      message: 'must provide either user_id or username'
+    });
+  });
+
+  it('rejects if username not found', async () => {
+    expect.hasAssertions();
+
+    const id = new ObjectId();
+
+    await expect(Backend.getUser({ username: id.toString() })).rejects.toMatchObject({
       message: expect.stringContaining(id.toString())
     });
   });
@@ -2041,17 +2067,20 @@ describe('::updateUser', () => {
       {
         name: 'one name',
         email: '1-one@email.address',
-        phone: '111-111-1111'
+        phone: '111-111-1111',
+        imageBase64: null
       },
       {
         name: 'two name',
         email: '2-two@email.address',
-        phone: null
+        phone: null,
+        imageBase64: 'pretend-base64'
       },
       {
         name: 'three name',
         email: '3-three@email.address',
-        phone: '333.333.3333 x5467'
+        phone: '333.333.3333 x5467',
+        imageBase64: null
       }
     ];
 
@@ -2066,7 +2095,12 @@ describe('::updateUser', () => {
 
     expect(
       await users.find({ _id: { $in: patchedUserIds } }).toArray()
-    ).toIncludeSameMembers(items.map((item) => expect.objectContaining(item)));
+    ).toIncludeSameMembers(
+      items.map((item) => {
+        const { imageBase64: _, ...rest } = item;
+        return expect.objectContaining(rest);
+      })
+    );
   });
 
   it('errors if request body is invalid', async () => {
@@ -2084,7 +2118,7 @@ describe('::updateUser', () => {
           name: '#&*@^(#@(^$&*#',
           email: '',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '3 and 30'
       ],
@@ -2093,7 +2127,7 @@ describe('::updateUser', () => {
           name: 'tr',
           email: '',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '3 and 30'
       ],
@@ -2104,7 +2138,7 @@ describe('::updateUser', () => {
             .join(''),
           email: '',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '3 and 30'
       ],
@@ -2113,7 +2147,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: '',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '5 and 50'
       ],
@@ -2122,7 +2156,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: null,
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '5 and 50'
       ],
@@ -2131,7 +2165,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'invalid@email address',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '5 and 50'
       ],
@@ -2140,7 +2174,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'bad-email-address.here',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '5 and 50'
       ],
@@ -2149,7 +2183,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'validemailaddressbutitisway2big@who.woulddothis.com',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         '5 and 50'
       ],
@@ -2158,7 +2192,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'valid@email.address',
           phone: '',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         'valid phone number'
       ],
@@ -2167,7 +2201,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'valid@email.address',
           phone: '773',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         'valid phone number'
       ],
@@ -2176,7 +2210,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'valid@email.address',
           phone: '773-$*#-&$^#',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         'valid phone number'
       ],
@@ -2185,7 +2219,7 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'valid@email.address',
           phone: '773-773-773',
-          username: ''
+          imageBase64: null
         } as unknown as PatchUser,
         'valid phone number'
       ],
@@ -2193,7 +2227,25 @@ describe('::updateUser', () => {
         {
           name: 'tre giles',
           email: 'valid@email.address',
+          phone: '773-773-7773'
+        } as unknown as PatchUser,
+        'string, data uri, or null'
+      ],
+      [
+        {
+          name: 'tre giles',
+          email: 'valid@email.address',
+          phone: '773-773-7773',
+          imageBase64: 5
+        } as unknown as PatchUser,
+        'string, data uri, or null'
+      ],
+      [
+        {
+          name: 'tre giles',
+          email: 'valid@email.address',
           phone: '777-777-7777',
+          imageBase64: 'fake-base64',
           username: 'xunnamius'
         } as unknown as PatchUser,
         'unexpected properties'
@@ -2220,7 +2272,8 @@ describe('::updateUser', () => {
         data: {
           name: 'one name',
           email: '1-one@email.address',
-          phone: '111-111-1111'
+          phone: '111-111-1111',
+          imageBase64: null
         }
       })
     ).rejects.toMatchObject({

@@ -688,17 +688,21 @@ export async function getUser({
   user_id?: UserId;
   username?: string;
 }): Promise<PublicUser> {
-  if (!(user_id instanceof ObjectId)) {
+  if (!user_id && !username) {
+    throw new ValidationError('must provide either user_id or username');
+  } else if (user_id && !(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
+  } else if (typeof username == 'string' && !username) {
+    throw new ValidationError('username cannot be empty');
   } else {
     const db = await getDb();
     const users = db.collection<InternalUser>('users');
 
     return (
       (await users
-        .find({ _id: user_id })
+        .find(user_id ? { _id: user_id } : { username })
         .project<PublicUser>(publicUserProjection)
-        .next()) ?? toss(new ItemNotFoundError(user_id))
+        .next()) ?? toss(new ItemNotFoundError(user_id || username))
     );
   }
 }
