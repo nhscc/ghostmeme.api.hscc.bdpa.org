@@ -1,10 +1,11 @@
 import { wrapHandler } from 'universe/backend/middleware';
-import { addFriend, isUserAFriend, removePackmate } from 'universe/backend';
+import { addUserAsFriend, isUserAFriend, removeUserAsFriend } from 'universe/backend';
 import { sendHttpNotFound, sendHttpOk } from 'multiverse/next-respond';
 import { ValidationError } from 'universe/backend/error';
 import { ObjectId } from 'mongodb';
 
 import type { NextApiResponse, NextApiRequest } from 'next';
+import type { FriendId, UserId } from 'types/global';
 
 // ? This is a NextJS special "config" export
 export { defaultConfig as config } from 'universe/backend/middleware';
@@ -12,14 +13,14 @@ export { defaultConfig as config } from 'universe/backend/middleware';
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   await wrapHandler(
     async ({ req, res }) => {
-      let packmate_id: ObjectId | undefined = undefined;
-      let user_id: ObjectId | undefined = undefined;
+      let friend_id: FriendId | undefined = undefined;
+      let user_id: UserId | undefined = undefined;
 
       try {
-        packmate_id = new ObjectId(req.query.packmate_id.toString());
+        friend_id = new ObjectId(req.query.friend_id.toString());
       } catch {
         throw new ValidationError(
-          `invalid packmate_id "${req.query.packmate_id.toString()}"`
+          `invalid friend_id "${req.query.friend_id.toString()}"`
         );
       }
 
@@ -30,14 +31,15 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       }
 
       if (req.method == 'GET') {
-        (await isUserAFriend({ packmate_id, user_id }))
+        (await isUserAFriend({ friend_id, user_id }))
           ? sendHttpOk(res)
           : sendHttpNotFound(res);
       } else if (req.method == 'DELETE') {
-        await removePackmate({ packmate_id, user_id });
+        await removeUserAsFriend({ friend_id, user_id });
         sendHttpOk(res);
       } else {
-        await addFriend({ packmate_id, user_id });
+        // * PUT
+        await addUserAsFriend({ friend_id, user_id });
         sendHttpOk(res);
       }
     },

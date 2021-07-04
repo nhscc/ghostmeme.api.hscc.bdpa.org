@@ -31,6 +31,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       }
 
       if (match && regexMatch) {
+        // * GET
         sendHttpOk(res, {
           memes: await searchMemes({
             after,

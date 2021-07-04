@@ -13,7 +13,6 @@ import {
   DUMMY_KEY as KEY,
   createMeme,
   getMemes,
-  updateMemes,
   getMemeLikesUserIds,
   isMemeLiked,
   searchMemes
@@ -43,7 +42,6 @@ jest.mock('universe/backend/middleware');
 
 const mockedCreateMeme = asMockedFunction(createMeme);
 const mockedGetMemes = asMockedFunction(getMemes);
-const mockedUpdateMemes = asMockedFunction(updateMemes);
 const mockedGetMemeLikesUserIds = asMockedFunction(getMemeLikesUserIds);
 const mockedIsMemeLiked = asMockedFunction(isMemeLiked);
 const mockedSearchMemes = asMockedFunction(searchMemes);
@@ -228,7 +226,7 @@ describe('api/v1/memes', () => {
   });
 
   describe('/:meme_id1/:meme_id2/.../:meme_idN [PUT]', () => {
-    it('accepts multiple meme_ids, ignoring not found and duplicates', async () => {
+    it('accepts multiple meme_ids', async () => {
       expect.hasAssertions();
 
       const items = [
@@ -388,7 +386,7 @@ describe('api/v1/memes', () => {
       });
     });
 
-    it('errors if the user has not liked the meme', async () => {
+    it('404s if the user has not liked the meme', async () => {
       expect.hasAssertions();
 
       mockedIsMemeLiked.mockReturnValue(Promise.resolve(false));

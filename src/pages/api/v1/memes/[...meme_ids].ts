@@ -31,8 +31,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         } else sendHttpOk(res, { memes });
       } else {
         // * PUT
-        // TODO: validation
-        await updateMemes({ meme_ids, data: {} });
+        await updateMemes({ meme_ids, data: req.body });
         sendHttpOk(res);
       }
     },

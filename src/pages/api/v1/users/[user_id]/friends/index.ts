@@ -1,10 +1,11 @@
-import { getRequestsOfType } from 'universe/backend';
+import { getUserFriendsUserIds } from 'universe/backend';
 import { sendHttpOk } from 'multiverse/next-respond';
 import { wrapHandler } from 'universe/backend/middleware';
 import { ValidationError } from 'universe/backend/error';
 import { ObjectId } from 'mongodb';
 
 import type { NextApiResponse, NextApiRequest } from 'next';
+import type { UserId } from 'types/global';
 
 // ? This is a NextJS special "config" export
 export { defaultConfig as config } from 'universe/backend/middleware';
@@ -12,8 +13,8 @@ export { defaultConfig as config } from 'universe/backend/middleware';
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   await wrapHandler(
     async ({ req, res }) => {
-      let after: ObjectId | null | undefined = undefined;
-      let user_id: ObjectId | undefined = undefined;
+      let after: UserId | null | undefined = undefined;
+      let user_id: UserId | undefined = undefined;
 
       try {
         after = req.query.after ? new ObjectId(req.query.after.toString()) : null;
@@ -27,8 +28,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         throw new ValidationError(`invalid user_id "${req.query.user_id.toString()}"`);
       }
 
+      // * GET
       sendHttpOk(res, {
-        users: await getRequestsOfType({ user_id, after })
+        users: await getUserFriendsUserIds({ user_id, after })
       });
     },
     {

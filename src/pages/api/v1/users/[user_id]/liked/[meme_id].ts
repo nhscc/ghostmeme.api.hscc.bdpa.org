@@ -28,6 +28,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         throw new ValidationError(`invalid user_id "${req.query.user_id.toString()}"`);
       }
 
+      // * GET
       if (user_id !== undefined) {
         (await isMemeLiked({ meme_id, user_id }))
           ? sendHttpOk(res)

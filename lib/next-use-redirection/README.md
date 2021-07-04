@@ -16,7 +16,7 @@ import * as React from 'react'
 import { useRedirection } from 'next-use-redirection'
 import { useUser } from 'universe/frontend/hooks'
 import PasswordForm from 'components/password-form'
-import { WithAuthed, User } from 'types/global';
+import type { WithAuthed, User } from 'types/global';
 
 const REDIRECT_ON_NOT_FIRST_LOGIN_LOCATION = '/dashboard';
 

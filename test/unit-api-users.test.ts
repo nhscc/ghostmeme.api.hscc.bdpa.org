@@ -14,21 +14,13 @@ import {
   getAllUsers,
   createUser,
   getUser,
-  deleteUser,
-  updateUser,
   getMemeLikesUserIds,
   getUserLikedMemeIds,
   isMemeLiked,
-  removeLikedMeme,
-  addLikedMeme,
   getUserFriendsUserIds,
   isUserAFriend,
-  removeUserAsFriend,
-  addUserAsFriend,
   getFriendRequestsOfType,
-  isFriendRequestOfType,
-  removeFriendRequest,
-  addFriendRequest
+  isFriendRequestOfType
 } from 'universe/backend';
 
 import EndpointUsers, { config as ConfigUsers } from 'universe/pages/api/v1/users';
@@ -61,7 +53,7 @@ import EndpointUsersIdRequestsTypeId, {
   config as ConfigUsersIdRequestsTypeId
 } from 'universe/pages/api/v1/users/[user_id]/requests/[request_type]/[target_id]';
 
-import type { PublicUser } from 'types/global';
+import type { FriendRequestType, PublicUser } from 'types/global';
 
 jest.mock('universe/backend');
 jest.mock('universe/backend/middleware');
@@ -69,21 +61,13 @@ jest.mock('universe/backend/middleware');
 const mockedGetAllUsers = asMockedFunction(getAllUsers);
 const mockedCreateUser = asMockedFunction(createUser);
 const mockedGetUser = asMockedFunction(getUser);
-const mockedDeleteUser = asMockedFunction(deleteUser);
-const mockedUpdateUser = asMockedFunction(updateUser);
 const mockedGetMemeLikesUserIds = asMockedFunction(getMemeLikesUserIds);
 const mockedGetUserLikedMemeIds = asMockedFunction(getUserLikedMemeIds);
 const mockedIsMemeLiked = asMockedFunction(isMemeLiked);
-const mockedRemoveLikedMeme = asMockedFunction(removeLikedMeme);
-const mockedAddLikedMeme = asMockedFunction(addLikedMeme);
 const mockedGetUserFriendsUserIds = asMockedFunction(getUserFriendsUserIds);
 const mockedIsUserAFriend = asMockedFunction(isUserAFriend);
-const mockedRemoveUserAsFriend = asMockedFunction(removeUserAsFriend);
-const mockedAddUserAsFriend = asMockedFunction(addUserAsFriend);
 const mockedGetFriendRequestsOfType = asMockedFunction(getFriendRequestsOfType);
 const mockedIsFriendRequestOfType = asMockedFunction(isFriendRequestOfType);
-const mockedRemoveFriendRequest = asMockedFunction(removeFriendRequest);
-const mockedAddFriendRequest = asMockedFunction(addFriendRequest);
 
 const api = {
   users: EndpointUsers as typeof EndpointUsers & { config?: typeof ConfigUsers },
@@ -232,16 +216,39 @@ describe('api/v1/users', () => {
 
           const json = await fetch({ headers: { KEY } }).then((r) => r.json());
 
+          expect(mockedGetUser).toBeCalledWith({ user_id: expect.anything() });
           expect(json.success).toBeTrue();
           expect(json.user).toBeObject();
         }
       });
 
       await testApiHandler({
-        params: { user_id: 'invalid' },
+        params: { user_id: '' },
         handler: api.usersId,
         test: async ({ fetch }) =>
           expect(await fetch().then((r) => r.status)).toStrictEqual(400)
+      });
+    });
+  });
+
+  describe('/:username [GET]', () => {
+    it('accepts a username and returns a user; errors on empty username/missing params', async () => {
+      expect.hasAssertions();
+
+      await testApiHandler({
+        params: { user_id: 'faker' },
+        handler: api.usersId,
+        test: async ({ fetch }) => {
+          mockedGetUser.mockReturnValue(
+            Promise.resolve({}) as ReturnType<typeof mockedGetUser>
+          );
+
+          const json = await fetch({ headers: { KEY } }).then((r) => r.json());
+
+          expect(mockedGetUser).toBeCalledWith({ username: expect.anything() });
+          expect(json.success).toBeTrue();
+          expect(json.user).toBeObject();
+        }
       });
     });
   });
@@ -433,7 +440,7 @@ describe('api/v1/users', () => {
       });
     });
 
-    it('errors if the user has not liked the meme', async () => {
+    it('404s if the user has not liked the meme', async () => {
       expect.hasAssertions();
 
       mockedIsMemeLiked.mockReturnValue(Promise.resolve(false));
@@ -453,7 +460,7 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/following [GET]', () => {
+  describe('/:user_id/friends [GET]', () => {
     it('accepts user_id and returns users; errors if invalid user_id given', async () => {
       expect.hasAssertions();
 
@@ -485,7 +492,7 @@ describe('api/v1/users', () => {
       });
     });
 
-    it('supports pagination and includeIndirect flag', async () => {
+    it('supports pagination', async () => {
       expect.hasAssertions();
 
       await testApiHandler({
@@ -497,24 +504,6 @@ describe('api/v1/users', () => {
 
           expect(json.success).toBeTrue();
           expect(json.users).toBeArray();
-          expect(mockedGetFollowingUserIds).toBeCalledWith(
-            expect.objectContaining({ includeIndirect: false })
-          );
-        }
-      });
-
-      await testApiHandler({
-        params: { user_id: new ObjectId().toString() },
-        requestPatcher: (req) => (req.url = '/?includeIndirect'),
-        handler: api.usersIdFriends,
-        test: async ({ fetch }) => {
-          const json = await fetch({ headers: { KEY } }).then((r) => r.json());
-
-          expect(json.success).toBeTrue();
-          expect(json.users).toBeArray();
-          expect(mockedGetFollowingUserIds).toBeCalledWith(
-            expect.objectContaining({ includeIndirect: true })
-          );
         }
       });
     });
@@ -552,26 +541,26 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/following/:followed_id [GET]', () => {
-    it('accepts followed_id and user_id; errors if invalid IDs given', async () => {
+  describe('/:user_id/friends/:friend_id [GET]', () => {
+    it('accepts friend_id and user_id; errors if invalid IDs given', async () => {
       expect.hasAssertions();
 
-      mockedIsUserFollowing.mockReturnValue(Promise.resolve(true));
+      mockedIsUserAFriend.mockReturnValue(Promise.resolve(true));
 
       const factory = itemFactory([
-        [{ followed_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ followed_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ followed_id: 'invalid-id', user_id: 'invalid-id' }, 400],
+        [{ friend_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
+        [{ friend_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
+        [{ friend_id: 'invalid-id', user_id: 'invalid-id' }, 400],
         [
           {
-            followed_id: new ObjectId().toString(),
+            friend_id: new ObjectId().toString(),
             user_id: new ObjectId().toString()
           },
           200
         ]
       ]);
 
-      const params = { followed_id: '', user_id: '' };
+      const params = { friend_id: '', user_id: '' };
 
       await testApiHandler({
         params,
@@ -585,15 +574,15 @@ describe('api/v1/users', () => {
       });
     });
 
-    it('errors if followed_id is not actually followed', async () => {
+    it('404s if the users are not friends', async () => {
       expect.hasAssertions();
 
-      mockedIsUserFollowing.mockReturnValue(Promise.resolve(false));
+      mockedIsUserAFriend.mockReturnValue(Promise.resolve(false));
 
       await testApiHandler({
         params: {
-          followed_id: new ObjectId().toString(),
-          user_id: new ObjectId().toString()
+          user_id: new ObjectId().toString(),
+          friend_id: new ObjectId().toString()
         },
         handler: api.usersIdFriendsId,
         test: async ({ fetch }) => {
@@ -605,24 +594,24 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/following/:followed_id [DELETE]', () => {
-    it('accepts followed_id and user_id; errors if invalid IDs given', async () => {
+  describe('/:user_id/friends/:friend_id [DELETE]', () => {
+    it('accepts friend_id and user_id; errors if invalid IDs given', async () => {
       expect.hasAssertions();
 
       const factory = itemFactory([
-        [{ followed_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ followed_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ followed_id: 'invalid-id', user_id: 'invalid-id' }, 400],
+        [{ friend_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
+        [{ friend_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
+        [{ friend_id: 'invalid-id', user_id: 'invalid-id' }, 400],
         [
           {
-            followed_id: new ObjectId().toString(),
+            friend_id: new ObjectId().toString(),
             user_id: new ObjectId().toString()
           },
           200
         ]
       ]);
 
-      const params = { followed_id: '', user_id: '' };
+      const params = { friend_id: '', user_id: '' };
 
       await testApiHandler({
         params,
@@ -639,24 +628,24 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/following/:followed_id [PUT]', () => {
-    it('accepts followed_id and user_id; errors if invalid IDs given', async () => {
+  describe('/:user_id/friends/:friend_id [PUT]', () => {
+    it('accepts friend_id and user_id; errors if invalid IDs given', async () => {
       expect.hasAssertions();
 
       const factory = itemFactory([
-        [{ followed_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ followed_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ followed_id: 'invalid-id', user_id: 'invalid-id' }, 400],
+        [{ friend_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
+        [{ friend_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
+        [{ friend_id: 'invalid-id', user_id: 'invalid-id' }, 400],
         [
           {
-            followed_id: new ObjectId().toString(),
+            friend_id: new ObjectId().toString(),
             user_id: new ObjectId().toString()
           },
           200
         ]
       ]);
 
-      const params = { followed_id: '', user_id: '' };
+      const params = { friend_id: '', user_id: '' };
 
       await testApiHandler({
         params,
@@ -673,16 +662,47 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/pack [GET]', () => {
-    it('accepts user_id and returns users; errors if invalid user_id given', async () => {
+  describe('/:user_id/requests/:request_type [GET]', () => {
+    it('accepts user_id and request_type and returns users', async () => {
       expect.hasAssertions();
 
       const factory = itemFactory([
-        [{ user_id: 'invalid-id' }, 400],
-        [{ user_id: new ObjectId().toString() }, 200]
+        [{ user_id: new ObjectId().toString(), request_type: 'outgoing' }, 200],
+        [{ user_id: new ObjectId().toString(), request_type: 'incoming' }, 200]
       ]);
 
-      const params = { user_id: '' };
+      const params = {} as { user_id: string; request_type: FriendRequestType };
+
+      await testApiHandler({
+        params,
+        handler: api.usersIdRequestsType,
+        test: async ({ fetch }) => {
+          for (const [expectedParams, expectedStatus] of factory) {
+            Object.assign(params, expectedParams);
+            expect(
+              await fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(
+                async (r) => [r.status, await r.json()]
+              )
+            ).toStrictEqual([
+              expectedStatus,
+              expectedStatus == 200
+                ? { success: true, users: expect.any(Array) }
+                : expect.objectContaining({ success: false })
+            ]);
+          }
+        }
+      });
+    });
+
+    it('errors if invalid user_id or request_type given', async () => {
+      expect.hasAssertions();
+
+      const factory = itemFactory([
+        [{ user_id: 'invalid-id', request_type: 'incoming' }, 400],
+        [{ user_id: new ObjectId().toString(), request_type: 'bad' }, 400]
+      ]);
+
+      const params = {} as { user_id: string; request_type: FriendRequestType };
 
       await testApiHandler({
         params,
@@ -709,7 +729,7 @@ describe('api/v1/users', () => {
       expect.hasAssertions();
 
       await testApiHandler({
-        params: { user_id: new ObjectId().toString() },
+        params: { user_id: new ObjectId().toString(), request_type: 'incoming' },
         requestPatcher: (req) => (req.url = `/?after=${new ObjectId()}`),
         handler: api.usersIdRequestsType,
         test: async ({ fetch }) => {
@@ -736,7 +756,7 @@ describe('api/v1/users', () => {
 
       await testApiHandler({
         requestPatcher: (req) => (req.url = factory()),
-        params: { user_id: new ObjectId().toString() },
+        params: { user_id: new ObjectId().toString(), request_type: 'incoming' },
         handler: api.usersIdRequestsType,
         test: async ({ fetch }) => {
           const responses = await Promise.all(
@@ -754,26 +774,52 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/pack/:packmate_id [GET]', () => {
-    it('accepts packmate_id and user_id; errors if invalid IDs given', async () => {
+  describe('/:user_id/requests/:request_type/:target_id [GET]', () => {
+    it('accepts target_id, user_id, and request_type; errors if invalid IDs given', async () => {
       expect.hasAssertions();
 
-      mockedIsUserPackmate.mockReturnValue(Promise.resolve(true));
+      mockedIsFriendRequestOfType.mockReturnValue(Promise.resolve(true));
 
       const factory = itemFactory([
-        [{ packmate_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ packmate_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ packmate_id: 'invalid-id', user_id: 'invalid-id' }, 400],
         [
           {
-            packmate_id: new ObjectId().toString(),
-            user_id: new ObjectId().toString()
+            target_id: 'invalid-id',
+            user_id: new ObjectId().toString(),
+            request_type: 'incoming'
+          },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: 'invalid-id',
+            request_type: 'incoming'
+          },
+          400
+        ],
+        [
+          { target_id: 'invalid-id', user_id: 'invalid-id', request_type: 'incoming' },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: new ObjectId().toString(),
+            request_type: 'invalid-type'
+          },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: new ObjectId().toString(),
+            request_type: 'incoming'
           },
           200
         ]
       ]);
 
-      const params = { packmate_id: '', user_id: '' };
+      const params = { target_id: '', user_id: '' };
 
       await testApiHandler({
         params,
@@ -787,15 +833,16 @@ describe('api/v1/users', () => {
       });
     });
 
-    it('errors if packmate_id does not belong to a packmate', async () => {
+    it('404s if the friend request does not exist', async () => {
       expect.hasAssertions();
 
-      mockedIsUserPackmate.mockReturnValue(Promise.resolve(false));
+      mockedIsFriendRequestOfType.mockReturnValue(Promise.resolve(false));
 
       await testApiHandler({
         params: {
-          packmate_id: new ObjectId().toString(),
-          user_id: new ObjectId().toString()
+          user_id: new ObjectId().toString(),
+          target_id: new ObjectId().toString(),
+          request_type: 'incoming'
         },
         handler: api.usersIdRequestsTypeId,
         test: async ({ fetch }) => {
@@ -807,24 +854,50 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/pack/:packmate_id [DELETE]', () => {
-    it('accepts packmate_id and user_id; errors if invalid IDs given', async () => {
+  describe('/:user_id/requests/:request_type/:target_id [DELETE]', () => {
+    it('accepts target_id, user_id, and request_type; errors if invalid IDs given', async () => {
       expect.hasAssertions();
 
       const factory = itemFactory([
-        [{ packmate_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ packmate_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ packmate_id: 'invalid-id', user_id: 'invalid-id' }, 400],
         [
           {
-            packmate_id: new ObjectId().toString(),
-            user_id: new ObjectId().toString()
+            target_id: 'invalid-id',
+            user_id: new ObjectId().toString(),
+            request_type: 'outgoing'
+          },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: 'invalid-id',
+            request_type: 'outgoing'
+          },
+          400
+        ],
+        [
+          { target_id: 'invalid-id', user_id: 'invalid-id', request_type: 'outgoing' },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: new ObjectId().toString(),
+            request_type: 'faker'
+          },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: new ObjectId().toString(),
+            request_type: 'outgoing'
           },
           200
         ]
       ]);
 
-      const params = { packmate_id: '', user_id: '' };
+      const params = { target_id: '', user_id: '' };
 
       await testApiHandler({
         params,
@@ -841,230 +914,54 @@ describe('api/v1/users', () => {
     });
   });
 
-  describe('/:user_id/pack/:packmate_id [PUT]', () => {
-    it('accepts packmate_id and user_id; errors if invalid IDs given', async () => {
+  describe('/:user_id/requests/:request_type/:target_id [PUT]', () => {
+    it('accepts target_id, user_id, and request_type; errors if invalid IDs given', async () => {
       expect.hasAssertions();
 
       const factory = itemFactory([
-        [{ packmate_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ packmate_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ packmate_id: 'invalid-id', user_id: 'invalid-id' }, 400],
         [
           {
-            packmate_id: new ObjectId().toString(),
-            user_id: new ObjectId().toString()
+            target_id: 'invalid-id',
+            user_id: new ObjectId().toString(),
+            request_type: 'outgoing'
+          },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: 'invalid-id',
+            request_type: 'outgoing'
+          },
+          400
+        ],
+        [
+          { target_id: 'invalid-id', user_id: 'invalid-id', request_type: 'outgoing' },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: new ObjectId().toString(),
+            request_type: 'bad'
+          },
+          400
+        ],
+        [
+          {
+            target_id: new ObjectId().toString(),
+            user_id: new ObjectId().toString(),
+            request_type: 'outgoing'
           },
           200
         ]
       ]);
 
-      const params = { packmate_id: '', user_id: '' };
+      const params = { target_id: '', user_id: '' };
 
       await testApiHandler({
         params,
         handler: api.usersIdRequestsTypeId,
-        test: async ({ fetch }) => {
-          for (const [expectedParams, expectedStatus] of factory) {
-            Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
-          }
-        }
-      });
-    });
-  });
-
-  describe('/:user_id/bookmarks [GET]', () => {
-    it('accepts user_id and returns memes; errors if invalid user_id given', async () => {
-      expect.hasAssertions();
-
-      const factory = itemFactory([
-        [{ user_id: 'invalid-id' }, 400],
-        [{ user_id: new ObjectId().toString() }, 200]
-      ]);
-
-      const params = { user_id: '' };
-
-      await testApiHandler({
-        params,
-        handler: api.usersIdBookmarks,
-        test: async ({ fetch }) => {
-          for (const [expectedParams, expectedStatus] of factory) {
-            Object.assign(params, expectedParams);
-            expect(
-              await fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(
-                async (r) => [r.status, await r.json()]
-              )
-            ).toStrictEqual([
-              expectedStatus,
-              expectedStatus == 200
-                ? { success: true, memes: expect.any(Array) }
-                : expect.objectContaining({ success: false })
-            ]);
-          }
-        }
-      });
-    });
-
-    it('supports pagination', async () => {
-      expect.hasAssertions();
-
-      await testApiHandler({
-        params: { user_id: new ObjectId().toString() },
-        requestPatcher: (req) => (req.url = `/?after=${new ObjectId()}`),
-        handler: api.usersIdBookmarks,
-        test: async ({ fetch }) => {
-          const json = await fetch({ headers: { KEY } }).then((r) => r.json());
-
-          expect(json.success).toBeTrue();
-          expect(json.memes).toBeArray();
-        }
-      });
-    });
-
-    it('handles invalid offsets during pagination', async () => {
-      expect.hasAssertions();
-
-      const factory = itemFactory([
-        `/?after=-5`,
-        `/?after=a`,
-        `/?after=@($)`,
-        `/?after=xyz`,
-        `/?after=123`,
-        `/?after=(*$)`,
-        `/?dne=123`
-      ]);
-
-      await testApiHandler({
-        requestPatcher: (req) => (req.url = factory()),
-        params: { user_id: new ObjectId().toString() },
-        handler: api.usersIdBookmarks,
-        test: async ({ fetch }) => {
-          const responses = await Promise.all(
-            Array.from({ length: factory.count }).map((_) => {
-              return fetch({ headers: { KEY } }).then((r) => r.status);
-            })
-          );
-
-          expect(responses).toIncludeSameMembers([
-            ...Array.from({ length: factory.count - 1 }).map(() => 400),
-            200
-          ]);
-        }
-      });
-    });
-  });
-
-  describe('/:user_id/bookmarks/:meme_id [GET]', () => {
-    it('accepts meme_id and user_id; errors if invalid IDs given', async () => {
-      expect.hasAssertions();
-
-      mockedIsMemeBookmarked.mockReturnValue(Promise.resolve(true));
-
-      const factory = itemFactory([
-        [{ meme_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ meme_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ meme_id: 'invalid-id', user_id: 'invalid-id' }, 400],
-        [
-          {
-            meme_id: new ObjectId().toString(),
-            user_id: new ObjectId().toString()
-          },
-          200
-        ]
-      ]);
-
-      const params = { meme_id: '', user_id: '' };
-
-      await testApiHandler({
-        params,
-        handler: api.usersIdBookmarksId,
-        test: async ({ fetch }) => {
-          for (const [expectedParams, expectedStatus] of factory) {
-            Object.assign(params, expectedParams);
-            expect(await fetch().then((r) => r.status)).toStrictEqual(expectedStatus);
-          }
-        }
-      });
-    });
-
-    it('errors if meme_id does not belong to a packmate', async () => {
-      expect.hasAssertions();
-
-      mockedIsMemeBookmarked.mockReturnValue(Promise.resolve(false));
-
-      await testApiHandler({
-        params: {
-          meme_id: new ObjectId().toString(),
-          user_id: new ObjectId().toString()
-        },
-        handler: api.usersIdBookmarksId,
-        test: async ({ fetch }) => {
-          expect(await fetch({ headers: { KEY } }).then((r) => r.status)).toStrictEqual(
-            404
-          );
-        }
-      });
-    });
-  });
-
-  describe('/:user_id/bookmarks/:meme_id [DELETE]', () => {
-    it('accepts meme_id and user_id; errors if invalid IDs given', async () => {
-      expect.hasAssertions();
-
-      const factory = itemFactory([
-        [{ meme_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ meme_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ meme_id: 'invalid-id', user_id: 'invalid-id' }, 400],
-        [
-          {
-            meme_id: new ObjectId().toString(),
-            user_id: new ObjectId().toString()
-          },
-          200
-        ]
-      ]);
-
-      const params = { meme_id: '', user_id: '' };
-
-      await testApiHandler({
-        params,
-        handler: api.usersIdBookmarksId,
-        test: async ({ fetch }) => {
-          for (const [expectedParams, expectedStatus] of factory) {
-            Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
-          }
-        }
-      });
-    });
-  });
-
-  describe('/:user_id/bookmarks/:meme_id [PUT]', () => {
-    it('accepts meme_id and user_id; errors if invalid IDs given', async () => {
-      expect.hasAssertions();
-
-      const factory = itemFactory([
-        [{ meme_id: 'invalid-id', user_id: new ObjectId().toString() }, 400],
-        [{ meme_id: new ObjectId().toString(), user_id: 'invalid-id' }, 400],
-        [{ meme_id: 'invalid-id', user_id: 'invalid-id' }, 400],
-        [
-          {
-            meme_id: new ObjectId().toString(),
-            user_id: new ObjectId().toString()
-          },
-          200
-        ]
-      ]);
-
-      const params = { meme_id: '', user_id: '' };
-
-      await testApiHandler({
-        params,
-        handler: api.usersIdBookmarksId,
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);

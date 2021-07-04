@@ -30,7 +30,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
             regexMatch: {}
           })
         });
-      } else
+      } // * POST
+      else
         sendHttpOk(res, { meme: await createMeme({ creatorKey: key, data: req.body }) });
     },
     { req, res, methods: ['GET', 'POST'], apiVersion: 1 }
