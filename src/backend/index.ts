@@ -155,6 +155,8 @@ export async function createMeme({
     throw new ValidationError('cannot use `imageUrl` and `imageBase64` at the same time');
   } else if (typeof data.expiredAt != 'number') {
     throw new ValidationError('`expiredAt` must be a number');
+  } else if (!data.description && !data.imageUrl && !data.imageBase64) {
+    throw new ValidationError('cannot create an empty meme');
   }
 
   let owner: UserId | undefined = undefined;
@@ -761,11 +763,11 @@ export async function isUserAFriend({
     return (
       (await users
         .find({ _id: user_id })
-        .project<{ followed: boolean }>({
-          followed: { $in: [friend_id, '$following'] }
+        .project<{ friend: boolean }>({
+          friend: { $in: [friend_id, '$friends'] }
         })
         .next()
-        .then((r) => r?.followed)) ?? toss(new GuruMeditationError())
+        .then((r) => r?.friend)) ?? toss(new GuruMeditationError())
     );
   }
 }
@@ -788,7 +790,7 @@ export async function removeUserAsFriend({
     if (!(await itemExists(users, friend_id))) throw new ItemNotFoundError(friend_id);
     if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);
 
-    await users.updateOne({ _id: user_id }, { $pull: { following: friend_id } });
+    await users.updateOne({ _id: user_id }, { $pull: { friends: friend_id } });
   }
 }
 
@@ -799,22 +801,22 @@ export async function addUserAsFriend({
   user_id: UserId;
   friend_id: UserId;
 }): Promise<void> {
-  if (!(followed_id instanceof ObjectId)) {
-    throw new InvalidIdError(followed_id);
+  if (!(friend_id instanceof ObjectId)) {
+    throw new InvalidIdError(friend_id);
   } else if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
-  } else if (user_id.equals(followed_id)) {
+  } else if (user_id.equals(friend_id)) {
     throw new ValidationError('users cannot follow themselves');
   } else {
     const db = await getDb();
     const users = db.collection<InternalUser>('users');
 
-    if (!(await itemExists(users, followed_id))) throw new ItemNotFoundError(followed_id);
+    if (!(await itemExists(users, friend_id))) throw new ItemNotFoundError(friend_id);
     if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);
 
     await users.updateOne(
-      { _id: user_id, following: { $nin: [followed_id] } },
-      { $push: { following: { $each: [followed_id], $position: 0 } } }
+      { _id: user_id, friends: { $nin: [friend_id] } },
+      { $push: { friends: { $each: [friend_id], $position: 0 } } }
     );
   }
 }
@@ -848,8 +850,10 @@ export async function getFriendRequestsOfType({
         .project<{ requests: FriendRequestId[] }>({
           requests: {
             $slice: [
-              '$requests',
-              after ? { $sum: [{ $indexOfArray: ['$requests', after] }, 1] } : 0,
+              `$requests.${request_type}`,
+              after
+                ? { $sum: [{ $indexOfArray: [`$requests.${request_type}`, after] }, 1] }
+                : 0,
               getEnv().RESULTS_PER_PAGE
             ]
           }
@@ -869,25 +873,25 @@ export async function isFriendRequestOfType({
   request_type: FriendRequestType;
   target_id: UserId;
 }): Promise<boolean> {
-  if (!(packmate_id instanceof ObjectId)) {
-    throw new InvalidIdError(packmate_id);
+  if (!(target_id instanceof ObjectId)) {
+    throw new InvalidIdError(target_id);
   } else if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
   } else {
     const db = await getDb();
     const users = db.collection<InternalUser>('users');
 
-    if (!(await itemExists(users, packmate_id))) throw new ItemNotFoundError(packmate_id);
+    if (!(await itemExists(users, target_id))) throw new ItemNotFoundError(target_id);
     if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);
 
     return (
       (await users
         .find({ _id: user_id })
-        .project<{ packmate: boolean }>({
-          packmate: { $in: [packmate_id, '$packmates'] }
+        .project<{ request: boolean }>({
+          request: { $in: [target_id, `$requests.${request_type}`] }
         })
         .next()
-        .then((r) => r?.packmate)) ?? toss(new GuruMeditationError())
+        .then((r) => r?.request)) ?? toss(new GuruMeditationError())
     );
   }
 }
@@ -901,18 +905,21 @@ export async function removeFriendRequest({
   request_type: FriendRequestType;
   target_id: UserId;
 }): Promise<void> {
-  if (!(packmate_id instanceof ObjectId)) {
-    throw new InvalidIdError(packmate_id);
+  if (!(target_id instanceof ObjectId)) {
+    throw new InvalidIdError(target_id);
   } else if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
   } else {
     const db = await getDb();
     const users = db.collection<InternalUser>('users');
 
-    if (!(await itemExists(users, packmate_id))) throw new ItemNotFoundError(packmate_id);
+    if (!(await itemExists(users, target_id))) throw new ItemNotFoundError(target_id);
     if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);
 
-    await users.updateOne({ _id: user_id }, { $pull: { packmates: packmate_id } });
+    await users.updateOne(
+      { _id: user_id },
+      { $pull: { [`requests.${request_type}`]: target_id } }
+    );
   }
 }
 
@@ -925,22 +932,22 @@ export async function addFriendRequest({
   request_type: FriendRequestType;
   target_id: UserId;
 }): Promise<void> {
-  if (!(packmate_id instanceof ObjectId)) {
-    throw new InvalidIdError(packmate_id);
+  if (!(target_id instanceof ObjectId)) {
+    throw new InvalidIdError(target_id);
   } else if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
-  } else if (user_id.equals(packmate_id)) {
-    throw new ValidationError('users cannot add themselves to their own pack');
+  } else if (user_id.equals(target_id)) {
+    throw new ValidationError('users cannot send a friend request to themselves');
   } else {
     const db = await getDb();
     const users = db.collection<InternalUser>('users');
 
-    if (!(await itemExists(users, packmate_id))) throw new ItemNotFoundError(packmate_id);
+    if (!(await itemExists(users, target_id))) throw new ItemNotFoundError(target_id);
     if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);
 
     await users.updateOne(
-      { _id: user_id, packmates: { $nin: [packmate_id] } },
-      { $push: { packmates: { $each: [packmate_id], $position: 0 } } }
+      { _id: user_id, [`requests.${request_type}`]: { $nin: [target_id] } },
+      { $push: { [`requests.${request_type}`]: { $each: [target_id], $position: 0 } } }
     );
   }
 }

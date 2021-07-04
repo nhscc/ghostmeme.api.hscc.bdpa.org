@@ -493,6 +493,26 @@ describe('::createMeme', () => {
         owner: dummyDbData.users[0]._id.toString(),
         receiver: null,
         expiredAt: -1,
+        description: null,
+        private: false,
+        replyTo: null,
+        imageUrl: 'https://meme.url',
+        imageBase64: null
+      },
+      {
+        owner: dummyDbData.users[0]._id.toString(),
+        receiver: null,
+        expiredAt: -1,
+        description: null,
+        private: false,
+        replyTo: null,
+        imageUrl: null,
+        imageBase64: 'pretend-base64'
+      },
+      {
+        owner: dummyDbData.users[0]._id.toString(),
+        receiver: null,
+        expiredAt: -1,
         description: '1',
         private: false,
         replyTo: null,
@@ -822,6 +842,19 @@ describe('::createMeme', () => {
           expiredAt: -1
         } as unknown as NewMeme,
         'not found'
+      ],
+      [
+        {
+          owner: dummyDbData.users[0]._id.toString(),
+          receiver: null,
+          expiredAt: -1,
+          description: null,
+          private: false,
+          replyTo: null,
+          imageUrl: null,
+          imageBase64: null
+        } as unknown as NewMeme,
+        'empty'
       ]
     ];
 
@@ -872,6 +905,83 @@ describe('::createMeme', () => {
         .findOne({})
         .then((r) => r?.totalMemes)
     ).toStrictEqual(dummyDbData.info.totalMemes + 2);
+  });
+});
+
+describe('::updateMeme', () => {
+  it('updates an existing meme in the database', async () => {
+    expect.hasAssertions();
+
+    const memes = (await getDb()).collection<WithId<InternalUser>>('memes');
+
+    const items: [MemeId[], PatchMeme][] = [
+      [[dummyDbData.memes[0]._id], { expiredAt: -1 }],
+      [dummyDbData.memes.slice(4, 6).map((m) => m._id), { expiredAt: 0 }],
+      [dummyDbData.memes.slice(40, 60).map((m) => m._id), { expiredAt: Date.now() * 2 }]
+    ];
+
+    await Promise.all(
+      items.map(([meme_ids, data]) => Backend.updateMemes({ meme_ids, data }))
+    );
+
+    await Promise.all(
+      items.map(async ([meme_ids, { expiredAt }]) =>
+        expect(
+          await memes
+            .find({ _id: { $in: meme_ids }, expiredAt })
+            .toArray()
+            .then((r) => r.map((m) => m._id))
+        ).toIncludeSameMembers(meme_ids)
+      )
+    );
+  });
+
+  it('errors if request body is invalid', async () => {
+    expect.hasAssertions();
+
+    const items: [PatchMeme, string][] = [
+      [undefined as unknown as PatchMeme, 'only JSON'],
+      ['string data' as unknown as PatchMeme, 'only JSON'],
+      [{} as unknown as PatchMeme, 'must be a number'],
+      [{ data: 1 } as unknown as PatchMeme, 'must be a number'],
+      [{ expiredAt: null } as unknown as PatchMeme, 'must be a number'],
+      [{ expiredAt: true } as unknown as PatchMeme, 'must be a number']
+    ];
+
+    await Promise.all(
+      items.map(([data, message]) =>
+        expect(
+          Backend.updateMemes({ meme_ids: [dummyDbData.memes[1]._id], data })
+        ).rejects.toMatchObject({ message: expect.stringContaining(message) })
+      )
+    );
+
+    await expect(
+      Backend.updateMemes({
+        meme_ids: [new ObjectId(), 'bad-id' as unknown as ObjectId, new ObjectId()],
+        data: { expiredAt: -1 }
+      })
+    ).rejects.toMatchObject({ message: expect.stringContaining('invalid ObjectId') });
+
+    await expect(
+      Backend.updateMemes({
+        meme_ids: Array.from({ length: getEnv().RESULTS_PER_PAGE + 1 }).map(
+          () => new ObjectId()
+        ),
+        data: { expiredAt: -1 }
+      })
+    ).rejects.toMatchObject({ message: expect.stringContaining('too many') });
+  });
+
+  it('does not reject if a meme_id does not exist', async () => {
+    expect.hasAssertions();
+
+    await expect(
+      Backend.updateMemes({
+        meme_ids: [new ObjectId()],
+        data: { expiredAt: -1 }
+      })
+    ).resolves.toBeUndefined();
   });
 });
 
@@ -1053,7 +1163,7 @@ describe('::getUserFriendsUserIds', () => {
 });
 
 describe('::isUserAFriend', () => {
-  it('returns true iff the specified user is following the other', async () => {
+  it('returns true iff the specified users are friends', async () => {
     expect.hasAssertions();
 
     const items: [UserId, UserId, boolean][] = [
@@ -1062,8 +1172,8 @@ describe('::isUserAFriend', () => {
     ];
 
     await Promise.all(
-      items.map(([user_id, followed_id, expectedTruth]) =>
-        expect(Backend.isUserFollowing({ user_id, followed_id })).resolves.toStrictEqual(
+      items.map(([user_id, friend_id, expectedTruth]) =>
+        expect(Backend.isUserAFriend({ user_id, friend_id })).resolves.toStrictEqual(
           expectedTruth
         )
       )
@@ -1079,85 +1189,17 @@ describe('::isUserAFriend', () => {
     ];
 
     await Promise.all(
-      items.map(([user_id, followed_id, ndx]) =>
-        expect(Backend.isUserFollowing({ user_id, followed_id })).rejects.toMatchObject({
-          message: expect.stringContaining(
-            itemToStringId(ndx == 0 ? user_id : followed_id)
-          )
+      items.map(([user_id, friend_id, ndx]) =>
+        expect(Backend.isUserAFriend({ user_id, friend_id })).rejects.toMatchObject({
+          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : friend_id))
         })
       )
     );
-  });
-});
-
-describe('::addUserAsFriend', () => {
-  it('assigns the specified user as a follower of another', async () => {
-    expect.hasAssertions();
-
-    const users = await (await getDb()).collection<InternalUser>('users');
-    const followed_id = itemToObjectId(dummyDbData.users[5]);
-
-    expect(
-      await users
-        .findOne({ _id: dummyDbData.users[0]._id })
-        .then((r) => itemToStringId(r?.friends))
-    ).not.toStrictEqual(expect.arrayContaining([followed_id.toString()]));
-
-    await Backend.addFriendRequest({ user_id: dummyDbData.users[0]._id, followed_id });
-
-    expect(
-      await users
-        .findOne({ _id: dummyDbData.users[0]._id })
-        .then((r) => itemToStringId(r?.friends))
-    ).toStrictEqual(expect.arrayContaining([followed_id.toString()]));
-  });
-
-  it('does not error if the user is already a follower', async () => {
-    expect.hasAssertions();
-
-    await expect(
-      Backend.addFriendRequest({
-        user_id: dummyDbData.users[0]._id,
-        followed_id: dummyDbData.users[0].friends[0]
-      })
-    ).toResolve();
-  });
-
-  it('rejects if ids not found', async () => {
-    expect.hasAssertions();
-
-    const items: [UserId, UserId, number][] = [
-      [new ObjectId(), dummyDbData.users[0]._id, 0],
-      [dummyDbData.users[0]._id, new ObjectId(), 1]
-    ];
-
-    await Promise.all(
-      items.map(([user_id, followed_id, ndx]) =>
-        expect(Backend.addFriendRequest({ user_id, followed_id })).rejects.toMatchObject({
-          message: expect.stringContaining(
-            itemToStringId(ndx == 0 ? user_id : followed_id)
-          )
-        })
-      )
-    );
-  });
-
-  it('user cannot follow themselves', async () => {
-    expect.hasAssertions();
-
-    await expect(
-      Backend.addFriendRequest({
-        user_id: dummyDbData.users[0]._id,
-        followed_id: dummyDbData.users[0]._id
-      })
-    ).rejects.toMatchObject({
-      message: expect.stringContaining('cannot follow themselves')
-    });
   });
 });
 
 describe('::removeUserAsFriend', () => {
-  it('removes the specified user as a follower of another', async () => {
+  it('removes the specified user as a friend of another', async () => {
     expect.hasAssertions();
 
     const db = await getDb();
@@ -1169,8 +1211,8 @@ describe('::removeUserAsFriend', () => {
     ).not.toStrictEqual([]);
 
     await Promise.all(
-      testUsers.map((followed_id) =>
-        Backend.unfollowUser({ user_id: dummyDbData.users[9]._id, followed_id })
+      testUsers.map((friend_id) =>
+        Backend.removeUserAsFriend({ user_id: dummyDbData.users[9]._id, friend_id })
       )
     );
 
@@ -1179,13 +1221,13 @@ describe('::removeUserAsFriend', () => {
     ).toStrictEqual([]);
   });
 
-  it('does not error if the user was never a follower', async () => {
+  it('does not error if the users were never friends', async () => {
     expect.hasAssertions();
 
     await expect(
-      Backend.unfollowUser({
+      Backend.removeUserAsFriend({
         user_id: dummyDbData.users[0]._id,
-        followed_id: dummyDbData.users[5]._id
+        friend_id: dummyDbData.users[5]._id
       })
     ).toResolve();
   });
@@ -1199,33 +1241,104 @@ describe('::removeUserAsFriend', () => {
     ];
 
     await Promise.all(
-      items.map(([user_id, followed_id, ndx]) =>
-        expect(Backend.unfollowUser({ user_id, followed_id })).rejects.toMatchObject({
-          message: expect.stringContaining(
-            itemToStringId(ndx == 0 ? user_id : followed_id)
-          )
+      items.map(([user_id, friend_id, ndx]) =>
+        expect(Backend.removeUserAsFriend({ user_id, friend_id })).rejects.toMatchObject({
+          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : friend_id))
         })
       )
     );
   });
 });
 
-describe('::getFriendRequestsOfType', () => {
-  it('returns packmates', async () => {
+describe('::addUserAsFriend', () => {
+  it('assigns the specified users as friends', async () => {
     expect.hasAssertions();
 
-    const users = dummyDbData.users.map<[ObjectId, UserId[]]>((u) => [
+    const users = await (await getDb()).collection<InternalUser>('users');
+    const friend_id = itemToObjectId(dummyDbData.users[6]);
+
+    expect(
+      await users
+        .findOne({ _id: dummyDbData.users[0]._id })
+        .then((r) => itemToStringId(r?.friends))
+    ).not.toStrictEqual(expect.arrayContaining([friend_id.toString()]));
+
+    await Backend.addUserAsFriend({ user_id: dummyDbData.users[0]._id, friend_id });
+
+    expect(
+      await users
+        .findOne({ _id: dummyDbData.users[0]._id })
+        .then((r) => itemToStringId(r?.friends))
+    ).toStrictEqual(expect.arrayContaining([friend_id.toString()]));
+  });
+
+  it('does not error if the users are already friends', async () => {
+    expect.hasAssertions();
+
+    await expect(
+      Backend.addUserAsFriend({
+        user_id: dummyDbData.users[0]._id,
+        friend_id: dummyDbData.users[0].friends[0]
+      })
+    ).toResolve();
+  });
+
+  it('rejects if ids not found', async () => {
+    expect.hasAssertions();
+
+    const items: [UserId, UserId, number][] = [
+      [new ObjectId(), dummyDbData.users[0]._id, 0],
+      [dummyDbData.users[0]._id, new ObjectId(), 1]
+    ];
+
+    await Promise.all(
+      items.map(([user_id, friend_id, ndx]) =>
+        expect(Backend.addUserAsFriend({ user_id, friend_id })).rejects.toMatchObject({
+          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : friend_id))
+        })
+      )
+    );
+  });
+
+  it('user cannot be a friend of themselves', async () => {
+    expect.hasAssertions();
+
+    await expect(
+      Backend.addUserAsFriend({
+        user_id: dummyDbData.users[0]._id,
+        friend_id: dummyDbData.users[0]._id
+      })
+    ).rejects.toMatchObject({
+      message: expect.stringContaining('cannot follow themselves')
+    });
+  });
+});
+
+describe('::getFriendRequestsOfType', () => {
+  it('returns friend requests with respect to type', async () => {
+    expect.hasAssertions();
+
+    const users = dummyDbData.users.map<[ObjectId, Record<string, UserId[]>]>((u) => [
       u._id,
-      u.packmates
+      u.requests
     ]);
 
     for (const [user_id, expectedIds] of users) {
       expect(
-        await Backend.getRequestsOfType({
+        await Backend.getFriendRequestsOfType({
           user_id,
+          request_type: 'incoming',
           after: null
         })
-      ).toStrictEqual(itemToStringId(expectedIds));
+      ).toStrictEqual(itemToStringId(expectedIds.incoming));
+
+      expect(
+        await Backend.getFriendRequestsOfType({
+          user_id,
+          request_type: 'outgoing',
+          after: null
+        })
+      ).toStrictEqual(itemToStringId(expectedIds.outgoing));
     }
   });
 
@@ -1234,19 +1347,31 @@ describe('::getFriendRequestsOfType', () => {
 
     const extraUsers = dummyDbData.users.slice(2, 5);
 
-    await (await getDb())
-      .collection<InternalUser>('users')
-      .updateOne(
-        { _id: dummyDbData.users[9]._id },
-        { $push: { packmates: { $each: itemToObjectId(extraUsers) } } }
-      );
+    await (await getDb()).collection<InternalUser>('users').updateOne(
+      { _id: dummyDbData.users[9]._id },
+      {
+        $push: {
+          'requests.incoming': { $each: itemToObjectId(extraUsers) },
+          'requests.outgoing': { $each: itemToObjectId(extraUsers) }
+        }
+      }
+    );
 
     await withMockedEnv(
       async () => {
         expect(
-          await Backend.getRequestsOfType({
+          await Backend.getFriendRequestsOfType({
             user_id: dummyDbData.users[9]._id,
-            after: dummyDbData.users[9].packmates[0]
+            request_type: 'incoming',
+            after: dummyDbData.users[0]._id
+          })
+        ).toStrictEqual(itemToStringId(extraUsers.slice(0, 2)));
+
+        expect(
+          await Backend.getFriendRequestsOfType({
+            user_id: dummyDbData.users[9]._id,
+            request_type: 'outgoing',
+            after: dummyDbData.users[0]._id
           })
         ).toStrictEqual(itemToStringId(extraUsers.slice(0, 2)));
       },
@@ -1254,16 +1379,28 @@ describe('::getFriendRequestsOfType', () => {
     );
   });
 
-  it('functions when user has no packmates', async () => {
+  it('functions when user has no friend requests', async () => {
     expect.hasAssertions();
 
     await (await getDb())
       .collection<InternalUser>('users')
-      .updateOne({ _id: dummyDbData.users[9]._id }, { $set: { packmates: [] } });
+      .updateOne(
+        { _id: dummyDbData.users[9]._id },
+        { $set: { incoming: [], outgoing: [] } }
+      );
 
     expect(
-      await Backend.getRequestsOfType({
+      await Backend.getFriendRequestsOfType({
         user_id: dummyDbData.users[9]._id,
+        request_type: 'incoming',
+        after: null
+      })
+    ).toStrictEqual([]);
+
+    expect(
+      await Backend.getFriendRequestsOfType({
+        user_id: dummyDbData.users[9]._id,
+        request_type: 'outgoing',
         after: null
       })
     ).toStrictEqual([]);
@@ -1278,30 +1415,79 @@ describe('::getFriendRequestsOfType', () => {
     ];
 
     await Promise.all(
-      items.map(([user_id, after, ndx]) =>
-        expect(Backend.getRequestsOfType({ user_id, after })).rejects.toMatchObject({
-          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : after))
+      items
+        .map(([user_id, after, ndx]) => {
+          return [
+            // eslint-disable-next-line jest/valid-expect
+            expect(
+              Backend.getFriendRequestsOfType({
+                user_id,
+                request_type: 'incoming',
+                after
+              })
+            ).rejects.toMatchObject({
+              message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : after))
+            }),
+            // eslint-disable-next-line jest/valid-expect
+            expect(
+              Backend.getFriendRequestsOfType({
+                user_id,
+                request_type: 'incoming',
+                after
+              })
+            ).rejects.toMatchObject({
+              message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : after))
+            })
+          ];
         })
-      )
+        .flat()
     );
   });
 });
 
 describe('::isFriendRequestOfType', () => {
-  it('returns true iff a user is in the pack', async () => {
+  it('returns true iff the user has a friend request of the specified type', async () => {
     expect.hasAssertions();
+    const userId = dummyDbData.users[5]._id;
 
     const items: [UserId, UserId, boolean][] = [
-      [dummyDbData.users[0]._id, dummyDbData.users[0]._id, false],
-      [dummyDbData.users[0]._id, new ObjectId(dummyDbData.users[0].packmates[0]), true]
+      [dummyDbData.users[0]._id, dummyDbData.users[6]._id, false],
+      [dummyDbData.users[0]._id, userId, true]
     ];
 
+    await (await getDb()).collection<InternalUser>('users').updateOne(
+      { _id: dummyDbData.users[0]._id },
+      {
+        $push: {
+          'requests.incoming': { $each: [userId] },
+          'requests.outgoing': { $each: [userId] }
+        }
+      }
+    );
+
     await Promise.all(
-      items.map(([user_id, packmate_id, expectedTruth]) =>
-        expect(Backend.isUserAFriend({ user_id, packmate_id })).resolves.toStrictEqual(
-          expectedTruth
-        )
-      )
+      items
+        .map(([user_id, target_id, expectedTruth]) => {
+          return [
+            // eslint-disable-next-line jest/valid-expect
+            expect(
+              Backend.isFriendRequestOfType({
+                user_id,
+                request_type: 'incoming',
+                target_id
+              })
+            ).resolves.toStrictEqual(expectedTruth),
+            // eslint-disable-next-line jest/valid-expect
+            expect(
+              Backend.isFriendRequestOfType({
+                user_id,
+                request_type: 'outgoing',
+                target_id
+              })
+            ).resolves.toStrictEqual(expectedTruth)
+          ];
+        })
+        .flat()
     );
   });
 
@@ -1314,54 +1500,193 @@ describe('::isFriendRequestOfType', () => {
     ];
 
     await Promise.all(
-      items.map(([user_id, packmate_id, ndx]) =>
-        expect(Backend.isUserAFriend({ user_id, packmate_id })).rejects.toMatchObject({
-          message: expect.stringContaining(
-            itemToStringId(ndx == 0 ? user_id : packmate_id)
-          )
+      items.map(([user_id, target_id, ndx]) => {
+        return [
+          // eslint-disable-next-line jest/valid-expect
+          expect(
+            Backend.isFriendRequestOfType({
+              user_id,
+              request_type: 'incoming',
+              target_id
+            })
+          ).rejects.toMatchObject({
+            message: expect.stringContaining(
+              itemToStringId(ndx == 0 ? user_id : target_id)
+            )
+          }),
+          // eslint-disable-next-line jest/valid-expect
+          expect(
+            Backend.isFriendRequestOfType({
+              user_id,
+              request_type: 'outgoing',
+              target_id
+            })
+          ).rejects.toMatchObject({
+            message: expect.stringContaining(
+              itemToStringId(ndx == 0 ? user_id : target_id)
+            )
+          })
+        ];
+      })
+    );
+  });
+});
+
+describe('::removeFriendRequest', () => {
+  it('removes a friend request of the specified type', async () => {
+    expect.hasAssertions();
+
+    const db = await getDb();
+    const users = await db.collection<InternalUser>('users');
+    const testUsers = itemToObjectId(dummyDbData.users);
+
+    await (await getDb()).collection<InternalUser>('users').updateOne(
+      { _id: dummyDbData.users[9]._id },
+      {
+        $push: {
+          'requests.incoming': { $each: testUsers },
+          'requests.outgoing': { $each: testUsers }
+        }
+      }
+    );
+
+    expect(
+      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.requests)
+    ).not.toStrictEqual({ incoming: [], outgoing: [] });
+
+    await Promise.all(
+      testUsers
+        .map((target_id) => {
+          return [
+            Backend.removeFriendRequest({
+              user_id: dummyDbData.users[9]._id,
+              request_type: 'incoming',
+              target_id
+            }),
+            Backend.removeFriendRequest({
+              user_id: dummyDbData.users[9]._id,
+              request_type: 'outgoing',
+              target_id
+            })
+          ];
         })
-      )
+        .flat()
+    );
+
+    expect(
+      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.requests)
+    ).toStrictEqual({ incoming: [], outgoing: [] });
+  });
+
+  it('does not error if the friend request does not exist', async () => {
+    expect.hasAssertions();
+
+    await expect(
+      Backend.removeFriendRequest({
+        user_id: dummyDbData.users[0]._id,
+        request_type: 'incoming',
+        target_id: dummyDbData.users[0]._id
+      })
+    ).toResolve();
+
+    await expect(
+      Backend.removeFriendRequest({
+        user_id: dummyDbData.users[0]._id,
+        request_type: 'outgoing',
+        target_id: dummyDbData.users[0]._id
+      })
+    ).toResolve();
+  });
+
+  it('rejects if ids not found', async () => {
+    expect.hasAssertions();
+
+    const items: [UserId, UserId, number][] = [
+      [new ObjectId(), dummyDbData.users[0]._id, 0],
+      [dummyDbData.users[0]._id, new ObjectId(), 1]
+    ];
+
+    await Promise.all(
+      items.map(([user_id, target_id, ndx]) => {
+        return [
+          // eslint-disable-next-line jest/valid-expect
+          expect(
+            Backend.removeFriendRequest({ user_id, request_type: 'incoming', target_id })
+          ).rejects.toMatchObject({
+            message: expect.stringContaining(
+              itemToStringId(ndx == 0 ? user_id : target_id)
+            )
+          }),
+          // eslint-disable-next-line jest/valid-expect
+          expect(
+            Backend.removeFriendRequest({ user_id, request_type: 'outgoing', target_id })
+          ).rejects.toMatchObject({
+            message: expect.stringContaining(
+              itemToStringId(ndx == 0 ? user_id : target_id)
+            )
+          })
+        ];
+      })
     );
   });
 });
 
 describe('::addFriendRequest', () => {
-  it('adds a user to the pack', async () => {
+  it('creates a new friend request of the specified type', async () => {
     expect.hasAssertions();
 
     const users = await (await getDb()).collection<InternalUser>('users');
-    const target = dummyDbData.users[0];
-    const originalPackmates = itemToObjectId(target.packmates);
-    const newPackmates = dummyDbData.users
-      .filter(
-        (user) =>
-          !user._id.equals(target._id) &&
-          !itemToStringId(originalPackmates).includes(itemToStringId(user))
-      )
-      .map<ObjectId>(itemToObjectId);
-
-    expect(
-      await users.findOne({ _id: target._id }).then((r) => itemToObjectId(r?.packmates))
-    ).toIncludeSameMembers(originalPackmates);
+    const user = dummyDbData.users[0];
+    const testUsers = itemToObjectId(dummyDbData.users.slice(1));
 
     await Promise.all(
-      newPackmates.map((packmate_id) =>
-        Backend.addFriend({ user_id: target._id, packmate_id })
-      )
+      testUsers
+        .map((target_id) => {
+          return [
+            Backend.addFriendRequest({
+              user_id: user._id,
+              request_type: 'incoming',
+              target_id
+            }),
+            Backend.addFriendRequest({
+              user_id: user._id,
+              request_type: 'outgoing',
+              target_id
+            })
+          ];
+        })
+        .flat()
     );
 
     expect(
-      await users.findOne({ _id: target._id }).then((r) => itemToObjectId(r?.packmates))
-    ).toIncludeSameMembers([...originalPackmates, ...newPackmates]);
+      await users
+        .findOne({ _id: user._id })
+        .then((r) => itemToObjectId(r?.requests.incoming))
+    ).toIncludeSameMembers(testUsers);
+
+    expect(
+      await users
+        .findOne({ _id: user._id })
+        .then((r) => itemToObjectId(r?.requests.outgoing))
+    ).toIncludeSameMembers(testUsers);
   });
 
-  it('does not error if the user is already a packmate', async () => {
+  it('does not error if the friend request already exists', async () => {
     expect.hasAssertions();
 
     await expect(
-      Backend.addFriend({
+      Backend.addFriendRequest({
         user_id: dummyDbData.users[0]._id,
-        packmate_id: dummyDbData.users[0].packmates[0]
+        request_type: 'incoming',
+        target_id: dummyDbData.users[1]._id
+      })
+    ).toResolve();
+
+    await expect(
+      Backend.addFriendRequest({
+        user_id: dummyDbData.users[0]._id,
+        request_type: 'incoming',
+        target_id: dummyDbData.users[1]._id
       })
     ).toResolve();
   });
@@ -1375,81 +1700,53 @@ describe('::addFriendRequest', () => {
     ];
 
     await Promise.all(
-      items.map(([user_id, packmate_id, ndx]) =>
-        expect(Backend.addFriend({ user_id, packmate_id })).rejects.toMatchObject({
-          message: expect.stringContaining(
-            itemToStringId(ndx == 0 ? user_id : packmate_id)
-          )
+      items
+        .map(([user_id, target_id, ndx]) => {
+          return [
+            // eslint-disable-next-line jest/valid-expect
+            expect(
+              Backend.addFriendRequest({ user_id, request_type: 'incoming', target_id })
+            ).rejects.toMatchObject({
+              message: expect.stringContaining(
+                itemToStringId(ndx == 0 ? user_id : target_id)
+              )
+            }),
+            // eslint-disable-next-line jest/valid-expect
+            expect(
+              Backend.addFriendRequest({ user_id, request_type: 'outgoing', target_id })
+            ).rejects.toMatchObject({
+              message: expect.stringContaining(
+                itemToStringId(ndx == 0 ? user_id : target_id)
+              )
+            })
+          ];
         })
-      )
+        .flat()
     );
   });
 
-  it('user cannot add themselves to their own pack', async () => {
+  it('user cannot send a friend request to themselves', async () => {
     expect.hasAssertions();
 
     await expect(
-      Backend.addFriend({
+      Backend.addFriendRequest({
         user_id: dummyDbData.users[0]._id,
-        packmate_id: dummyDbData.users[0]._id
+        request_type: 'incoming',
+        target_id: dummyDbData.users[0]._id
       })
     ).rejects.toMatchObject({
-      message: expect.stringContaining('cannot add themselves to')
+      message: expect.stringContaining('friend request to themselves')
     });
-  });
-});
-
-describe('::removeFriendRequest', () => {
-  it('removes a user from the pack', async () => {
-    expect.hasAssertions();
-
-    const db = await getDb();
-    const users = await db.collection<InternalUser>('users');
-    const testUsers = itemToObjectId(dummyDbData.users[9].packmates);
-
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.packmates)
-    ).not.toStrictEqual([]);
-
-    await Promise.all(
-      testUsers.map((packmate_id) =>
-        Backend.removePackmate({ user_id: dummyDbData.users[9]._id, packmate_id })
-      )
-    );
-
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.packmates)
-    ).toStrictEqual([]);
-  });
-
-  it('does not error if the user was never in the pack', async () => {
-    expect.hasAssertions();
 
     await expect(
-      Backend.removePackmate({
+      Backend.addFriendRequest({
         user_id: dummyDbData.users[0]._id,
-        packmate_id: dummyDbData.users[0]._id
+        request_type: 'outgoing',
+        target_id: dummyDbData.users[0]._id
       })
-    ).toResolve();
-  });
-
-  it('rejects if ids not found', async () => {
-    expect.hasAssertions();
-
-    const items: [UserId, UserId, number][] = [
-      [new ObjectId(), dummyDbData.users[0]._id, 0],
-      [dummyDbData.users[0]._id, new ObjectId(), 1]
-    ];
-
-    await Promise.all(
-      items.map(([user_id, packmate_id, ndx]) =>
-        expect(Backend.removePackmate({ user_id, packmate_id })).rejects.toMatchObject({
-          message: expect.stringContaining(
-            itemToStringId(ndx == 0 ? user_id : packmate_id)
-          )
-        })
-      )
-    );
+    ).rejects.toMatchObject({
+      message: expect.stringContaining('friend request to themselves')
+    });
   });
 });
 
@@ -1462,19 +1759,22 @@ describe('::createUser', () => {
         name: 'one name',
         email: '1-one@email.address',
         phone: '111-111-1111',
-        username: 'uzr-1'
+        username: 'uzr-1',
+        imageBase64: null
       },
       {
         name: 'two name',
         email: '2-two@email.address',
         phone: null,
-        username: 'uzr-2-12345678901234'
+        username: 'uzr-2-12345678901234',
+        imageBase64: null
       },
       {
         name: 'three name',
         email: '3-three@email.address',
         phone: '333.333.3333 x5467',
-        username: 'user_3'
+        username: 'user_3',
+        imageBase64: 'pretend-base64'
       }
     ];
 
@@ -1482,23 +1782,29 @@ describe('::createUser', () => {
       items.map((data) => Backend.createUser({ creatorKey: Backend.DUMMY_KEY, data }))
     );
 
-    const expectedInternalUsers = items.map<InternalUser>((item) => ({
-      ...item,
-      _id: expect.any(ObjectId),
-      deleted: false,
-      bookmarked: [],
-      following: [],
-      packmates: [],
-      liked: [],
-      meta: expect.objectContaining({
-        creator: Backend.DUMMY_KEY,
-        followability: expect.any(Number),
-        influence: expect.any(Number)
-      })
-    }));
+    const expectedInternalUsers = items.map<InternalUser>((item) => {
+      const { imageBase64: _, ...rest } = item;
+      return {
+        ...rest,
+        _id: expect.any(ObjectId),
+        deleted: false,
+        liked: [],
+        friends: [],
+        requests: { incoming: [], outgoing: [] },
+        imageUrl: null,
+        meta: expect.objectContaining({
+          creator: Backend.DUMMY_KEY,
+          friendability: expect.any(Number),
+          influence: expect.any(Number)
+        })
+      };
+    });
 
     expect(newUsers).toIncludeSameMembers(
-      items.map((item) => expect.objectContaining(item))
+      items.map((item) => {
+        const { imageBase64: _, ...rest } = item;
+        return expect.objectContaining(rest);
+      })
     );
 
     expect(
@@ -1675,6 +1981,17 @@ describe('::createUser', () => {
           email: 'valid@email.address',
           phone: '777-777-7777',
           username: 'xunnamius',
+          imageBase64: false
+        } as unknown as NewUser,
+        'base64 string, data uri, or null'
+      ],
+      [
+        {
+          name: 'tre giles',
+          email: 'valid@email.address',
+          phone: '777-777-7777',
+          username: 'xunnamius',
+          imageBase64: null,
           admin: true
         } as unknown as NewUser,
         'unexpected properties'
@@ -1701,7 +2018,8 @@ describe('::createUser', () => {
         name: 'one name',
         email: '1-one@email.address',
         phone: '111-111-1111',
-        username: 'uzr-1'
+        username: 'uzr-1',
+        imageBase64: null
       }
     });
 
@@ -2061,11 +2379,26 @@ describe('::searchMemes', () => {
     );
   });
 
+  it('returns expected memes when searching conditioned on createdAt and expiredAt', async () => {
+    expect.hasAssertions();
+  });
+
+  it('supports special "$or" sub-matcher', async () => {
+    expect.hasAssertions();
+  });
+
   it('match and regexMatch errors properly with bad inputs', async () => {
     expect.hasAssertions();
 
     const items = [
       [{ likes: { $in: [5] } }, 'validation'],
+      [{ likes: { $or: [{ bad: 'or' }] } }, 'validation'],
+      [{ likes: { $or: [{ $gt: 5 }, { $lte: 'bad' }] } }, 'validation'],
+      [{ likes: { $or: [{ $gt: 6 }, 'bad'] } }, 'validation'],
+      [{ likes: { $or: [{ $gt: 7 }, undefined] } }, 'validation'],
+      [{ likes: { $or: [{}] } }, 'validation'],
+      [{ likes: { $or: [] } }, 'validation'],
+      [{ likes: { $gte: 'bad' } }, 'validation'],
       [{ bad: 'super-bad' }, 'validation'],
       [{ meta: {} }, 'validation'],
       [{ meme_id: 5 }, 'illegal'],
@@ -2102,7 +2435,7 @@ describe('::getApiKeys', () => {
     expect(keys).toStrictEqual(
       dummyDbData.keys.map(() => ({
         owner: expect.any(String),
-        creatorKey: expect.any(String)
+        key: expect.any(String)
       }))
     );
 
@@ -2131,7 +2464,7 @@ describe('::addToRequestLog', () => {
     const req2 = {
       headers: {
         'x-forwarded-for': '8.8.8.8',
-        creatorKey: Backend.DUMMY_KEY
+        key: Backend.BANNED_KEY
       },
       method: 'GET',
       url: '/api/route/path2'
@@ -2158,7 +2491,7 @@ describe('::addToRequestLog', () => {
 
     expect(log1).toStrictEqual({
       ip: '9.9.9.9',
-      creatorKey: null,
+      key: null,
       route: 'route/path1',
       method: 'POST',
       time: now,
@@ -2167,7 +2500,7 @@ describe('::addToRequestLog', () => {
 
     expect(log2).toStrictEqual({
       ip: '8.8.8.8',
-      creatorKey: Backend.DUMMY_KEY,
+      key: Backend.BANNED_KEY,
       route: 'route/path2',
       method: 'GET',
       time: now,
@@ -2192,7 +2525,7 @@ describe('::isRateLimited', () => {
     const req2 = await Backend.isRateLimited({
       headers: {
         'x-forwarded-for': '8.8.8.8',
-        creatorKey: Backend.DUMMY_KEY
+        key: Backend.BANNED_KEY
       },
       method: 'GET',
       url: '/api/route/path2'
@@ -2201,7 +2534,7 @@ describe('::isRateLimited', () => {
     const req3 = await Backend.isRateLimited({
       headers: {
         'x-forwarded-for': '1.2.3.4',
-        creatorKey: 'fake-key'
+        key: 'fake-key'
       },
       method: 'POST',
       url: '/api/route/path1'
@@ -2218,7 +2551,7 @@ describe('::isRateLimited', () => {
     const req5 = await Backend.isRateLimited({
       headers: {
         'x-forwarded-for': '1.2.3.4',
-        creatorKey: Backend.DUMMY_KEY
+        key: Backend.BANNED_KEY
       },
       method: 'POST',
       url: '/api/route/path1'
@@ -2251,7 +2584,7 @@ describe('::isRateLimited', () => {
     const req2 = {
       headers: {
         'x-forwarded-for': '8.8.8.8',
-        creatorKey: 'fake-key'
+        key: 'fake-key'
       },
       method: 'GET',
       url: '/api/route/path2'
