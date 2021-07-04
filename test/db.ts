@@ -223,7 +223,7 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
  * are run. **In this mode, all tests will share the same database state!**
  */
 export function setupTestDb(defer = false) {
-  const port = getEnv().DEBUG_INSPECTING ? getEnv().MONGODB_MS_PORT : undefined;
+  const port = (getEnv().DEBUG_INSPECTING && getEnv().MONGODB_MS_PORT) || undefined;
 
   const server = new MongoMemoryServer({
     instance: {
