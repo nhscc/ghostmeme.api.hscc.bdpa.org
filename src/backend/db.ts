@@ -99,6 +99,7 @@ export async function initializeDb(db: Db) {
 }
 
 // TODO: XXX: turn this into a package of some sort (and abstract away key type)
+type ItemExistsOptions = { exclude_id?: ObjectId };
 /**
  * Checks if an item identified by some `key` (default identifier is `"_id"`)
  * exists within `collection`.
@@ -106,19 +107,37 @@ export async function initializeDb(db: Db) {
 export async function itemExists(
   collection: Collection,
   id: ObjectId,
-  key?: '_id' | 'owner' | 'receiver' | 'replyTo'
+  key?: '_id' | 'owner' | 'receiver' | 'replyTo',
+  options?: ItemExistsOptions
 ): Promise<boolean>;
 export async function itemExists(
   collection: Collection,
   id: string,
-  key: string
+  key: string,
+  options?: ItemExistsOptions
 ): Promise<boolean>;
 export async function itemExists(
   collection: Collection,
   id: ObjectId | string,
-  key = '_id'
+  key = '_id',
+  options?: ItemExistsOptions
 ): Promise<boolean> {
-  return (await collection.find({ [key]: id }).count()) != 0;
+  if (options?.exclude_id) {
+    if (!(options.exclude_id instanceof ObjectId)) {
+      throw new GuruMeditationError('expected exclude_id option to be of type ObjectId');
+    } else if (key == '_id') {
+      throw new GuruMeditationError('cannot use exclude_id option with key == "_id"');
+    }
+  }
+
+  return (
+    (await collection
+      .find({
+        [key]: id,
+        ...(options?.exclude_id ? { _id: { $ne: options.exclude_id } } : {})
+      })
+      .count()) != 0
+  );
 }
 
 export type IdItem<T extends ObjectId> = WithId<unknown> | string | T | Nullish;
