@@ -88,21 +88,21 @@ const matchableSubStrings = ['$gt', '$lt', '$gte', '$lte'];
 
 export const publicMemeProjection = {
   _id: false,
-  meme_id: '$_id',
-  owner: true,
-  receiver: true,
+  meme_id: { $toString: '$_id' },
+  owner: { $toString: '$owner' },
+  receiver: { $toString: '$receiver' },
   createdAt: true,
   expiredAt: true,
   description: true,
   likes: '$totalLikes',
   private: true,
-  replyTo: true,
+  replyTo: { $toString: '$replyTo' },
   imageUrl: true
 };
 
 export const publicUserProjection = {
   _id: false,
-  user_id: '$_id',
+  user_id: { $toString: '$_id' },
   name: true,
   email: true,
   phone: true,
@@ -133,42 +133,60 @@ export async function createMeme({
   if (!isPlainObject(data)) {
     throw new ValidationError('only JSON content is allowed');
   } else if (
-    typeof data.content != 'string' ||
-    !data.content.length ||
-    data.content.length > 280
+    data.description !== null &&
+    (typeof data.description != 'string' ||
+      !data.description.length ||
+      data.description.length > 500)
   ) {
     throw new ValidationError(
-      '`content` must be a non-zero length string <= 280 characters'
+      '`description` must be a non-zero length string <= 500 characters or null'
     );
   } else if (typeof data.private != 'boolean') {
     throw new ValidationError('`private` must be a boolean');
   } else if (!creatorKey || typeof creatorKey != 'string') {
     throw new InvalidKeyError();
+  } else if (data.imageUrl !== null && typeof data.imageUrl != 'string') {
+    throw new ValidationError('`imageUrl` must be a string or null');
+  } else if (data.imageBase64 && data.imageUrl) {
+    throw new ValidationError('cannot use `imageUrl` and `imageBase64` at the same time');
+  } else if (typeof data.expiredAt != 'number') {
+    throw new ValidationError('`expiredAt` must be a number');
   }
 
+  let owner: UserId | undefined = undefined;
+  let receiver: UserId | null | undefined = undefined;
+  let replyTo: MemeId | null | undefined = undefined;
+  let imageUrl = data.imageUrl;
+
   try {
-    data.owner = new ObjectId(data.owner);
+    owner = new ObjectId(data.owner);
   } catch {
     throw new ValidationError('invalid user_id for `owner`');
   }
 
-  if (data.replyTo) {
+  if (data.receiver) {
     try {
-      data.replyTo = new ObjectId(data.replyTo);
+      receiver = new ObjectId(data.receiver);
     } catch {
       throw new ValidationError('invalid user_id for `replyTo`');
     }
-  } else data.replyTo = null;
+  } else receiver = null;
 
-  if (data.rememeOf) {
+  if (data.replyTo) {
     try {
-      data.rememeOf = new ObjectId(data.rememeOf);
+      replyTo = new ObjectId(data.replyTo);
     } catch {
-      throw new ValidationError('invalid user_id for `rememeOf`');
+      throw new ValidationError('invalid meme_id for `replyTo`');
     }
-  } else data.rememeOf = null;
+  } else replyTo = null;
 
-  const { owner, content, private: p, replyTo, rememeOf, ...rest } = data;
+  if (data.imageBase64) {
+    // TODO: validate and use imageBase64 to resolve new imageUrl
+    // eslint-disable-next-line no-self-assign
+    imageUrl = imageUrl;
+  }
+
+  const { description, private: priv, expiredAt, ...rest } = data;
 
   const db = await getDb();
   const memes = db.collection<InternalMeme>('memes');
@@ -176,51 +194,50 @@ export async function createMeme({
 
   if (Object.keys(rest).length > 0) {
     throw new ValidationError('unexpected properties encountered');
-  } else if (replyTo && rememeOf) {
-    throw new ValidationError('memes must be either a meme-back or a rememe');
+  } else if (
+    !(receiver && priv && !replyTo) &&
+    !(!receiver && priv) &&
+    !(!receiver && !priv && !replyTo)
+  ) {
+    throw new ValidationError(
+      'illegal receiver-private-replyTo combination (check problem statement)'
+    );
   } else if (!(await itemExists(users, owner))) {
     throw new ItemNotFoundError(owner);
+  } else if (receiver && !(await itemExists(users, receiver))) {
+    throw new ItemNotFoundError(receiver);
   } else if (replyTo && !(await itemExists(memes, replyTo))) {
     throw new ItemNotFoundError(replyTo);
-  } else if (rememeOf && !(await itemExists(memes, rememeOf))) {
-    throw new ItemNotFoundError(rememeOf);
   }
 
   // * At this point, we can finally trust this data is not malicious
   const newMeme: InternalMeme = {
     owner,
-    content,
+    receiver,
     createdAt: Date.now(),
+    expiredAt,
+    description,
     likes: [],
     totalLikes: 0,
-    totalRememes: 0,
-    totalMemebacks: 0,
-    deleted: false,
-    private: p,
+    private: priv,
     replyTo,
-    rememeOf,
+    imageUrl,
     meta: {
       creator: creatorKey,
       likeability: 1 / randomInt(100),
-      rememeability: 1 / randomInt(100),
-      memebackability: 1 / randomInt(100)
+      shareability: 1 / randomInt(100)
     }
   };
 
   await memes.insertOne(newMeme);
   await db.collection<InternalInfo>('info').updateOne({}, { $inc: { totalMemes: 1 } });
 
-  if (replyTo) {
-    await memes.updateOne({ _id: replyTo }, { $inc: { totalMemebacks: 1 } });
-  } else if (rememeOf) {
-    await memes.updateOne({ _id: rememeOf }, { $inc: { totalRememes: 1 } });
-  }
-
   return getMemes({ meme_ids: [(newMeme as WithId<InternalMeme>)._id] }).then(
     (ids) => ids[0]
   );
 }
 
+// TODO: DRY some of this validation logic out as well (see create/updateUser)
 export async function updateMemes({
   meme_ids,
   data
@@ -230,20 +247,19 @@ export async function updateMemes({
 }): Promise<void> {
   if (!Array.isArray(meme_ids)) {
     throw new InvalidIdError();
+  } else if (!isPlainObject(data)) {
+    throw new ValidationError('only JSON content is allowed');
+  } else if (typeof data.expiredAt != 'number') {
+    throw new ValidationError('`expiredAt` must be a number');
   } else if (meme_ids.length > getEnv().RESULTS_PER_PAGE) {
     throw new ValidationError('too many meme_ids specified');
   } else if (!meme_ids.every((id) => id instanceof ObjectId)) {
     throw new InvalidIdError();
   } else if (meme_ids.length) {
     const db = await getDb();
-    const numUpdated = await db
-      .collection<InternalMeme>('memes')
-      .updateMany({ _id: { $in: meme_ids }, deleted: false }, { $set: { deleted: true } })
-      .then((r) => r.matchedCount);
-
     await db
-      .collection<InternalInfo>('info')
-      .updateOne({}, { $inc: { totalMemes: -numUpdated } });
+      .collection<InternalMeme>('memes')
+      .updateMany({ _id: { $in: meme_ids } }, { $set: { expiredAt: data.expiredAt } });
   }
 }
 
@@ -480,14 +496,20 @@ export async function createUser({
     data.phone !== null &&
     (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
   ) {
-    throw new ValidationError('`phone` must be a valid phone number');
+    throw new ValidationError('`phone` must be a valid phone number or null');
   } else if (typeof data.username != 'string' || !usernameRegex.test(data.username)) {
     throw new ValidationError(
       '`username` must be an alphanumeric string between 5 and 20 characters'
     );
+  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+    throw new ValidationError(
+      '`imageBase64` must be a valid base64 string, data uri, or null'
+    );
+  } else if (!creatorKey || typeof creatorKey != 'string') {
+    throw new InvalidKeyError();
   }
 
-  const { email, name, phone, username, ...rest } = data;
+  const { email, name, phone, username, imageBase64, ...rest } = data;
 
   if (Object.keys(rest).length > 0) {
     throw new ValidationError('unexpected properties encountered');
@@ -504,20 +526,25 @@ export async function createUser({
     throw new ValidationError('a user with that phone number already exists');
   }
 
+  // TODO: validate and use imageBase64
+  void imageBase64;
+  // TODO: resolve real imageUrl
+  const imageUrl = null;
+
   // * At this point, we can finally trust this data is not malicious
   const newUser: InternalUser = {
     name,
     email,
     phone,
     username,
-    packmates: [],
-    following: [],
-    bookmarked: [],
+    friends: [],
+    imageUrl,
+    requests: { incoming: [], outgoing: [] },
     liked: [],
     deleted: false,
     meta: {
       creator: creatorKey,
-      followability: 1 / randomInt(100),
+      friendability: 1 / randomInt(100),
       influence: 1 / randomInt(100)
     }
   };
@@ -562,10 +589,14 @@ export async function updateUser({
     data.phone !== null &&
     (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
   ) {
-    throw new ValidationError('`phone` must be a valid phone number');
+    throw new ValidationError('`phone` must be a valid phone number or null');
+  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+    throw new ValidationError(
+      '`imageBase64` must be a valid base64 string, data uri, or null'
+    );
   }
 
-  const { email, name, phone, ...rest } = data;
+  const { email, name, phone, imageBase64, ...rest } = data;
 
   if (Object.keys(rest).length > 0)
     throw new ValidationError('unexpected properties encountered');
@@ -573,14 +604,27 @@ export async function updateUser({
   const db = await getDb();
   const users = db.collection<InternalUser>('users');
 
-  if (await itemExists(users, email, 'email')) {
+  if (await itemExists(users, email, 'email', { exclude_id: user_id })) {
     throw new ValidationError('a user with that email address already exists');
-  } else if (phone && (await itemExists(users, phone, 'phone'))) {
+  } else if (
+    phone &&
+    (await itemExists(users, phone, 'phone', { exclude_id: user_id }))
+  ) {
     throw new ValidationError('a user with that phone number already exists');
   }
 
+  // TODO: validate and use imageBase64
+  void imageBase64;
+  // TODO: resolve real imageUrl
+  const imageUrl = null;
+
   // * At this point, we can finally trust this data is not malicious
-  const patchUser: PatchUser = { name, email, phone };
+  const patchUser: Omit<PatchUser, 'imageBase64'> & { imageUrl: string | null } = {
+    name,
+    email,
+    phone,
+    imageUrl
+  };
 
   if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);
   await users.updateOne({ _id: user_id }, { $set: patchUser });
@@ -947,9 +991,9 @@ export async function searchMemes({
       delete matchSpec.replyTo;
     }
 
-    if (matchSpec.rememeOf) {
-      matchIds.rememeOf = itemToObjectId(split(matchSpec.rememeOf.toString()));
-      delete matchSpec.rememeOf;
+    if (matchSpec.replyTo) {
+      matchIds.replyTo = itemToObjectId(split(matchSpec.replyTo.toString()));
+      delete matchSpec.replyTo;
     }
 
     // ? Handle aliasing/proxying
@@ -984,9 +1028,9 @@ export async function searchMemes({
     );
   }
 
-  if ((matchIds.rememeOf?.length || 0) > getEnv().RESULTS_PER_PAGE) {
+  if ((matchIds.replyTo?.length || 0) > getEnv().RESULTS_PER_PAGE) {
     throw new ValidationError(
-      `match object validation failed on "rememeOf": too many ids`
+      `match object validation failed on "replyTo": too many ids`
     );
   }
 

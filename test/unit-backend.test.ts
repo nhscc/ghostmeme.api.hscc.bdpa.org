@@ -1,10 +1,14 @@
 /* eslint-disable no-await-in-loop */
 import { WithId, ObjectId } from 'mongodb';
+import { toss } from 'toss-expression';
 import * as Backend from 'universe/backend';
 import { getEnv } from 'universe/backend/env';
 import { setupTestDb, dummyDbData } from 'testverse/db';
 import { mockEnvFactory, toPublicUser, toPublicMeme } from 'testverse/setup';
+import { itemToObjectId, itemToStringId } from 'universe/backend/db';
+import { GuruMeditationError } from 'universe/backend/error';
 
+import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   InternalRequestLogEntry,
   InternalLimitedLogEntry,
@@ -19,10 +23,6 @@ import {
   PatchUser,
   InternalApiKey
 } from 'types/global';
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { itemToObjectId, itemToStringId } from 'universe/backend/db';
-import { toss } from 'toss-expression';
-import { GuruMeditationError } from 'universe/backend/error';
 
 const { getDb } = setupTestDb();
 
@@ -104,8 +104,8 @@ describe('::getMemes', () => {
   });
 });
 
-describe('::deleteMemes', () => {
-  it('deletes one or more memes', async () => {
+describe('::updateMemes', () => {
+  it('updates one or more memes', async () => {
     expect.hasAssertions();
 
     const db = await getDb();
@@ -115,41 +115,41 @@ describe('::deleteMemes', () => {
 
     await db
       .collection('memes')
-      .updateMany({ _id: { $in: testIds.flat() } }, { $set: { deleted: false } });
+      .updateMany({ _id: { $in: testIds.flat() } }, { $set: { expiredAt: -10 } });
 
-    await Promise.all(testIds.map((meme_ids) => Backend.deleteMemes({ meme_ids })));
+    await Promise.all(
+      testIds.map((meme_ids) => Backend.updateMemes({ meme_ids, data: { expiredAt: 0 } }))
+    );
 
     expect(
       await db
         .collection('memes')
-        .find({ _id: { $in: testIds.flat() }, deleted: false })
+        .find({ _id: { $in: testIds.flat() }, expiredAt: -10 })
         .count()
     ).toStrictEqual(0);
   });
 
-  it('updates summary system metadata', async () => {
+  it('leaves summary system metadata unchanged', async () => {
     expect.hasAssertions();
 
     const db = await getDb();
-    const testIds = itemToObjectId(
-      dummyDbData.memes.filter((meme) => !meme.deleted).slice(0, 10)
-    );
+    const testIds = itemToObjectId(dummyDbData.memes.slice(0, 10));
 
-    await Backend.deleteMemes({ meme_ids: testIds });
+    await Backend.updateMemes({ meme_ids: testIds, data: { expiredAt: -1 } });
 
     expect(
       await db
         .collection<InternalInfo>('info')
         .findOne({})
         .then((r) => r?.totalMemes)
-    ).toStrictEqual(dummyDbData.info.totalMemes - 10);
+    ).toStrictEqual(dummyDbData.info.totalMemes);
   });
 
   it('does not reject if meme_ids not found', async () => {
     expect.hasAssertions();
 
     await expect(
-      Backend.deleteMemes({ meme_ids: [new ObjectId()] })
+      Backend.updateMemes({ meme_ids: [new ObjectId()], data: { expiredAt: -1 } })
     ).resolves.toBeUndefined();
   });
 
@@ -159,7 +159,10 @@ describe('::deleteMemes', () => {
     await withMockedEnv(
       async () => {
         await expect(
-          Backend.deleteMemes({ meme_ids: [new ObjectId(), new ObjectId()] })
+          Backend.updateMemes({
+            meme_ids: [new ObjectId(), new ObjectId()],
+            data: { expiredAt: -1 }
+          })
         ).rejects.toMatchObject({
           message: expect.stringContaining('too many')
         });
@@ -313,7 +316,7 @@ describe('::isMemeLiked', () => {
   });
 });
 
-describe('::unlikeMeme', () => {
+describe('::removeLikedMeme', () => {
   it('unlikes a meme and updates meme and user metadata', async () => {
     expect.hasAssertions();
 
@@ -392,8 +395,8 @@ describe('::unlikeMeme', () => {
   });
 });
 
-describe('::likeMeme', () => {
-  it('likes a meme and updates meme and user metadata', async () => {
+describe('::addLikedMeme', () => {
+  it('likes a meme and updates meme and user metadata properly', async () => {
     expect.hasAssertions();
 
     const db = await getDb();
@@ -456,7 +459,7 @@ describe('::likeMeme', () => {
     expect.hasAssertions();
 
     await expect(
-      Backend.removeLikedMeme({
+      Backend.addLikedMeme({
         user_id: dummyDbData.users[0]._id,
         meme_id: dummyDbData.users[0].liked[0]
       })
@@ -640,16 +643,6 @@ describe('::createMeme', () => {
         } as unknown as NewMeme,
         'not found'
       ],
-      // [                  // OK
-      //   {
-      //     owner: dummyDbData.users[0]._id,
-      //     content: 'rst',
-      //     private: false,
-      //     memebackTo: false,
-      //     rememeOf: null
-      //   } as unknown as NewMeme,
-      //   'invalid'
-      // ],
       [
         {
           owner: dummyDbData.users[0]._id,
@@ -839,30 +832,7 @@ describe('::deleteUser', () => {
   });
 });
 
-describe('::getFollowingUserIds', () => {
-  const getAllFollowers = async (id: UserId, recurse = false) => {
-    const findUser = (uid: UserId) =>
-      dummyDbData.users.find((user) => user._id.equals(uid)) ||
-      toss(new GuruMeditationError('could not find user'));
-
-    const user = findUser(id);
-
-    const ids = Array.from(
-      new Set([
-        ...user.following,
-        ...(recurse ? [] : user.following.map((id) => findUser(id).following).flat())
-      ])
-    );
-
-    return (await getDb())
-      .collection<InternalUser>('users')
-      .find({ _id: { $in: ids } })
-      .sort({ _id: -1 })
-      .project<WithId<unknown>>({ _id: true })
-      .toArray()
-      .then(itemToObjectId);
-  };
-
+describe('::getUserFriendsUserIds', () => {
   it('returns users that a user is (directly) following', async () => {
     expect.hasAssertions();
 
@@ -1007,7 +977,7 @@ describe('::getFollowingUserIds', () => {
   });
 });
 
-describe('::isUserFollowing', () => {
+describe('::isUserAFriend', () => {
   it('returns true iff the specified user is following the other', async () => {
     expect.hasAssertions();
 
@@ -1045,7 +1015,7 @@ describe('::isUserFollowing', () => {
   });
 });
 
-describe('::followUser', () => {
+describe('::addUserAsFriend', () => {
   it('assigns the specified user as a follower of another', async () => {
     expect.hasAssertions();
 
@@ -1111,7 +1081,7 @@ describe('::followUser', () => {
   });
 });
 
-describe('::unfollowUser', () => {
+describe('::removeUserAsFriend', () => {
   it('removes the specified user as a follower of another', async () => {
     expect.hasAssertions();
 
@@ -1165,7 +1135,7 @@ describe('::unfollowUser', () => {
   });
 });
 
-describe('::getPackmateUserIds', () => {
+describe('::getFriendRequestsOfType', () => {
   it('returns packmates', async () => {
     expect.hasAssertions();
 
@@ -1242,7 +1212,7 @@ describe('::getPackmateUserIds', () => {
   });
 });
 
-describe('::isUserPackmate', () => {
+describe('::isFriendRequestOfType', () => {
   it('returns true iff a user is in the pack', async () => {
     expect.hasAssertions();
 
@@ -1280,7 +1250,7 @@ describe('::isUserPackmate', () => {
   });
 });
 
-describe('::addPackmate', () => {
+describe('::addFriendRequest', () => {
   it('adds a user to the pack', async () => {
     expect.hasAssertions();
 
@@ -1354,7 +1324,7 @@ describe('::addPackmate', () => {
   });
 });
 
-describe('::removePackmate', () => {
+describe('::removeFriendRequest', () => {
   it('removes a user from the pack', async () => {
     expect.hasAssertions();
 
@@ -1402,226 +1372,6 @@ describe('::removePackmate', () => {
           message: expect.stringContaining(
             itemToStringId(ndx == 0 ? user_id : packmate_id)
           )
-        })
-      )
-    );
-  });
-});
-
-describe('::getBookmarkedMemeIds', () => {
-  it('returns memes that a user bookmarked', async () => {
-    expect.hasAssertions();
-
-    const users = dummyDbData.users.map<[ObjectId, MemeId[]]>((u) => [
-      u._id,
-      u.bookmarked
-    ]);
-
-    for (const [user_id, expectedIds] of users) {
-      expect(await Backend.getBookmarkedMemeIds({ user_id, after: null })).toStrictEqual(
-        itemToStringId(expectedIds)
-      );
-    }
-  });
-
-  it('supports pagination', async () => {
-    expect.hasAssertions();
-
-    const extraMemes = dummyDbData.memes.slice(0, 5);
-
-    await (await getDb())
-      .collection<InternalUser>('users')
-      .updateOne(
-        { _id: dummyDbData.users[9]._id },
-        { $push: { bookmarked: { $each: itemToObjectId(extraMemes) } } }
-      );
-
-    await withMockedEnv(
-      async () => {
-        expect(
-          await Backend.getBookmarkedMemeIds({
-            user_id: dummyDbData.users[9]._id,
-            after: dummyDbData.users[9].bookmarked[0]
-          })
-        ).toStrictEqual(itemToStringId(extraMemes.slice(0, 3)));
-      },
-      { RESULTS_PER_PAGE: '3' }
-    );
-  });
-
-  it('functions when user has no bookmarked memes', async () => {
-    expect.hasAssertions();
-
-    await (await getDb())
-      .collection<InternalUser>('users')
-      .updateOne({ _id: dummyDbData.users[9]._id }, { $set: { bookmarked: [] } });
-
-    expect(
-      await Backend.getBookmarkedMemeIds({
-        user_id: dummyDbData.users[9]._id,
-        after: null
-      })
-    ).toStrictEqual([]);
-  });
-
-  it('rejects if ids not found', async () => {
-    expect.hasAssertions();
-
-    const items: [UserId, MemeId, number][] = [
-      [new ObjectId(), dummyDbData.memes[1]._id, 0],
-      [dummyDbData.users[0]._id, new ObjectId(), 1]
-    ];
-
-    await Promise.all(
-      items.map(([user_id, after, ndx]) =>
-        expect(Backend.getBookmarkedMemeIds({ user_id, after })).rejects.toMatchObject({
-          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : after))
-        })
-      )
-    );
-  });
-});
-
-describe('::isMemeBookmarked', () => {
-  it('returns true iff a meme is bookmarked', async () => {
-    expect.hasAssertions();
-
-    const items: [UserId, MemeId, boolean][] = [
-      [dummyDbData.users[0]._id, dummyDbData.memes[0]._id, false],
-      [dummyDbData.users[0]._id, new ObjectId(dummyDbData.users[0].bookmarked[0]), true]
-    ];
-
-    await Promise.all(
-      items.map(([user_id, meme_id, expectedTruth]) =>
-        expect(Backend.isMemeBookmarked({ user_id, meme_id })).resolves.toStrictEqual(
-          expectedTruth
-        )
-      )
-    );
-  });
-
-  it('rejects if ids not found', async () => {
-    expect.hasAssertions();
-
-    const items: [UserId, MemeId, number][] = [
-      [new ObjectId(), dummyDbData.memes[1]._id, 0],
-      [dummyDbData.users[0]._id, new ObjectId(), 1]
-    ];
-
-    await Promise.all(
-      items.map(([user_id, meme_id, ndx]) =>
-        expect(Backend.isMemeBookmarked({ user_id, meme_id })).rejects.toMatchObject({
-          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : meme_id))
-        })
-      )
-    );
-  });
-});
-
-describe('::bookmarkMeme', () => {
-  it('bookmarks a meme', async () => {
-    expect.hasAssertions();
-
-    const users = await (await getDb()).collection<InternalUser>('users');
-    const originalBookmarks = itemToObjectId(dummyDbData.users[0].bookmarked);
-    const newBookmarkedMemes = dummyDbData.memes
-      .filter((meme) => !itemToStringId(originalBookmarks).includes(itemToStringId(meme)))
-      .map<ObjectId>(itemToObjectId);
-
-    expect(
-      await users
-        .findOne({ _id: dummyDbData.users[0]._id })
-        .then((r) => itemToObjectId(r?.bookmarked))
-    ).toIncludeSameMembers(originalBookmarks);
-
-    await Promise.all(
-      newBookmarkedMemes.map((id) =>
-        Backend.bookmarkMeme({ user_id: dummyDbData.users[0]._id, meme_id: id })
-      )
-    );
-
-    expect(
-      await users
-        .findOne({ _id: dummyDbData.users[0]._id })
-        .then((r) => itemToObjectId(r?.bookmarked))
-    ).toIncludeSameMembers([...originalBookmarks, ...newBookmarkedMemes]);
-  });
-
-  it('does not error if the user has already bookmarked the meme', async () => {
-    expect.hasAssertions();
-
-    await expect(
-      Backend.bookmarkMeme({
-        user_id: dummyDbData.users[0]._id,
-        meme_id: dummyDbData.users[0].bookmarked[0]
-      })
-    ).toResolve();
-  });
-
-  it('rejects if ids not found', async () => {
-    expect.hasAssertions();
-
-    const items: [UserId, MemeId, number][] = [
-      [new ObjectId(), dummyDbData.memes[1]._id, 0],
-      [dummyDbData.users[0]._id, new ObjectId(), 1]
-    ];
-
-    await Promise.all(
-      items.map(([user_id, meme_id, ndx]) =>
-        expect(Backend.bookmarkMeme({ user_id, meme_id })).rejects.toMatchObject({
-          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : meme_id))
-        })
-      )
-    );
-  });
-});
-
-describe('::unbookmarkMeme', () => {
-  it('unbookmarks a meme', async () => {
-    expect.hasAssertions();
-
-    const db = await getDb();
-    const users = await db.collection<InternalUser>('users');
-    const testMemes = itemToObjectId(dummyDbData.users[9].bookmarked);
-
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.bookmarked)
-    ).not.toStrictEqual([]);
-
-    await Promise.all(
-      testMemes.map((meme_id) =>
-        Backend.unbookmarkMeme({ user_id: dummyDbData.users[9]._id, meme_id })
-      )
-    );
-
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.bookmarked)
-    ).toStrictEqual([]);
-  });
-
-  it('does not error if the user never bookmarked the meme', async () => {
-    expect.hasAssertions();
-
-    await expect(
-      Backend.unbookmarkMeme({
-        user_id: dummyDbData.users[0]._id,
-        meme_id: dummyDbData.memes[0]._id
-      })
-    ).toResolve();
-  });
-
-  it('rejects if ids not found', async () => {
-    expect.hasAssertions();
-
-    const items: [UserId, MemeId, number][] = [
-      [new ObjectId(), dummyDbData.memes[1]._id, 0],
-      [dummyDbData.users[0]._id, new ObjectId(), 1]
-    ];
-
-    await Promise.all(
-      items.map(([user_id, meme_id, ndx]) =>
-        expect(Backend.unbookmarkMeme({ user_id, meme_id })).rejects.toMatchObject({
-          message: expect.stringContaining(itemToStringId(ndx == 0 ? user_id : meme_id))
         })
       )
     );

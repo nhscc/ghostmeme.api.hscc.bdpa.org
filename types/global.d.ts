@@ -213,28 +213,28 @@ export type NewMeme = Pick<
   owner: string;
   receiver: string | null;
   replyTo: string | null;
-  imageBase64: string;
+  imageBase64: string | null;
 };
 
 /**
  * The shape of a newly received user.
  */
 export type NewUser = Pick<InternalUser, 'name' | 'email' | 'phone' | 'username'> & {
-  imageBase64: string;
+  imageBase64: string | null;
 };
 
 /**
  * The shape of a received update to an existing meme.
  */
 export type PatchMeme = {
-  imageBase64: string;
+  expiredAt: InternalMeme['expiredAt'];
 };
 
 /**
  * The shape of a received update to an existing user.
  */
 export type PatchUser = Pick<InternalUser, 'name' | 'email' | 'phone'> & {
-  imageBase64: string;
+  imageBase64: string | null;
 };
 
 export type FriendRequestType = 'incoming' | 'outgoing';
