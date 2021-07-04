@@ -952,6 +952,8 @@ export async function addFriendRequest({
   }
 }
 
+type SubSpecifierObject = { [subspecifier in '$gt' | '$lt' | '$gte' | '$lte']?: number };
+
 export async function searchMemes({
   after,
   match,
@@ -963,9 +965,8 @@ export async function searchMemes({
       | string
       | number
       | boolean
-      | {
-          [subspecifier in '$gt' | '$lt' | '$gte' | '$lte']?: number;
-        };
+      | SubSpecifierObject
+      | { $or: SubSpecifierObject[] };
   };
   regexMatch: {
     [specifier: string]: string;
@@ -999,9 +1000,9 @@ export async function searchMemes({
       delete matchSpec.owner;
     }
 
-    if (matchSpec.replyTo) {
-      matchIds.replyTo = itemToObjectId(split(matchSpec.replyTo.toString()));
-      delete matchSpec.replyTo;
+    if (matchSpec.receiver) {
+      matchIds.receiver = itemToObjectId(split(matchSpec.receiver.toString()));
+      delete matchSpec.receiver;
     }
 
     if (matchSpec.replyTo) {
@@ -1015,16 +1016,6 @@ export async function searchMemes({
       matchSpec.totalLikes = matchSpec.likes;
       delete matchSpec.likes;
     }
-
-    if (matchSpec.rememes) {
-      matchSpec.totalRememes = matchSpec.rememes;
-      delete matchSpec.rememes;
-    }
-
-    if (matchSpec.memebacks) {
-      matchSpec.totalMemebacks = matchSpec.memebacks;
-      delete matchSpec.memebacks;
-    }
   });
 
   // ? Next, we validate everything
@@ -1035,9 +1026,9 @@ export async function searchMemes({
     throw new ValidationError(`match object validation failed on "owner": too many ids`);
   }
 
-  if ((matchIds.replyTo?.length || 0) > getEnv().RESULTS_PER_PAGE) {
+  if ((matchIds.receiver?.length || 0) > getEnv().RESULTS_PER_PAGE) {
     throw new ValidationError(
-      `match object validation failed on "replyTo": too many ids`
+      `match object validation failed on "receiver": too many ids`
     );
   }
 
@@ -1054,18 +1045,55 @@ export async function searchMemes({
     };
 
     if (!matchableStrings.includes(key)) err('invalid specifier');
-    if (Array.isArray(val)) err('invalid value type: cannot be array');
+    if (Array.isArray(val)) err('value cannot be array');
 
     if (isPlainObject(val)) {
       let valNotEmpty = false;
 
       for (const [subkey, subval] of Object.entries(val)) {
-        valNotEmpty = true;
-        if (!matchableSubStrings.includes(subkey)) err('invalid sub-specifier');
-        if (typeof subval != 'number') err('invalid sub-value type');
+        if (subkey == '$or') {
+          if (!Array.isArray(subval)) {
+            err('invalid $or sub-specifier: value must be array');
+          } else if (subval.length != 2) {
+            err('invalid $or sub-specifier: must be exactly two elements in array');
+          } else if (
+            subval.every((sv, ndx) => {
+              const errText = `invalid $or sub-specifier at index ${ndx}`;
+
+              if (!isPlainObject(sv)) {
+                err(`${errText}: all array elements must be objects`);
+              }
+
+              const entries = Object.entries(sv);
+
+              if (!entries.length) return false;
+              if (entries.length != 1) {
+                err(`${errText}: only one sub-specifier allowed per array element`);
+              }
+
+              entries.forEach(([k, v]) => {
+                if (!matchableSubStrings.includes(k)) {
+                  err(`${errText}: invalid sub-specifier "${k}"`);
+                } else if (typeof v != 'number') {
+                  err(`${errText}: "${k}" has invalid sub-value type (must be a number)`);
+                }
+              });
+              return true;
+            })
+          ) {
+            valNotEmpty = true;
+          }
+        } else {
+          valNotEmpty = true;
+          if (!matchableSubStrings.includes(subkey)) {
+            err(`invalid sub-specifier "${subkey}"`);
+          } else if (typeof subval != 'number') {
+            err(`"${subkey}" has invalid sub-value type (must be a number)`);
+          }
+        }
       }
 
-      if (!valNotEmpty) err('invalid value type: cannot be empty object');
+      if (!valNotEmpty) err('invalid value type encountered: no empty objects allowed');
     } else if (val !== null && !['number', 'string', 'boolean'].includes(typeof val)) {
       err('invalid value type; must be number, string, or boolean');
     }
@@ -1093,10 +1121,27 @@ export async function searchMemes({
     finalRegexMatch[k] = { $regex: v, $options: 'i' };
   });
 
+  const orMatcher: { [key: string]: SubSpecifierObject }[] = [];
+
+  Object.entries(match).forEach(([k, v]) => {
+    const obj = v as { $or: unknown };
+    if (isPlainObject(obj) && obj.$or) {
+      (obj.$or as SubSpecifierObject[]).forEach((operand) =>
+        orMatcher.push({
+          [k]: operand
+        })
+      );
+      delete obj.$or;
+    }
+
+    if (!Object.keys(obj).length) delete match[k];
+  });
+
   const primaryMatchStage = {
     $match: {
       ...(after ? { _id: { $lt: after } } : {}),
       ...match,
+      ...(orMatcher.length ? { $or: orMatcher } : {}),
       ...finalRegexMatch
     }
   };

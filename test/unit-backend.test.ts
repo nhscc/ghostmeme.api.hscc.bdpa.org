@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { WithId, ObjectId } from 'mongodb';
 import { toss } from 'toss-expression';
+import cloneDeep from 'clone-deep';
 import * as Backend from 'universe/backend';
 import { getEnv } from 'universe/backend/env';
 import { setupTestDb, dummyDbData } from 'testverse/db';
@@ -2244,32 +2245,34 @@ describe('::searchMemes', () => {
     );
   });
 
-  it('searches with respect to match and regexMatch, handles proxying and special ID regexMatches', async () => {
+  it('searches with respect to match and regexMatch, handling proxying', async () => {
     expect.hasAssertions();
 
     const matchItems = [
       [
-        { likes: { $gt: 20 } },
-        itemToStringId(dummyDbData.memes.filter((b) => b.totalLikes > 20))
-      ],
-      [
-        { rememes: { $lte: 50 } },
-        itemToStringId(dummyDbData.memes.filter((b) => b.totalRememes <= 50))
-      ],
-      [
-        { memebacks: dummyDbData.memes[0].totalMemebacks },
+        { likes: { $gt: 20, $lt: 50 } },
         itemToStringId(
-          dummyDbData.memes.filter(
-            (b) => b.totalMemebacks == dummyDbData.memes[0].totalMemebacks
-          )
+          dummyDbData.memes.filter((b) => b.totalLikes > 20 && b.totalLikes < 50)
         )
+      ],
+      [
+        { likes: { $lt: 20 } },
+        itemToStringId(dummyDbData.memes.filter((b) => b.totalLikes < 20))
+      ],
+      [
+        { likes: { $gte: 20 } },
+        itemToStringId(dummyDbData.memes.filter((b) => b.totalLikes >= 20))
+      ],
+      [
+        { likes: { $lte: 20 } },
+        itemToStringId(dummyDbData.memes.filter((b) => b.totalLikes <= 20))
       ]
     ] as [Parameters<typeof Backend.searchMemes>[0]['match'], string[]][];
 
     const regexMatchItems = [
       [
-        { description: '^#\\d ' },
-        itemToStringId(dummyDbData.memes.filter((b) => /^#\d /i.test(b.description)))
+        { description: '@' },
+        itemToStringId(dummyDbData.memes.filter((b) => /@/.test(b.description || '')))
       ]
     ] as [Parameters<typeof Backend.searchMemes>[0]['regexMatch'], string[]][];
 
@@ -2356,7 +2359,7 @@ describe('::searchMemes', () => {
     );
   });
 
-  it('returns expected memes when using match for ID search', async () => {
+  it('returns expected memes when matching ID-related fields', async () => {
     expect.hasAssertions();
 
     expect(
@@ -2377,52 +2380,278 @@ describe('::searchMemes', () => {
         )
       )
     );
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          likes: { $lt: 100 }
+        },
+        regexMatch: { owner: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}` }
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter(
+          (b) =>
+            [dummyDbData.users[0]._id, dummyDbData.users[1]._id].includes(b.owner) &&
+            b.totalLikes < 100
+        )
+      )
+    );
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          likes: { $lt: 100 },
+          receiver: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}`
+        },
+        regexMatch: {}
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter(
+          (b) =>
+            (
+              [dummyDbData.users[0]._id, dummyDbData.users[1]._id] as (ObjectId | null)[]
+            ).includes(b.receiver) && b.totalLikes < 100
+        )
+      )
+    );
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          likes: { $lt: 100 }
+        },
+        regexMatch: {
+          receiver: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}`
+        }
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter(
+          (b) =>
+            (
+              [dummyDbData.users[0]._id, dummyDbData.users[1]._id] as (ObjectId | null)[]
+            ).includes(b.receiver) && b.totalLikes < 100
+        )
+      )
+    );
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          likes: { $lt: 100 },
+          owner: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}`
+        },
+        regexMatch: {}
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter(
+          (b) =>
+            [dummyDbData.users[0]._id, dummyDbData.users[1]._id].includes(b.owner) &&
+            b.totalLikes < 100
+        )
+      )
+    );
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          likes: { $lt: 100 }
+        },
+        regexMatch: { owner: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}` }
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter(
+          (b) =>
+            [dummyDbData.users[0]._id, dummyDbData.users[1]._id].includes(b.owner) &&
+            b.totalLikes < 100
+        )
+      )
+    );
   });
 
   it('returns expected memes when searching conditioned on createdAt and expiredAt', async () => {
     expect.hasAssertions();
+
+    const now = Date.now();
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          createdAt: { $lt: now, $gt: now / 2 }
+        },
+        regexMatch: {}
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter((b) => b.createdAt < now && b.createdAt > now / 2)
+      )
+    );
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          expiredAt: { $gte: now, $lte: now + now / 2 }
+        },
+        regexMatch: {}
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter(
+          (b) => b.expiredAt >= now && b.expiredAt <= now + now / 2
+        )
+      )
+    );
   });
 
   it('supports special "$or" sub-matcher', async () => {
     expect.hasAssertions();
+
+    const now = Date.now();
+
+    expect(
+      await Backend.searchMemes({
+        after: null,
+        match: {
+          createdAt: { $or: [{ $lt: now }, { $gt: now / 2 }] }
+        },
+        regexMatch: {}
+      }).then((r) => r.map((b) => b.meme_id.toString()))
+    ).toIncludeSameMembers(
+      itemToStringId(
+        dummyDbData.memes.filter((b) => b.createdAt < now || b.createdAt > now / 2)
+      )
+    );
   });
 
   it('match and regexMatch errors properly with bad inputs', async () => {
     expect.hasAssertions();
 
     const items = [
-      [{ likes: { $in: [5] } }, 'validation'],
-      [{ likes: { $or: [{ bad: 'or' }] } }, 'validation'],
-      [{ likes: { $or: [{ $gt: 5 }, { $lte: 'bad' }] } }, 'validation'],
-      [{ likes: { $or: [{ $gt: 6 }, 'bad'] } }, 'validation'],
-      [{ likes: { $or: [{ $gt: 7 }, undefined] } }, 'validation'],
-      [{ likes: { $or: [{}] } }, 'validation'],
-      [{ likes: { $or: [] } }, 'validation'],
-      [{ likes: { $gte: 'bad' } }, 'validation'],
-      [{ bad: 'super-bad' }, 'validation'],
-      [{ meta: {} }, 'validation'],
+      ['wtf', 'match and regexMatch'],
+      [['wtf'], 'match and regexMatch'],
+      [null, 'match and regexMatch'],
+      [undefined, 'match and regexMatch'],
       [{ meme_id: 5 }, 'illegal'],
       [{ _id: 5 }, 'illegal'],
-      [{ user_id: 5 }, 'illegal']
-    ] as unknown;
+      [{ user_id: 5 }, 'illegal'],
+      [
+        {
+          owner: Array.from({ length: getEnv().RESULTS_PER_PAGE + 1 })
+            .map(() => new ObjectId())
+            .join('|')
+        },
+        '"owner": too many ids'
+      ],
+      [
+        {
+          receiver: Array.from({ length: getEnv().RESULTS_PER_PAGE + 1 })
+            .map(() => new ObjectId())
+            .join('|')
+        },
+        '"receiver": too many ids'
+      ],
+      [
+        {
+          replyTo: Array.from({ length: getEnv().RESULTS_PER_PAGE + 1 })
+            .map(() => new ObjectId())
+            .join('|')
+        },
+        '"replyTo": too many ids'
+      ],
+      [{ bad: 'super-bad' }, '"bad": invalid specifier'],
+      [{ expiredAt: () => 'wtf' }, '"expiredAt": invalid value type'],
+      [{ meta: {} }, '"meta": invalid specifier'],
+      [{ likes: [] }, ['cannot be array', '(regex) string']],
+      [{ likes: { $in: [5] } }, ['invalid sub-specifier "$in"', '(regex) string']],
+      [{ likes: { $or: { bad: 'or' } } }, ['value must be array', '(regex) string']],
+      [
+        { likes: { $or: [{ bad: 5 }, { $lte: 5 }] } },
+        ['sub-specifier at index 0: invalid sub-specifier "bad"', '(regex) string']
+      ],
+      [
+        { likes: { $or: [{ $gt: 5 }, { $lte: 'bad' }] } },
+        ['sub-specifier at index 1: "$lte" has invalid sub-value type', '(regex) string']
+      ],
+      [
+        { likes: { $or: [{ $gt: 6 }, 'b'] } },
+        ['sub-specifier at index 1: all array elements must be objects', '(regex) string']
+      ],
+      [
+        { likes: { $or: [{ $gt: 6 }, { $gt: 6, $lte: 5 }] } },
+        [
+          'sub-specifier at index 1: only one sub-specifier allowed per array element',
+          '(regex) string'
+        ]
+      ],
+      [
+        { likes: { $or: [{ $gt: 7 }, undefined] } },
+        ['index 1: all array elements must be objects', '(regex) string']
+      ],
+      [{ likes: { $or: [{}, {}] } }, ['no empty objects allowed', '(regex) string']],
+      [{ likes: {} }, ['no empty objects allowed', '(regex) string']],
+      [{ likes: { $or: [] } }, ['must be exactly two', '(regex) string']],
+      [
+        { likes: { $or: [{ $gt: 5 }, { $gt: 5 }, { $gt: 5 }] } },
+        ['must be exactly two', '(regex) string']
+      ],
+      [
+        { likes: { $gte: 'bad' } },
+        ['"totalLikes": "$gte" has invalid sub-value type', '(regex) string']
+      ]
+    ] as [Record<string, unknown>, string | string[]][];
 
     await Promise.all(
-      (items as [Parameters<typeof Backend.searchMemes>[0]['match'], string][]).map(
-        ([match, expectedMessage]) =>
-          expect(
-            Backend.searchMemes({ after: null, match, regexMatch: {} })
-          ).rejects.toMatchObject({ message: expect.stringContaining(expectedMessage) })
+      (
+        cloneDeep(items) as [
+          Parameters<typeof Backend.searchMemes>[0]['match'],
+          string | string[]
+        ][]
+      ).map(([match, expectedMessage]) =>
+        expect(
+          Backend.searchMemes({ after: null, match, regexMatch: {} })
+        ).rejects.toMatchObject({
+          message: expect.stringContaining(
+            Array.isArray(expectedMessage) ? expectedMessage[0] : expectedMessage
+          )
+        })
       )
     );
 
     await Promise.all(
-      (items as [Parameters<typeof Backend.searchMemes>[0]['regexMatch'], string][]).map(
-        ([regexMatch, expectedMessage]) =>
-          expect(
-            Backend.searchMemes({ after: null, regexMatch, match: {} })
-          ).rejects.toMatchObject({ message: expect.stringContaining(expectedMessage) })
+      (
+        cloneDeep(items) as [
+          Parameters<typeof Backend.searchMemes>[0]['regexMatch'],
+          string
+        ][]
+      ).map(([regexMatch, expectedMessage]) =>
+        expect(
+          Backend.searchMemes({ after: null, regexMatch, match: {} })
+        ).rejects.toMatchObject({
+          message: expect.stringContaining(
+            Array.isArray(expectedMessage) ? expectedMessage[1] : expectedMessage
+          )
+        })
       )
     );
+
+    await expect(
+      Backend.searchMemes({
+        after: null,
+        regexMatch: undefined as unknown as Record<string, string>,
+        match: undefined as unknown as Record<string, string>
+      })
+    ).rejects.toMatchObject({ message: expect.stringContaining('match and regexMatch') });
   });
 });
 
