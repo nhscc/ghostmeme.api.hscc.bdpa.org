@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import { DUMMY_KEY, BANNED_KEY } from 'universe/backend';
+import { DUMMY_KEY, BANNED_KEY, DEV_KEY } from 'universe/backend';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import cloneDeep from 'clone-deep';
 import { randomInt } from 'crypto';
@@ -46,6 +46,11 @@ const memes = Array.from({ length: Math.ceil(DUMMY_USER_COUNT / 10) })
 
 export const dummyDbData: DummyDbData = {
   keys: [
+    {
+      _id: new ObjectId(),
+      owner: 'local developer',
+      key: DEV_KEY
+    },
     {
       _id: new ObjectId(),
       owner: 'dummy chapter',
