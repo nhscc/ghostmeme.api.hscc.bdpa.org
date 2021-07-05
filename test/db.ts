@@ -63,7 +63,10 @@ export const dummyDbData: DummyDbData = {
     name: `Fake${ndx} User${ndx}`,
     email: `${ndx}-user-email@site.com`,
     phone: `555-555-555${ndx}`,
-    username: Usernames[ndx],
+    username:
+      ndx < Usernames.length
+        ? Usernames[ndx]
+        : toss(new GuruMeditationError('ran out of usernames')),
     friends: [],
     requests: {
       incoming: [],
