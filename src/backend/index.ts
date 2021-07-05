@@ -67,6 +67,11 @@ export const DUMMY_KEY = '12349b61-83a7-4036-b060-213784b491';
 export const BANNED_KEY = 'banned-h54e-6rt7-gctfh-hrftdygct0';
 
 /**
+ * This key is guaranteed to be rate limited.
+ */
+export const DEV_KEY = 'dev-xunn-dev-294a-536h-9751-rydmj';
+
+/**
  * Meme properties that can be matched against with `searchMemes()`.
  */
 const matchableStrings = [

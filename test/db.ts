@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import { DUMMY_KEY, BANNED_KEY } from 'universe/backend';
+import { DUMMY_KEY, BANNED_KEY, DEV_KEY } from 'universe/backend';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import cloneDeep from 'clone-deep';
 import { randomInt } from 'crypto';
@@ -48,6 +48,11 @@ export const dummyDbData: DummyDbData = {
   keys: [
     {
       _id: new ObjectId(),
+      owner: 'local developer',
+      key: DEV_KEY
+    },
+    {
+      _id: new ObjectId(),
       owner: 'dummy chapter',
       key: DUMMY_KEY
     },
@@ -63,7 +68,10 @@ export const dummyDbData: DummyDbData = {
     name: `Fake${ndx} User${ndx}`,
     email: `${ndx}-user-email@site.com`,
     phone: `555-555-555${ndx}`,
-    username: Usernames[ndx],
+    username:
+      ndx < Usernames.length
+        ? Usernames[ndx]
+        : toss(new GuruMeditationError('ran out of usernames')),
     friends: [],
     requests: {
       incoming: [],
