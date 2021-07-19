@@ -1,6 +1,5 @@
-import sha256 from 'crypto-js/sha256';
+import { createHash, randomInt } from 'crypto';
 import { ObjectId } from 'mongodb';
-import { randomInt } from 'crypto';
 import { toss } from 'toss-expression';
 import { getClientIp } from 'request-ip';
 import { isPlainObject } from 'is-plain-object';
@@ -1252,5 +1251,10 @@ export async function getApiKeys() {
       _id: false
     })
     .toArray()
-    .then((a) => a.map((apiKey) => ({ ...apiKey, key: sha256(apiKey.key).toString() })));
+    .then((a) =>
+      a.map((apiKey) => ({
+        ...apiKey,
+        key: createHash('sha256').update(apiKey.key).digest('hex')
+      }))
+    );
 }
