@@ -234,6 +234,7 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
 export function setupTestDb(defer = false) {
   const port = (getEnv().DEBUG_INSPECTING && getEnv().MONGODB_MS_PORT) || undefined;
 
+  // * The in-memory server is not started until it's needed later on
   const server = new MongoMemoryServer({
     instance: {
       port,
@@ -249,6 +250,7 @@ export function setupTestDb(defer = false) {
    * selecting and returning the database.
    */
   const getNewClientAndDb = async () => {
+    await server.ensureInstance();
     uri = uri ?? (await server.getUri('test')); // ? Ensure singleton
     const client = await MongoClient.connect(uri);
     const db = client.db();
