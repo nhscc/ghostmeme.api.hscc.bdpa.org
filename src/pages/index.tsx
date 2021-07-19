@@ -23,14 +23,18 @@ export default function Index({
 }: Awaited<ReturnType<typeof getServerSideProps>>['props']) {
   return (
     <React.Fragment>
-      <p>Psst: there is no web frontend for this API.</p>
-      {!isInProduction && (
-        <div>
-          Environment: <strong>{nodeEnv}</strong> <br />
-          Serverless node runtime: <strong>{nodeVersion}</strong> <br />
-          Ghostmeme runtime: <strong>{`v${pkgVersion}`}</strong> <br />
-        </div>
-      )}
+      Ghostmeme runtime: <strong>{`v${pkgVersion}`}</strong> <br />
+      Serverless node runtime: <strong>{nodeVersion}</strong> <br />
+      Production mode:{' '}
+      <strong>
+        {isInProduction ? (
+          <span style={{ color: 'green' }}>yes</span>
+        ) : (
+          <span style={{ color: 'red' }}>no</span>
+        )}
+      </strong>
+      <br />
+      Environment: <strong>{nodeEnv}</strong> <br />
     </React.Fragment>
   );
 }
