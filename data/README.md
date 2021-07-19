@@ -4,7 +4,7 @@ The complete corpus of conversations that (generated) users have with one
 another is stored [here][1]. This corpus was created with data from the [Cornell
 Movie-Dialogs Corpus][2], a large metadata-rich collection of fictional
 conversations extracted from raw movie scripts. Also includes 100 memes from
-[imgflip's API](https://imgflip.com/api).
+[imgflip's API][4].
 
 If for some reason you want to regenerate the corpus, run
 [`node ./generate-corpus.js`][3].
@@ -60,3 +60,4 @@ Movie titles Used:
 [1]: ./corpus.json
 [2]: https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html
 [3]: ./generate-corpus.js
+[4]: https://imgflip.com/api
