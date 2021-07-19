@@ -51,6 +51,13 @@ module.exports = () => {
       ignoreDuringBuilds: true
     },
 
+    typescript: {
+      // ! This prevents production builds from failing in the presence of
+      // ! TypeScript errors, e.g. when modules from dev deps cannot be found;
+      // ! linting is handled during CL/CI rather than at deploy time.
+      ignoreBuildErrors: true
+    },
+
     async rewrites() {
       return [
         {

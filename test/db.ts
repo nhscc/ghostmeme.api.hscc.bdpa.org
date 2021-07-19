@@ -4,6 +4,8 @@ import { randomInt } from 'crypto';
 import { usernames as Usernames, memes as Memes } from '../data/corpus.json';
 import { getEnv } from 'universe/backend/env';
 import { GuruMeditationError } from 'universe/backend/error';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import cloneDeep from 'clone-deep';
 
 import {
   getDb,
@@ -191,7 +193,7 @@ dummyDbData.users.forEach((user, userIndex) => {
 });
 
 export async function hydrateDb(db: Db, data: DummyDbData) {
-  const newData = require('clone-deep')(data);
+  const newData = cloneDeep(data);
 
   await Promise.all([
     ...[newData.keys.length ? db.collection('keys').insertMany(newData.keys) : null],
@@ -231,8 +233,6 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
  */
 export function setupTestDb(defer = false) {
   const port = (getEnv().DEBUG_INSPECTING && getEnv().MONGODB_MS_PORT) || undefined;
-  const { MongoMemoryServer } =
-    require('mongodb-memory-server') as typeof import('mongodb-memory-server');
 
   const server = new MongoMemoryServer({
     instance: {
