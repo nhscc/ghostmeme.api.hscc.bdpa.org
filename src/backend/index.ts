@@ -295,6 +295,7 @@ export async function getMemes({
       .find({ _id: { $in: meme_ids } })
       .sort({ _id: -1 })
       .limit(getEnv().RESULTS_PER_PAGE)
+      // @ts-expect-error: mongodb@4.0.0 driver typings are broken
       .project<PublicMeme>(publicMemeProjection)
       .toArray();
 
@@ -332,8 +333,11 @@ export async function getMemeLikesUserIds({
         .project<{ likes: UserId[] }>({
           likes: {
             $slice: [
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               '$likes',
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               after ? { $sum: [{ $indexOfArray: ['$likes', after] }, 1] } : 0,
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               getEnv().RESULTS_PER_PAGE
             ]
           }
@@ -372,8 +376,11 @@ export async function getUserLikedMemeIds({
         .project<{ likes: MemeId[] }>({
           likes: {
             $slice: [
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               '$liked',
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               after ? { $sum: [{ $indexOfArray: ['$liked', after] }, 1] } : 0,
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               getEnv().RESULTS_PER_PAGE
             ]
           }
@@ -738,8 +745,11 @@ export async function getUserFriendsUserIds({
       .project<{ friends: UserId[] }>({
         friends: {
           $slice: [
+            // @ts-expect-error: mongodb@4.0.0 driver typings are broken
             '$friends',
+            // @ts-expect-error: mongodb@4.0.0 driver typings are broken
             after ? { $sum: [{ $indexOfArray: ['$friends', after] }, 1] } : 0,
+            // @ts-expect-error: mongodb@4.0.0 driver typings are broken
             getEnv().RESULTS_PER_PAGE
           ]
         }
@@ -859,10 +869,13 @@ export async function getFriendRequestsOfType({
         .project<{ requests: FriendRequestId[] }>({
           requests: {
             $slice: [
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               `$requests.${request_type}`,
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               after
                 ? { $sum: [{ $indexOfArray: [`$requests.${request_type}`, after] }, 1] }
                 : 0,
+              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               getEnv().RESULTS_PER_PAGE
             ]
           }
@@ -1232,10 +1245,10 @@ export async function addToRequestLog({ req, res }: NextApiState) {
 
 export async function getApiKeys() {
   return (await getDb())
-    .collection<InternalApiKey>('keys')
+    .collection('keys')
     .find()
     .sort({ _id: 1 })
-    .project({
+    .project<InternalApiKey>({
       _id: false
     })
     .toArray()

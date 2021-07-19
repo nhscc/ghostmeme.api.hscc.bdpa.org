@@ -25,7 +25,7 @@ export async function getDb(params?: { external: true }) {
         console.log(`[ connecting to mongo database at ${uri} ]`);
     }
 
-    memory.client = await MongoClient.connect(uri, { useUnifiedTopology: true });
+    memory.client = await MongoClient.connect(uri);
     memory.db = memory.client.db();
   }
 
@@ -47,7 +47,7 @@ export async function getDbClient(params?: { external: true }) {
  * Kills the MongoClient and closes any lingering database connections.
  */
 export async function closeDb() {
-  memory?.client.isConnected() && (await memory?.client.close());
+  await memory?.client.close(true);
   memory = null;
 }
 

@@ -231,8 +231,10 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
  */
 export function setupTestDb(defer = false) {
   const port = (getEnv().DEBUG_INSPECTING && getEnv().MONGODB_MS_PORT) || undefined;
+  const { MongoMemoryServer } =
+    require('mongodb-memory-server') as typeof import('mongodb-memory-server');
 
-  const server = new (require('mongodb-memory-server').MongoMemoryServer)({
+  const server = new MongoMemoryServer({
     instance: {
       port,
       // ? Latest mongo versions error without this line
@@ -248,7 +250,7 @@ export function setupTestDb(defer = false) {
    */
   const getNewClientAndDb = async () => {
     uri = uri ?? (await server.getUri('test')); // ? Ensure singleton
-    const client = await MongoClient.connect(uri, { useUnifiedTopology: true });
+    const client = await MongoClient.connect(uri);
     const db = client.db();
 
     if (!db) throw new GuruMeditationError('unable to connect to database');
@@ -276,8 +278,7 @@ export function setupTestDb(defer = false) {
   }
 
   afterAll(async () => {
-    const client = await getDbClient();
-    client.isConnected() && (await client.close());
+    await (await getDbClient()).close(true);
     await server.stop();
   });
 
