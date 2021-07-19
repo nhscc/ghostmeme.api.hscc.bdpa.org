@@ -104,20 +104,20 @@ type ItemExistsOptions = { exclude_id?: ObjectId };
  * Checks if an item identified by some `key` (default identifier is `"_id"`)
  * exists within `collection`.
  */
-export async function itemExists(
-  collection: Collection,
+export async function itemExists<T>(
+  collection: Collection<T>,
   id: ObjectId,
   key?: '_id' | 'owner' | 'receiver' | 'replyTo',
   options?: ItemExistsOptions
 ): Promise<boolean>;
-export async function itemExists(
-  collection: Collection,
+export async function itemExists<T>(
+  collection: Collection<T>,
   id: string,
   key: string,
   options?: ItemExistsOptions
 ): Promise<boolean>;
-export async function itemExists(
-  collection: Collection,
+export async function itemExists<T>(
+  collection: Collection<T>,
   id: ObjectId | string,
   key = '_id',
   options?: ItemExistsOptions
