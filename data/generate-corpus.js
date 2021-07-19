@@ -29,7 +29,6 @@ const DESIRED_MOVIES = [
   'm282',
   'm304',
   'm346',
-  'm413',
   'm433',
   'm473',
   'm540',
@@ -83,12 +82,12 @@ const lines = rawLines.reduce((map, ln, ndx) => {
 console.log('\b\b\b\b\b\b100/100');
 console.log('> joining and filtering conversation dialog...');
 
-// Lol
+// Lol, you try to pick out the PG-13 movies from the corpus, but still...
 const censor = (line) => {
   return line
     .replace(
-      /(\b| )\S*(?:fuck|shit|bitch|dick|cunt|ass|rape)\S*( |\b)/gi,
-      '$1[naughty word]$2'
+      /(\b| )\S*(?:fuck|shit|bitch|dick|cunt|ass|rape|cock|blow|suck|screw|faggot| cum )\S*( |\b)/gi,
+      '$1[bleeped]$2'
     )
     .replace(/(\S)\s\s+(\S)/gi, '$1 $2');
 };
