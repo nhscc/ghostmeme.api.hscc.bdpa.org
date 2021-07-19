@@ -7,41 +7,42 @@
 ### Variables
 
 - [BANNED_KEY][2]
-- [DUMMY_KEY][3]
-- [NULL_KEY][4]
-- [publicMemeProjection][5]
-- [publicUserProjection][6]
+- [DEV_KEY][3]
+- [DUMMY_KEY][4]
+- [NULL_KEY][5]
+- [publicMemeProjection][6]
+- [publicUserProjection][7]
 
 ### Functions
 
-- [addFriendRequest][7]
-- [addLikedMeme][8]
-- [addToRequestLog][9]
-- [addUserAsFriend][10]
-- [createMeme][11]
-- [createUser][12]
-- [deleteUser][13]
-- [getAllUsers][14]
-- [getApiKeys][15]
-- [getFriendRequestsOfType][16]
-- [getMemeLikesUserIds][17]
-- [getMemes][18]
-- [getSystemInfo][19]
-- [getUser][20]
-- [getUserFriendsUserIds][21]
-- [getUserLikedMemeIds][22]
-- [isDueForContrivedError][23]
-- [isFriendRequestOfType][24]
-- [isKeyAuthentic][25]
-- [isMemeLiked][26]
-- [isRateLimited][27]
-- [isUserAFriend][28]
-- [removeFriendRequest][29]
-- [removeLikedMeme][30]
-- [removeUserAsFriend][31]
-- [searchMemes][32]
-- [updateMemes][33]
-- [updateUser][34]
+- [addFriendRequest][8]
+- [addLikedMeme][9]
+- [addToRequestLog][10]
+- [addUserAsFriend][11]
+- [createMeme][12]
+- [createUser][13]
+- [deleteUser][14]
+- [getAllUsers][15]
+- [getApiKeys][16]
+- [getFriendRequestsOfType][17]
+- [getMemeLikesUserIds][18]
+- [getMemes][19]
+- [getSystemInfo][20]
+- [getUser][21]
+- [getUserFriendsUserIds][22]
+- [getUserLikedMemeIds][23]
+- [isDueForContrivedError][24]
+- [isFriendRequestOfType][25]
+- [isKeyAuthentic][26]
+- [isMemeLiked][27]
+- [isRateLimited][28]
+- [isUserAFriend][29]
+- [removeFriendRequest][30]
+- [removeLikedMeme][31]
+- [removeUserAsFriend][32]
+- [searchMemes][33]
+- [updateMemes][34]
+- [updateUser][35]
 
 ## Variables
 
@@ -53,7 +54,19 @@ This key is guaranteed to be rate limited.
 
 #### Defined in
 
-[src/backend/index.ts:67][35]
+[src/backend/index.ts:67][36]
+
+---
+
+### DEV_KEY
+
+• `Const` **DEV_KEY**: `"dev-xunn-dev-294a-536h-9751-rydmj"`
+
+This key is guaranteed to be rate limited.
+
+#### Defined in
+
+[src/backend/index.ts:72][37]
 
 ---
 
@@ -65,7 +78,7 @@ This key is only valid when running in a Jest test environment.
 
 #### Defined in
 
-[src/backend/index.ts:62][36]
+[src/backend/index.ts:62][38]
 
 ---
 
@@ -77,7 +90,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:57][37]
+[src/backend/index.ts:57][39]
 
 ---
 
@@ -107,7 +120,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:89][38]
+[src/backend/index.ts:94][40]
 
 ---
 
@@ -135,7 +148,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:103][39]
+[src/backend/index.ts:108][41]
 
 ## Functions
 
@@ -148,9 +161,9 @@ This key is guaranteed never to appear in the system and can be checked against.
 | Name                   | Type                      |
 | :--------------------- | :------------------------ |
 | `(destructured)`       | `Object`                  |
-| ▶ `({ request_type })` | [`FriendRequestType`][40] |
-| ▶ `({ target_id })`    | [`UserId`][41]            |
-| ▶ `({ user_id })`      | [`UserId`][41]            |
+| ▶ `({ request_type })` | [`FriendRequestType`][42] |
+| ▶ `({ target_id })`    | [`UserId`][43]            |
+| ▶ `({ user_id })`      | [`UserId`][43]            |
 
 #### Returns
 
@@ -158,7 +171,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:930][42]
+[src/backend/index.ts:935][44]
 
 ---
 
@@ -171,8 +184,8 @@ This key is guaranteed never to appear in the system and can be checked against.
 | Name              | Type           |
 | :---------------- | :------------- |
 | `(destructured)`  | `Object`       |
-| ▶ `({ meme_id })` | [`MemeId`][43] |
-| ▶ `({ user_id })` | [`UserId`][41] |
+| ▶ `({ meme_id })` | [`MemeId`][45] |
+| ▶ `({ user_id })` | [`UserId`][43] |
 
 #### Returns
 
@@ -180,7 +193,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:442][44]
+[src/backend/index.ts:447][46]
 
 ---
 
@@ -194,7 +207,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 | Name             | Type                 |
 | :--------------- | :------------------- |
-| `(destructured)` | [`NextApiState`][45] |
+| `(destructured)` | [`NextApiState`][47] |
 
 #### Returns
 
@@ -202,7 +215,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:1217][46]
+[src/backend/index.ts:1222][48]
 
 ---
 
@@ -215,8 +228,8 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | Name                | Type           |
 | :------------------ | :------------- |
 | `(destructured)`    | `Object`       |
-| ▶ `({ friend_id })` | [`UserId`][41] |
-| ▶ `({ user_id })`   | [`UserId`][41] |
+| ▶ `({ friend_id })` | [`UserId`][43] |
+| ▶ `({ user_id })`   | [`UserId`][43] |
 
 #### Returns
 
@@ -224,13 +237,13 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:801][47]
+[src/backend/index.ts:806][49]
 
 ---
 
 ### createMeme
 
-▸ **createMeme**(`(destructured)`): `Promise`<[`PublicMeme`][48]>
+▸ **createMeme**(`(destructured)`): `Promise`<[`PublicMeme`][50]>
 
 #### Parameters
 
@@ -238,21 +251,21 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | :------------------- | :------------------------- |
 | `(destructured)`     | `Object`                   |
 | ▶ `({ creatorKey })` | `string`                   |
-| ▶ `({ data })`       | `Partial`<[`NewMeme`][49]> |
+| ▶ `({ data })`       | `Partial`<[`NewMeme`][51]> |
 
 #### Returns
 
-`Promise`<[`PublicMeme`][48]>
+`Promise`<[`PublicMeme`][50]>
 
 #### Defined in
 
-[src/backend/index.ts:126][50]
+[src/backend/index.ts:131][52]
 
 ---
 
 ### createUser
 
-▸ **createUser**(`(destructured)`): `Promise`<[`PublicUser`][51]>
+▸ **createUser**(`(destructured)`): `Promise`<[`PublicUser`][53]>
 
 #### Parameters
 
@@ -260,15 +273,15 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | :------------------- | :------------------------- |
 | `(destructured)`     | `Object`                   |
 | ▶ `({ creatorKey })` | `string`                   |
-| ▶ `({ data })`       | `Partial`<[`NewUser`][52]> |
+| ▶ `({ data })`       | `Partial`<[`NewUser`][54]> |
 
 #### Returns
 
-`Promise`<[`PublicUser`][51]>
+`Promise`<[`PublicUser`][53]>
 
 #### Defined in
 
-[src/backend/index.ts:474][53]
+[src/backend/index.ts:479][55]
 
 ---
 
@@ -281,7 +294,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | Name              | Type           |
 | :---------------- | :------------- |
 | `(destructured)`  | `Object`       |
-| ▶ `({ user_id })` | [`UserId`][41] |
+| ▶ `({ user_id })` | [`UserId`][43] |
 
 #### Returns
 
@@ -289,28 +302,28 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:641][54]
+[src/backend/index.ts:646][56]
 
 ---
 
 ### getAllUsers
 
-▸ **getAllUsers**(`(destructured)`): `Promise`<[`PublicUser`][51]\[]>
+▸ **getAllUsers**(`(destructured)`): `Promise`<[`PublicUser`][53]\[]>
 
 #### Parameters
 
 | Name             | Type                     |
 | :--------------- | :----------------------- |
 | `(destructured)` | `Object`                 |
-| ▶ `({ after })`  | [`UserId`][41] \| `null` |
+| ▶ `({ after })`  | [`UserId`][43] \| `null` |
 
 #### Returns
 
-`Promise`<[`PublicUser`][51]\[]>
+`Promise`<[`PublicUser`][53]\[]>
 
 #### Defined in
 
-[src/backend/index.ts:660][55]
+[src/backend/index.ts:665][57]
 
 ---
 
@@ -324,7 +337,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:1228][56]
+[src/backend/index.ts:1233][58]
 
 ---
 
@@ -337,9 +350,9 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | Name                   | Type                              |
 | :--------------------- | :-------------------------------- |
 | `(destructured)`       | `Object`                          |
-| ▶ `({ after })`        | [`FriendRequestId`][57] \| `null` |
-| ▶ `({ request_type })` | [`FriendRequestType`][40]         |
-| ▶ `({ user_id })`      | [`UserId`][41]                    |
+| ▶ `({ after })`        | [`FriendRequestId`][59] \| `null` |
+| ▶ `({ request_type })` | [`FriendRequestType`][42]         |
+| ▶ `({ user_id })`      | [`UserId`][43]                    |
 
 #### Returns
 
@@ -347,7 +360,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:828][58]
+[src/backend/index.ts:833][60]
 
 ---
 
@@ -360,8 +373,8 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | Name              | Type                     |
 | :---------------- | :----------------------- |
 | `(destructured)`  | `Object`                 |
-| ▶ `({ after })`   | [`UserId`][41] \| `null` |
-| ▶ `({ meme_id })` | [`MemeId`][43]           |
+| ▶ `({ after })`   | [`UserId`][43] \| `null` |
+| ▶ `({ meme_id })` | [`MemeId`][45]           |
 
 #### Returns
 
@@ -369,64 +382,64 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:302][59]
+[src/backend/index.ts:307][61]
 
 ---
 
 ### getMemes
 
-▸ **getMemes**(`(destructured)`): `Promise`<[`PublicMeme`][48]\[]>
+▸ **getMemes**(`(destructured)`): `Promise`<[`PublicMeme`][50]\[]>
 
 #### Parameters
 
 | Name               | Type             |
 | :----------------- | :--------------- |
 | `(destructured)`   | `Object`         |
-| ▶ `({ meme_ids })` | [`MemeId`][43][] |
+| ▶ `({ meme_ids })` | [`MemeId`][45][] |
 
 #### Returns
 
-`Promise`<[`PublicMeme`][48]\[]>
+`Promise`<[`PublicMeme`][50]\[]>
 
 #### Defined in
 
-[src/backend/index.ts:272][60]
+[src/backend/index.ts:277][62]
 
 ---
 
 ### getSystemInfo
 
-▸ **getSystemInfo**(): `Promise`<[`InternalInfo`][61]>
+▸ **getSystemInfo**(): `Promise`<[`InternalInfo`][63]>
 
 #### Returns
 
-`Promise`<[`InternalInfo`][61]>
+`Promise`<[`InternalInfo`][63]>
 
 #### Defined in
 
-[src/backend/index.ts:116][62]
+[src/backend/index.ts:121][64]
 
 ---
 
 ### getUser
 
-▸ **getUser**(`(destructured)`): `Promise`<[`PublicUser`][51]>
+▸ **getUser**(`(destructured)`): `Promise`<[`PublicUser`][53]>
 
 #### Parameters
 
 | Name                | Type           |
 | :------------------ | :------------- |
 | `(destructured)`    | `Object`       |
-| ▶ `({ user_id? })`  | [`UserId`][41] |
+| ▶ `({ user_id? })`  | [`UserId`][43] |
 | ▶ `({ username? })` | `string`       |
 
 #### Returns
 
-`Promise`<[`PublicUser`][51]>
+`Promise`<[`PublicUser`][53]>
 
 #### Defined in
 
-[src/backend/index.ts:684][63]
+[src/backend/index.ts:689][65]
 
 ---
 
@@ -439,8 +452,8 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | Name              | Type                     |
 | :---------------- | :----------------------- |
 | `(destructured)`  | `Object`                 |
-| ▶ `({ after })`   | [`UserId`][41] \| `null` |
-| ▶ `({ user_id })` | [`UserId`][41]           |
+| ▶ `({ after })`   | [`UserId`][43] \| `null` |
+| ▶ `({ user_id })` | [`UserId`][43]           |
 
 #### Returns
 
@@ -448,7 +461,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:710][64]
+[src/backend/index.ts:715][66]
 
 ---
 
@@ -461,8 +474,8 @@ Note that this async function does not have to be awaited. It's fire and forget!
 | Name              | Type                     |
 | :---------------- | :----------------------- |
 | `(destructured)`  | `Object`                 |
-| ▶ `({ after })`   | [`MemeId`][43] \| `null` |
-| ▶ `({ user_id })` | [`UserId`][41]           |
+| ▶ `({ after })`   | [`MemeId`][45] \| `null` |
+| ▶ `({ user_id })` | [`UserId`][43]           |
 
 #### Returns
 
@@ -470,7 +483,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:342][65]
+[src/backend/index.ts:347][67]
 
 ---
 
@@ -487,7 +500,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1202][66]
+[src/backend/index.ts:1207][68]
 
 ---
 
@@ -500,9 +513,9 @@ across all Vercel virtual machines.
 | Name                   | Type                      |
 | :--------------------- | :------------------------ |
 | `(destructured)`       | `Object`                  |
-| ▶ `({ request_type })` | [`FriendRequestType`][40] |
-| ▶ `({ target_id })`    | [`UserId`][41]            |
-| ▶ `({ user_id })`      | [`UserId`][41]            |
+| ▶ `({ request_type })` | [`FriendRequestType`][42] |
+| ▶ `({ target_id })`    | [`UserId`][43]            |
+| ▶ `({ user_id })`      | [`UserId`][43]            |
 
 #### Returns
 
@@ -510,7 +523,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:871][67]
+[src/backend/index.ts:876][69]
 
 ---
 
@@ -530,7 +543,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1167][68]
+[src/backend/index.ts:1172][70]
 
 ---
 
@@ -543,8 +556,8 @@ across all Vercel virtual machines.
 | Name              | Type           |
 | :---------------- | :------------- |
 | `(destructured)`  | `Object`       |
-| ▶ `({ meme_id })` | [`MemeId`][43] |
-| ▶ `({ user_id })` | [`UserId`][41] |
+| ▶ `({ meme_id })` | [`MemeId`][45] |
+| ▶ `({ user_id })` | [`UserId`][43] |
 
 #### Returns
 
@@ -552,7 +565,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:382][69]
+[src/backend/index.ts:387][71]
 
 ---
 
@@ -572,7 +585,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1176][70]
+[src/backend/index.ts:1181][72]
 
 ---
 
@@ -585,8 +598,8 @@ across all Vercel virtual machines.
 | Name                | Type           |
 | :------------------ | :------------- |
 | `(destructured)`    | `Object`       |
-| ▶ `({ friend_id })` | [`UserId`][41] |
-| ▶ `({ user_id })`   | [`UserId`][41] |
+| ▶ `({ friend_id })` | [`UserId`][43] |
+| ▶ `({ user_id })`   | [`UserId`][43] |
 
 #### Returns
 
@@ -594,7 +607,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:749][71]
+[src/backend/index.ts:754][73]
 
 ---
 
@@ -607,9 +620,9 @@ across all Vercel virtual machines.
 | Name                   | Type                      |
 | :--------------------- | :------------------------ |
 | `(destructured)`       | `Object`                  |
-| ▶ `({ request_type })` | [`FriendRequestType`][40] |
-| ▶ `({ target_id })`    | [`UserId`][41]            |
-| ▶ `({ user_id })`      | [`UserId`][41]            |
+| ▶ `({ request_type })` | [`FriendRequestType`][42] |
+| ▶ `({ target_id })`    | [`UserId`][43]            |
+| ▶ `({ user_id })`      | [`UserId`][43]            |
 
 #### Returns
 
@@ -617,7 +630,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:903][72]
+[src/backend/index.ts:908][74]
 
 ---
 
@@ -630,8 +643,8 @@ across all Vercel virtual machines.
 | Name              | Type           |
 | :---------------- | :------------- |
 | `(destructured)`  | `Object`       |
-| ▶ `({ meme_id })` | [`MemeId`][43] |
-| ▶ `({ user_id })` | [`UserId`][41] |
+| ▶ `({ meme_id })` | [`MemeId`][45] |
+| ▶ `({ user_id })` | [`UserId`][43] |
 
 #### Returns
 
@@ -639,7 +652,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:413][73]
+[src/backend/index.ts:418][75]
 
 ---
 
@@ -652,8 +665,8 @@ across all Vercel virtual machines.
 | Name                | Type           |
 | :------------------ | :------------- |
 | `(destructured)`    | `Object`       |
-| ▶ `({ friend_id })` | [`UserId`][41] |
-| ▶ `({ user_id })`   | [`UserId`][41] |
+| ▶ `({ friend_id })` | [`UserId`][43] |
+| ▶ `({ user_id })`   | [`UserId`][43] |
 
 #### Returns
 
@@ -661,30 +674,30 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:779][74]
+[src/backend/index.ts:784][76]
 
 ---
 
 ### searchMemes
 
-▸ **searchMemes**(`(destructured)`): `Promise`<[`PublicMeme`][48]\[]>
+▸ **searchMemes**(`(destructured)`): `Promise`<[`PublicMeme`][50]\[]>
 
 #### Parameters
 
 | Name                 | Type                     |
 | :------------------- | :----------------------- |
 | `(destructured)`     | `Object`                 |
-| ▶ `({ after })`      | [`MemeId`][43] \| `null` |
+| ▶ `({ after })`      | [`MemeId`][45] \| `null` |
 | ▶ `({ match })`      | `Object`                 |
 | ▶ `({ regexMatch })` | `Object`                 |
 
 #### Returns
 
-`Promise`<[`PublicMeme`][48]\[]>
+`Promise`<[`PublicMeme`][50]\[]>
 
 #### Defined in
 
-[src/backend/index.ts:961][75]
+[src/backend/index.ts:966][77]
 
 ---
 
@@ -697,8 +710,8 @@ across all Vercel virtual machines.
 | Name               | Type                         |
 | :----------------- | :--------------------------- |
 | `(destructured)`   | `Object`                     |
-| ▶ `({ data })`     | `Partial`<[`PatchMeme`][76]> |
-| ▶ `({ meme_ids })` | [`MemeId`][43][]             |
+| ▶ `({ data })`     | `Partial`<[`PatchMeme`][78]> |
+| ▶ `({ meme_ids })` | [`MemeId`][45][]             |
 
 #### Returns
 
@@ -706,7 +719,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:247][77]
+[src/backend/index.ts:252][79]
 
 ---
 
@@ -719,8 +732,8 @@ across all Vercel virtual machines.
 | Name              | Type                         |
 | :---------------- | :--------------------------- |
 | `(destructured)`  | `Object`                     |
-| ▶ `({ data })`    | `Partial`<[`PatchUser`][78]> |
-| ▶ `({ user_id })` | [`UserId`][41]               |
+| ▶ `({ data })`    | `Partial`<[`PatchUser`][80]> |
+| ▶ `({ user_id })` | [`UserId`][43]               |
 
 #### Returns
 
@@ -728,117 +741,120 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:568][79]
+[src/backend/index.ts:573][81]
 
 [1]: ../README.md
 [2]: src_backend.md#banned_key
-[3]: src_backend.md#dummy_key
-[4]: src_backend.md#null_key
-[5]: src_backend.md#publicmemeprojection
-[6]: src_backend.md#publicuserprojection
-[7]: src_backend.md#addfriendrequest
-[8]: src_backend.md#addlikedmeme
-[9]: src_backend.md#addtorequestlog
-[10]: src_backend.md#adduserasfriend
-[11]: src_backend.md#creatememe
-[12]: src_backend.md#createuser
-[13]: src_backend.md#deleteuser
-[14]: src_backend.md#getallusers
-[15]: src_backend.md#getapikeys
-[16]: src_backend.md#getfriendrequestsoftype
-[17]: src_backend.md#getmemelikesuserids
-[18]: src_backend.md#getmemes
-[19]: src_backend.md#getsysteminfo
-[20]: src_backend.md#getuser
-[21]: src_backend.md#getuserfriendsuserids
-[22]: src_backend.md#getuserlikedmemeids
-[23]: src_backend.md#isdueforcontrivederror
-[24]: src_backend.md#isfriendrequestoftype
-[25]: src_backend.md#iskeyauthentic
-[26]: src_backend.md#ismemeliked
-[27]: src_backend.md#isratelimited
-[28]: src_backend.md#isuserafriend
-[29]: src_backend.md#removefriendrequest
-[30]: src_backend.md#removelikedmeme
-[31]: src_backend.md#removeuserasfriend
-[32]: src_backend.md#searchmemes
-[33]: src_backend.md#updatememes
-[34]: src_backend.md#updateuser
-[35]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L67
+[3]: src_backend.md#dev_key
+[4]: src_backend.md#dummy_key
+[5]: src_backend.md#null_key
+[6]: src_backend.md#publicmemeprojection
+[7]: src_backend.md#publicuserprojection
+[8]: src_backend.md#addfriendrequest
+[9]: src_backend.md#addlikedmeme
+[10]: src_backend.md#addtorequestlog
+[11]: src_backend.md#adduserasfriend
+[12]: src_backend.md#creatememe
+[13]: src_backend.md#createuser
+[14]: src_backend.md#deleteuser
+[15]: src_backend.md#getallusers
+[16]: src_backend.md#getapikeys
+[17]: src_backend.md#getfriendrequestsoftype
+[18]: src_backend.md#getmemelikesuserids
+[19]: src_backend.md#getmemes
+[20]: src_backend.md#getsysteminfo
+[21]: src_backend.md#getuser
+[22]: src_backend.md#getuserfriendsuserids
+[23]: src_backend.md#getuserlikedmemeids
+[24]: src_backend.md#isdueforcontrivederror
+[25]: src_backend.md#isfriendrequestoftype
+[26]: src_backend.md#iskeyauthentic
+[27]: src_backend.md#ismemeliked
+[28]: src_backend.md#isratelimited
+[29]: src_backend.md#isuserafriend
+[30]: src_backend.md#removefriendrequest
+[31]: src_backend.md#removelikedmeme
+[32]: src_backend.md#removeuserasfriend
+[33]: src_backend.md#searchmemes
+[34]: src_backend.md#updatememes
+[35]: src_backend.md#updateuser
 [36]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L62
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L67
 [37]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L57
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L72
 [38]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L89
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L62
 [39]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L103
-[40]: types_global.md#friendrequesttype
-[41]: ../interfaces/types_global.userid.md
-[42]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L930
-[43]: ../interfaces/types_global.memeid.md
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L57
+[40]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L94
+[41]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L108
+[42]: types_global.md#friendrequesttype
+[43]: ../interfaces/types_global.userid.md
 [44]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L442
-[45]: types_global.md#nextapistate
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L935
+[45]: ../interfaces/types_global.memeid.md
 [46]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L1217
-[47]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L801
-[48]: types_global.md#publicmeme
-[49]: types_global.md#newmeme
-[50]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L126
-[51]: types_global.md#publicuser
-[52]: types_global.md#newuser
-[53]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L474
-[54]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L641
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L447
+[47]: types_global.md#nextapistate
+[48]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1222
+[49]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L806
+[50]: types_global.md#publicmeme
+[51]: types_global.md#newmeme
+[52]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L131
+[53]: types_global.md#publicuser
+[54]: types_global.md#newuser
 [55]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L660
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L479
 [56]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L1228
-[57]: ../interfaces/types_global.friendrequestid.md
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L646
+[57]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L665
 [58]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L828
-[59]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L302
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1233
+[59]: ../interfaces/types_global.friendrequestid.md
 [60]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L272
-[61]: types_global.md#internalinfo
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L833
+[61]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L307
 [62]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L116
-[63]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L684
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L277
+[63]: types_global.md#internalinfo
 [64]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L710
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L121
 [65]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L342
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L689
 [66]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L1202
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L715
 [67]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L871
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L347
 [68]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L1167
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1207
 [69]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L382
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L876
 [70]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L1176
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1172
 [71]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L749
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L387
 [72]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L903
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1181
 [73]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L413
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L754
 [74]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L779
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L908
 [75]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L961
-[76]: types_global.md#patchmeme
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L418
+[76]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L784
 [77]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L247
-[78]: types_global.md#patchuser
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L966
+[78]: types_global.md#patchmeme
 [79]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/index.ts#L568
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L252
+[80]: types_global.md#patchuser
+[81]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L573

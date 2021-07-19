@@ -351,30 +351,30 @@ purposes.
 [11]: src_backend_db.md#itemtostringid
 [12]: src_backend_db.md#setclientanddb
 [13]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L143
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L143
 [14]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L144
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L144
 [15]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L49
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L49
 [16]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L68
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L68
 [17]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L15
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L15
 [18]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L40
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L40
 [19]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L83
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L83
 [20]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L107
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L107
 [21]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L113
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L113
 [22]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L153
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L153
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L157
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L157
 [24]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L188
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L188
 [25]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L193
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L193
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/db.ts#L58
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L58

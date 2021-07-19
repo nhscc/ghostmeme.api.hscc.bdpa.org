@@ -27,19 +27,13 @@
 
 #### Defined in
 
-[src/pages/index.tsx:39][4]
+[src/pages/index.tsx:19][4]
 
 ---
 
 ### getServerSideProps
 
-▸ **getServerSideProps**(`(destructured)`): `Promise`<`Object`>
-
-#### Parameters
-
-| Name             | Type                        |
-| :--------------- | :-------------------------- |
-| `(destructured)` | `GetServerSidePropsContext` |
+▸ **getServerSideProps**(): `Promise`<`Object`>
 
 #### Returns
 
@@ -47,12 +41,12 @@
 
 #### Defined in
 
-[src/pages/index.tsx:13][5]
+[src/pages/index.tsx:7][5]
 
 [1]: ../README.md
 [2]: src_pages.md#default
 [3]: src_pages.md#getserversideprops
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/pages/index.tsx#L39
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/pages/index.tsx#L19
 [5]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/pages/index.tsx#L13
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/pages/index.tsx#L7

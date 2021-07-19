@@ -178,7 +178,7 @@ node_modules/@types/node/globals.d.ts:4
 [10]: src_backend_error.activitysimulationerror.md#capturestacktrace
 [11]: src_backend_error.apperror.md#constructor
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/backend/error.ts#L40
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/error.ts#L40
 [13]: src_backend_error.apperror.md#message
 [14]: src_backend_error.apperror.md#name
 [15]: src_backend_error.apperror.md#stack

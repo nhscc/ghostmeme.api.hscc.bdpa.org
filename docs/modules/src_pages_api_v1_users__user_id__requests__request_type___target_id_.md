@@ -48,4 +48,4 @@ Renames and exports: [defaultConfig][4]
 [4]: src_backend_middleware.md#defaultconfig
 
 [5]:
-https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/pages/api/v1/users/[user_id]/requests/[request_type]/[target_id].ts#L15
+https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/pages/api/v1/users/[user_id]/requests/[request_type]/[target_id].ts#L15

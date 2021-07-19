@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[test/db.ts:35][9]
+[test/db.ts:34][9]
 
 ## Variables
 
@@ -44,13 +44,13 @@
 
 #### Defined in
 
-[test/db.ts:47][10]
+[test/db.ts:46][10]
 
 ## Functions
 
 ### hydrateDb
 
-▸ **hydrateDb**(`db`, `data`): `Promise`<[`DummyDbData`][2]>
+▸ **hydrateDb**(`db`, `data`): `Promise`<`any`>
 
 #### Parameters
 
@@ -61,11 +61,11 @@
 
 #### Returns
 
-`Promise`<[`DummyDbData`][2]>
+`Promise`<`any`>
 
 #### Defined in
 
-[test/db.ts:186][11]
+[test/db.ts:193][11]
 
 ---
 
@@ -93,7 +93,7 @@ Setup a test version of the database using jest lifecycle hooks.
 
 #### Defined in
 
-[test/db.ts:225][12]
+[test/db.ts:232][12]
 
 [1]: ../README.md
 [2]: test_db.md#dummydbdata
@@ -104,10 +104,10 @@ Setup a test version of the database using jest lifecycle hooks.
 [7]: types_global.md#internalmeme
 [8]: types_global.md#internaluser
 [9]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/test/db.ts#L35
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/db.ts#L34
 [10]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/test/db.ts#L47
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/db.ts#L46
 [11]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/test/db.ts#L186
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/db.ts#L193
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/test/db.ts#L225
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/db.ts#L232
