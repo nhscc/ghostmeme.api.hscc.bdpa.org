@@ -25,6 +25,7 @@ export default function Index({
     <React.Fragment>
       Ghostmeme runtime: <strong>{`v${pkgVersion}`}</strong> <br />
       Serverless node runtime: <strong>{nodeVersion}</strong> <br />
+      Environment: <strong>{nodeEnv}</strong> <br />
       Production mode:{' '}
       <strong>
         {isInProduction ? (
@@ -34,7 +35,6 @@ export default function Index({
         )}
       </strong>
       <br />
-      Environment: <strong>{nodeEnv}</strong> <br />
     </React.Fragment>
   );
 }
