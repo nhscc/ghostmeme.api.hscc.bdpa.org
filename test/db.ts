@@ -1,7 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { DUMMY_KEY, BANNED_KEY, DEV_KEY } from 'universe/backend';
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import cloneDeep from 'clone-deep';
 import { randomInt } from 'crypto';
 import { usernames as Usernames, memes as Memes } from '../data/corpus.json';
 import { getEnv } from 'universe/backend/env';
@@ -25,6 +23,7 @@ import type {
   InternalUser,
   InternalInfo
 } from 'types/global';
+
 import { toss } from 'toss-expression';
 
 /**
@@ -192,7 +191,7 @@ dummyDbData.users.forEach((user, userIndex) => {
 });
 
 export async function hydrateDb(db: Db, data: DummyDbData) {
-  const newData = cloneDeep(data);
+  const newData = require('clone-deep')(data);
 
   await Promise.all([
     ...[newData.keys.length ? db.collection('keys').insertMany(newData.keys) : null],
@@ -233,7 +232,7 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
 export function setupTestDb(defer = false) {
   const port = (getEnv().DEBUG_INSPECTING && getEnv().MONGODB_MS_PORT) || undefined;
 
-  const server = new MongoMemoryServer({
+  const server = new (require('mongodb-memory-server').MongoMemoryServer)({
     instance: {
       port,
       // ? Latest mongo versions error without this line
