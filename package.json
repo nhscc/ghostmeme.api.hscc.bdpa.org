@@ -56,7 +56,7 @@
     "@types/cors": "^2.8.12",
     "@types/debug": "^4.1.6",
     "@types/folder-hash": "^4.0.1",
-    "@types/node": "^16.3.3",
+    "@types/node": "^16.4.0",
     "@types/react": "^17.0.14",
     "@types/request-ip": "^0.0.37",
     "@xunnamius/types": "^1.0.3",
