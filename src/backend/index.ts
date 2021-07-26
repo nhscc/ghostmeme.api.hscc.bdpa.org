@@ -518,9 +518,12 @@ export async function createUser({
     throw new ValidationError(
       '`username` must be an alphanumeric string between 5 and 20 characters'
     );
-  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+  } else if (
+    data.imageBase64 !== null &&
+    (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
+  ) {
     throw new ValidationError(
-      '`imageBase64` must be a valid base64 string, data uri, or null'
+      '`imageBase64` must be a valid non-empty base64 string, data uri, or null'
     );
   } else if (!creatorKey || typeof creatorKey != 'string') {
     throw new InvalidKeyError();
