@@ -176,7 +176,6 @@ describe('api/v1/memes', () => {
         handler: api.memesIds,
         test: async ({ fetch }) => {
           // ? fetch is async, so to use params we need to wait
-          // TODO: fix w/ paramsPatcher (and the others too)
           for (const item of items) {
             params.meme_ids = item;
 
@@ -243,7 +242,6 @@ describe('api/v1/memes', () => {
         handler: api.memesIds,
         test: async ({ fetch }) => {
           // ? fetch is async, so to use params we need to wait
-          // TODO: fix w/ paramsPatcher
           for (const item of items) {
             params.meme_ids = item;
 

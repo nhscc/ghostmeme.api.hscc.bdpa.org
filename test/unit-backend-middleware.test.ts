@@ -40,7 +40,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 jest.mock('universe/backend');
 
-// TODO: add non-authenticated endpoint support (merge-in from airports api)
+// TODO: XXX: add non-authenticated endpoint support (merge-in from airports api)
 
 const noop = async ({ res }: { res: NextApiResponse }) => res.status(200).send({});
 

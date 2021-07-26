@@ -8,17 +8,17 @@ import debugFactory from 'debug';
 import type { PatchUser, PublicMeme, PublicUser } from 'types/global';
 import type { NextApiHandler, PageConfig } from 'next';
 
-// TODO: turn a lot of this into some kind of package; needs to be generic
-// TODO: enough to handle various use cases though :) Maybe
-// TODO: @xunnamius/test-factory for the generic version, along with
-// TODO: @xunnamius/test-factory-next, @xunnamius/test-factory-next-api (below),
-// TODO: @xunnamius/test-factory-X plugins
+// TODO: XXX: turn a lot of this into some kind of package; needs to be generic
+// TODO: XXX: enough to handle various use cases though :) Maybe
+// TODO: XXX: @xunnamius/test-factory for the generic version, along with
+// TODO: XXX: @xunnamius/test-factory-next, @xunnamius/test-factory-next-api (below),
+// TODO: XXX: @xunnamius/test-factory-X plugins
 
-// TODO: add an `id` param that allows getResultAt using that `id` (along with
-// TODO: index)
+// TODO: XXX: add an `id` param that allows getResultAt using that `id` (along with
+// TODO: XXX: index)
 
-// TODO: document functionality: RUN_ONLY='#, ##,###,...'
-// TODO: "fail fast" should be optional
+// TODO: XXX: document functionality: RUN_ONLY='#, ##,###,...'
+// TODO: XXX: "fail fast" should be optional
 
 const debug = debugFactory(`${pkgName}:integration-fixtures`);
 
@@ -145,7 +145,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
     deleted: expect.any(Boolean)
   });
 
-  // TODO: delete me
+  // TODO: XXX: delete me
   void addUnknownDelete;
 
   const runOnly = process.env.RUN_ONLY?.split(',')
@@ -2000,7 +2000,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
     // }
   ];
 
-  // TODO: ability to specify "depends" via index or name/id
+  // TODO: XXX: ability to specify "depends" via index or name/id
 
   const filteredFixtures = fixtures.filter<TestFixture>(
     (test, ndx): test is TestFixture => {
@@ -2013,8 +2013,8 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
     }
   );
 
-  // TODO: with @xunnamius/fable, have an "every X" type construct (the below is "every 10")
-  // TODO: also allow middleware
+  // TODO: XXX: with @xunnamius/fable, have an "every X" type construct (the below is "every 10")
+  // TODO: XXX: also allow middleware
   for (let i = 9; i < filteredFixtures.length; i += 10) {
     filteredFixtures.splice(i, 0, {
       displayIndex: -1,
