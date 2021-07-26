@@ -25,7 +25,7 @@ export async function getDb(params?: { external: true }) {
         console.log(`[ connecting to mongo database at ${uri} ]`);
     }
 
-    memory.client = await MongoClient.connect(uri, { useUnifiedTopology: true });
+    memory.client = await MongoClient.connect(uri);
     memory.db = memory.client.db();
   }
 
@@ -47,7 +47,7 @@ export async function getDbClient(params?: { external: true }) {
  * Kills the MongoClient and closes any lingering database connections.
  */
 export async function closeDb() {
-  memory?.client.isConnected() && (await memory?.client.close());
+  await memory?.client.close(true);
   memory = null;
 }
 
@@ -104,20 +104,20 @@ type ItemExistsOptions = { exclude_id?: ObjectId };
  * Checks if an item identified by some `key` (default identifier is `"_id"`)
  * exists within `collection`.
  */
-export async function itemExists(
-  collection: Collection,
+export async function itemExists<T>(
+  collection: Collection<T>,
   id: ObjectId,
   key?: '_id' | 'owner' | 'receiver' | 'replyTo',
   options?: ItemExistsOptions
 ): Promise<boolean>;
-export async function itemExists(
-  collection: Collection,
+export async function itemExists<T>(
+  collection: Collection<T>,
   id: string,
   key: string,
   options?: ItemExistsOptions
 ): Promise<boolean>;
-export async function itemExists(
-  collection: Collection,
+export async function itemExists<T>(
+  collection: Collection<T>,
   id: ObjectId | string,
   key = '_id',
   options?: ItemExistsOptions

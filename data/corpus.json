@@ -22,14 +22,14 @@
     ],
     [
       { "actor": "A", "line": "...We're saved!" },
-      { "actor": "B", "line": "I'm [naughty word]!" }
+      { "actor": "B", "line": "I'm [bleeped]!" }
     ],
     [
       { "actor": "B", "line": "...would you like a drink?" },
       { "actor": "A", "line": "No thank you." },
       {
         "actor": "B",
-        "line": "Follow me.. Life, which you so nobly serve, comes from destruction. Look at this empty [naughty word]."
+        "line": "Follow me.. Life, which you so nobly serve, comes from destruction. Look at this empty [bleeped]."
       }
     ],
     [
@@ -39,11 +39,11 @@
       },
       {
         "actor": "A",
-        "line": "Destroying a [naughty word] is one thing..killing people with the weapons you produce is quite another."
+        "line": "Destroying a [bleeped] is one thing..killing people with the weapons you produce is quite another."
       },
       {
         "actor": "B",
-        "line": "Let me [naughty word] you Father..I will never kill more people in my entire life than religion has killed in the last 2000 years."
+        "line": "Let me [bleeped] you Father..I will never kill more people in my entire life than religion has killed in the last 2000 years."
       }
     ],
     [
@@ -73,7 +73,7 @@
       { "actor": "A", "line": "What are you doing?" },
       {
         "actor": "B",
-        "line": "Trying to save your [naughty word] so you can save the world."
+        "line": "Trying to save your [bleeped] so you can save the world."
       }
     ],
     [
@@ -188,7 +188,7 @@
     [
       { "actor": "B", "line": "I just found a picture of you." },
       { "actor": "A", "line": "How do I look?" },
-      { "actor": "B", "line": "Like [naughty word]." }
+      { "actor": "B", "line": "Like [bleeped]." }
     ],
     [
       { "actor": "B", "line": "Hello?" },
@@ -312,7 +312,7 @@
     ],
     [
       { "actor": "B", "line": "I don't even know what I'm looking for!" },
-      { "actor": "A", "line": "[naughty word] it! Hold tight!" }
+      { "actor": "A", "line": "[bleeped] it! Hold tight!" }
     ],
     [
       { "actor": "A", "line": "What did you say? What did you do?" },
@@ -349,7 +349,7 @@
       }
     ],
     [
-      { "actor": "A", "line": "...[naughty word]!" },
+      { "actor": "A", "line": "...[bleeped]!" },
       { "actor": "B", "line": "What is it?" }
     ],
     [
@@ -361,7 +361,7 @@
       { "actor": "A", "line": "Oh, yes you will..." }
     ],
     [
-      { "actor": "B", "line": "Valo [naughty word] Chacha hamas." },
+      { "actor": "B", "line": "Valo [bleeped] Chacha hamas." },
       { "actor": "A", "line": "Uh..you're welcome." }
     ],
     [
@@ -462,7 +462,7 @@
       { "actor": "A", "line": "Been here long?" },
       {
         "actor": "B",
-        "line": "Don't [naughty word] with me man or I'll blow you into tomorrow!"
+        "line": "Don't [bleeped] with me man or I'll [bleeped] you into tomorrow!"
       }
     ],
     [
@@ -550,7 +550,7 @@
       },
       {
         "actor": "B",
-        "line": "Who gives a [naughty word] I didn't come here to listen to music! Listen up instead of running off at the mouth! The batteries on my phone are almost gone."
+        "line": "Who gives a [bleeped] I didn't come here to listen to music! Listen up instead of running off at the mouth! The batteries on my phone are almost gone."
       },
       { "actor": "A", "line": "Yes, Sir!" },
       {
@@ -604,7 +604,7 @@
       { "actor": "A", "line": "What do you mean?" },
       {
         "actor": "B",
-        "line": "Go to the airport. Get a plane. I'll have a [naughty word] band waiting for you."
+        "line": "Go to the airport. Get a plane. I'll have a [bleeped] band waiting for you."
       },
       { "actor": "A", "line": "Save it for Bourne." },
       { "actor": "B", "line": "What?" }
@@ -627,7 +627,7 @@
       { "actor": "B", "line": "I want to know what happened." },
       {
         "actor": "A",
-        "line": "What happened? Jason Bourne happened. You've got the files? Then let's cut the crap. It went wrong. Conklin had these guys wound so tight they were bound to snap. Bourne was his number one -- guy went out to work, screwed the op and never came back. Conklin couldn't fix it, couldn't find Bourne, couldn't adjust. It all went sideways. Finally there were no options left."
+        "line": "What happened? Jason Bourne happened. You've got the files? Then let's cut the crap. It went wrong. Conklin had these guys wound so tight they were bound to snap. Bourne was his number one -- guy went out to work, [bleeped] the op and never came back. Conklin couldn't fix it, couldn't find Bourne, couldn't adjust. It all went sideways. Finally there were no options left."
       },
       {
         "actor": "B",
@@ -635,7 +635,7 @@
       },
       {
         "actor": "A",
-        "line": "I've given thirty years and two marriages to this agency. I've shoveled [naughty word] on four continents. I'm due to retire next year and believe me, I need my pension, but if you think I'm gonna sit here and let you dangle me with this, you can go to hell. Marshall too. It had to be done."
+        "line": "I've given thirty years and two marriages to this agency. I've shoveled [bleeped] on four continents. I'm due to retire next year and believe me, I need my pension, but if you think I'm gonna sit here and let you dangle me with this, you can go to hell. Marshall too. It had to be done."
       },
       { "actor": "B", "line": "And Bourne? Where's he now?" },
       {
@@ -898,7 +898,7 @@
       }
     ],
     [
-      { "actor": "A", "line": "Oh, [naughty word]..." },
+      { "actor": "A", "line": "Oh, [bleeped]..." },
       { "actor": "B", "line": "Careful..." }
     ],
     [
@@ -1110,12 +1110,12 @@
         "actor": "B",
         "line": "I'm serious. I'm always going on about me, me, me. Enough about me. Your turn."
       },
-      { "actor": "A", "line": "It's a [naughty word] soccer ball, you idiot." },
+      { "actor": "A", "line": "It's a [bleeped] soccer ball, you idiot." },
       { "actor": "B", "line": "Shut up." }
     ],
     [
       { "actor": "B", "line": "Jesus." },
-      { "actor": "A", "line": "Look again, [naughty word] It's a mirage." }
+      { "actor": "A", "line": "Look again, [bleeped] It's a mirage." }
     ],
     [
       {
@@ -1126,7 +1126,7 @@
         "actor": "B",
         "line": "It matters. We do the best we can, that's all we have."
       },
-      { "actor": "A", "line": "Then we've just got [naughty word]." }
+      { "actor": "A", "line": "Then we've just got [bleeped]." }
     ],
     [
       {
@@ -1148,7 +1148,7 @@
       },
       {
         "actor": "A",
-        "line": "He was a sorry [naughty word] and I'm sorry I ever married him."
+        "line": "He was a sorry [bleeped] and I'm sorry I ever married him."
       }
     ],
     [
@@ -1160,7 +1160,7 @@
     [
       {
         "actor": "B",
-        "line": "Did you really steal a crippled kid's bicycle to make your deliveries, or is that just some [naughty word] story?"
+        "line": "Did you really steal a crippled kid's bicycle to make your deliveries, or is that just some [bleeped] story?"
       },
       { "actor": "A", "line": "I didn't steal it, and he wasn't crippled." }
     ],
@@ -1189,7 +1189,7 @@
       { "actor": "B", "line": "Chuck." },
       {
         "actor": "A",
-        "line": "What do you want me to say? That I thought I'd done a great job but it all turned to [naughty word] That I might as well have gone sailing for all the good I did?"
+        "line": "What do you want me to say? That I thought I'd done a great job but it all turned to [bleeped] That I might as well have gone sailing for all the good I did?"
       },
       { "actor": "B", "line": "Yeah, tell me. Tell me all of it." }
     ],
@@ -1370,7 +1370,7 @@
       { "actor": "A", "line": "But chickens?" },
       {
         "actor": "B",
-        "line": "Sixty three pounds consumed per capita, up from twenty seven in 1960. Going to [naughty word] beef. Chicken's global. No religious taboos. You don't see your Hindus and your Muslims boycotting poultry."
+        "line": "Sixty three pounds consumed per capita, up from twenty seven in 1960. Going to [bleeped] beef. Chicken's global. No religious taboos. You don't see your Hindus and your Muslims boycotting poultry."
       },
       {
         "actor": "A",
@@ -1452,7 +1452,7 @@
         "line": "Jesus. I got it working... You have no idea how hard it was... They're finally a team..."
       },
       { "actor": "B", "line": "I'm touched." },
-      { "actor": "A", "line": "You [naughty word] us over." },
+      { "actor": "A", "line": "You [bleeped] us over." },
       {
         "actor": "B",
         "line": "The point of FedEx, as I understand it, is to make the damn connection."
@@ -1520,7 +1520,7 @@
     ],
     [
       { "actor": "A", "line": "I beat the odds!" },
-      { "actor": "B", "line": "You beat 'em to [naughty word] pal! Jesus!" }
+      { "actor": "B", "line": "You beat 'em to [bleeped] pal! Jesus!" }
     ],
     [
       { "actor": "B", "line": "How about we go somewhere else?" },
@@ -1535,7 +1535,7 @@
     [
       {
         "actor": "B",
-        "line": "When I first showed up, I thought you'd lost your [naughty word] marbles."
+        "line": "When I first showed up, I thought you'd lost your [bleeped] marbles."
       },
       {
         "actor": "A",
@@ -1552,7 +1552,7 @@
     [
       {
         "actor": "B",
-        "line": "To life. [naughty word] 'em if they can't take a joke."
+        "line": "To life. [bleeped] 'em if they can't take a joke."
       },
       { "actor": "A", "line": "To life." },
       { "actor": "B", "line": "That's all there is." },
@@ -1612,7 +1612,7 @@
       { "actor": "A", "line": "That why you dumped him?" },
       {
         "actor": "B",
-        "line": "No! I just couldn't see myself with some boring egg head who spends his summer picking apart cockroaches. I wanted to have some adventure, some fun..."
+        "line": "No! I just couldn't see myself with some boring egg head who spends his summer picking apart [bleeped] I wanted to have some adventure, some fun..."
       }
     ],
     [
@@ -1662,7 +1662,7 @@
       { "actor": "A", "line": "What?" }
     ],
     [
-      { "actor": "A", "line": "So, you still picking apart cockroaches?" },
+      { "actor": "A", "line": "So, you still picking apart [bleeped]?" },
       {
         "actor": "B",
         "line": "No, I'm into earthworms now. You wouldn't be interested. They're real \"boring\" creatures. Very reliable, dependable, no surprises..."
@@ -1811,7 +1811,7 @@
       { "actor": "B", "line": "Call me Charlie." },
       {
         "actor": "A",
-        "line": "Mr. Caiman, I've been doing extra research for you after hours and weekends for nearly a year. And I've never asked for anything but this job is really important to me. I'm too old to be an [naughty word] anymore. I need to know this job is going someplace."
+        "line": "Mr. Caiman, I've been doing extra research for you after hours and weekends for nearly a year. And I've never asked for anything but this job is really important to me. I'm too old to be an [bleeped] anymore. I need to know this job is going someplace."
       },
       { "actor": "B", "line": "So have dinner with me tonight." },
       { "actor": "A", "line": "I can't." },
@@ -2085,7 +2085,7 @@
       { "actor": "A", "line": "Hi, Louis." },
       {
         "actor": "B",
-        "line": "Hey, it's crazy in here. You're missing a [naughty word] party."
+        "line": "Hey, it's crazy in here. You're missing a [bleeped] party."
       },
       {
         "actor": "A",
@@ -2120,7 +2120,7 @@
     [
       {
         "actor": "B",
-        "line": "Have you ever thought of moving out -- at least until this disturbance blows over?"
+        "line": "Have you ever thought of moving out -- at least until this disturbance [bleeped] over?"
       },
       {
         "actor": "A",
@@ -2338,7 +2338,7 @@
       },
       {
         "actor": "A",
-        "line": "Forget it, Venkman. You had your chance to cooperate but you thought it was more fun to insult me. Now it's my turn, [naughty word]."
+        "line": "Forget it, Venkman. You had your chance to cooperate but you thought it was more fun to insult me. Now it's my turn, [bleeped]."
       }
     ],
     [
@@ -2598,7 +2598,7 @@
       },
       {
         "actor": "B",
-        "line": "So far all we got is a [naughty word] smell on the twelfth floor and we almost fried a Puerto Rican bellboy."
+        "line": "So far all we got is a [bleeped] smell on the twelfth floor and we almost fried a Puerto Rican bellboy."
       },
       {
         "actor": "A",
@@ -2942,7 +2942,7 @@
       { "actor": "A", "line": "I don't know..." },
       {
         "actor": "B",
-        "line": "AGH! Please! He's having a secret device constructed for the circus. The [naughty word] craftsmen are working overtime."
+        "line": "AGH! Please! He's having a secret device constructed for the circus. The [bleeped] craftsmen are working overtime."
       },
       { "actor": "A", "line": "I'll nose around..." },
       {
@@ -3024,7 +3024,7 @@
       },
       {
         "actor": "A",
-        "line": "Why do you keep playing at being so humble? It's a little [naughty word]."
+        "line": "Why do you keep playing at being so humble? It's a little [bleeped]."
       },
       { "actor": "B", "line": "Why do you play at being drunk?" },
       {
@@ -3033,7 +3033,7 @@
       },
       {
         "actor": "B",
-        "line": "I don't believe that. He's got the best doctor in the world and a will of iron. You know we're preparing for a full-blown invasion of Germany."
+        "line": "I don't believe that. He's got the best doctor in the world and a will of iron. You know we're preparing for a [bleeped] invasion of Germany."
       },
       {
         "actor": "A",
@@ -3220,7 +3220,7 @@
     [
       {
         "actor": "A",
-        "line": "When you get to Ostia, use this -- bribe [naughty word] to Africa or Spain. Save my family. You should be able to find a merchant ship that will take you to Egypt then to Numidia."
+        "line": "When you get to Ostia, use this -- bribe [bleeped] to Africa or Spain. Save my family. You should be able to find a merchant ship that will take you to Egypt then to Numidia."
       },
       { "actor": "B", "line": "No!" }
     ],
@@ -3291,7 +3291,7 @@
     [
       {
         "actor": "A",
-        "line": "Proximo, if this is her doctor he's an [naughty word]."
+        "line": "Proximo, if this is her doctor he's an [bleeped]."
       },
       { "actor": "B", "line": "Don't be ridiculous." }
     ],
@@ -3346,7 +3346,7 @@
       },
       {
         "actor": "B",
-        "line": "I can really [naughty word] them on this! Can I at least tell them you'll think about it?"
+        "line": "I can really [bleeped] them on this! Can I at least tell them you'll think about it?"
       },
       {
         "actor": "A",
@@ -3369,7 +3369,7 @@
       },
       {
         "actor": "B",
-        "line": "I'll do it! Sure as there's [naughty word] in the Tiber we're all going to die, but for you -- anything!"
+        "line": "I'll do it! Sure as there's [bleeped] in the Tiber we're all going to die, but for you -- anything!"
       }
     ],
     [
@@ -3661,7 +3661,7 @@
       { "actor": "B", "line": "This I can see." },
       {
         "actor": "A",
-        "line": "We've gotta burn the rain forest, Pops. Dump toxic waste, pollute the air, rip up the ozone. Maybe if we screw this planet up enough they won't want it anymore."
+        "line": "We've gotta burn the rain forest, Pops. Dump toxic waste, pollute the air, rip up the ozone. Maybe if we [bleeped] this planet up enough they won't want it anymore."
       },
       { "actor": "B", "line": "David, you're drunk." }
     ],
@@ -3809,7 +3809,7 @@
         "line": "You know, you're not as charming as you think you are."
       },
       { "actor": "B", "line": "Yes, I am." },
-      { "actor": "A", "line": "[naughty word]!" },
+      { "actor": "A", "line": "[bleeped]!" },
       { "actor": "B", "line": "Butt-munch." }
     ],
     [
@@ -3820,7 +3820,7 @@
     [
       { "actor": "A", "line": "You scared the hell out of me." },
       { "actor": "B", "line": "Yeah, but what an entrance!" },
-      { "actor": "A", "line": "[naughty word]." },
+      { "actor": "A", "line": "[bleeped]." },
       { "actor": "B", "line": "Butt-munch." }
     ],
     [
@@ -3930,7 +3930,7 @@
       { "actor": "A", "line": "But, Mr. President..." },
       {
         "actor": "B",
-        "line": "So far these things have not become hostile. For the moment let's [naughty word] they won't. Connie, let's issue statements advising people not to panic, to stay home and take cover."
+        "line": "So far these things have not become hostile. For the moment let's [bleeped] they won't. Connie, let's issue statements advising people not to panic, to stay home and take cover."
       }
     ],
     [
@@ -4014,7 +4014,7 @@
     ],
     [
       { "actor": "A", "line": "So... this door. It's... not an exit... ?" },
-      { "actor": "B", "line": "It's not even a [naughty word] door." }
+      { "actor": "B", "line": "It's not even a [bleeped] door." }
     ],
     [
       { "actor": "B", "line": "We have one motto: Peace on Earth." },
@@ -4058,7 +4058,7 @@
     [
       {
         "actor": "B",
-        "line": "Hell of an [naughty word] isn't he? Damn guy moves so fast, he actually gets there before you even ask for him."
+        "line": "Hell of an [bleeped] isn't he? Damn guy moves so fast, he actually gets there before you even ask for him."
       },
       { "actor": "A", "line": "Sorta literally gets ahead of himself." },
       {
@@ -4073,7 +4073,7 @@
       },
       {
         "actor": "A",
-        "line": "Further... what are you talking about, air? That makes no sense-- I hold three cadet [naughty word] records--"
+        "line": "Further... what are you talking about, air? That makes no sense-- I hold three cadet [bleeped] records--"
       },
       { "actor": "B", "line": "Actually, it didn't come from me." }
     ],
@@ -4096,7 +4096,7 @@
         "actor": "B",
         "line": "Mikey. Hold it, Mikey-- I want you to talk to me. Mikey. I'm telling you.. don't make me... Mikey Gimme the 140."
       },
-      { "actor": "A", "line": "Oh. [naughty word] it's in the car--" },
+      { "actor": "A", "line": "Oh. [bleeped] it's in the car--" },
       { "actor": "B", "line": "What? I thought you just--" }
     ],
     [
@@ -4553,7 +4553,7 @@
       },
       {
         "actor": "A",
-        "line": "Jesus, everyone's moving. Could be an [naughty word] Does it look aggressive?"
+        "line": "Jesus, everyone's moving. Could be an [bleeped] Does it look aggressive?"
       },
       { "actor": "B", "line": "Hard to tell. I hope not." },
       {
@@ -4602,7 +4602,7 @@
       },
       {
         "actor": "A",
-        "line": "And I [naughty word] you're bringing this to us because we're the most powerful country on the planet..."
+        "line": "And I [bleeped] you're bringing this to us because we're the most powerful country on the planet..."
       },
       {
         "actor": "B",
@@ -4847,10 +4847,7 @@
         "actor": "B",
         "line": "All right, John, just take a breath, let's think about this..."
       },
-      {
-        "actor": "A",
-        "line": "I'm out of breath! I'm a [naughty word] fugitive!"
-      },
+      { "actor": "A", "line": "I'm out of breath! I'm a [bleeped] fugitive!" },
       { "actor": "B", "line": "Then come to my house. We'll talk --" },
       {
         "actor": "A",
@@ -5143,7 +5140,7 @@
     [
       {
         "actor": "A",
-        "line": "Where've you got him? Is he all right? Tell me, you [naughty word] -- WHERE IS HE?!"
+        "line": "Where've you got him? Is he all right? Tell me, you [bleeped] -- WHERE IS HE?!"
       },
       { "actor": "B", "line": "I put him in a barrel and sunk him in the bay." }
     ],
@@ -5405,13 +5402,13 @@
       },
       {
         "actor": "A",
-        "line": "Not after the vote next week. Once the Amendment [naughty word] we go national, there's gonna be nowhere to run."
+        "line": "Not after the vote next week. Once the Amendment [bleeped] we go national, there's gonna be nowhere to run."
       }
     ],
     [
       {
         "actor": "A",
-        "line": "Crime of [naughty word] No premeditation. They show up late. Most of our scrambles are flash events like this one. We rarely see anything with premeditation anymore."
+        "line": "Crime of [bleeped] No premeditation. They show up late. Most of our scrambles are flash events like this one. We rarely see anything with premeditation anymore."
       },
       { "actor": "B", "line": "People have gotten the message. Gum?" }
     ],
@@ -5474,14 +5471,14 @@
       { "actor": "A", "line": "I think you're swell company, Knott." },
       {
         "actor": "B",
-        "line": "It's not at all that you don't trust me to be alone with the Chief. That you think I might, you know, [naughty word] with him, if I had the chance..."
+        "line": "It's not at all that you don't trust me to be alone with the Chief. That you think I might, you know, [bleeped] with him, if I had the chance..."
       }
     ],
     [
       { "actor": "A", "line": "Why don't I feel like celebrating?" },
       {
         "actor": "B",
-        "line": "Cause all of a sudden you got no one you can [naughty word] brown nose anymore."
+        "line": "Cause all of a sudden you got no one you can [bleeped] brown nose anymore."
       }
     ],
     [
@@ -5493,7 +5490,7 @@
       },
       {
         "actor": "B",
-        "line": "How can you even tell? You know how blind you are without your [naughty word]."
+        "line": "How can you even tell? You know how blind you are without your [bleeped]."
       }
     ],
     [
@@ -5506,7 +5503,7 @@
     ],
     [
       { "actor": "B", "line": "Howard --" },
-      { "actor": "A", "line": "I forgot my [naughty word]." }
+      { "actor": "A", "line": "I forgot my [bleeped]." }
     ],
     [
       { "actor": "B", "line": "This your work?" },
@@ -5581,7 +5578,7 @@
     [
       {
         "actor": "B",
-        "line": "It's [naughty word] over earth as we speak! Trajectory coordinates are 009843."
+        "line": "It's [bleeped] over earth as we speak! Trajectory coordinates are 009843."
       },
       { "actor": "A", "line": "Billy, that's BRILLIANT!" },
       { "actor": "B", "line": "We get Ivan into the Comets PATH--" }
@@ -5656,7 +5653,7 @@
       },
       {
         "actor": "A",
-        "line": "To [naughty word] you I have retro-fitted your helmets with new Opti-Scan devices."
+        "line": "To [bleeped] you I have retro-fitted your helmets with new Opti-Scan devices."
       },
       {
         "actor": "B",
@@ -5741,7 +5738,7 @@
     [
       {
         "actor": "B",
-        "line": "Uh... that's [naughty word] top secret, confidential, undercover information."
+        "line": "Uh... that's [bleeped] top secret, confidential, undercover information."
       },
       { "actor": "A", "line": "If we told you -- we'd have to kill you." }
     ],
@@ -5765,7 +5762,7 @@
       },
       {
         "actor": "B",
-        "line": "Couldn''t stand them -- [naughty word] all the way. And did you catch a whiff of their BREATH?! It's like having a conversation with a couple of ONIONS! Not to mention..."
+        "line": "Couldn''t stand them -- [bleeped] all the way. And did you catch a whiff of their BREATH?! It's like having a conversation with a couple of ONIONS! Not to mention..."
       }
     ],
     [
@@ -6389,11 +6386,11 @@
     [
       {
         "actor": "A",
-        "line": "Did you see that!? [naughty word] Billions of [naughty word]!"
+        "line": "Did you see that!? [bleeped] Billions of [bleeped]!"
       },
       {
         "actor": "B",
-        "line": "That's one of the plagues, right? The [naughty word] plague!"
+        "line": "That's one of the plagues, right? The [bleeped] plague!"
       }
     ],
     [
@@ -6654,7 +6651,7 @@
       { "actor": "A", "line": "Actually, I find it all fascinating." },
       {
         "actor": "B",
-        "line": "And that's what concerns me. Elizabeth, we will be landing in Port Royal soon, and beginning our new lives. Wouldn't it be wonderful if we comport ourselves as befits our [naughty word] and station?"
+        "line": "And that's what concerns me. Elizabeth, we will be landing in Port Royal soon, and beginning our new lives. Wouldn't it be wonderful if we comport ourselves as befits our [bleeped] and station?"
       },
       { "actor": "A", "line": "Yes, father." }
     ],
@@ -6734,7 +6731,7 @@
     [
       {
         "actor": "B",
-        "line": "You should look at our contretemps this way: we've got shade trees, thank the Lord. We've got some food on the trees, thank the Lord again. And we've got rum, praise the Lord. We can stay alive a month, maybe more. Keep a weather eye open for [naughty word] ships, and our chances are fair."
+        "line": "You should look at our contretemps this way: we've got shade trees, thank the Lord. We've got some food on the trees, thank the Lord again. And we've got rum, praise the Lord. We can stay alive a month, maybe more. Keep a weather eye open for [bleeped] ships, and our chances are fair."
       },
       {
         "actor": "A",
@@ -6903,7 +6900,7 @@
     [
       {
         "actor": "B",
-        "line": "Taking stock: you've got a pistol with only one shot, a [naughty word] that doesn't point north ... and no ship. You are without a doubt the worst pirate I have ever heard of."
+        "line": "Taking stock: you've got a pistol with only one shot, a [bleeped] that doesn't point north ... and no ship. You are without a doubt the worst pirate I have ever heard of."
       },
       { "actor": "A", "line": "Ah, but you have heard of me." }
     ],
@@ -7002,7 +6999,7 @@
       },
       {
         "actor": "B",
-        "line": "I worked [naughty word] from England as a cabin boy. After my mother [naughty word] I came out here ... looking for my father."
+        "line": "I worked [bleeped] from England as a cabin boy. After my mother [bleeped] I came out here ... looking for my father."
       },
       { "actor": "A", "line": "Is that so?" },
       { "actor": "B", "line": "My father. William Turner?" }
@@ -7069,7 +7066,7 @@
       },
       {
         "actor": "A",
-        "line": "The worst. On the other hand, maybe I'm a man who can't [naughty word] up a chance for revenge against the black-hearted bastard who stole my ship and left me to die in the middle of the ocean -- twice! -- and who knows how to get what he wants. Now that's a great pirate."
+        "line": "The worst. On the other hand, maybe I'm a man who can't [bleeped] up a chance for revenge against the black-hearted bastard who stole my ship and left me to die in the middle of the ocean -- twice! -- and who knows how to get what he wants. Now that's a great pirate."
       }
     ],
     [
@@ -7175,7 +7172,7 @@
     [
       {
         "actor": "B",
-        "line": "Okay, this guy is trying to scare us. He's messed with our property, he's coming around the house. It's time for an [naughty word] whoopin'!"
+        "line": "Okay, this guy is trying to scare us. He's messed with our property, he's coming around the house. It's time for an [bleeped] whoopin'!"
       },
       {
         "actor": "A",
@@ -7672,7 +7669,7 @@
       { "actor": "A", "line": "Really?" },
       { "actor": "B", "line": "And you know what else?" },
       { "actor": "A", "line": "What?" },
-      { "actor": "B", "line": "Tommy Tammisimo sucked big time." }
+      { "actor": "B", "line": "Tommy Tammisimo [bleeped] big time." }
     ],
     [
       { "actor": "A", "line": "What are you thinking, Momma?" },
@@ -7729,7 +7726,7 @@
     [
       {
         "actor": "B",
-        "line": "Cole, this was a legal courthouse. Laws were [naughty word] here. Some of the first laws of this country. This building was full of lawyers. Lawmakers."
+        "line": "Cole, this was a legal courthouse. Laws were [bleeped] here. Some of the first laws of this country. This building was full of lawyers. Lawmakers."
       },
       { "actor": "A", "line": "They were the ones who hanged everybody." }
     ],
@@ -7838,7 +7835,10 @@
       { "actor": "B", "line": "Hm. What a lump." }
     ],
     [
-      { "actor": "B", "line": "You maniac. You'll blow your scholarship." },
+      {
+        "actor": "B",
+        "line": "You maniac. You'll [bleeped] your scholarship."
+      },
       { "actor": "A", "line": "They'll never take me alive." }
     ],
     [
@@ -7875,11 +7875,11 @@
     [
       {
         "actor": "A",
-        "line": "Oh, I need your notes from the [naughty word] I missed."
+        "line": "Oh, I need your notes from the [bleeped] I missed."
       },
       {
         "actor": "B",
-        "line": "Well, I've missed a lot of [naughty word] myself..."
+        "line": "Well, I've missed a lot of [bleeped] myself..."
       },
       { "actor": "A", "line": "Oh. Well, hang in there, amigo." }
     ],
@@ -7888,14 +7888,11 @@
       { "actor": "A", "line": "Get away from me, freak!" }
     ],
     [
-      { "actor": "A", "line": "Too hip. Your photos suck, kid." },
+      { "actor": "A", "line": "Too hip. Your photos [bleeped] kid." },
       { "actor": "B", "line": "I think you're trying to tell me something." }
     ],
     [
-      {
-        "actor": "B",
-        "line": "You taking extension [naughty word] Mr. Jameson?"
-      },
+      { "actor": "B", "line": "You taking extension [bleeped] Mr. Jameson?" },
       { "actor": "A", "line": "Parker-- you go here, right? Got your camera?" },
       { "actor": "B", "line": "Yeah--" },
       { "actor": "A", "line": "Get inside and get pictures. Fifty bucks." },
@@ -7916,7 +7913,7 @@
       },
       {
         "actor": "A",
-        "line": "I like enthusiasm. That's why I use a lot of [naughty word] kids. Not just 'cause they work cheap."
+        "line": "I like enthusiasm. That's why I use a lot of [bleeped] kids. Not just 'cause they work cheap."
       },
       { "actor": "B", "line": "Mr. Jameson--" },
       {
@@ -7929,7 +7926,7 @@
       },
       {
         "actor": "A",
-        "line": "I don't give a gerbil's [naughty word] how you got 'em! I can't print this surreal garbage!"
+        "line": "I don't give a gerbil's [bleeped] how you got 'em! I can't print this surreal garbage!"
       },
       { "actor": "B", "line": "You print pictures of Bigfoot!" },
       {
@@ -7958,7 +7955,7 @@
         "actor": "B",
         "line": "Uh-huh. Look, this should be skintight. Bright colors. Red, maybe a deep midnight blue."
       },
-      { "actor": "A", "line": "What's this? A cockaroach?" },
+      { "actor": "A", "line": "What's this? A [bleeped]?" },
       { "actor": "B", "line": "A spider. Eight legs." }
     ],
     [
@@ -7969,7 +7966,7 @@
       { "actor": "B", "line": "Sorry. I'm still getting the hang of this." },
       {
         "actor": "A",
-        "line": "I see. So, Amazing Spider-Man-- I'll [naughty word] that's not your given name--"
+        "line": "I see. So, Amazing Spider-Man-- I'll [bleeped] that's not your given name--"
       },
       { "actor": "B", "line": "Just call me Spidey." },
       { "actor": "A", "line": "Can I get you a snack-- a housefly, maybe?" },
@@ -8151,10 +8148,10 @@
       { "actor": "A", "line": "Tofu. Ben, I wish you wouldn't." }
     ],
     [
-      { "actor": "A", "line": "Absolutely no [naughty word]." },
+      { "actor": "A", "line": "Absolutely no [bleeped]." },
       {
         "actor": "B",
-        "line": "Funny thing happened after my physics [naughty word] today. Harry Osborn--"
+        "line": "Funny thing happened after my physics [bleeped] today. Harry Osborn--"
       },
       { "actor": "A", "line": "Use a fork." }
     ],
@@ -8324,7 +8321,7 @@
       { "actor": "A", "line": "He'll try to finish his experiment." },
       {
         "actor": "B",
-        "line": "And blow up the universe just to prove he's right? Bit egotistical, isn't it?"
+        "line": "And [bleeped] up the universe just to prove he's right? Bit egotistical, isn't it?"
       },
       {
         "actor": "A",
@@ -8433,7 +8430,7 @@
     ],
     [
       { "actor": "A", "line": "Such power exists?" },
-      { "actor": "B", "line": "I [naughty word] you such power exists." }
+      { "actor": "B", "line": "I [bleeped] you such power exists." }
     ],
     [
       {
@@ -8612,7 +8609,7 @@
       { "actor": "B", "line": "How does he explain that?" },
       {
         "actor": "A",
-        "line": "He says their medicine is that much more advanced. He was very nice about it. But he made me feel like a [naughty word] witch doctor."
+        "line": "He says their medicine is that much more advanced. He was very nice about it. But he made me feel like a [bleeped] witch doctor."
       }
     ],
     [
@@ -8681,7 +8678,7 @@
     [
       {
         "actor": "A",
-        "line": "We could call a special meeting of the General [naughty word] But of course the UN doesn't represent all of the nations."
+        "line": "We could call a special meeting of the General [bleeped] But of course the UN doesn't represent all of the nations."
       },
       {
         "actor": "B",
@@ -9096,7 +9093,7 @@
         "actor": "B",
         "line": "How could it happen to everybody's watch together?"
       },
-      { "actor": "A", "line": "Have you got a pocket [naughty word]?" }
+      { "actor": "A", "line": "Have you got a pocket [bleeped]?" }
     ],
     [
       { "actor": "B", "line": "What is that gizmo?!" },
@@ -9403,7 +9400,7 @@
         "actor": "B",
         "line": "Damn those Carny bolsheviks the other night, throwing bricks at my windows --"
       },
-      { "actor": "A", "line": "No. No [naughty word] on the inside." },
+      { "actor": "A", "line": "No. No [bleeped] on the inside." },
       { "actor": "B", "line": "Weird, huh?" }
     ],
     [
@@ -9467,7 +9464,7 @@
     [
       {
         "actor": "B",
-        "line": "We're gonna [naughty word] his spiffy old Batmobile, then [naughty word] it as an H-bomb on wheels. Capiche? Yesterday's victor is tomorrow's vapor."
+        "line": "We're gonna [bleeped] his spiffy old Batmobile, then [bleeped] it as an H-bomb on wheels. Capiche? Yesterday's victor is tomorrow's vapor."
       },
       {
         "actor": "A",
@@ -9556,7 +9553,7 @@
       },
       {
         "actor": "B",
-        "line": "... Want 'em to go [naughty word] Nutso. Ballistic ... Do permanent damage to little old ladies. Loot, pillage, annoy people in a big way ... <u>Sounds</u> fun. But I ..."
+        "line": "... Want 'em to go [bleeped] Nutso. Ballistic ... Do permanent damage to little old ladies. Loot, pillage, annoy people in a big way ... <u>Sounds</u> fun. But I ..."
       }
     ],
     [
@@ -9595,14 +9592,14 @@
       },
       {
         "actor": "B",
-        "line": "Well I figured that your [naughty word] was \"Finster.\" Your Pomeranian. And it was. And it's all very interesting, though a bit on the technical side, I mean about how the power plant is a power plant in name only since in fact it's gonna be one big giant..."
+        "line": "Well I figured that your [bleeped] was \"Finster.\" Your Pomeranian. And it was. And it's all very interesting, though a bit on the technical side, I mean about how the power plant is a power plant in name only since in fact it's gonna be one big giant..."
       }
     ],
     [
       { "actor": "A", "line": "... Where did curiosity get the cat?" },
       {
         "actor": "B",
-        "line": "I'm no cat. I'm just an [naughty word] A <u>secretary</u> --"
+        "line": "I'm no cat. I'm just an [bleeped] A <u>secretary</u> --"
       },
       { "actor": "A", "line": "And a very, very good one." },
       { "actor": "B", "line": "Too good?" }
@@ -9731,7 +9728,7 @@
       },
       {
         "actor": "B",
-        "line": "[naughty word] Of course. Find the photo of Ivy after the flower ball."
+        "line": "[bleeped] Of course. Find the photo of Ivy after the flower ball."
       }
     ],
     [
@@ -9755,7 +9752,7 @@
     [
       {
         "actor": "B",
-        "line": "Al's main squeeze. Is she here? I'm about to [naughty word] the bottom of my shoe off my tongue, right?"
+        "line": "Al's main squeeze. Is she here? I'm about to [bleeped] the bottom of my shoe off my tongue, right?"
       },
       {
         "actor": "A",
@@ -9770,7 +9767,7 @@
       { "actor": "B", "line": "Keep it." },
       {
         "actor": "A",
-        "line": "Of course, [naughty word] Grayson, ward of the fabulously wealthy Bruce Wayne. Why would you need a few hundred dollars?"
+        "line": "Of course, [bleeped] Grayson, ward of the fabulously wealthy Bruce Wayne. Why would you need a few hundred dollars?"
       },
       { "actor": "B", "line": "Hey, what's your problem?" },
       {
@@ -9964,7 +9961,7 @@
       },
       {
         "actor": "A",
-        "line": "[naughty word] you were reckless. You could have been killed."
+        "line": "[bleeped] you were reckless. You could have been killed."
       },
       {
         "actor": "B",
@@ -9999,7 +9996,7 @@
         "line": "I'm late for the dedication. Then I go after Freeze and Ivy. Alone."
       },
       { "actor": "B", "line": "Like hell you do." },
-      { "actor": "A", "line": "[naughty word] don't push me right now." },
+      { "actor": "A", "line": "[bleeped] don't push me right now." },
       {
         "actor": "B",
         "line": "Or what? No one can capture Ivy but the big bad Bat. Crap! You just want her for yourself. Don't you? Answer me, damn it!"
@@ -10106,7 +10103,7 @@
       { "actor": "B", "line": "Then you never loved me?" },
       {
         "actor": "A",
-        "line": "Love you? I loathe your bipedal arrogance, your animal superiority. My only joy is knowing that even now my poison kiss is sucking the life from your ape-like face."
+        "line": "Love you? I loathe your bipedal arrogance, your animal superiority. My only joy is knowing that even now my poison kiss is [bleeped] the life from your ape-like face."
       }
     ],
     [
@@ -10172,12 +10169,12 @@
     [
       {
         "actor": "A",
-        "line": "Sorry to bother you, sir. I have some rather distressing news about Master [naughty word]."
+        "line": "Sorry to bother you, sir. I have some rather distressing news about Master [bleeped]."
       },
       { "actor": "B", "line": "Is he all right?" },
       {
         "actor": "A",
-        "line": "I'm afraid Master [naughty word] has... gone traveling."
+        "line": "I'm afraid Master [bleeped] has... gone traveling."
       },
       { "actor": "B", "line": "He ran away?" },
       { "actor": "A", "line": "Actually, he took the car." },
@@ -10293,7 +10290,7 @@
       },
       {
         "actor": "A",
-        "line": "No more tricks, Edward. Release Chase and [naughty word] This is between you and me."
+        "line": "No more tricks, Edward. Release Chase and [bleeped] This is between you and me."
       }
     ],
     [
@@ -10329,13 +10326,13 @@
       },
       {
         "actor": "B",
-        "line": "The press were just wondering what it feels like to be outsold, [naughty word] and generally outdone in every way... And what light through yonder window breaks? `Tis the east. And you are..."
+        "line": "The press were just wondering what it feels like to be outsold, [bleeped] and generally outdone in every way... And what light through yonder window breaks? `Tis the east. And you are..."
       }
     ],
     [
       {
         "actor": "B",
-        "line": "No [naughty word] could be more intoxicating than you, my dear. But we make due. To your charms. Skol."
+        "line": "No [bleeped] could be more intoxicating than you, my dear. But we make due. To your charms. Skol."
       },
       { "actor": "A", "line": "Nostrovia." },
       { "actor": "B", "line": "La'chiem." },
@@ -10418,7 +10415,7 @@
         "actor": "B",
         "line": "In a sense we are all two people. The side we show in daylight. And that side we keep in shadow."
       },
-      { "actor": "A", "line": "Rage. Anger. [naughty word] Pain." }
+      { "actor": "A", "line": "Rage. Anger. [bleeped] Pain." }
     ],
     [
       { "actor": "A", "line": "And the beast slouches towards Bethelem." },
@@ -10464,7 +10461,7 @@
       },
       {
         "actor": "A",
-        "line": "Listen, [naughty word] Killing Two-Face won't take the pain away. It'll make it worse."
+        "line": "Listen, [bleeped] Killing Two-Face won't take the pain away. It'll make it worse."
       },
       {
         "actor": "B",
@@ -10486,7 +10483,7 @@
       { "actor": "B", "line": "You can't-." },
       {
         "actor": "A",
-        "line": "[naughty word] let go. Revenge will eat you alive. Trust me. I know."
+        "line": "[bleeped] let go. Revenge will eat you alive. Trust me. I know."
       },
       {
         "actor": "B",
@@ -10557,7 +10554,7 @@
       }
     ],
     [
-      { "actor": "B", "line": "Holy [naughty word]." },
+      { "actor": "B", "line": "Holy [bleeped]." },
       {
         "actor": "A",
         "line": "So not everyone can be a poet. Still, I respect the sentiment."
@@ -10711,7 +10708,7 @@
     [
       {
         "actor": "B",
-        "line": "I [naughty word] in my usual charming manner I've just insulted the host. Alexander Knox."
+        "line": "I [bleeped] in my usual charming manner I've just insulted the host. Alexander Knox."
       },
       {
         "actor": "A",
@@ -11035,7 +11032,7 @@
       },
       {
         "actor": "B",
-        "line": "Some. I am a rich [naughty word] remember? I'm quoting."
+        "line": "Some. I am a rich [bleeped] remember? I'm quoting."
       }
     ],
     [
@@ -11061,7 +11058,7 @@
       { "actor": "B", "line": "Guess who's got a date with Bruce Wayne?" },
       {
         "actor": "A",
-        "line": "Bruce Wayne? Date? He called you up and asked you for a date? [naughty word] HEY, MIRANDA! C'MERE! Now pay close attention to this. Miranda -- tell my friend here what you told me about Bruce Wayne."
+        "line": "Bruce Wayne? Date? He called you up and asked you for a date? [bleeped] HEY, MIRANDA! C'MERE! Now pay close attention to this. Miranda -- tell my friend here what you told me about Bruce Wayne."
       }
     ],
     [
@@ -11098,7 +11095,7 @@
     [
       {
         "actor": "A",
-        "line": "The guy's bats all right. He's bat [naughty word] crazy. He -- -- I can't believe it. I was right!!"
+        "line": "The guy's bats all right. He's bat [bleeped] crazy. He -- -- I can't believe it. I was right!!"
       },
       { "actor": "B", "line": "Allie, he's not." },
       { "actor": "A", "line": "Not what?" },
@@ -11113,14 +11110,14 @@
       { "actor": "A", "line": "What do you say? Let's head for the lights." }
     ],
     [
-      { "actor": "A", "line": "HOLY [naughty word]!!" },
+      { "actor": "A", "line": "HOLY [bleeped]!!" },
       { "actor": "B", "line": "You okay?" },
       { "actor": "A", "line": "Yeah. Yeah. Little winded. DID YOU SEE THAT?!" },
       {
         "actor": "B",
         "line": "God yes, Allie. I've gotta say -- that was the ballsiest move I ever..."
       },
-      { "actor": "A", "line": "Holy [naughty word] Holy..." }
+      { "actor": "A", "line": "Holy [bleeped] Holy..." }
     ],
     [
       {
@@ -11143,7 +11140,7 @@
       },
       {
         "actor": "A",
-        "line": "I'm [naughty word] we're exploring that possibility."
+        "line": "I'm [bleeped] we're exploring that possibility."
       },
       {
         "actor": "B",
@@ -11189,7 +11186,7 @@
       { "actor": "A", "line": "We don't know what we're into!" },
       {
         "actor": "B",
-        "line": "We're in the [naughty word] man! Pick your poison. Maybe he's in there to finish the job. Maybe he's working for Wombosi. Maybe they want to go on TV together. Every possibility sucks -- we've got to move!"
+        "line": "We're in the [bleeped] man! Pick your poison. Maybe he's in there to finish the job. Maybe he's working for Wombosi. Maybe they want to go on TV together. Every possibility [bleeped] -- we've got to move!"
       }
     ],
     [
@@ -11215,7 +11212,7 @@
       { "actor": "A", "line": "What is Treadstone?" },
       {
         "actor": "B",
-        "line": "...what did you do?...you must've really [naughty word] up..."
+        "line": "...what did you do?...you must've really [bleeped] up..."
       },
       { "actor": "A", "line": "I think so." },
       {
@@ -11272,12 +11269,12 @@
       { "actor": "A", "line": "Yes. I mean, I think so. Yes. Yes..." },
       { "actor": "B", "line": "Well, either you are, or you aren't." },
       { "actor": "A", "line": "Right." },
-      { "actor": "B", "line": "You have your [naughty word]?" },
+      { "actor": "B", "line": "You have your [bleeped]?" },
       {
         "actor": "A",
-        "line": "I have a [naughty word] I've got... Actually, it's a little complicated."
+        "line": "I have a [bleeped] I've got... Actually, it's a little complicated."
       },
-      { "actor": "B", "line": "<u>Do you have your [naughty word] sir</u>?" },
+      { "actor": "B", "line": "<u>Do you have your [bleeped] sir</u>?" },
       { "actor": "A", "line": "Look, maybe I should just..." },
       { "actor": "B", "line": "Sir, you waited on line." },
       { "actor": "A", "line": "Yeah, I know..." }
@@ -11315,7 +11312,7 @@
     [
       {
         "actor": "B",
-        "line": "Well... I must admit, when my [naughty word] told me you were here I was, really -- I was quite -- I was surprised."
+        "line": "Well... I must admit, when my [bleeped] told me you were here I was, really -- I was quite -- I was surprised."
       },
       { "actor": "A", "line": "Really." },
       { "actor": "B", "line": "We thought you were gone for good." },
@@ -11342,14 +11339,14 @@
       { "actor": "A", "line": "Please. I don't want to scare you." },
       { "actor": "B", "line": "It's a little late for that." },
       { "actor": "A", "line": "I've got a situation here and --" },
-      { "actor": "B", "line": "Get the [naughty word] away from my car." },
+      { "actor": "B", "line": "Get the [bleeped] away from my car." },
       {
         "actor": "A",
         "line": "I'll give you ten thousand dollars to drive me to Paris."
       },
       {
         "actor": "B",
-        "line": "Great. You know what? I'll give you ten gazillion dollars to get the [naughty word] away from me before I start screaming my head off."
+        "line": "Great. You know what? I'll give you ten gazillion dollars to get the [bleeped] away from me before I start screaming my head off."
       },
       { "actor": "A", "line": "You don't want the police any more than I do." }
     ],
@@ -11424,7 +11421,7 @@
     ],
     [
       { "actor": "A", "line": "Look, I don't know what's up there." },
-      { "actor": "B", "line": "You got me pretty [naughty word] curious." },
+      { "actor": "B", "line": "You got me pretty [bleeped] curious." },
       {
         "actor": "A",
         "line": "Look, you could come up. Or you could wait if you want. I could go check it out. You could wait."
@@ -11545,7 +11542,7 @@
         "actor": "B",
         "line": "I said, someone came last night -- Look, this isn't a carnival -- people call and they make an appointment and they follow the rules -- everyone signs in and out -- this is a serious place -- serious work -- it's not just to come in whenever you like --"
       },
-      { "actor": "A", "line": "[naughty word] we didn't sign in." },
+      { "actor": "A", "line": "[bleeped] we didn't sign in." },
       { "actor": "B", "line": "So get the hell out of here." },
       {
         "actor": "A",
@@ -11595,7 +11592,7 @@
       },
       {
         "actor": "B",
-        "line": "-- I paid this [naughty word] guy -- I paid him four thousand dollars -- my last four thousand dollars to marry me, okay? -- I told this to the case officer last week... ...<u>here</u> -- Mr. Thomas. I told Mr. Thomas I didn't know this guy was already married -- I admitted this!"
+        "line": "-- I paid this [bleeped] guy -- I paid him four thousand dollars -- my last four thousand dollars to marry me, okay? -- I told this to the case officer last week... ...<u>here</u> -- Mr. Thomas. I told Mr. Thomas I didn't know this guy was already married -- I admitted this!"
       },
       { "actor": "A", "line": "-- Miss Kreutz, please --" },
       {
@@ -11628,7 +11625,7 @@
       { "actor": "B", "line": "-- yes, sir, it's confirmed --" }
     ],
     [
-      { "actor": "A", "line": "What the [naughty word] is he doing?" },
+      { "actor": "A", "line": "What the [bleeped] is he doing?" },
       {
         "actor": "B",
         "line": "Maybe it's a game. Maybe he's trying to send us a message."
@@ -11672,7 +11669,7 @@
       { "actor": "B", "line": "What?" },
       {
         "actor": "A",
-        "line": "I'm not sure. We have no launch protocol; the entry of the [naughty word] is supposed to initiate activation."
+        "line": "I'm not sure. We have no launch protocol; the entry of the [bleeped] is supposed to initiate activation."
       },
       { "actor": "B", "line": "Anything happening in there, El?" }
     ],
@@ -11909,7 +11906,7 @@
         "actor": "B",
         "line": "I'm saying you might have consulted us; the contents of this message could be extremely sensitive..."
       },
-      { "actor": "A", "line": "You want to [naughty word] prime numbers?" }
+      { "actor": "A", "line": "You want to [bleeped] prime numbers?" }
     ],
     [
       {
@@ -12119,14 +12116,14 @@
     [
       {
         "actor": "B",
-        "line": "As each component was tested and shipped off to Texas a duplicate was maintained and [naughty word] in Hokkaido -- for backup purposes, of course. We've been right behind you the entire time. You see my problem: I couldn't appear to control too large a percentage; my enemies wouldn't stand for it. So I simply made sure the Japanese consortium received the systems integration contract. Of course no one had to know the corporations involved were recently acquired, wholly-owned subsidiaries --"
+        "line": "As each component was tested and shipped off to Texas a duplicate was maintained and [bleeped] in Hokkaido -- for backup purposes, of course. We've been right behind you the entire time. You see my problem: I couldn't appear to control too large a percentage; my enemies wouldn't stand for it. So I simply made sure the Japanese consortium received the systems integration contract. Of course no one had to know the corporations involved were recently acquired, wholly-owned subsidiaries --"
       },
       { "actor": "A", "line": "-- of Hadden Industries." }
     ],
     [
       {
         "actor": "B",
-        "line": "Very well. [naughty word] this is true. [naughty word] they have only the best of intentions. Suppose they decide to just step in and solve all our problems for us. You have no objection to them so flagrantly intervening in human affairs?"
+        "line": "Very well. [bleeped] this is true. [bleeped] they have only the best of intentions. Suppose they decide to just step in and solve all our problems for us. You have no objection to them so flagrantly intervening in human affairs?"
       },
       {
         "actor": "A",
@@ -12162,7 +12159,7 @@
     [
       {
         "actor": "A",
-        "line": "... I keep telling myself okay, that's just the price, you have to do your time doing [naughty word] before you're allowed to get to the good stuff... but if I have to catalog one more quasar... God, I've missed you."
+        "line": "... I keep telling myself okay, that's just the price, you have to do your time doing [bleeped] before you're allowed to get to the good stuff... but if I have to catalog one more quasar... God, I've missed you."
       },
       { "actor": "B", "line": "Any luck on the grant money?" },
       {
@@ -12242,7 +12239,7 @@
         "actor": "B",
         "line": "Ellie -- I'm getting married. Her name's Laura. She came up to Owens Valley to do her post-doc about six months after you left."
       },
-      { "actor": "A", "line": "You [naughty word]." },
+      { "actor": "A", "line": "You [bleeped]." },
       {
         "actor": "B",
         "line": "That is true. But it's also true that if I really thought we wanted the same things, I'd follow you anywhere... but the truth is I don't think you want the company. Be honest, El. There's nowhere you'd rather be than sitting out at some remote corner of the world searching for the answers to the mysteries of the universe. And call me crazy, but I just can't compete with that... I'm sorry."
@@ -12368,7 +12365,7 @@
       { "actor": "A", "line": "If you came back." },
       {
         "actor": "B",
-        "line": "If you came back... you'd only be four years older -- but over 50 years would have [naughty word] on Earth."
+        "line": "If you came back... you'd only be four years older -- but over 50 years would have [bleeped] on Earth."
       },
       { "actor": "A", "line": "Something like that." },
       {
@@ -12439,7 +12436,7 @@
     [
       { "actor": "A", "line": "Hi." },
       { "actor": "B", "line": "Hi." },
-      { "actor": "A", "line": "I'm [naughty word] you read my deposition." },
+      { "actor": "A", "line": "I'm [bleeped] you read my deposition." },
       { "actor": "B", "line": "It was quite a page turner." },
       {
         "actor": "A",
@@ -12465,7 +12462,7 @@
       { "actor": "B", "line": "You have a question, Dr. Arroway?" },
       {
         "actor": "A",
-        "line": "I question the thinking behind sending the first [naughty word] to another civilization in armed -- basically announcing our intentions are hostile."
+        "line": "I question the thinking behind sending the first [bleeped] to another civilization in armed -- basically announcing our intentions are hostile."
       },
       {
         "actor": "B",
@@ -12594,12 +12591,9 @@
       },
       {
         "actor": "A",
-        "line": "Cora Peterson, his Technical [naughty word] You'll join Duval and the others --"
+        "line": "Cora Peterson, his Technical [bleeped] You'll join Duval and the others --"
       },
-      {
-        "actor": "B",
-        "line": "What can I do? Except maybe [naughty word] out?"
-      }
+      { "actor": "B", "line": "What can I do? Except maybe [bleeped] out?" }
     ],
     [
       {
@@ -12742,7 +12736,7 @@
       },
       {
         "actor": "B",
-        "line": "I understand you've been Dr. Duval's [naughty word] for quite some time... He must've snatched you out of the cradle."
+        "line": "I understand you've been Dr. Duval's [bleeped] for quite some time... He must've snatched you out of the cradle."
       },
       {
         "actor": "A",
@@ -12776,7 +12770,7 @@
       { "actor": "B", "line": "You must carry spare parts --" },
       {
         "actor": "A",
-        "line": "Not anything built into the [naughty word] If it hadn't come loose --"
+        "line": "Not anything built into the [bleeped] If it hadn't come loose --"
       }
     ],
     [
@@ -12892,7 +12886,7 @@
       { "actor": "A", "line": "We'll never get there in time, at this rate." },
       {
         "actor": "B",
-        "line": "Isn't there another route? So we can [naughty word] all this?"
+        "line": "Isn't there another route? So we can [bleeped] all this?"
       },
       {
         "actor": "A",
@@ -12922,11 +12916,11 @@
       { "actor": "A", "line": "At an operation?" },
       {
         "actor": "B",
-        "line": "They know they failed to kill Benes. Security thinks they'll try again, first chance they get. We're afraid of medical sabotage -- or surgical [naughty word]."
+        "line": "They know they failed to kill Benes. Security thinks they'll try again, first chance they get. We're afraid of medical sabotage -- or surgical [bleeped]."
       },
       {
         "actor": "A",
-        "line": "Surgical [naughty word] But that means you suspect --"
+        "line": "Surgical [bleeped] But that means you suspect --"
       }
     ],
     [
@@ -13022,7 +13016,7 @@
       },
       {
         "actor": "B",
-        "line": "Let's hope they realize the danger. Captain, I'll give you a new [naughty word] heading."
+        "line": "Let's hope they realize the danger. Captain, I'll give you a new [bleeped] heading."
       }
     ],
     [
@@ -13140,570 +13134,6 @@
       }
     ],
     [
-      { "actor": "A", "line": "-- I'm hoping to live in the Old Quarter." },
-      {
-        "actor": "B",
-        "line": "Even the so-called New Town isn't so new. Only the people. People of the future living in buildings of the past. Has anyone seen Eduard?"
-      }
-    ],
-    [
-      { "actor": "A", "line": "Where do you live?" },
-      { "actor": "B", "line": "Up there." }
-    ],
-    [
-      { "actor": "B", "line": "My [naughty word] I presume." },
-      { "actor": "A", "line": "Yes -- that's us." }
-    ],
-    [
-      { "actor": "A", "line": "Fine -- terrible." },
-      { "actor": "B", "line": "What was the matter with it?" }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "Preliminary investigations may already be underway."
-      },
-      {
-        "actor": "A",
-        "line": "You were his friend. One link is all they need."
-      }
-    ],
-    [
-      { "actor": "B", "line": "-- Ah, but what if it <u>wasn't</u>?" },
-      { "actor": "A", "line": "-- Small." }
-    ],
-    [
-      { "actor": "A", "line": "I've read your stories. They're fantastic." },
-      { "actor": "B", "line": "I don't know what you could have read." },
-      { "actor": "A", "line": "Just what you've published." },
-      { "actor": "B", "line": "-- In magazines nobody reads." },
-      { "actor": "A", "line": "I read the one about the penal colony." },
-      { "actor": "B", "line": "Did you?" },
-      {
-        "actor": "A",
-        "line": "The needles inscribing the judgement into the flesh of the man. Very good."
-      }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "These strange stories you write -- they come naturally, do they?"
-      },
-      {
-        "actor": "B",
-        "line": "Naturally? -- that's not the word I would have chosen."
-      },
-      {
-        "actor": "A",
-        "line": "Where do you get your ideas? Only joking -- I'm just joking. Let's go to a brothel then, Kafka, come on."
-      },
-      {
-        "actor": "B",
-        "line": "I haven't got the energy. I mean, I have to conserve my energy."
-      },
-      {
-        "actor": "A",
-        "line": "Why do you work in that hideous insurance office? -- dealing with people who fall off ladders. Now take me -- I make my living as a stone mason. It's not my art -- but it's the <u>tools</u> of my art. You could be -- a journalist."
-      }
-    ],
-    [
-      { "actor": "B", "line": "You work in the cemetery." },
-      { "actor": "A", "line": "A man must eat -- And drink." },
-      { "actor": "B", "line": "The <u>Castle</u> cemetery." }
-    ],
-    [
-      { "actor": "B", "line": "-- Oh, yes, determination runs in the family." },
-      {
-        "actor": "A",
-        "line": "There is <u>one</u> thing I'd like you to tell me."
-      },
-      {
-        "actor": "B",
-        "line": "I'm trying to find things out myself -- that's the whole point."
-      },
-      {
-        "actor": "A",
-        "line": "What made you think <u>I'd</u> be able to get you into the Castle?"
-      },
-      {
-        "actor": "B",
-        "line": "The cemetery is nearer the Castle than anywhere else -- wasn't it part of the Castle originally? -- I always [naughty word] there'd be a gate or something. Isn't there?"
-      },
-      { "actor": "A", "line": "In a manner of speaking." }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "The Castle gates were blockaded in the time of the great plague -- it's an escape route. Don't get stuck."
-      },
-      { "actor": "B", "line": "Not a chance. I'm the thinnest person I know." }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "The keeper of the files is still waiting for your final summation of the Erlanger claim."
-      },
-      { "actor": "B", "line": "I gave it to him yesterday." },
-      { "actor": "A", "line": "You didn't give it to <u>me</u>." },
-      { "actor": "B", "line": "No, I left it in his office." },
-      { "actor": "A", "line": "Did you see him?" },
-      {
-        "actor": "B",
-        "line": "I've never seen him. I don't believe there is a keeper of the files."
-      },
-      {
-        "actor": "A",
-        "line": "He's usually in the storage room sorting things out. He can't close the file on a case until he has the concluding report."
-      },
-      {
-        "actor": "B",
-        "line": "He has it, he just hasn't noticed it yet, all right?"
-      },
-      {
-        "actor": "A",
-        "line": "Who's to say he ever will? He's a timid old man and quite careful not to tread on anyone's toes -- In fact, I'm the only one he trusts and he wouldn't even look at a document if it didn't first come through me."
-      }
-    ],
-    [
-      { "actor": "A", "line": "Are you looking for Gabriela Rossmann?" },
-      { "actor": "B", "line": "Yes." }
-    ],
-    [
-      { "actor": "B", "line": "You wanted to see me, sir." },
-      { "actor": "A", "line": "Sit down, Kafka." }
-    ],
-    [
-      { "actor": "B", "line": "To do my work well, I have little time for --" },
-      {
-        "actor": "A",
-        "line": "You must make the time. Where do you go off to in the lunch hour?"
-      },
-      { "actor": "B", "line": "I usually take lunch by the River." },
-      {
-        "actor": "A",
-        "line": "It's not healthy, Kafka -- not for you and not for your workmates. At the annual dinner this month you again failed to make an appearance."
-      },
-      { "actor": "B", "line": "I did not realize it was obligatory." },
-      {
-        "actor": "A",
-        "line": "Have you never wondered -- and I mention this only in [naughty word] -- why other clerks have advanced to more responsible positions while you, who have been here longer, have not?"
-      },
-      { "actor": "B", "line": "No, sir." },
-      {
-        "actor": "A",
-        "line": "Attitude, Kafka. It doesn't matter how well you do your work -- you still see it as something to be gotten on with rather than something to take an active interest in."
-      },
-      { "actor": "B", "line": "Well, I --" },
-      {
-        "actor": "A",
-        "line": "Oh, I know you got along with that poor fellow -- what was his name?"
-      },
-      { "actor": "B", "line": "-- Eduard --" },
-      {
-        "actor": "A",
-        "line": "-- Yes -- Raban -- but he was too much like you -- even more so perhaps. He wasn't here as long as you, so I didn't know him as well -- but I could see the influence he was having. I simply want you to be aware of this because you'll be happier for it."
-      }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "Excuse me, sir -- I understand you have Eduard Raban's file."
-      },
-      { "actor": "A", "line": "I do." },
-      {
-        "actor": "B",
-        "line": "I wonder if I might look to see if there's an address for family -- I thought I'd like to write to them."
-      }
-    ],
-    [
-      { "actor": "B", "line": "I'm Kafka -- I work upstairs in Accident --" },
-      { "actor": "A", "line": "I know." },
-      { "actor": "B", "line": "You're a friend of Eduard Raban's." },
-      { "actor": "A", "line": "Why would you suppose so?" },
-      { "actor": "B", "line": "Oh -- well, I thought he once mentioned --" },
-      { "actor": "A", "line": "One of you must be mistaken." }
-    ],
-    [
-      { "actor": "A", "line": "Hello again." },
-      { "actor": "B", "line": "I've never seen you here before." },
-      { "actor": "A", "line": "Have you looked?" }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "I was having an affair with Eduard. He didn't tell you?"
-      },
-      { "actor": "B", "line": "No." },
-      {
-        "actor": "A",
-        "line": "He would have. You were his best friend. A better friend than me."
-      },
-      { "actor": "B", "line": "I suspected that he -- well." },
-      { "actor": "A", "line": "What?" },
-      {
-        "actor": "B",
-        "line": "That he was -- satisfied in that regard. I didn't want to pry."
-      },
-      {
-        "actor": "A",
-        "line": "It's not that we wanted to deceive anyone -- but you know how these things are looked upon at the office."
-      }
-    ],
-    [
-      { "actor": "B", "line": "How long were you and Eduard --" },
-      {
-        "actor": "A",
-        "line": "Two or three months, that's all. -- I seduced him."
-      }
-    ],
-    [
-      { "actor": "A", "line": "Are you free tonight?" },
-      { "actor": "B", "line": "Tonight?" },
-      {
-        "actor": "A",
-        "line": "There are some people I'd like you to meet. Can you come to the Musil district at eight o'clock?"
-      },
-      { "actor": "B", "line": "... All right." }
-    ],
-    [
-      { "actor": "B", "line": "-- I don't know the Musil district." },
-      { "actor": "A", "line": "You won't have any trouble finding it." }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "I nominated you as a possible candidate. You were Eduard's good friend. He read me some of your work."
-      },
-      {
-        "actor": "B",
-        "line": "I've hardly published enough for anyone to draw conclusions from."
-      },
-      {
-        "actor": "A",
-        "line": "You strike me as a man with a defined notion of injustice -- a high concern for the lot of your fellow men. And yet you're able to remain an outsider. With the concomitant air of ... superiority?"
-      }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "And you still maintain -- what? That he was murdered."
-      },
-      { "actor": "A", "line": "He was murdered." }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "You think what we're doing is so wrong? And what are you doing? Pursuing goodness? For what? To answer to some supreme tribunal?"
-      },
-      {
-        "actor": "B",
-        "line": "My only concern is the human tribunal. Isn't it yours?"
-      },
-      {
-        "actor": "A",
-        "line": "Yes -- which is why \"quiet, dependable people\" have to take charge of their own lives."
-      },
-      {
-        "actor": "B",
-        "line": "At the cost of others? You accuse people of murder without trial -- apparently without irony. Did you go to the Castle with Eduard? Then you have no idea what really might have happened that night at all -- even before or after he got there."
-      }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "You might think -- I thought so myself at first -- that Burgel's too insignificant to be dangerous. But that's the very reason to beware! It's the small men to watch out for -- the ones who substitute method for character."
-      },
-      {
-        "actor": "B",
-        "line": "Now you've fallen into his trap. When he goes to bed at night Burgel dreams of inspiring as much fear in others as they inspire in him."
-      },
-      {
-        "actor": "A",
-        "line": "It's still easier for you to understand suicide, isn't it."
-      }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "Of course he is -- the Castle precincts are not the safest part of the city after dark. People disappear up there regularly. If you want to lie in wait for someone, that's the place to do it."
-      },
-      { "actor": "B", "line": "Now you're saying Eduard was lured there?" },
-      {
-        "actor": "A",
-        "line": "How often does one of our clerks have business in the house of records?"
-      },
-      { "actor": "B", "line": "I've heard of it happening." },
-      {
-        "actor": "A",
-        "line": "And Burgel is the bringer of messages, isn't he?"
-      },
-      { "actor": "B", "line": "Usually." }
-    ],
-    [
-      { "actor": "B", "line": "Gabriela! -- you did get away." },
-      {
-        "actor": "A",
-        "line": "I knew you walked this way to work. I wanted to find you before they did."
-      },
-      { "actor": "B", "line": "-- I've just come from the Castle. It's over." },
-      {
-        "actor": "A",
-        "line": "Over? It's only over when you can crawl to a clean little spot on earth where the sun sometimes shines and you can warm yourself a bit."
-      }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "Only two steps back? Even the man they left to guard me retreated further than that."
-      },
-      { "actor": "B", "line": "I -- I found your jailer." },
-      {
-        "actor": "A",
-        "line": "This is the result of their elixir of youth. They were to come and check on it during the night. I contrived to miss the appointment."
-      },
-      { "actor": "B", "line": "They're dead now. We can get help." },
-      {
-        "actor": "A",
-        "line": "I know how they reward failure. If they saw this I'd be rotting in the quarries by the afternoon -- with all the others."
-      },
-      {
-        "actor": "B",
-        "line": "There's a new potion -- he said it was perfected."
-      },
-      {
-        "actor": "A",
-        "line": "I know there is. And you're what I have to bargain with. For now you're the last one in their way."
-      },
-      {
-        "actor": "B",
-        "line": "I told you, they're <u>dead</u>. It's finished."
-      },
-      {
-        "actor": "A",
-        "line": "Why should I believe a man who never believed me? They're absolutely right, you know -- guilt should never be doubted. It's easier that way."
-      }
-    ],
-    [
-      { "actor": "A", "line": "Kafka -- is that your real name?" },
-      { "actor": "B", "line": "Yes. Yes, of course -- why wouldn't it be?" },
-      { "actor": "A", "line": "When was the last time you saw Mr. Raban?" },
-      { "actor": "B", "line": "Wednesday. We left the office together." },
-      {
-        "actor": "A",
-        "line": "Did you go anywhere afterwards -- to have a drink perhaps?"
-      },
-      {
-        "actor": "B",
-        "line": "No, we said goodbye outside the building. He went off, as usual, toward his house."
-      },
-      { "actor": "A", "line": "Your office is the Workmen's --" },
-      { "actor": "B", "line": "-- Accident and Compensation [naughty word]." },
-      { "actor": "A", "line": "Where you've been employed for seven years." },
-      { "actor": "B", "line": "Eight -- and seven months." },
-      {
-        "actor": "A",
-        "line": "Engaged in the manufacture and distribution of ... pills and so forth."
-      },
-      { "actor": "B", "line": "Well -- other departments are, yes." },
-      {
-        "actor": "A",
-        "line": "Would you describe your relationship with the dead man as close?"
-      },
-      {
-        "actor": "B",
-        "line": "Yes. Since he came to the office, almost three years ago, we've been quite good friends. How was Eduard ..."
-      },
-      { "actor": "A", "line": "He was found in the River. Could he swim?" },
-      { "actor": "B", "line": "I don't know." },
-      { "actor": "A", "line": "Was he depressed?" },
-      {
-        "actor": "B",
-        "line": "No. He didn't seem to be. Do you think he drowned himself?"
-      },
-      {
-        "actor": "A",
-        "line": "Grown men don't normally fall into the river, do they?"
-      },
-      { "actor": "B", "line": "No, I suppose not." },
-      {
-        "actor": "A",
-        "line": "He might have had a drink or two, despite what you think."
-      },
-      { "actor": "B", "line": "Can I ask -- how you found me?" },
-      {
-        "actor": "A",
-        "line": "His landlady knew of no other friends to refer us to."
-      },
-      {
-        "actor": "B",
-        "line": "I don't think he really had any. He had no family either."
-      },
-      { "actor": "A", "line": "We know that." }
-    ],
-    [
-      { "actor": "B", "line": "Probably not." },
-      {
-        "actor": "A",
-        "line": "Anyway, I'd like you to reflect that in me you have -- I won't say a friend, because we're complete fencers, of course -- from distinctly incompatible social [naughty word] -- but to some extent, shall we say, an interested third party."
-      },
-      { "actor": "B", "line": "I'll bear that in mind." },
-      {
-        "actor": "A",
-        "line": "-- Should you happen upon anything that might be relevant."
-      }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "You told me to contact you if anything relevant came up -- Gabriela is relevant. When I spoke to you before I didn't know she'd been seeing Eduard."
-      },
-      {
-        "actor": "A",
-        "line": "That's been noted. But where does it lead us? Unless you have something more to add."
-      },
-      {
-        "actor": "B",
-        "line": "She's missing. I went to her house and she hadn't returned there."
-      }
-    ],
-    [
-      { "actor": "A", "line": "Do you?" },
-      { "actor": "B", "line": "We saw her naked once -- didn't we." }
-    ],
-    [
-      { "actor": "B", "line": "-- I was just trying to finish some work!" },
-      { "actor": "A", "line": "You mean you've actually begun some?" }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "For all your incompetence I was beginning to think you were at least loyal to me. You're very good ham actors."
-      },
-      { "actor": "B", "line": "-- Just doing our job." },
-      { "actor": "A", "line": "It's a farce." }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "My [naughty word] I should have known. Nothing is given to me. I have to acquire everything."
-      },
-      {
-        "actor": "B",
-        "line": "It's all right to be sarcastic in private to us -- because we have a sense of humor -- but when we're up at the Castle we suggest you don't make a fuss. It would spoil the not unfavorable impression you make in other respects."
-      }
-    ],
-    [
-      { "actor": "A", "line": "That's <u>mad</u>." },
-      { "actor": "B", "line": "-- Oh, yes, it's mad." }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "Why are you so aggressively unimaginative? Eduard is no longer the only casualty."
-      },
-      { "actor": "A", "line": "Then why haven't I been --" }
-    ],
-    [
-      { "actor": "A", "line": "... A piece of paper ..." },
-      {
-        "actor": "B",
-        "line": "A mere slip. Your friend Mr. Raban dealt only with claims that came <u>in</u>, another department being responsible for compensation that goes out -- this is correct?"
-      }
-    ],
-    [
-      { "actor": "B", "line": "-- You seem amused." },
-      {
-        "actor": "A",
-        "line": "It only amuses me in that it gives me an insight into the ludicrous bungling that in some circumstances may decide the life of a human being."
-      }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "And I suppose Dr. Murnau didn't die in a cave-in. You killed him to free the Position of Orlac Medical Officer for your own ends."
-      },
-      {
-        "actor": "B",
-        "line": "Yes, well -- we're looking for a new village now. If we stay too long at one source ... people become suspicious."
-      }
-    ],
-    [
-      {
-        "actor": "A",
-        "line": "The fact that it's live bodies you practice your trade on doesn't seem to matter to you."
-      },
-      {
-        "actor": "B",
-        "line": "On the contrary, it matters a great deal. We're engaged in immensely important research here. I'm a revolutionary too, you know -- but a much more pragmatic one."
-      }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "\"Raban\" -- that'll be nearly at the back of the alphabet."
-      },
-      { "actor": "A", "line": "It usually is." },
-      {
-        "actor": "B",
-        "line": "I'm not obliged to give you access, you know -- not without authorization -- but I'll make an exception this one time."
-      }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "Wait a minute. \"Raban?\" Where have I heard that name?"
-      },
-      {
-        "actor": "A",
-        "line": "He's the clerk who died last week. From the insurance department"
-      }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "If it was Accounts you wanted why did you ask for Employees?"
-      },
-      { "actor": "A", "line": "Orlac is an account?" },
-      {
-        "actor": "B",
-        "line": "It's a factory in the northern mountains. One of our best customers. Without a proper request I'm not obliged to do this, you understand -- but I'll make an exception on this one occasion."
-      }
-    ],
-    [
-      { "actor": "A", "line": "Ludwig." },
-      { "actor": "B", "line": "Oskar." }
-    ],
-    [
-      { "actor": "A", "line": "Women are all you have on your mind!" },
-      {
-        "actor": "B",
-        "line": "She went to the roof to sunbathe one lunch hour -- we watched her changing."
-      }
-    ],
-    [
-      { "actor": "B", "line": "It's not our fault. We're naturally nervous." },
-      { "actor": "A", "line": "And we're upset too." }
-    ],
-    [
-      {
-        "actor": "B",
-        "line": "But your goal is so hard to reach. Do you think the official network would surrender to one man? We would never think of attempting anything remotely as difficult."
-      },
-      {
-        "actor": "A",
-        "line": "My mother used to tell us of the young man who decided to ride to the next village and how she was afraid that -- not even mentioning accidents -- the span of a normal happy life might fall far short of the time needed for such a trip."
-      }
-    ],
-    [
-      { "actor": "A", "line": "This is filed incorrectly!" },
-      { "actor": "B", "line": "Here too! They're all in a dreadful muddle!" }
-    ],
-    [
-      { "actor": "B", "line": "Then that's the place for us!" },
-      { "actor": "A", "line": "Amerika for us!" },
-      { "actor": "B", "line": "Amerika!" }
-    ],
-    [
       { "actor": "A", "line": "Then the informant is real." },
       { "actor": "B", "line": "Does that surprise you? It was inevitable." },
       { "actor": "A", "line": "He'll be contacting us again." },
@@ -13727,11 +13157,11 @@
     ],
     [
       { "actor": "A", "line": "Lieutenant?" },
-      { "actor": "B", "line": "Oh [naughty word]." },
+      { "actor": "B", "line": "Oh [bleeped]." },
       { "actor": "A", "line": "Lieutenant, you were given specific orders --" },
       {
         "actor": "B",
-        "line": "I'm just doing my job. You gimme that [naughty word] and you can cram it up your [naughty word]."
+        "line": "I'm just doing my job. You gimme that [bleeped] and you can cram it up your [bleeped]."
       },
       { "actor": "A", "line": "The orders were for your protection." }
     ],
@@ -13811,7 +13241,7 @@
     [
       {
         "actor": "A",
-        "line": "Whoa! [naughty word] Neo, you scared the Bejeezus out of me."
+        "line": "Whoa! [bleeped] Neo, you scared the Bejeezus out of me."
       },
       { "actor": "B", "line": "Sorry." },
       { "actor": "A", "line": "No, it's all right." },
@@ -13833,7 +13263,7 @@
       { "actor": "B", "line": "Really?" },
       {
         "actor": "A",
-        "line": "You bet your [naughty word] It keeps him going. Maybe it keeps all of us going."
+        "line": "You bet your [bleeped] It keeps him going. Maybe it keeps all of us going."
       },
       { "actor": "B", "line": "How many were there?" },
       { "actor": "A", "line": "Five. Since I've been here." },
@@ -13842,7 +13272,7 @@
       { "actor": "B", "line": "How?" },
       {
         "actor": "A",
-        "line": "Honestly. Morpheus. He got them all amped up believing in [naughty word] I watched each of them take on an agent and I watched each of them die. Little piece of advice: you see an agent, you do what we do; run. Run your [naughty word] off."
+        "line": "Honestly. Morpheus. He got them all amped up believing in [bleeped] I watched each of them take on an agent and I watched each of them die. Little piece of advice: you see an agent, you do what we do; run. Run your [bleeped] off."
       }
     ],
     [
@@ -13865,7 +13295,7 @@
     ],
     [
       { "actor": "B", "line": "I got a fibrillation!" },
-      { "actor": "A", "line": "[naughty word] Apoc?" }
+      { "actor": "A", "line": "[bleeped] Apoc?" }
     ],
     [
       { "actor": "A", "line": "Give me your phone." },
@@ -13881,7 +13311,7 @@
       { "actor": "A", "line": "Hello, Neo. Do you know who this is?" }
     ],
     [
-      { "actor": "B", "line": "Holy [naughty word] [naughty word]!" },
+      { "actor": "B", "line": "Holy [bleeped] [bleeped]!" },
       { "actor": "A", "line": "Yes." }
     ],
     [
@@ -14167,7 +13597,7 @@
     ],
     [
       { "actor": "B", "line": "And I know that's not where you want to be." },
-      { "actor": "A", "line": "... [naughty word]." }
+      { "actor": "A", "line": "... [bleeped]." }
     ],
     [
       { "actor": "A", "line": "Uh-oh..." },
@@ -14249,7 +13679,7 @@
       }
     ],
     [
-      { "actor": "A", "line": "Holy [naughty word]!" },
+      { "actor": "A", "line": "Holy [bleeped]!" },
       { "actor": "B", "line": "Hey, Mikey, he likes it! Ready for more?" },
       { "actor": "A", "line": "Hell yes!" }
     ],
@@ -14600,7 +14030,7 @@
     [
       {
         "actor": "B",
-        "line": "Apart from that, you look pretty chipper for a man who's two thousand and thirty one years old. I read the clocks. They bear out [naughty word] hypothesis. We've been away from Earth for two thousand years, give or take a decade. Still can't accept it, huh?"
+        "line": "Apart from that, you look pretty chipper for a man who's two thousand and thirty one years old. I read the clocks. They bear out [bleeped] hypothesis. We've been away from Earth for two thousand years, give or take a decade. Still can't accept it, huh?"
       },
       { "actor": "A", "line": "long pause) You know it." },
       {
@@ -14662,13 +14092,10 @@
       { "actor": "B", "line": "Fine. Just let her out." }
     ],
     [
-      {
-        "actor": "A",
-        "line": "Why did you do that? [naughty word] off your hair?"
-      },
+      { "actor": "A", "line": "Why did you do that? [bleeped] off your hair?" },
       {
         "actor": "B",
-        "line": "In my world -- before I left it - only youngsters of your age wore un- [naughty word] hair."
+        "line": "In my world -- before I left it - only youngsters of your age wore un- [bleeped] hair."
       }
     ],
     [
@@ -14778,7 +14205,7 @@
       { "actor": "A", "line": "How so?" },
       {
         "actor": "B",
-        "line": "Let us [naughty word] as common sense dictates, that the prisoner's story is false. But if he does not come from another planet, then surely he sprang from our own. Yes, sprang. As an animal psychologist, I have found no physiological defect to explain why humans are mute."
+        "line": "Let us [bleeped] as common sense dictates, that the prisoner's story is false. But if he does not come from another planet, then surely he sprang from our own. Yes, sprang. As an animal psychologist, I have found no physiological defect to explain why humans are mute."
       }
     ],
     [
@@ -14838,7 +14265,7 @@
       },
       {
         "actor": "B",
-        "line": "You may well call it upside down, since you occupy its lowest level. And deservedly. The eastern desert has never been explored -- because we've always [naughty word] that no life can exist there. Save yourself, Taylor. Tell me -- is there another jungle beyond the Forbidden Zone?"
+        "line": "You may well call it upside down, since you occupy its lowest level. And deservedly. The eastern desert has never been explored -- because we've always [bleeped] that no life can exist there. Save yourself, Taylor. Tell me -- is there another jungle beyond the Forbidden Zone?"
       },
       { "actor": "A", "line": "I don't know." },
       {
@@ -14986,7 +14413,7 @@
         "actor": "A",
         "line": "But how convenient that the proof of his arrival has vanished? You also state that Bright Eyes had two intelligent companions at the time of his capture."
       },
-      { "actor": "B", "line": "This is his [naughty word]." },
+      { "actor": "B", "line": "This is his [bleeped]." },
       { "actor": "A", "line": "Where are they now?" }
     ],
     [
@@ -15211,7 +14638,7 @@
     [
       {
         "actor": "A",
-        "line": "Hey, listen, when all this blows over, maybe we could get together every now and then and see each other. And maybe something might. happen again. What do you think?"
+        "line": "Hey, listen, when all this [bleeped] over, maybe we could get together every now and then and see each other. And maybe something might. happen again. What do you think?"
       },
       { "actor": "B", "line": "Are you asking me for a \"date\"?" },
       {
@@ -15410,7 +14837,7 @@
         "actor": "A",
         "line": "You were? You mean we could've been... you-know-what... all this time?"
       },
-      { "actor": "B", "line": "You bet your [naughty word]." },
+      { "actor": "B", "line": "You bet your [bleeped]." },
       { "actor": "A", "line": "Why didn't you tell me?" },
       { "actor": "B", "line": "You're supposed to guess." }
     ],
@@ -15715,16 +15142,13 @@
       { "actor": "B", "line": "What? What did you tell me?" }
     ],
     [
-      {
-        "actor": "B",
-        "line": "Man, you don't never [naughty word] out, do ya?"
-      },
+      { "actor": "B", "line": "Man, you don't never [bleeped] out, do ya?" },
       { "actor": "A", "line": "Nope. Never. " }
     ],
     [
       {
         "actor": "A",
-        "line": "Hiya, sweet thing. Little guy's getting' [naughty word] huh? Kent, you still here?"
+        "line": "Hiya, sweet thing. Little guy's getting' [bleeped] huh? Kent, you still here?"
       },
       { "actor": "B", "line": "I seem to be." }
     ],
@@ -16013,7 +15437,7 @@
       },
       {
         "actor": "B",
-        "line": "What'm I gonna do with half a cent? Buy me a thoroughbred cockroach? Everybody loses them fractions?"
+        "line": "What'm I gonna do with half a cent? Buy me a thoroughbred [bleeped] Everybody loses them fractions?"
       },
       {
         "actor": "A",
@@ -16045,7 +15469,7 @@
     [
       {
         "actor": "A",
-        "line": "Please, Mr. Webster, you're a great humanitarian. Ain't you heard what it's like in them jails? You send an innocent boy in and he gets thrown in with killers and robbers and [naughty word] and [naughty word] killer and robber [naughty word] and..."
+        "line": "Please, Mr. Webster, you're a great humanitarian. Ain't you heard what it's like in them jails? You send an innocent boy in and he gets thrown in with killers and robbers and [bleeped] and [bleeped] killer and robber [bleeped] and..."
       },
       { "actor": "B", "line": "Mr. Gorman, just answer me one question..." }
     ],
@@ -16217,7 +15641,7 @@
       { "actor": "A", "line": "Watch out for them air pockets!" },
       { "actor": "B", "line": "No, we're just going down." },
       { "actor": "A", "line": "We gonna crash?" },
-      { "actor": "B", "line": "I never crash, Gus. That'd be [naughty word]." },
+      { "actor": "B", "line": "I never crash, Gus. That'd be [bleeped]." },
       { "actor": "A", "line": "We back in Metropolis?" },
       { "actor": "B", "line": "No...I just have a little stop to make." }
     ],
@@ -16478,7 +15902,7 @@
       { "actor": "A", "line": "Lois, I usually do." },
       {
         "actor": "B",
-        "line": "Then maybe you should get your [naughty word] checked."
+        "line": "Then maybe you should get your [bleeped] checked."
       }
     ],
     [
@@ -16657,11 +16081,11 @@
       },
       {
         "actor": "A",
-        "line": "Actually I was trying to catch up on my reading. There's a lot of [naughty word] I never got around to --"
+        "line": "Actually I was trying to catch up on my reading. There's a lot of [bleeped] I never got around to --"
       },
       {
         "actor": "B",
-        "line": "[naughty word] The whole world's about to blow up and you're reading [naughty word]?!"
+        "line": "[bleeped] The whole world's about to [bleeped] up and you're reading [bleeped]?!"
       }
     ],
     [
@@ -16750,7 +16174,7 @@
     [
       {
         "actor": "A",
-        "line": "Wait, wait, wait just a moment. Wait till you've got to know better will you please. Wait, -- look, I can give you anything you want. I can give you the [naughty word] ring, the - er -- unlimited freedom to maim, cure, destroy, chew - plus Lex Luthor's savvy. Lex Luthor's career guidance... Lex Luthor's School of..."
+        "line": "Wait, wait, wait just a moment. Wait till you've got to know better will you please. Wait, -- look, I can give you anything you want. I can give you the [bleeped] ring, the - er -- unlimited freedom to maim, cure, destroy, chew - plus Lex Luthor's savvy. Lex Luthor's career guidance... Lex Luthor's School of..."
       },
       {
         "actor": "B",
@@ -16883,7 +16307,7 @@
       { "actor": "A", "line": "Look, they need a machine to fly." },
       {
         "actor": "B",
-        "line": "Brave young heroes. Be nice to them, my dear. Blow them a kiss."
+        "line": "Brave young heroes. Be nice to them, my dear. [bleeped] them a kiss."
       }
     ],
     [
@@ -17057,11 +16481,11 @@
       },
       {
         "actor": "A",
-        "line": "But what good is a vow if everything gets blown away? What good was my letter?"
+        "line": "But what good is a vow if everything gets [bleeped] away? What good was my letter?"
       },
       {
         "actor": "B",
-        "line": "I'm going to [naughty word] this letter on to all the leaders of the world. I promise you. For it is they , and not I, that represent the people of Earth."
+        "line": "I'm going to [bleeped] this letter on to all the leaders of the world. I promise you. For it is they , and not I, that represent the people of Earth."
       }
     ],
     [
@@ -17287,7 +16711,7 @@
       { "actor": "A", "line": "I know, but --" },
       {
         "actor": "B",
-        "line": "Stop saying you know when I say 'y'know.' I know you know. Yes, I know you're here, Otis. What do you want, a [naughty word] band?"
+        "line": "Stop saying you know when I say 'y'know.' I know you know. Yes, I know you're here, Otis. What do you want, a [bleeped] band?"
       }
     ],
     [
@@ -17310,7 +16734,7 @@
       { "actor": "A", "line": "Thank you." },
       {
         "actor": "B",
-        "line": "Otherwise, you're a Mongoloid idiot. It's reasonable to [naughty word] that fragments of the planet were shot out into space by the force of the explosion, and --"
+        "line": "Otherwise, you're a Mongoloid idiot. It's reasonable to [bleeped] that fragments of the planet were shot out into space by the force of the explosion, and --"
       }
     ],
     [
@@ -17352,7 +16776,7 @@
       { "actor": "A", "line": "What's she doing in California?" },
       {
         "actor": "B",
-        "line": "It's for that piece she's doing on women and competition. She's off to the Women's Western Golf [naughty word]."
+        "line": "It's for that piece she's doing on women and competition. She's off to the Women's Western Golf [bleeped]."
       }
     ],
     [
@@ -17886,7 +17310,7 @@
       { "actor": "B", "line": "It is for me." },
       {
         "actor": "A",
-        "line": "Y'know? I'm sure of it. Y'know? And there's a strong streak of goody- goody in him that is going to blow this deal for me if I don't do something about it. Something!"
+        "line": "Y'know? I'm sure of it. Y'know? And there's a strong streak of goody- goody in him that is going to [bleeped] this deal for me if I don't do something about it. Something!"
       }
     ],
     [
@@ -17907,7 +17331,7 @@
       { "actor": "B", "line": "What is this??!" },
       {
         "actor": "A",
-        "line": "Makes Cecil B. DeMille look like the Senior [naughty word] play, right?"
+        "line": "Makes Cecil B. DeMille look like the Senior [bleeped] play, right?"
       },
       { "actor": "B", "line": "But...why?" }
     ],
@@ -17929,7 +17353,7 @@
       },
       {
         "actor": "B",
-        "line": "Sure. It's the joining together of two land [naughty word] pushed together eight million years ago. The fault line itself is unstable and always shifting, which is the reason you get earthquakes in the California area from time to time."
+        "line": "Sure. It's the joining together of two land [bleeped] pushed together eight million years ago. The fault line itself is unstable and always shifting, which is the reason you get earthquakes in the California area from time to time."
       },
       {
         "actor": "A",
@@ -17990,7 +17414,7 @@
       { "actor": "A", "line": "What do you do?" },
       {
         "actor": "B",
-        "line": "What do I do. I'm a key figure in an ongoing government charade. An annoyance to my superiors. A joke among my peers. \"Spooky,\" they call me. Spooky Mulder. Whose sister was abducted by aliens when he was a kid. Who now chases little green men with a badge and a gun, shouting to the heavens and anyone who'll listen that the fix is in. That our government's hip to the truth and a part of the conspiracy. That the sky is falling and when it hits it's gonna be the [naughty word] of all time."
+        "line": "What do I do. I'm a key figure in an ongoing government charade. An annoyance to my superiors. A joke among my peers. \"Spooky,\" they call me. Spooky Mulder. Whose sister was abducted by aliens when he was a kid. Who now chases little green men with a badge and a gun, shouting to the heavens and anyone who'll listen that the fix is in. That our government's hip to the truth and a part of the conspiracy. That the sky is falling and when it hits it's gonna be the [bleeped] of all time."
       }
     ],
     [
@@ -18061,7 +17485,7 @@
       { "actor": "B", "line": "Yes." },
       {
         "actor": "A",
-        "line": "We have a situation. The members are [naughty word]."
+        "line": "We have a situation. The members are [bleeped]."
       },
       { "actor": "B", "line": "Is it an emergency?" }
     ],
@@ -18150,7 +17574,7 @@
     [
       {
         "actor": "A",
-        "line": "See this [naughty word] Somebody knows I'm talking to you."
+        "line": "See this [bleeped] Somebody knows I'm talking to you."
       },
       { "actor": "B", "line": "Not according to the men in blue." },
       {
@@ -18182,7 +17606,7 @@
       { "actor": "B", "line": "What killed those men?" },
       {
         "actor": "A",
-        "line": "What killed them I won't even write about. I tell you, they'd do more than just [naughty word] me. They have the future to protect."
+        "line": "What killed them I won't even write about. I tell you, they'd do more than just [bleeped] me. They have the future to protect."
       },
       { "actor": "B", "line": "I'll know soon enough." },
       {
@@ -18306,7 +17730,7 @@
       { "actor": "A", "line": "What? What are you talking about?" },
       {
         "actor": "B",
-        "line": "I meet with the OPR day after tomorrow for remediation and [naughty word]..."
+        "line": "I meet with the OPR day after tomorrow for remediation and [bleeped]..."
       },
       { "actor": "A", "line": "Why?" },
       {
@@ -18586,7 +18010,7 @@
       { "actor": "B", "line": "My god..." },
       {
         "actor": "A",
-        "line": "The geometry of [naughty word] infection presents certain conceptual re-evaluations for us. About our place in their Colonization."
+        "line": "The geometry of [bleeped] infection presents certain conceptual re-evaluations for us. About our place in their Colonization."
       },
       {
         "actor": "B",
@@ -18655,7 +18079,7 @@
       },
       {
         "actor": "A",
-        "line": "Take the elevator to the very bottom, go left, down the crewman's [naughty word] then make a right."
+        "line": "Take the elevator to the very bottom, go left, down the crewman's [bleeped] then make a right."
       },
       { "actor": "B", "line": "Bottom, left, right. I have it." },
       { "actor": "A", "line": "Hurry, Rose." }
@@ -18766,7 +18190,7 @@
       },
       {
         "actor": "B",
-        "line": "You're wrong. They're fascinating. Like in a dream... there's truth without logic. What's his name again...? [naughty word]."
+        "line": "You're wrong. They're fascinating. Like in a dream... there's truth without logic. What's his name again...? [bleeped]."
       },
       {
         "actor": "A",
@@ -19061,7 +18485,7 @@
       },
       {
         "actor": "A",
-        "line": "I don't think so. They've got you in a [naughty word] jar like some butterfly, and you're goin' to die if you don't break out. Maybe not right away, 'cause you're strong. But sooner or later the fire in you is goin' to go out."
+        "line": "I don't think so. They've got you in a [bleeped] jar like some butterfly, and you're goin' to die if you don't break out. Maybe not right away, 'cause you're strong. But sooner or later the fire in you is goin' to go out."
       },
       { "actor": "B", "line": "It's not up to you to save me, Jack." },
       { "actor": "A", "line": "You're right. Only you can do that." },
@@ -19554,7 +18978,10 @@
       { "actor": "B", "line": "Hold still, Buzz!" }
     ],
     [
-      { "actor": "B", "line": "Ahhh!! This is the part where we blow up!" },
+      {
+        "actor": "B",
+        "line": "Ahhh!! This is the part where we [bleeped] up!"
+      },
       { "actor": "A", "line": "Not today!" }
     ],
     [
@@ -19762,7 +19189,7 @@
       { "actor": "B", "line": "Oh, no...it's a Combat Carl." },
       {
         "actor": "A",
-        "line": "Just stay where you are, Corporal! Don't move, Carl. You'll blow up. I know you're tired! I know your leg is cramping, but you can't move. Do you hear me?"
+        "line": "Just stay where you are, Corporal! Don't move, Carl. You'll [bleeped] up. I know you're tired! I know your leg is cramping, but you can't move. Do you hear me?"
       }
     ],
     [
@@ -19814,7 +19241,7 @@
       { "actor": "A", "line": "You did break in." },
       {
         "actor": "B",
-        "line": "Tried to. Can't quite make the connection with that sucker, though. If I had a direct terminal ..."
+        "line": "Tried to. Can't quite make the connection with that [bleeped] though. If I had a direct terminal ..."
       },
       { "actor": "A", "line": "Are you embezzling?" },
       {
@@ -19967,7 +19394,7 @@
       },
       {
         "actor": "A",
-        "line": "Walter, I sympathize, but I have data coming out of the Master Control Program saying there is something screwy --"
+        "line": "Walter, I sympathize, but I have data coming out of the Master Control Program saying there is something [bleeped] --"
       },
       {
         "actor": "B",
@@ -19991,7 +19418,7 @@
       },
       {
         "actor": "B",
-        "line": "Thank you, no. I have some work to do... [naughty word] I can still log on."
+        "line": "Thank you, no. I have some work to do... [bleeped] I can still log on."
       }
     ],
     [
@@ -20003,10 +19430,7 @@
     ],
     [
       { "actor": "A", "line": "Who is your User, program?" },
-      {
-        "actor": "B",
-        "line": "Alan-One. He calls me... may I [naughty word]?"
-      },
+      { "actor": "B", "line": "Alan-One. He calls me... may I [bleeped]?" },
       {
         "actor": "A",
         "line": "All that is visible must grow beyond itself and extend into the realm of the invisible."
@@ -20133,7 +19557,7 @@
       },
       {
         "actor": "B",
-        "line": "PARAMUS... wonder what those initials stand for ... ...probably Program [naughty word] Routine -- well, it sounds like a lovely place."
+        "line": "PARAMUS... wonder what those initials stand for ... ...probably Program [bleeped] Routine -- well, it sounds like a lovely place."
       },
       { "actor": "A", "line": "It grows on you." }
     ],
@@ -20189,7 +19613,7 @@
       { "actor": "B", "line": "Yes, MCP." },
       {
         "actor": "A",
-        "line": "I've got a little challenge for you, Sark -- a new recruit. He's a tough case, but I want him treated in the usual manner. Train him for the games... let him hope for a while... and blow him away."
+        "line": "I've got a little challenge for you, Sark -- a new recruit. He's a tough case, but I want him treated in the usual manner. Train him for the games... let him hope for a while... and [bleeped] him away."
       },
       {
         "actor": "B",
@@ -20317,7 +19741,7 @@
     [
       { "actor": "A", "line": "When was the last time I wore pink?" },
       { "actor": "B", "line": "The Mitchell barbecue three years ago." },
-      { "actor": "A", "line": "Oh [naughty word]..." },
+      { "actor": "A", "line": "Oh [bleeped]..." },
       { "actor": "B", "line": "Matching shirt and shorts. It was brutal." }
     ],
     [
@@ -20507,7 +19931,7 @@
       },
       {
         "actor": "B",
-        "line": "Consider him packed. I didn't like his attitude... Struttin around with a cane and [naughty word]."
+        "line": "Consider him packed. I didn't like his attitude... Struttin around with a cane and [bleeped]."
       }
     ],
     [
@@ -20596,11 +20020,8 @@
     [
       { "actor": "B", "line": "Where were you sitting on the train?" },
       { "actor": "A", "line": "Against a window." },
-      { "actor": "B", "line": "In the [naughty word] car?" },
-      {
-        "actor": "A",
-        "line": "Yes. Where are the rest of the [naughty word]?"
-      },
+      { "actor": "B", "line": "In the [bleeped] car?" },
+      { "actor": "A", "line": "Yes. Where are the rest of the [bleeped]?" },
       { "actor": "B", "line": "Was your family traveling with you?" },
       { "actor": "A", "line": "No." },
       { "actor": "B", "line": "Did you get up from your seat?" },

@@ -54,4 +54,4 @@ false - not redirecting error is defined - error occurred
 [2]: lib_next_use_redirection.md#useredirection
 [3]: lib_next_isomorphic_redirect_types.md#frontendredirectconfig
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/lib/next-use-redirection/index.ts#L18
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-use-redirection/index.ts#L18

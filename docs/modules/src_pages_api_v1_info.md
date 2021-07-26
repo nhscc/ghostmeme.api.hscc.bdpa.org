@@ -44,4 +44,4 @@ Renames and exports: [defaultConfig][4]
 [3]: src_pages_api_v1_info.md#default
 [4]: src_backend_middleware.md#defaultconfig
 [5]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/src/pages/api/v1/info.ts#L8
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/pages/api/v1/info.ts#L8

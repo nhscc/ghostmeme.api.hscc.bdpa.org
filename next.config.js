@@ -44,6 +44,20 @@ module.exports = () => {
       MAX_CONTENT_LENGTH_BYTES: process.env.MAX_CONTENT_LENGTH_BYTES
     },
 
+    eslint: {
+      // ! This prevents production builds from failing in the presence of
+      // ! ESLint errors; linting is handled during CL/CI rather than at deploy
+      // ! time.
+      ignoreDuringBuilds: true
+    },
+
+    typescript: {
+      // ! This prevents production builds from failing in the presence of
+      // ! TypeScript errors, e.g. when modules from dev deps cannot be found;
+      // ! linting is handled during CL/CI rather than at deploy time.
+      ignoreBuildErrors: true
+    },
+
     async rewrites() {
       return [
         {

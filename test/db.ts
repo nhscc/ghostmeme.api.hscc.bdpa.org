@@ -1,11 +1,11 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { DUMMY_KEY, BANNED_KEY, DEV_KEY } from 'universe/backend';
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import cloneDeep from 'clone-deep';
 import { randomInt } from 'crypto';
 import { usernames as Usernames, memes as Memes } from '../data/corpus.json';
 import { getEnv } from 'universe/backend/env';
 import { GuruMeditationError } from 'universe/backend/error';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import cloneDeep from 'clone-deep';
 
 import {
   getDb,
@@ -25,6 +25,7 @@ import type {
   InternalUser,
   InternalInfo
 } from 'types/global';
+
 import { toss } from 'toss-expression';
 
 /**
@@ -233,6 +234,7 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
 export function setupTestDb(defer = false) {
   const port = (getEnv().DEBUG_INSPECTING && getEnv().MONGODB_MS_PORT) || undefined;
 
+  // * The in-memory server is not started until it's needed later on
   const server = new MongoMemoryServer({
     instance: {
       port,
@@ -248,8 +250,9 @@ export function setupTestDb(defer = false) {
    * selecting and returning the database.
    */
   const getNewClientAndDb = async () => {
+    await server.ensureInstance();
     uri = uri ?? (await server.getUri('test')); // ? Ensure singleton
-    const client = await MongoClient.connect(uri, { useUnifiedTopology: true });
+    const client = await MongoClient.connect(uri);
     const db = client.db();
 
     if (!db) throw new GuruMeditationError('unable to connect to database');
@@ -277,8 +280,7 @@ export function setupTestDb(defer = false) {
   }
 
   afterAll(async () => {
-    const client = await getDbClient();
-    client.isConnected() && (await client.close());
+    await (await getDbClient()).close(true);
     await server.stop();
   });
 

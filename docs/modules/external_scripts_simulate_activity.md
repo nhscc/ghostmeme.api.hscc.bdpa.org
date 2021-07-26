@@ -31,4 +31,4 @@
 [1]: ../README.md
 [2]: external_scripts_simulate_activity.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1aca321/external-scripts/simulate-activity.ts#L4
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/external-scripts/simulate-activity.ts#L4
