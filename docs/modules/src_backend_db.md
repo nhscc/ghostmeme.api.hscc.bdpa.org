@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[src/backend/db.ts:143][13]
+[src/backend/db.ts:147][13]
 
 ---
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[src/backend/db.ts:144][14]
+[src/backend/db.ts:148][14]
 
 ## Functions
 
@@ -167,16 +167,23 @@ and can be called without worry of data loss.
 
 ### itemExists
 
-▸ **itemExists**(`collection`, `id`, `key?`, `options?`): `Promise`<`boolean`>
+▸ **itemExists**<`T`>(`collection`, `id`, `key?`, `options?`):
+`Promise`<`boolean`>
 
 Checks if an item identified by some `key` (default identifier is `"_id"`)
 exists within `collection`.
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
 
 #### Parameters
 
 | Name         | Type                                                |
 | :----------- | :-------------------------------------------------- |
-| `collection` | `Collection`                                        |
+| `collection` | `Collection`<`T`>                                   |
 | `id`         | `ObjectId`                                          |
 | `key?`       | `"_id"` \| `"owner"` \| `"receiver"` \| `"replyTo"` |
 | `options?`   | `ItemExistsOptions`                                 |
@@ -187,15 +194,22 @@ exists within `collection`.
 
 #### Defined in
 
-[src/backend/db.ts:107][20]
+[src/backend/db.ts:109][20]
 
-▸ **itemExists**(`collection`, `id`, `key`, `options?`): `Promise`<`boolean`>
+▸ **itemExists**<`T`>(`collection`, `id`, `key`, `options?`):
+`Promise`<`boolean`>
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
 
 #### Parameters
 
 | Name         | Type                |
 | :----------- | :------------------ |
-| `collection` | `Collection`        |
+| `collection` | `Collection`<`T`>   |
 | `id`         | `string`            |
 | `key`        | `string`            |
 | `options?`   | `ItemExistsOptions` |
@@ -206,7 +220,7 @@ exists within `collection`.
 
 #### Defined in
 
-[src/backend/db.ts:113][21]
+[src/backend/db.ts:115][21]
 
 ---
 
@@ -234,7 +248,7 @@ Reduces an `item` down to its `ObjectId` instance.
 
 #### Defined in
 
-[src/backend/db.ts:153][22]
+[src/backend/db.ts:157][22]
 
 ▸ **itemToObjectId**<`T`>(`item`): `T`\[]
 
@@ -258,7 +272,7 @@ Reduces an array of `item`s down to its `ObjectId` instances.
 
 #### Defined in
 
-[src/backend/db.ts:157][23]
+[src/backend/db.ts:161][23]
 
 ---
 
@@ -286,7 +300,7 @@ Reduces an `item` down to the string representation of its `ObjectId` instance.
 
 #### Defined in
 
-[src/backend/db.ts:188][24]
+[src/backend/db.ts:192][24]
 
 ▸ **itemToStringId**<`T`>(`item`): `string`\[]
 
@@ -311,7 +325,7 @@ respective `ObjectId` instances.
 
 #### Defined in
 
-[src/backend/db.ts:193][25]
+[src/backend/db.ts:197][25]
 
 ---
 
@@ -351,30 +365,30 @@ purposes.
 [11]: src_backend_db.md#itemtostringid
 [12]: src_backend_db.md#setclientanddb
 [13]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L143
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L147
 [14]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L144
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L148
 [15]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L49
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L49
 [16]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L68
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L68
 [17]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L15
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L15
 [18]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L40
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L40
 [19]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L83
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L83
 [20]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L107
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L109
 [21]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L113
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L115
 [22]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L153
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L157
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L157
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L161
 [24]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L188
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L192
 [25]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L193
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L197
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/db.ts#L58
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/db.ts#L58

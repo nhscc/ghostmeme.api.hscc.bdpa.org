@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / NotFoundError
+[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / HookError
 
-# Class: NotFoundError
+# Class: HookError
 
-[src/backend/error][2].NotFoundError
+[src/backend/error][2].HookError
 
 ## Hierarchy
 
 - [`AppError`][3]
 
-  ↳ **`NotFoundError`**
+  ↳ **`HookError`**
 
 ## Table of contents
 
@@ -32,7 +32,7 @@
 
 ### constructor
 
-• **new NotFoundError**(`message?`)
+• **new HookError**(`message?`)
 
 #### Parameters
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[src/backend/error.ts:22][12]
+node_modules/named-app-errors/dist/modules/index.d.ts:12
 
 ## Properties
 
@@ -56,7 +56,7 @@
 
 #### Inherited from
 
-[AppError][3].[message][13]
+[AppError][3].[message][12]
 
 #### Defined in
 
@@ -70,7 +70,7 @@ node_modules/typescript/lib/lib.es5.d.ts:974
 
 #### Inherited from
 
-[AppError][3].[name][14]
+[AppError][3].[name][13]
 
 #### Defined in
 
@@ -84,7 +84,7 @@ node_modules/typescript/lib/lib.es5.d.ts:973
 
 #### Inherited from
 
-[AppError][3].[stack][15]
+[AppError][3].[stack][14]
 
 #### Defined in
 
@@ -96,8 +96,6 @@ node_modules/typescript/lib/lib.es5.d.ts:975
 
 ▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`:
 `CallSite`\[]) => `any`
-
-Optional override for formatting stack traces
 
 #### Type declaration
 
@@ -118,7 +116,7 @@ Optional override for formatting stack traces
 
 #### Inherited from
 
-[AppError][3].[prepareStackTrace][16]
+[AppError][3].[prepareStackTrace][15]
 
 #### Defined in
 
@@ -132,7 +130,7 @@ node_modules/@types/node/globals.d.ts:11
 
 #### Inherited from
 
-[AppError][3].[stackTraceLimit][17]
+[AppError][3].[stackTraceLimit][16]
 
 #### Defined in
 
@@ -159,7 +157,7 @@ Create .stack property on a target object
 
 #### Inherited from
 
-[AppError][3].[captureStackTrace][18]
+[AppError][3].[captureStackTrace][17]
 
 #### Defined in
 
@@ -167,20 +165,18 @@ node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
 [2]: ../modules/src_backend_error.md
-[3]: src_backend_error.apperror.md
-[4]: src_backend_error.notfounderror.md#constructor
-[5]: src_backend_error.notfounderror.md#message
-[6]: src_backend_error.notfounderror.md#name
-[7]: src_backend_error.notfounderror.md#stack
-[8]: src_backend_error.notfounderror.md#preparestacktrace
-[9]: src_backend_error.notfounderror.md#stacktracelimit
-[10]: src_backend_error.notfounderror.md#capturestacktrace
-[11]: src_backend_error.apperror.md#constructor
-[12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/error.ts#L22
-[13]: src_backend_error.apperror.md#message
-[14]: src_backend_error.apperror.md#name
-[15]: src_backend_error.apperror.md#stack
-[16]: src_backend_error.apperror.md#preparestacktrace
-[17]: src_backend_error.apperror.md#stacktracelimit
-[18]: src_backend_error.apperror.md#capturestacktrace
+[3]: src_backend_error.AppError.md
+[4]: src_backend_error.HookError.md#constructor
+[5]: src_backend_error.HookError.md#message
+[6]: src_backend_error.HookError.md#name
+[7]: src_backend_error.HookError.md#stack
+[8]: src_backend_error.HookError.md#preparestacktrace
+[9]: src_backend_error.HookError.md#stacktracelimit
+[10]: src_backend_error.HookError.md#capturestacktrace
+[11]: src_backend_error.AppError.md#constructor
+[12]: src_backend_error.AppError.md#message
+[13]: src_backend_error.AppError.md#name
+[14]: src_backend_error.AppError.md#stack
+[15]: src_backend_error.AppError.md#preparestacktrace
+[16]: src_backend_error.AppError.md#stacktracelimit
+[17]: src_backend_error.AppError.md#capturestacktrace

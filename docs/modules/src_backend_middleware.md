@@ -81,9 +81,9 @@ out endpoints for later implementation.
 [4]: src_backend_middleware.md#wraphandler
 [5]: https://nextjs.org/docs/api-routes/api-middlewares#custom-config
 [6]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/middleware.ts#L48
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/middleware.ts#L48
 [7]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/middleware.ts#L58
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/middleware.ts#L58
 [8]: types_global.md#nextapistate
 [9]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/middleware.ts#L90
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/middleware.ts#L90

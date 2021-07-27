@@ -54,7 +54,7 @@ This key is guaranteed to be rate limited.
 
 #### Defined in
 
-[src/backend/index.ts:67][36]
+[src/backend/index.ts:66][36]
 
 ---
 
@@ -66,7 +66,7 @@ This key is guaranteed to be rate limited.
 
 #### Defined in
 
-[src/backend/index.ts:72][37]
+[src/backend/index.ts:71][37]
 
 ---
 
@@ -78,7 +78,7 @@ This key is only valid when running in a Jest test environment.
 
 #### Defined in
 
-[src/backend/index.ts:62][38]
+[src/backend/index.ts:61][38]
 
 ---
 
@@ -90,7 +90,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:57][39]
+[src/backend/index.ts:56][39]
 
 ---
 
@@ -120,7 +120,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:94][40]
+[src/backend/index.ts:93][40]
 
 ---
 
@@ -148,7 +148,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:108][41]
+[src/backend/index.ts:107][41]
 
 ## Functions
 
@@ -171,7 +171,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:935][44]
+[src/backend/index.ts:958][44]
 
 ---
 
@@ -193,7 +193,7 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Defined in
 
-[src/backend/index.ts:447][46]
+[src/backend/index.ts:460][46]
 
 ---
 
@@ -215,7 +215,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:1222][48]
+[src/backend/index.ts:1248][48]
 
 ---
 
@@ -237,7 +237,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:806][49]
+[src/backend/index.ts:826][49]
 
 ---
 
@@ -259,7 +259,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:131][52]
+[src/backend/index.ts:130][52]
 
 ---
 
@@ -281,7 +281,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:479][55]
+[src/backend/index.ts:492][55]
 
 ---
 
@@ -302,7 +302,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:646][56]
+[src/backend/index.ts:663][56]
 
 ---
 
@@ -323,7 +323,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:665][57]
+[src/backend/index.ts:682][57]
 
 ---
 
@@ -337,7 +337,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:1233][58]
+[src/backend/index.ts:1259][58]
 
 ---
 
@@ -360,7 +360,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:833][60]
+[src/backend/index.ts:853][60]
 
 ---
 
@@ -382,7 +382,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:307][61]
+[src/backend/index.ts:314][61]
 
 ---
 
@@ -403,7 +403,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:277][62]
+[src/backend/index.ts:283][62]
 
 ---
 
@@ -417,7 +417,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:121][64]
+[src/backend/index.ts:120][64]
 
 ---
 
@@ -439,7 +439,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:689][65]
+[src/backend/index.ts:706][65]
 
 ---
 
@@ -461,7 +461,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:715][66]
+[src/backend/index.ts:732][66]
 
 ---
 
@@ -483,7 +483,7 @@ Note that this async function does not have to be awaited. It's fire and forget!
 
 #### Defined in
 
-[src/backend/index.ts:347][67]
+[src/backend/index.ts:357][67]
 
 ---
 
@@ -500,7 +500,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1207][68]
+[src/backend/index.ts:1233][68]
 
 ---
 
@@ -523,7 +523,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:876][69]
+[src/backend/index.ts:899][69]
 
 ---
 
@@ -543,7 +543,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1172][70]
+[src/backend/index.ts:1198][70]
 
 ---
 
@@ -565,7 +565,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:387][71]
+[src/backend/index.ts:400][71]
 
 ---
 
@@ -585,7 +585,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1181][72]
+[src/backend/index.ts:1207][72]
 
 ---
 
@@ -607,7 +607,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:754][73]
+[src/backend/index.ts:774][73]
 
 ---
 
@@ -630,7 +630,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:908][74]
+[src/backend/index.ts:931][74]
 
 ---
 
@@ -652,7 +652,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:418][75]
+[src/backend/index.ts:431][75]
 
 ---
 
@@ -674,7 +674,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:784][76]
+[src/backend/index.ts:804][76]
 
 ---
 
@@ -697,7 +697,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:966][77]
+[src/backend/index.ts:989][77]
 
 ---
 
@@ -719,7 +719,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:252][79]
+[src/backend/index.ts:258][79]
 
 ---
 
@@ -741,7 +741,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:573][81]
+[src/backend/index.ts:587][81]
 
 [1]: ../README.md
 [2]: src_backend.md#banned_key
@@ -779,82 +779,82 @@ across all Vercel virtual machines.
 [34]: src_backend.md#updatememes
 [35]: src_backend.md#updateuser
 [36]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L67
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L66
 [37]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L72
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L71
 [38]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L62
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L61
 [39]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L57
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L56
 [40]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L94
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L93
 [41]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L108
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L107
 [42]: types_global.md#friendrequesttype
-[43]: ../interfaces/types_global.userid.md
+[43]: ../interfaces/types_global.UserId.md
 [44]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L935
-[45]: ../interfaces/types_global.memeid.md
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L958
+[45]: ../interfaces/types_global.MemeId.md
 [46]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L447
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L460
 [47]: types_global.md#nextapistate
 [48]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1222
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L1248
 [49]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L806
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L826
 [50]: types_global.md#publicmeme
 [51]: types_global.md#newmeme
 [52]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L131
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L130
 [53]: types_global.md#publicuser
 [54]: types_global.md#newuser
 [55]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L479
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L492
 [56]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L646
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L663
 [57]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L665
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L682
 [58]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1233
-[59]: ../interfaces/types_global.friendrequestid.md
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L1259
+[59]: ../interfaces/types_global.FriendRequestId.md
 [60]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L833
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L853
 [61]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L307
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L314
 [62]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L277
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L283
 [63]: types_global.md#internalinfo
 [64]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L121
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L120
 [65]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L689
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L706
 [66]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L715
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L732
 [67]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L347
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L357
 [68]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1207
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L1233
 [69]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L876
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L899
 [70]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1172
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L1198
 [71]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L387
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L400
 [72]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L1181
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L1207
 [73]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L754
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L774
 [74]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L908
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L931
 [75]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L418
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L431
 [76]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L784
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L804
 [77]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L966
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L989
 [78]: types_global.md#patchmeme
 [79]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L252
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L258
 [80]: types_global.md#patchuser
 [81]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/index.ts#L573
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/index.ts#L587

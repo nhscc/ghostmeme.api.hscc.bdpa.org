@@ -1,15 +1,20 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] /
-ActivitySimulationError
+[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / InvalidIdError
 
-# Class: ActivitySimulationError
+# Class: InvalidIdError\<T>
 
-[src/backend/error][2].ActivitySimulationError
+[src/backend/error][2].InvalidIdError
+
+## Type parameters
+
+| Name | Type                 |
+| :--- | :------------------- |
+| `T`  | `string` \| `number` |
 
 ## Hierarchy
 
 - [`AppError`][3]
 
-  ↳ **`ActivitySimulationError`**
+  ↳ **`InvalidIdError`**
 
 ## Table of contents
 
@@ -33,13 +38,19 @@ ActivitySimulationError
 
 ### constructor
 
-• **new ActivitySimulationError**(`message?`)
+• **new InvalidIdError**<`T`>(`id?`)
+
+#### Type parameters
+
+| Name | Type                 |
+| :--- | :------------------- |
+| `T`  | `string` \| `number` |
 
 #### Parameters
 
-| Name       | Type     |
-| :--------- | :------- |
-| `message?` | `string` |
+| Name  | Type |
+| :---- | :--- |
+| `id?` | `T`  |
 
 #### Overrides
 
@@ -47,7 +58,7 @@ ActivitySimulationError
 
 #### Defined in
 
-[src/backend/error.ts:40][12]
+[src/backend/error.ts:51][12]
 
 ## Properties
 
@@ -168,20 +179,20 @@ node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
 [2]: ../modules/src_backend_error.md
-[3]: src_backend_error.apperror.md
-[4]: src_backend_error.activitysimulationerror.md#constructor
-[5]: src_backend_error.activitysimulationerror.md#message
-[6]: src_backend_error.activitysimulationerror.md#name
-[7]: src_backend_error.activitysimulationerror.md#stack
-[8]: src_backend_error.activitysimulationerror.md#preparestacktrace
-[9]: src_backend_error.activitysimulationerror.md#stacktracelimit
-[10]: src_backend_error.activitysimulationerror.md#capturestacktrace
-[11]: src_backend_error.apperror.md#constructor
+[3]: src_backend_error.AppError.md
+[4]: src_backend_error.InvalidIdError.md#constructor
+[5]: src_backend_error.InvalidIdError.md#message
+[6]: src_backend_error.InvalidIdError.md#name
+[7]: src_backend_error.InvalidIdError.md#stack
+[8]: src_backend_error.InvalidIdError.md#preparestacktrace
+[9]: src_backend_error.InvalidIdError.md#stacktracelimit
+[10]: src_backend_error.InvalidIdError.md#capturestacktrace
+[11]: src_backend_error.AppError.md#constructor
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/backend/error.ts#L40
-[13]: src_backend_error.apperror.md#message
-[14]: src_backend_error.apperror.md#name
-[15]: src_backend_error.apperror.md#stack
-[16]: src_backend_error.apperror.md#preparestacktrace
-[17]: src_backend_error.apperror.md#stacktracelimit
-[18]: src_backend_error.apperror.md#capturestacktrace
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/error.ts#L51
+[13]: src_backend_error.AppError.md#message
+[14]: src_backend_error.AppError.md#name
+[15]: src_backend_error.AppError.md#stack
+[16]: src_backend_error.AppError.md#preparestacktrace
+[17]: src_backend_error.AppError.md#stacktracelimit
+[18]: src_backend_error.AppError.md#capturestacktrace

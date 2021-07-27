@@ -337,32 +337,32 @@
 [15]: lib_next_respond.md#sendnotimplementederror
 [16]: lib_next_isomorphic_redirect_types.md#httpstatuscode
 [17]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L4
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L4
 [18]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L76
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L76
 [19]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L36
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L36
 [20]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L126
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L126
 [21]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L106
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L106
 [22]: lib_next_respond_types.md#errorjsonresponse
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L22
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L22
 [24]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L66
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L66
 [25]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L32
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L32
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L96
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L96
 [27]: lib_next_respond_types.md#successjsonresponse
 [28]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L12
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L12
 [29]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L86
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L86
 [30]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L46
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L46
 [31]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L56
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L56
 [32]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/lib/next-respond/index.ts#L116
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-respond/index.ts#L116

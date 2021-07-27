@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / KeyError
+[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / NotAuthorizedError
 
-# Class: KeyError
+# Class: NotAuthorizedError
 
-[src/backend/error][2].KeyError
+[src/backend/error][2].NotAuthorizedError
 
 ## Hierarchy
 
 - [`AppError`][3]
 
-  ↳ **`KeyError`**
+  ↳ **`NotAuthorizedError`**
 
 ## Table of contents
 
@@ -32,7 +32,13 @@
 
 ### constructor
 
-• **new KeyError**()
+• **new NotAuthorizedError**(`message?`)
+
+#### Parameters
+
+| Name       | Type     |
+| :--------- | :------- |
+| `message?` | `string` |
 
 #### Overrides
 
@@ -40,7 +46,7 @@
 
 #### Defined in
 
-node_modules/named-app-errors/dist/modules/index.d.ts:23
+node_modules/named-app-errors/dist/modules/index.d.ts:18
 
 ## Properties
 
@@ -159,18 +165,18 @@ node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
 [2]: ../modules/src_backend_error.md
-[3]: src_backend_error.apperror.md
-[4]: src_backend_error.keyerror.md#constructor
-[5]: src_backend_error.keyerror.md#message
-[6]: src_backend_error.keyerror.md#name
-[7]: src_backend_error.keyerror.md#stack
-[8]: src_backend_error.keyerror.md#preparestacktrace
-[9]: src_backend_error.keyerror.md#stacktracelimit
-[10]: src_backend_error.keyerror.md#capturestacktrace
-[11]: src_backend_error.apperror.md#constructor
-[12]: src_backend_error.apperror.md#message
-[13]: src_backend_error.apperror.md#name
-[14]: src_backend_error.apperror.md#stack
-[15]: src_backend_error.apperror.md#preparestacktrace
-[16]: src_backend_error.apperror.md#stacktracelimit
-[17]: src_backend_error.apperror.md#capturestacktrace
+[3]: src_backend_error.AppError.md
+[4]: src_backend_error.NotAuthorizedError.md#constructor
+[5]: src_backend_error.NotAuthorizedError.md#message
+[6]: src_backend_error.NotAuthorizedError.md#name
+[7]: src_backend_error.NotAuthorizedError.md#stack
+[8]: src_backend_error.NotAuthorizedError.md#preparestacktrace
+[9]: src_backend_error.NotAuthorizedError.md#stacktracelimit
+[10]: src_backend_error.NotAuthorizedError.md#capturestacktrace
+[11]: src_backend_error.AppError.md#constructor
+[12]: src_backend_error.AppError.md#message
+[13]: src_backend_error.AppError.md#name
+[14]: src_backend_error.AppError.md#stack
+[15]: src_backend_error.AppError.md#preparestacktrace
+[16]: src_backend_error.AppError.md#stacktracelimit
+[17]: src_backend_error.AppError.md#capturestacktrace

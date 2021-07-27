@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / HookError
+[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / ValidationError
 
-# Class: HookError
+# Class: ValidationError
 
-[src/backend/error][2].HookError
+[src/backend/error][2].ValidationError
 
 ## Hierarchy
 
 - [`AppError`][3]
 
-  ↳ **`HookError`**
+  ↳ **`ValidationError`**
 
 ## Table of contents
 
@@ -32,7 +32,7 @@
 
 ### constructor
 
-• **new HookError**(`message?`)
+• **new ValidationError**(`message?`)
 
 #### Parameters
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-node_modules/named-app-errors/dist/modules/index.d.ts:11
+node_modules/named-app-errors/dist/modules/index.d.ts:31
 
 ## Properties
 
@@ -165,18 +165,18 @@ node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
 [2]: ../modules/src_backend_error.md
-[3]: src_backend_error.apperror.md
-[4]: src_backend_error.hookerror.md#constructor
-[5]: src_backend_error.hookerror.md#message
-[6]: src_backend_error.hookerror.md#name
-[7]: src_backend_error.hookerror.md#stack
-[8]: src_backend_error.hookerror.md#preparestacktrace
-[9]: src_backend_error.hookerror.md#stacktracelimit
-[10]: src_backend_error.hookerror.md#capturestacktrace
-[11]: src_backend_error.apperror.md#constructor
-[12]: src_backend_error.apperror.md#message
-[13]: src_backend_error.apperror.md#name
-[14]: src_backend_error.apperror.md#stack
-[15]: src_backend_error.apperror.md#preparestacktrace
-[16]: src_backend_error.apperror.md#stacktracelimit
-[17]: src_backend_error.apperror.md#capturestacktrace
+[3]: src_backend_error.AppError.md
+[4]: src_backend_error.ValidationError.md#constructor
+[5]: src_backend_error.ValidationError.md#message
+[6]: src_backend_error.ValidationError.md#name
+[7]: src_backend_error.ValidationError.md#stack
+[8]: src_backend_error.ValidationError.md#preparestacktrace
+[9]: src_backend_error.ValidationError.md#stacktracelimit
+[10]: src_backend_error.ValidationError.md#capturestacktrace
+[11]: src_backend_error.AppError.md#constructor
+[12]: src_backend_error.AppError.md#message
+[13]: src_backend_error.AppError.md#name
+[14]: src_backend_error.AppError.md#stack
+[15]: src_backend_error.AppError.md#preparestacktrace
+[16]: src_backend_error.AppError.md#stacktracelimit
+[17]: src_backend_error.AppError.md#capturestacktrace
