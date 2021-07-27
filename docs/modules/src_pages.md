@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[src/pages/index.tsx:19][4]
+[src/pages/index.tsx:22][4]
 
 ---
 
@@ -47,6 +47,6 @@
 [2]: src_pages.md#default
 [3]: src_pages.md#getserversideprops
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/pages/index.tsx#L19
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/src/pages/index.tsx#L22
 [5]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/pages/index.tsx#L7
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/src/pages/index.tsx#L7

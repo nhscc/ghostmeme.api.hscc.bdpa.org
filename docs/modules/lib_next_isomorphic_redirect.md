@@ -103,10 +103,10 @@ executing on the frontend. An Error will be thrown if this is not the case.
 [4]: lib_next_isomorphic_redirect.md#isomorphicredirect
 [5]: lib_next_isomorphic_redirect_types.md#backendredirectconfig
 [6]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-isomorphic-redirect/index.ts#L40
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/lib/next-isomorphic-redirect/index.ts#L40
 [7]: lib_next_isomorphic_redirect_types.md#frontendredirectconfig
 [8]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-isomorphic-redirect/index.ts#L24
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/lib/next-isomorphic-redirect/index.ts#L24
 [9]: lib_next_isomorphic_redirect_types.md#isomorphicredirectconfig
 [10]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/lib/next-isomorphic-redirect/index.ts#L58
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/lib/next-isomorphic-redirect/index.ts#L58

@@ -31,4 +31,4 @@
 [1]: ../README.md
 [2]: external_scripts_generate_activity.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/external-scripts/generate-activity.ts#L4
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/external-scripts/generate-activity.ts#L4
