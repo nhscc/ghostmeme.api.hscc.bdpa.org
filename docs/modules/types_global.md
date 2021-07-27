@@ -350,34 +350,34 @@ The shape of a publicly available user.
 [21]: types_global.md#publicmeme
 [22]: types_global.md#publicuser
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L231
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L231
 [24]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L239
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L239
 [25]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L226
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L226
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L247
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L247
 [27]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L26
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L26
 [28]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L267
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L267
 [29]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L34
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L34
 [30]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L255
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L255
 [31]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L105
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L105
 [32]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L195
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L195
 [33]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L208
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L208
 [34]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L18
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L18
 [35]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L215
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L215
 [36]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L222
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L222
 [37]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L169
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L169
 [38]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L183
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/types/global.d.ts#L183

@@ -47,6 +47,9 @@
 | `PRUNE_DATA_MAX_LOGS`                     | `null` \| `number` |
 | `REQUESTS_PER_CONTRIVED_ERROR`            | `number`           |
 | `RESULTS_PER_PAGE`                        | `number`           |
+| `TZ`                                      | `string`           |
+| `VERCEL_GIT_COMMIT_MESSAGE`               | `string`           |
+| `VERCEL_REGION`                           | `string`           |
 
 #### Defined in
 
@@ -55,4 +58,4 @@
 [1]: ../README.md
 [2]: src_backend_env.md#getenv
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/env.ts#L27
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/src/backend/env.ts#L27
