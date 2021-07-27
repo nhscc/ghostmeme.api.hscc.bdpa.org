@@ -835,7 +835,7 @@ export async function addUserAsFriend({
   } else if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
   } else if (user_id.equals(friend_id)) {
-    throw new ValidationError('users cannot follow themselves');
+    throw new ValidationError('users cannot friend themselves');
   } else {
     const db = await getDb();
     const users = db.collection<InternalUser>('users');
