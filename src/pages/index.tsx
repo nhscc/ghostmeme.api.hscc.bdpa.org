@@ -29,21 +29,26 @@ export default function Index({
 }: Awaited<ReturnType<typeof getServerSideProps>>['props']) {
   return (
     <React.Fragment>
-      Ghostmeme runtime: <strong>{`v${pkgVersion}`}</strong> <br />
-      Serverless node runtime: <strong>{nodeVersion}</strong> <br />
-      Environment: <strong>{nodeEnv}</strong> <br />
-      Production mode:{' '}
-      <strong>
-        {isInProduction ? (
-          <span style={{ color: 'green' }}>yes</span>
-        ) : (
-          <span style={{ color: 'red' }}>no</span>
-        )}
-      </strong>
-      <br />
-      Vercel region: <strong>{region}</strong> <br />
-      Timezone: <strong>{timezone}</strong> <br />
-      Latest change: <strong>{commitMessage}</strong> <br />
+      <p>
+        Serverless node runtime: <strong>{nodeVersion}</strong> <br />
+        Ghostmeme runtime: <strong>{`v${pkgVersion}`}</strong> <br />
+        Latest change: <strong>{commitMessage}</strong>
+        <br />
+      </p>
+      <p>
+        Vercel region: <strong>{region}</strong> <br />
+        Timezone: <strong>{timezone}</strong> <br />
+        Environment: <strong>{nodeEnv}</strong> <br />
+        Production mode:{' '}
+        <strong>
+          {isInProduction ? (
+            <span style={{ color: 'green' }}>yes</span>
+          ) : (
+            <span style={{ color: 'red' }}>no</span>
+          )}
+        </strong>
+        <br />
+      </p>
     </React.Fragment>
   );
 }
