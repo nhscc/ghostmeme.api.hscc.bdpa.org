@@ -82,7 +82,7 @@ export function getEnv(loud = false) {
     API_ROOT_URI: (process.env.API_ROOT_URI || '').toString(),
     DEBUG_INSPECTING: !!process.env.VSCODE_INSPECTOR_OPTIONS,
     VERCEL_REGION: (process.env.VERCEL_REGION || 'unknown').toString(),
-    TZ: (process.env.TZ || 'unknown').toString(),
+    TZ: (process.env.TZ || 'unknown').toString().replace(':', ''),
     VERCEL_GIT_COMMIT_MESSAGE: (
       process.env.VERCEL_GIT_COMMIT_MESSAGE || 'unknown'
     ).toString()
