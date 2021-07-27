@@ -80,7 +80,12 @@ export function getEnv(loud = false) {
       !!process.env.HYDRATE_DB_ON_STARTUP &&
       process.env.HYDRATE_DB_ON_STARTUP !== 'false',
     API_ROOT_URI: (process.env.API_ROOT_URI || '').toString(),
-    DEBUG_INSPECTING: !!process.env.VSCODE_INSPECTOR_OPTIONS
+    DEBUG_INSPECTING: !!process.env.VSCODE_INSPECTOR_OPTIONS,
+    VERCEL_REGION: (process.env.VERCEL_REGION || 'unknown').toString(),
+    TZ: (process.env.TZ || 'unknown').toString(),
+    VERCEL_GIT_COMMIT_MESSAGE: (
+      process.env.VERCEL_GIT_COMMIT_MESSAGE || 'unknown'
+    ).toString()
   };
 
   if (loud && env.NODE_ENV == 'development') {
