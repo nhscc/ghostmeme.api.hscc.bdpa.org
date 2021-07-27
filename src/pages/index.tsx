@@ -11,7 +11,10 @@ export async function getServerSideProps() {
     props: {
       isInProduction: env.NODE_ENV == 'production',
       nodeEnv: env.NODE_ENV,
-      nodeVersion: process.version
+      nodeVersion: process.version,
+      region: env.VERCEL_REGION,
+      timezone: env.TZ,
+      commitMessage: env.VERCEL_GIT_COMMIT_MESSAGE
     }
   };
 }
@@ -19,7 +22,10 @@ export async function getServerSideProps() {
 export default function Index({
   isInProduction,
   nodeEnv,
-  nodeVersion
+  nodeVersion,
+  region,
+  timezone,
+  commitMessage
 }: Awaited<ReturnType<typeof getServerSideProps>>['props']) {
   return (
     <React.Fragment>
@@ -35,6 +41,9 @@ export default function Index({
         )}
       </strong>
       <br />
+      Vercel region: <strong>{region}</strong> <br />
+      Timezone: <strong>{timezone}</strong> <br />
+      Latest change: <strong>{commitMessage}</strong> <br />
     </React.Fragment>
   );
 }
