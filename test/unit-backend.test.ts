@@ -590,7 +590,7 @@ describe('::createMeme', () => {
         meta: expect.objectContaining({
           creator: Backend.DUMMY_KEY,
           likeability: expect.any(Number),
-          shareability: expect.any(Number)
+          gregariousness: expect.any(Number)
         })
       } as InternalMeme;
 
@@ -643,7 +643,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'fds',
+          description: 'fds2',
           private: false,
           receiver: null,
           imageUrl: null,
@@ -655,7 +655,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'fds',
+          description: 'fds3',
           private: false,
           receiver: null,
           replyTo: null
@@ -665,7 +665,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'fds',
+          description: 'fds4',
           private: false,
           receiver: null,
           imageUrl: null,
@@ -676,7 +676,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'fds',
+          description: 'fds5',
           private: false,
           receiver: null,
           replyTo: null,
@@ -688,7 +688,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc1',
           private: false,
           receiver: null,
           replyTo: null,
@@ -701,7 +701,7 @@ describe('::createMeme', () => {
       [
         {
           owner: 'bad',
-          description: 'abc',
+          description: 'abc2',
           private: false,
           receiver: null,
           replyTo: null,
@@ -714,7 +714,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc3',
           private: false,
           receiver: 'bad',
           replyTo: null,
@@ -727,7 +727,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc4',
           private: false,
           receiver: null,
           replyTo: 'bad',
@@ -740,9 +740,9 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc5',
           private: true,
-          receiver: new ObjectId(),
+          receiver: new ObjectId().toHexString(),
           replyTo: memeId,
           imageBase64: 'pretend-its-base64',
           imageUrl: null,
@@ -753,9 +753,9 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc6',
           private: false,
-          receiver: new ObjectId(),
+          receiver: new ObjectId().toHexString(),
           replyTo: null,
           imageBase64: 'pretend-its-base64',
           imageUrl: null,
@@ -766,7 +766,7 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc7',
           private: false,
           receiver: null,
           replyTo: memeId,
@@ -807,8 +807,33 @@ describe('::createMeme', () => {
       ],
       [
         {
-          owner: new ObjectId(),
-          description: 'abc',
+          owner: '',
+          description: 'abc8',
+          private: false,
+          receiver: null,
+          replyTo: null,
+          imageBase64: null,
+          imageUrl: 'https://some.url',
+          expiredAt: -1
+        } as unknown as NewMeme,
+        '`owner`'
+      ],
+      [
+        {
+          description: 'abc82',
+          private: false,
+          receiver: null,
+          replyTo: null,
+          imageBase64: null,
+          imageUrl: 'https://some.url',
+          expiredAt: -1
+        } as unknown as NewMeme,
+        '`owner`'
+      ],
+      [
+        {
+          owner: new ObjectId().toHexString(),
+          description: 'abc9',
           private: false,
           receiver: null,
           replyTo: null,
@@ -821,9 +846,9 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc10',
           private: true,
-          receiver: new ObjectId(),
+          receiver: new ObjectId().toHexString(),
           replyTo: null,
           imageBase64: null,
           imageUrl: 'https://some.url',
@@ -834,10 +859,10 @@ describe('::createMeme', () => {
       [
         {
           owner: userId,
-          description: 'abc',
+          description: 'abc11',
           private: true,
           receiver: null,
-          replyTo: new ObjectId(),
+          replyTo: new ObjectId().toHexString(),
           imageBase64: null,
           imageUrl: 'https://some.url',
           expiredAt: -1
@@ -1336,7 +1361,7 @@ describe('::addUserAsFriend', () => {
         friend_id: dummyDbData.users[0]._id
       })
     ).rejects.toMatchObject({
-      message: expect.stringContaining('cannot follow themselves')
+      message: expect.stringContaining('cannot friend themselves')
     });
   });
 });
@@ -1820,9 +1845,7 @@ describe('::createUser', () => {
         requests: { incoming: [], outgoing: [] },
         imageUrl: null,
         meta: expect.objectContaining({
-          creator: Backend.DUMMY_KEY,
-          friendability: expect.any(Number),
-          influence: expect.any(Number)
+          creator: Backend.DUMMY_KEY
         })
       };
     });
