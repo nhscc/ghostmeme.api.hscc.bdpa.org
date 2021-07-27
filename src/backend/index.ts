@@ -151,7 +151,10 @@ export async function createMeme({
     throw new InvalidKeyError();
   } else if (data.imageUrl !== null && typeof data.imageUrl != 'string') {
     throw new ValidationError('`imageUrl` must be a string or null');
-  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+  } else if (
+    data.imageBase64 !== null &&
+    (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
+  ) {
     throw new ValidationError(
       '`imageBase64` must be a valid base64 string, data uri, or null'
     );
@@ -168,13 +171,17 @@ export async function createMeme({
   let replyTo: MemeId | null | undefined = undefined;
   let imageUrl = data.imageUrl;
 
-  try {
-    owner = new ObjectId(data.owner);
-  } catch {
-    throw new ValidationError('invalid user_id for `owner`');
+  if (typeof data.owner == 'string' && data.owner.length) {
+    try {
+      owner = new ObjectId(data.owner);
+    } catch {
+      throw new ValidationError('invalid user_id for `owner`');
+    }
+  } else {
+    throw new ValidationError('`owner` property is required');
   }
 
-  if (data.receiver) {
+  if (typeof data.receiver == 'string' && data.receiver.length) {
     try {
       receiver = new ObjectId(data.receiver);
     } catch {
@@ -182,7 +189,7 @@ export async function createMeme({
     }
   } else receiver = null;
 
-  if (data.replyTo) {
+  if (typeof data.replyTo == 'string' && data.replyTo.length) {
     try {
       replyTo = new ObjectId(data.replyTo);
     } catch {
@@ -613,7 +620,10 @@ export async function updateUser({
     (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
   ) {
     throw new ValidationError('`phone` must be a valid phone number or null');
-  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+  } else if (
+    data.imageBase64 !== null &&
+    (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
+  ) {
     throw new ValidationError(
       '`imageBase64` must be a valid base64 string, data uri, or null'
     );
