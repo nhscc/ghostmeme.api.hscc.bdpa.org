@@ -70,7 +70,7 @@ Error.constructor
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es5.d.ts:978
+node_modules/typescript/lib/lib.es5.d.ts:979
 
 ## Properties
 
@@ -189,22 +189,22 @@ node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
 [2]: ../modules/src_backend_error.md
-[3]: src_backend_error.notfounderror.md
-[4]: src_backend_error.activitygenerationerror.md
-[5]: src_backend_error.activitysimulationerror.md
-[6]: src_backend_error.invalididerror.md
-[7]: test_setup.factoryexhaustionerror.md
-[8]: src_backend_error.fetcherror.md
-[9]: src_backend_error.gurumeditationerror.md
-[10]: src_backend_error.hookerror.md
-[11]: src_backend_error.keyerror.md
-[12]: src_backend_error.notauthorizederror.md
-[13]: src_backend_error.validationerror.md
-[14]: src_backend_error.itemnotfounderror.md
-[15]: src_backend_error.apperror.md#constructor
-[16]: src_backend_error.apperror.md#message
-[17]: src_backend_error.apperror.md#name
-[18]: src_backend_error.apperror.md#stack
-[19]: src_backend_error.apperror.md#preparestacktrace
-[20]: src_backend_error.apperror.md#stacktracelimit
-[21]: src_backend_error.apperror.md#capturestacktrace
+[3]: src_backend_error.NotFoundError.md
+[4]: src_backend_error.ActivityGenerationError.md
+[5]: src_backend_error.ActivitySimulationError.md
+[6]: src_backend_error.InvalidIdError.md
+[7]: test_setup.FactoryExhaustionError.md
+[8]: src_backend_error.FetchError.md
+[9]: src_backend_error.GuruMeditationError.md
+[10]: src_backend_error.HookError.md
+[11]: src_backend_error.KeyError.md
+[12]: src_backend_error.NotAuthorizedError.md
+[13]: src_backend_error.ValidationError.md
+[14]: src_backend_error.ItemNotFoundError.md
+[15]: src_backend_error.AppError.md#constructor
+[16]: src_backend_error.AppError.md#message
+[17]: src_backend_error.AppError.md#name
+[18]: src_backend_error.AppError.md#stack
+[19]: src_backend_error.AppError.md#preparestacktrace
+[20]: src_backend_error.AppError.md#stacktracelimit
+[21]: src_backend_error.AppError.md#capturestacktrace

@@ -30,6 +30,6 @@
 
 [1]: ../README.md
 [2]: ../modules/test_setup.md
-[3]: test_setup.testresultprovider.md#testresult
+[3]: test_setup.TestResultProvider.md#testresult
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L440
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L440

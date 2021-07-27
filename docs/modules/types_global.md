@@ -48,7 +48,7 @@ The shape of precomputed conversation corpus data.
 
 #### Defined in
 
-[types/global.d.ts:245][23]
+[types/global.d.ts:231][23]
 
 ---
 
@@ -67,7 +67,7 @@ The shape of a single line of precomputed conversation corpus data.
 
 #### Defined in
 
-[types/global.d.ts:253][24]
+[types/global.d.ts:239][24]
 
 ---
 
@@ -77,7 +77,7 @@ The shape of a single line of precomputed conversation corpus data.
 
 #### Defined in
 
-[types/global.d.ts:240][25]
+[types/global.d.ts:226][25]
 
 ---
 
@@ -96,7 +96,7 @@ The shape of an API key.
 
 #### Defined in
 
-[types/global.d.ts:261][26]
+[types/global.d.ts:247][26]
 
 ---
 
@@ -129,7 +129,7 @@ The shape of a limited log entry.
 
 #### Defined in
 
-[types/global.d.ts:281][28]
+[types/global.d.ts:267][28]
 
 ---
 
@@ -141,22 +141,22 @@ The shape of a meme stored in MongoDb.
 
 #### Type declaration
 
-| Name                | Type                       | Description                                                                                                                                  |
-| :------------------ | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| `createdAt`         | [`UnixEpochMs`][5]         | When this meme was created creation (milliseconds since unix epoch).                                                                         |
-| `description`       | `string` \| `null`         | The utf-8 content of this meme.                                                                                                              |
-| `expiredAt`         | [`UnixEpochMs`][5] \| `-1` | When this meme was created creation (milliseconds since unix epoch).                                                                         |
-| `imageUrl`          | `string` \| `null`         | The HTTP image url of this meme.                                                                                                             |
-| `likes`             | [`UserId`][6][]            | A list of user IDs that liked this meme.                                                                                                     |
-| `meta`              | `Object`                   | Metadata information only relevant to the server runtime and completely opaque to API consumers.                                             |
-| `meta.creator`      | `string`                   | The API key responsible for creating this meme.                                                                                              |
-| `meta.likeability`  | `number`                   | X = percent chance of a generated user liking a specific meme from this user.                                                                |
-| `meta.shareability` | `number`                   | X = percent chance of a generated user sharing a specific meme from this user.                                                               |
-| `owner`             | [`UserId`][6]              | The ID of the user that created and owns this meme.                                                                                          |
-| `private`           | `boolean`                  | If `true`, this meme should only be visible to authorized users.                                                                             |
-| `receiver`          | [`UserId`][6] \| `null`    | The ID of the user that created and owns this meme.                                                                                          |
-| `replyTo`           | [`MemeId`][4] \| `null`    | The ID of the meme this meme was created in response to.                                                                                     |
-| `totalLikes`        | `number`                   | Integer number of likes this meme has received. We'll cache this data instead of calculating it via the aggregation for performance reasons. |
+| Name                  | Type                       | Description                                                                                                                                  |
+| :-------------------- | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| `createdAt`           | [`UnixEpochMs`][5]         | When this meme was created creation (milliseconds since unix epoch).                                                                         |
+| `description`         | `string` \| `null`         | The utf-8 content of this meme.                                                                                                              |
+| `expiredAt`           | [`UnixEpochMs`][5] \| `-1` | When this meme was created creation (milliseconds since unix epoch).                                                                         |
+| `imageUrl`            | `string` \| `null`         | The HTTP image url of this meme.                                                                                                             |
+| `likes`               | [`UserId`][6][]            | A list of user IDs that liked this meme.                                                                                                     |
+| `meta`                | `Object`                   | Metadata information only relevant to the server runtime and completely opaque to API consumers.                                             |
+| `meta.creator`        | `string`                   | The API key responsible for creating this meme.                                                                                              |
+| `meta.gregariousness` | `number`                   | Determines how likely machine users are to comment on (reply to) this meme.                                                                  |
+| `meta.likeability`    | `number`                   | Determines how likely machine users are to take like-based actions on this meme.                                                             |
+| `owner`               | [`UserId`][6]              | The ID of the user that created and owns this meme.                                                                                          |
+| `private`             | `boolean`                  | If `true`, this meme should only be visible to authorized users.                                                                             |
+| `receiver`            | [`UserId`][6] \| `null`    | The ID of the user that created and owns this meme.                                                                                          |
+| `replyTo`             | [`MemeId`][4] \| `null`    | The ID of the meme this meme was created in response to.                                                                                     |
+| `totalLikes`          | `number`                   | Integer number of likes this meme has received. We'll cache this data instead of calculating it via the aggregation for performance reasons. |
 
 #### Defined in
 
@@ -183,7 +183,7 @@ The shape of a request log entry.
 
 #### Defined in
 
-[types/global.d.ts:269][30]
+[types/global.d.ts:255][30]
 
 ---
 
@@ -195,23 +195,21 @@ The shape of a user stored in MongoDb.
 
 #### Type declaration
 
-| Name                 | Type               | Description                                                                                         |
-| :------------------- | :----------------- | :-------------------------------------------------------------------------------------------------- |
-| `deleted`            | `boolean`          | If `true`, the user is for all intents and purposes non-existent in the system. **`default`** false |
-| `email`              | `string`           | Email address                                                                                       |
-| `friends`            | [`UserId`][6][]    | A list of user IDs this user is friends with.                                                       |
-| `imageUrl`           | `string` \| `null` | The HTTP image url of this user's profile pic.                                                      |
-| `liked`              | [`MemeId`][4][]    | A list of meme IDs that this user has liked.                                                        |
-| `meta`               | `Object`           | Metadata information only relevant to the server runtime and completely opaque to API consumers.    |
-| `meta.creator`       | `string`           | The API key responsible for creating this meme.                                                     |
-| `meta.friendability` | `number`           | Max percentage of the generated user base that will _eventually_ befriend this user.                |
-| `meta.influence`     | `number`           | X = percent chance of a generated follower liking a specific meme from this user.                   |
-| `name`               | `string`           | User first, full, etc name                                                                          |
-| `phone`              | `string` \| `null` | Phone number                                                                                        |
-| `requests`           | `Object`           | A list of friend requests involving this user.                                                      |
-| `requests.incoming`  | [`UserId`][6][]    | Friend requests that have been sent to this user.                                                   |
-| `requests.outgoing`  | [`UserId`][6][]    | Friend requests this user has sent to others.                                                       |
-| `username`           | `string`           | Username. Must be unique in the system.                                                             |
+| Name                | Type               | Description                                                                                         |
+| :------------------ | :----------------- | :-------------------------------------------------------------------------------------------------- |
+| `deleted`           | `boolean`          | If `true`, the user is for all intents and purposes non-existent in the system. **`default`** false |
+| `email`             | `string`           | Email address                                                                                       |
+| `friends`           | [`UserId`][6][]    | A list of user IDs this user is friends with.                                                       |
+| `imageUrl`          | `string` \| `null` | The HTTP image url of this user's profile pic.                                                      |
+| `liked`             | [`MemeId`][4][]    | A list of meme IDs that this user has liked.                                                        |
+| `meta`              | `Object`           | Metadata information only relevant to the server runtime and completely opaque to API consumers.    |
+| `meta.creator`      | `string`           | The API key responsible for creating this meme.                                                     |
+| `name`              | `string`           | User first, full, etc name                                                                          |
+| `phone`             | `string` \| `null` | Phone number                                                                                        |
+| `requests`          | `Object`           | A list of friend requests involving this user.                                                      |
+| `requests.incoming` | [`UserId`][6][]    | Friend requests that have been sent to this user.                                                   |
+| `requests.outgoing` | [`UserId`][6][]    | Friend requests this user has sent to others.                                                       |
+| `username`          | `string`           | Username. Must be unique in the system.                                                             |
 
 #### Defined in
 
@@ -229,7 +227,7 @@ The shape of a newly received meme.
 
 #### Defined in
 
-[types/global.d.ts:209][32]
+[types/global.d.ts:195][32]
 
 ---
 
@@ -242,7 +240,7 @@ The shape of a newly received user.
 
 #### Defined in
 
-[types/global.d.ts:222][33]
+[types/global.d.ts:208][33]
 
 ---
 
@@ -285,7 +283,7 @@ The shape of a received update to an existing meme.
 
 #### Defined in
 
-[types/global.d.ts:229][35]
+[types/global.d.ts:215][35]
 
 ---
 
@@ -298,7 +296,7 @@ The shape of a received update to an existing user.
 
 #### Defined in
 
-[types/global.d.ts:236][36]
+[types/global.d.ts:222][36]
 
 ---
 
@@ -313,7 +311,7 @@ The shape of a publicly available meme.
 
 #### Defined in
 
-[types/global.d.ts:183][37]
+[types/global.d.ts:169][37]
 
 ---
 
@@ -327,14 +325,14 @@ The shape of a publicly available user.
 
 #### Defined in
 
-[types/global.d.ts:197][38]
+[types/global.d.ts:183][38]
 
 [1]: ../README.md
-[2]: ../interfaces/types_global.friendid.md
-[3]: ../interfaces/types_global.friendrequestid.md
-[4]: ../interfaces/types_global.memeid.md
-[5]: ../interfaces/types_global.unixepochms.md
-[6]: ../interfaces/types_global.userid.md
+[2]: ../interfaces/types_global.FriendId.md
+[3]: ../interfaces/types_global.FriendRequestId.md
+[4]: ../interfaces/types_global.MemeId.md
+[5]: ../interfaces/types_global.UnixEpochMs.md
+[6]: ../interfaces/types_global.UserId.md
 [7]: types_global.md#corpusdata
 [8]: types_global.md#corpusdialogline
 [9]: types_global.md#friendrequesttype
@@ -352,34 +350,34 @@ The shape of a publicly available user.
 [21]: types_global.md#publicmeme
 [22]: types_global.md#publicuser
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L245
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L231
 [24]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L253
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L239
 [25]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L240
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L226
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L261
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L247
 [27]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L26
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L26
 [28]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L281
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L267
 [29]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L34
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L34
 [30]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L269
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L255
 [31]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L105
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L105
 [32]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L209
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L195
 [33]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L222
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L208
 [34]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L18
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L18
 [35]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L229
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L215
 [36]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L236
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L222
 [37]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L183
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L169
 [38]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/types/global.d.ts#L197
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/types/global.d.ts#L183

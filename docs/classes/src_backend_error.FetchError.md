@@ -47,7 +47,7 @@
 
 #### Defined in
 
-node_modules/named-app-errors/dist/modules/index.d.ts:14
+node_modules/named-app-errors/dist/modules/index.d.ts:15
 
 ## Properties
 
@@ -166,18 +166,18 @@ node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
 [2]: ../modules/src_backend_error.md
-[3]: src_backend_error.apperror.md
-[4]: src_backend_error.fetcherror.md#constructor
-[5]: src_backend_error.fetcherror.md#message
-[6]: src_backend_error.fetcherror.md#name
-[7]: src_backend_error.fetcherror.md#stack
-[8]: src_backend_error.fetcherror.md#preparestacktrace
-[9]: src_backend_error.fetcherror.md#stacktracelimit
-[10]: src_backend_error.fetcherror.md#capturestacktrace
-[11]: src_backend_error.apperror.md#constructor
-[12]: src_backend_error.apperror.md#message
-[13]: src_backend_error.apperror.md#name
-[14]: src_backend_error.apperror.md#stack
-[15]: src_backend_error.apperror.md#preparestacktrace
-[16]: src_backend_error.apperror.md#stacktracelimit
-[17]: src_backend_error.apperror.md#capturestacktrace
+[3]: src_backend_error.AppError.md
+[4]: src_backend_error.FetchError.md#constructor
+[5]: src_backend_error.FetchError.md#message
+[6]: src_backend_error.FetchError.md#name
+[7]: src_backend_error.FetchError.md#stack
+[8]: src_backend_error.FetchError.md#preparestacktrace
+[9]: src_backend_error.FetchError.md#stacktracelimit
+[10]: src_backend_error.FetchError.md#capturestacktrace
+[11]: src_backend_error.AppError.md#constructor
+[12]: src_backend_error.AppError.md#message
+[13]: src_backend_error.AppError.md#name
+[14]: src_backend_error.AppError.md#stack
+[15]: src_backend_error.AppError.md#preparestacktrace
+[16]: src_backend_error.AppError.md#stacktracelimit
+[17]: src_backend_error.AppError.md#capturestacktrace

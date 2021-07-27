@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / NotAuthorizedError
+[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / FactoryExhaustionError
 
-# Class: NotAuthorizedError
+# Class: FactoryExhaustionError
 
-[src/backend/error][2].NotAuthorizedError
+[test/setup][2].FactoryExhaustionError
 
 ## Hierarchy
 
 - [`AppError`][3]
 
-  ↳ **`NotAuthorizedError`**
+  ↳ **`FactoryExhaustionError`**
 
 ## Table of contents
 
@@ -32,7 +32,7 @@
 
 ### constructor
 
-• **new NotAuthorizedError**(`message?`)
+• **new FactoryExhaustionError**(`message?`)
 
 #### Parameters
 
@@ -40,13 +40,13 @@
 | :--------- | :------- |
 | `message?` | `string` |
 
-#### Overrides
+#### Inherited from
 
 [AppError][3].[constructor][11]
 
 #### Defined in
 
-node_modules/named-app-errors/dist/modules/index.d.ts:17
+node_modules/typescript/lib/lib.es5.d.ts:979
 
 ## Properties
 
@@ -96,6 +96,8 @@ node_modules/typescript/lib/lib.es5.d.ts:975
 
 ▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`:
 `CallSite`\[]) => `any`
+
+Optional override for formatting stack traces
 
 #### Type declaration
 
@@ -164,19 +166,19 @@ Create .stack property on a target object
 node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
-[2]: ../modules/src_backend_error.md
-[3]: src_backend_error.apperror.md
-[4]: src_backend_error.notauthorizederror.md#constructor
-[5]: src_backend_error.notauthorizederror.md#message
-[6]: src_backend_error.notauthorizederror.md#name
-[7]: src_backend_error.notauthorizederror.md#stack
-[8]: src_backend_error.notauthorizederror.md#preparestacktrace
-[9]: src_backend_error.notauthorizederror.md#stacktracelimit
-[10]: src_backend_error.notauthorizederror.md#capturestacktrace
-[11]: src_backend_error.apperror.md#constructor
-[12]: src_backend_error.apperror.md#message
-[13]: src_backend_error.apperror.md#name
-[14]: src_backend_error.apperror.md#stack
-[15]: src_backend_error.apperror.md#preparestacktrace
-[16]: src_backend_error.apperror.md#stacktracelimit
-[17]: src_backend_error.apperror.md#capturestacktrace
+[2]: ../modules/test_setup.md
+[3]: src_backend_error.AppError.md
+[4]: test_setup.FactoryExhaustionError.md#constructor
+[5]: test_setup.FactoryExhaustionError.md#message
+[6]: test_setup.FactoryExhaustionError.md#name
+[7]: test_setup.FactoryExhaustionError.md#stack
+[8]: test_setup.FactoryExhaustionError.md#preparestacktrace
+[9]: test_setup.FactoryExhaustionError.md#stacktracelimit
+[10]: test_setup.FactoryExhaustionError.md#capturestacktrace
+[11]: src_backend_error.AppError.md#constructor
+[12]: src_backend_error.AppError.md#message
+[13]: src_backend_error.AppError.md#name
+[14]: src_backend_error.AppError.md#stack
+[15]: src_backend_error.AppError.md#preparestacktrace
+[16]: src_backend_error.AppError.md#stacktracelimit
+[17]: src_backend_error.AppError.md#capturestacktrace
