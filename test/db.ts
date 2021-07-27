@@ -81,11 +81,7 @@ export const dummyDbData: DummyDbData = {
     liked: [],
     deleted: false,
     imageUrl: null,
-    meta: {
-      creator: DUMMY_KEY,
-      friendability: 0,
-      influence: 0
-    }
+    meta: { creator: DUMMY_KEY }
   })),
   info: {
     _id: new ObjectId(),
@@ -146,13 +142,12 @@ dummyDbData.memes = memes.map(({ url: imageUrl }, ndx) => ({
     ndx % 3 == 0 ? -1 : Date.now() + (ndx % 2 == 0 ? randomInt(10 ** 6) : Date.now()),
   likes: [],
   totalLikes: (ndx + 3) % 10 == 0 ? DUMMY_USER_COUNT : 0,
-  deleted: (ndx + 5) % 10 == 0 ? true : false,
   private: true,
   replyTo: null,
   imageUrl: ndx % 2 == 0 && ndx % 5 == 0 ? null : imageUrl,
   meta: {
     creator: DUMMY_KEY,
-    shareability: (ndx % 2 == 0 ? 0 : 0.75) + 0.25 * Math.random(),
+    gregariousness: (ndx % 2 == 0 ? 0 : 0.75) + 0.25 * Math.random(),
     likeability: (ndx % 3 == 0 ? 0.75 : 0) + 0.25 * Math.random()
   }
 }));

@@ -83,19 +83,19 @@ export type InternalMeme = {
      */
     creator: string;
     /**
-     * X = percent chance of a generated user liking a specific meme from
-     * this user.
+     * Determines how likely machine users are to take like-based actions on
+     * this meme.
      *
      * @type number between 0 and 1
      */
     likeability: number;
     /**
-     * X = percent chance of a generated user sharing a specific meme from
-     * this user.
+     * Determines how likely machine users are to comment on (reply to) this
+     * meme.
      *
      * @type number between 0 and 1
      */
-    shareability: number;
+    gregariousness: number;
   };
 };
 
@@ -160,20 +160,6 @@ export type InternalUser = {
      * The API key responsible for creating this meme.
      */
     creator: string;
-    /**
-     * Max percentage of the generated user base that will _eventually_ befriend
-     * this user.
-     *
-     * @type number between 0 (~1% of user base) and 1 (~75% of user base)
-     */
-    friendability: number;
-    /**
-     * X = percent
-     * chance of a generated follower liking a specific meme from this user.
-     *
-     * @type number between 0 and 1
-     */
-    influence: number;
   };
 };
 
