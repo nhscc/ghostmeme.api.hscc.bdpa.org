@@ -151,7 +151,10 @@ export async function createMeme({
     throw new InvalidKeyError();
   } else if (data.imageUrl !== null && typeof data.imageUrl != 'string') {
     throw new ValidationError('`imageUrl` must be a string or null');
-  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+  } else if (
+    data.imageBase64 !== null &&
+    (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
+  ) {
     throw new ValidationError(
       '`imageBase64` must be a valid base64 string, data uri, or null'
     );
@@ -168,13 +171,17 @@ export async function createMeme({
   let replyTo: MemeId | null | undefined = undefined;
   let imageUrl = data.imageUrl;
 
-  try {
-    owner = new ObjectId(data.owner);
-  } catch {
-    throw new ValidationError('invalid user_id for `owner`');
+  if (typeof data.owner == 'string' && data.owner.length) {
+    try {
+      owner = new ObjectId(data.owner);
+    } catch {
+      throw new ValidationError('invalid user_id for `owner`');
+    }
+  } else {
+    throw new ValidationError('`owner` property is required');
   }
 
-  if (data.receiver) {
+  if (typeof data.receiver == 'string' && data.receiver.length) {
     try {
       receiver = new ObjectId(data.receiver);
     } catch {
@@ -182,7 +189,7 @@ export async function createMeme({
     }
   } else receiver = null;
 
-  if (data.replyTo) {
+  if (typeof data.replyTo == 'string' && data.replyTo.length) {
     try {
       replyTo = new ObjectId(data.replyTo);
     } catch {
@@ -235,7 +242,7 @@ export async function createMeme({
     meta: {
       creator: creatorKey,
       likeability: 1 / randomInt(100),
-      shareability: 1 / randomInt(100)
+      gregariousness: 1 / randomInt(100)
     }
   };
 
@@ -566,9 +573,7 @@ export async function createUser({
     liked: [],
     deleted: false,
     meta: {
-      creator: creatorKey,
-      friendability: 1 / randomInt(100),
-      influence: 1 / randomInt(100)
+      creator: creatorKey
     }
   };
 
@@ -613,7 +618,10 @@ export async function updateUser({
     (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
   ) {
     throw new ValidationError('`phone` must be a valid phone number or null');
-  } else if (data.imageBase64 !== null && typeof data.imageBase64 != 'string') {
+  } else if (
+    data.imageBase64 !== null &&
+    (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
+  ) {
     throw new ValidationError(
       '`imageBase64` must be a valid base64 string, data uri, or null'
     );
@@ -827,7 +835,7 @@ export async function addUserAsFriend({
   } else if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
   } else if (user_id.equals(friend_id)) {
-    throw new ValidationError('users cannot follow themselves');
+    throw new ValidationError('users cannot friend themselves');
   } else {
     const db = await getDb();
     const users = db.collection<InternalUser>('users');
@@ -1148,17 +1156,20 @@ export async function searchMemes({
   const orMatcher: { [key: string]: SubSpecifierObject }[] = [];
 
   Object.entries(match).forEach(([k, v]) => {
-    const obj = v as { $or: unknown };
-    if (isPlainObject(obj) && obj.$or) {
-      (obj.$or as SubSpecifierObject[]).forEach((operand) =>
-        orMatcher.push({
-          [k]: operand
-        })
-      );
-      delete obj.$or;
-    }
+    if (isPlainObject(v)) {
+      const obj = v as { $or?: unknown };
 
-    if (!Object.keys(obj).length) delete match[k];
+      if (obj.$or) {
+        (obj.$or as SubSpecifierObject[]).forEach((operand) =>
+          orMatcher.push({
+            [k]: operand
+          })
+        );
+        delete obj.$or;
+      }
+
+      if (obj && !Object.keys(obj).length) delete match[k];
+    }
   });
 
   const primaryMatchStage = {
