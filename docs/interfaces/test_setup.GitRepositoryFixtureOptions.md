@@ -6,27 +6,23 @@
 
 ## Table of contents
 
-### Properties
+### Methods
 
 - [setupGit][3]
 
-## Properties
+## Methods
 
 ### setupGit
 
-• **setupGit**: (`git`: `SimpleGit`) => `AnyVoid`
+▸ **setupGit**(`git`): `AnyVoid`
 
-#### Type declaration
-
-▸ (`git`): `AnyVoid`
-
-##### Parameters
+#### Parameters
 
 | Name  | Type        |
 | :---- | :---------- |
 | `git` | `SimpleGit` |
 
-##### Returns
+#### Returns
 
 `AnyVoid`
 
@@ -36,6 +32,6 @@
 
 [1]: ../README.md
 [2]: ../modules/test_setup.md
-[3]: test_setup.gitrepositoryfixtureoptions.md#setupgit
+[3]: test_setup.GitRepositoryFixtureOptions.md#setupgit
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L416
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L416

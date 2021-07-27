@@ -22,6 +22,6 @@
 
 [1]: ../README.md
 [2]: ../modules/test_setup.md
-[3]: test_setup.webpacktestfixtureoptions.md#webpackversion
+[3]: test_setup.WebpackTestFixtureOptions.md#webpackversion
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L411
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L411

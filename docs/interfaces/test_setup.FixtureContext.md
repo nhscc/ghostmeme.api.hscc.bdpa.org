@@ -150,36 +150,36 @@ Partial.treeOutput
 
 [1]: ../README.md
 [2]: ../modules/test_setup.md
-[3]: test_setup.testresultprovider.md
-[4]: test_setup.treeoutputprovider.md
-[5]: test_setup.gitprovider.md
-[6]: test_setup.fixturecontext.md#debug
-[7]: test_setup.fixturecontext.md#filecontents
-[8]: test_setup.fixturecontext.md#git
-[9]: test_setup.fixturecontext.md#options
-[10]: test_setup.fixturecontext.md#root
-[11]: test_setup.fixturecontext.md#testidentifier
-[12]: test_setup.fixturecontext.md#testresult
-[13]: test_setup.fixturecontext.md#treeoutput
-[14]: test_setup.fixturecontext.md#using
+[3]: test_setup.TestResultProvider.md
+[4]: test_setup.TreeOutputProvider.md
+[5]: test_setup.GitProvider.md
+[6]: test_setup.FixtureContext.md#debug
+[7]: test_setup.FixtureContext.md#filecontents
+[8]: test_setup.FixtureContext.md#git
+[9]: test_setup.FixtureContext.md#options
+[10]: test_setup.FixtureContext.md#root
+[11]: test_setup.FixtureContext.md#testidentifier
+[12]: test_setup.FixtureContext.md#testresult
+[13]: test_setup.FixtureContext.md#treeoutput
+[14]: test_setup.FixtureContext.md#using
 [15]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L435
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L435
 [16]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L434
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L434
 [17]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L450
-[18]: test_setup.fixtureoptions.md
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L450
+[18]: test_setup.FixtureOptions.md
 [19]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L432
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L432
 [20]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L430
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L430
 [21]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L431
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L431
 [22]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L440
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L440
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L445
-[24]: test_setup.mockfixture.md
-[25]: test_setup.fixturecontext.md
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L445
+[24]: test_setup.MockFixture.md
+[25]: test_setup.FixtureContext.md
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/test/setup.ts#L433
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/test/setup.ts#L433

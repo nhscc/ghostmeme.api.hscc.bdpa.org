@@ -37,9 +37,10 @@ ghostmeme.api.hscc.bdpa.org
 - [src/pages/api/v1/users/\[user_id\]/requests/\[request_type\]][29]
 - [src/pages/api/v1/users/\[user_id\]/requests/\[request_type\]/\[target_id\]][30]
 - [test/db][31]
-- [test/setup][32]
-- [types/global][33]
-- [types/unique-filename][34]
+- [test/integration.fixtures][32]
+- [test/setup][33]
+- [types/global][34]
+- [types/unique-filename][35]
 
 [1]: modules/external_scripts_ban_hammer.md
 [2]: modules/external_scripts_generate_activity.md
@@ -73,6 +74,7 @@ ghostmeme.api.hscc.bdpa.org
 [30]:
   modules/src_pages_api_v1_users__user_id__requests__request_type___target_id_.md
 [31]: modules/test_db.md
-[32]: modules/test_setup.md
-[33]: modules/types_global.md
-[34]: modules/types_unique_filename.md
+[32]: modules/test_integration_fixtures.md
+[33]: modules/test_setup.md
+[34]: modules/types_global.md
+[35]: modules/types_unique_filename.md

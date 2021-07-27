@@ -37,11 +37,11 @@ Renames and exports: [defaultConfig][4]
 
 #### Defined in
 
-[src/pages/api/v1/info.ts:8][5]
+[src/pages/api/v1/info.ts:10][5]
 
 [1]: ../README.md
 [2]: src_pages_api_v1_info.md#config
 [3]: src_pages_api_v1_info.md#default
 [4]: src_backend_middleware.md#defaultconfig
 [5]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/pages/api/v1/info.ts#L8
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/pages/api/v1/info.ts#L10

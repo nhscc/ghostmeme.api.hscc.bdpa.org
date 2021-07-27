@@ -1,20 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / ItemNotFoundError
+[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / NotFoundError
 
-# Class: ItemNotFoundError\<T>
+# Class: NotFoundError
 
-[src/backend/error][2].ItemNotFoundError
-
-## Type parameters
-
-| Name | Type     |
-| :--- | :------- |
-| `T`  | `string` |
+[src/backend/error][2].NotFoundError
 
 ## Hierarchy
 
 - [`AppError`][3]
 
-  ↳ **`ItemNotFoundError`**
+  ↳ **`NotFoundError`**
 
 ## Table of contents
 
@@ -38,19 +32,13 @@
 
 ### constructor
 
-• **new ItemNotFoundError**<`T`>(`reference?`)
-
-#### Type parameters
-
-| Name | Type     |
-| :--- | :------- |
-| `T`  | `string` |
+• **new NotFoundError**(`message?`)
 
 #### Parameters
 
-| Name         | Type |
-| :----------- | :--- |
-| `reference?` | `T`  |
+| Name       | Type     |
+| :--------- | :------- |
+| `message?` | `string` |
 
 #### Overrides
 
@@ -58,7 +46,7 @@
 
 #### Defined in
 
-node_modules/named-app-errors/dist/modules/index.d.ts:20
+[src/backend/error.ts:23][12]
 
 ## Properties
 
@@ -68,7 +56,7 @@ node_modules/named-app-errors/dist/modules/index.d.ts:20
 
 #### Inherited from
 
-[AppError][3].[message][12]
+[AppError][3].[message][13]
 
 #### Defined in
 
@@ -82,7 +70,7 @@ node_modules/typescript/lib/lib.es5.d.ts:974
 
 #### Inherited from
 
-[AppError][3].[name][13]
+[AppError][3].[name][14]
 
 #### Defined in
 
@@ -96,7 +84,7 @@ node_modules/typescript/lib/lib.es5.d.ts:973
 
 #### Inherited from
 
-[AppError][3].[stack][14]
+[AppError][3].[stack][15]
 
 #### Defined in
 
@@ -108,6 +96,8 @@ node_modules/typescript/lib/lib.es5.d.ts:975
 
 ▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`:
 `CallSite`\[]) => `any`
+
+Optional override for formatting stack traces
 
 #### Type declaration
 
@@ -128,7 +118,7 @@ Optional override for formatting stack traces
 
 #### Inherited from
 
-[AppError][3].[prepareStackTrace][15]
+[AppError][3].[prepareStackTrace][16]
 
 #### Defined in
 
@@ -142,7 +132,7 @@ node_modules/@types/node/globals.d.ts:11
 
 #### Inherited from
 
-[AppError][3].[stackTraceLimit][16]
+[AppError][3].[stackTraceLimit][17]
 
 #### Defined in
 
@@ -169,7 +159,7 @@ Create .stack property on a target object
 
 #### Inherited from
 
-[AppError][3].[captureStackTrace][17]
+[AppError][3].[captureStackTrace][18]
 
 #### Defined in
 
@@ -177,18 +167,20 @@ node_modules/@types/node/globals.d.ts:4
 
 [1]: ../README.md
 [2]: ../modules/src_backend_error.md
-[3]: src_backend_error.apperror.md
-[4]: src_backend_error.itemnotfounderror.md#constructor
-[5]: src_backend_error.itemnotfounderror.md#message
-[6]: src_backend_error.itemnotfounderror.md#name
-[7]: src_backend_error.itemnotfounderror.md#stack
-[8]: src_backend_error.itemnotfounderror.md#preparestacktrace
-[9]: src_backend_error.itemnotfounderror.md#stacktracelimit
-[10]: src_backend_error.itemnotfounderror.md#capturestacktrace
-[11]: src_backend_error.apperror.md#constructor
-[12]: src_backend_error.apperror.md#message
-[13]: src_backend_error.apperror.md#name
-[14]: src_backend_error.apperror.md#stack
-[15]: src_backend_error.apperror.md#preparestacktrace
-[16]: src_backend_error.apperror.md#stacktracelimit
-[17]: src_backend_error.apperror.md#capturestacktrace
+[3]: src_backend_error.AppError.md
+[4]: src_backend_error.NotFoundError.md#constructor
+[5]: src_backend_error.NotFoundError.md#message
+[6]: src_backend_error.NotFoundError.md#name
+[7]: src_backend_error.NotFoundError.md#stack
+[8]: src_backend_error.NotFoundError.md#preparestacktrace
+[9]: src_backend_error.NotFoundError.md#stacktracelimit
+[10]: src_backend_error.NotFoundError.md#capturestacktrace
+[11]: src_backend_error.AppError.md#constructor
+[12]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/backend/error.ts#L23
+[13]: src_backend_error.AppError.md#message
+[14]: src_backend_error.AppError.md#name
+[15]: src_backend_error.AppError.md#stack
+[16]: src_backend_error.AppError.md#preparestacktrace
+[17]: src_backend_error.AppError.md#stacktracelimit
+[18]: src_backend_error.AppError.md#capturestacktrace

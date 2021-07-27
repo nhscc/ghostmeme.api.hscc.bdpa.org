@@ -38,7 +38,7 @@ Renames and exports: [defaultConfig][4]
 
 #### Defined in
 
-[src/pages/api/v1/memes/\[meme_id\]/likes/\[user_id\].ts:11][5]
+[src/pages/api/v1/memes/\[meme_id\]/likes/\[user_id\].ts:13][5]
 
 [1]: ../README.md
 [2]: src_pages_api_v1_memes__meme_id__likes__user_id_.md#config
@@ -46,4 +46,4 @@ Renames and exports: [defaultConfig][4]
 [4]: src_backend_middleware.md#defaultconfig
 
 [5]:
-https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/bc222b4/src/pages/api/v1/memes/[meme_id]/likes/[user_id].ts#L11
+https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/ed30678/src/pages/api/v1/memes/[meme_id]/likes/[user_id].ts#L13
