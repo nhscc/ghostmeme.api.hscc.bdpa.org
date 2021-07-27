@@ -1156,17 +1156,20 @@ export async function searchMemes({
   const orMatcher: { [key: string]: SubSpecifierObject }[] = [];
 
   Object.entries(match).forEach(([k, v]) => {
-    const obj = v as { $or: unknown };
-    if (isPlainObject(obj) && obj.$or) {
-      (obj.$or as SubSpecifierObject[]).forEach((operand) =>
-        orMatcher.push({
-          [k]: operand
-        })
-      );
-      delete obj.$or;
-    }
+    if (isPlainObject(v)) {
+      const obj = v as { $or?: unknown };
 
-    if (!Object.keys(obj).length) delete match[k];
+      if (obj.$or) {
+        (obj.$or as SubSpecifierObject[]).forEach((operand) =>
+          orMatcher.push({
+            [k]: operand
+          })
+        );
+        delete obj.$or;
+      }
+
+      if (obj && !Object.keys(obj).length) delete match[k];
+    }
   });
 
   const primaryMatchStage = {
