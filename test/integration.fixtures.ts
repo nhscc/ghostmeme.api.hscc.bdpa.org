@@ -308,6 +308,38 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       }
     },
     {
+      subject: 'invalid create user (username uniqueness upheld if mixed-case)',
+      handler: api.users,
+      method: 'POST',
+      body: {
+        name: 'Hillary Clinton',
+        email: 'hXYZ@hillaryclinton.com',
+        phone: '377-765-6654',
+        username: 'THe-HIll',
+        imageBase64: null
+      },
+      response: {
+        status: 400,
+        json: { error: expect.stringContaining('with that username') }
+      }
+    },
+    {
+      subject: 'invalid create user (email uniqueness upheld if mixed-case)',
+      handler: api.users,
+      method: 'POST',
+      body: {
+        name: 'Hillary Clinton',
+        email: 'H@HILLARYclinton.com',
+        phone: '377-765-6654',
+        username: 'the-other-hill',
+        imageBase64: null
+      },
+      response: {
+        status: 400,
+        json: { error: expect.stringContaining('with that email') }
+      }
+    },
+    {
       subject: 'invalid create user #1',
       handler: api.users,
       method: 'POST',
