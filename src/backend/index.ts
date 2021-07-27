@@ -242,7 +242,7 @@ export async function createMeme({
     meta: {
       creator: creatorKey,
       likeability: 1 / randomInt(100),
-      shareability: 1 / randomInt(100)
+      gregariousness: 1 / randomInt(100)
     }
   };
 
@@ -573,9 +573,7 @@ export async function createUser({
     liked: [],
     deleted: false,
     meta: {
-      creator: creatorKey,
-      friendability: 1 / randomInt(100),
-      influence: 1 / randomInt(100)
+      creator: creatorKey
     }
   };
 
