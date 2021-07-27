@@ -553,9 +553,9 @@ export async function createUser({
   const db = await getDb();
   const users = await db.collection<InternalUser>('users');
 
-  if (await itemExists(users, username, 'username')) {
+  if (await itemExists(users, username, 'username', { caseInsensitive: true })) {
     throw new ValidationError('a user with that username already exists');
-  } else if (await itemExists(users, email, 'email')) {
+  } else if (await itemExists(users, email, 'email', { caseInsensitive: true })) {
     throw new ValidationError('a user with that email address already exists');
   } else if (phone && (await itemExists(users, phone, 'phone'))) {
     throw new ValidationError('a user with that phone number already exists');
@@ -635,7 +635,12 @@ export async function updateUser({
   const db = await getDb();
   const users = db.collection<InternalUser>('users');
 
-  if (await itemExists(users, email, 'email', { exclude_id: user_id })) {
+  if (
+    await itemExists(users, email, 'email', {
+      exclude_id: user_id,
+      caseInsensitive: true
+    })
+  ) {
     throw new ValidationError('a user with that email address already exists');
   } else if (
     phone &&

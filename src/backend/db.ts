@@ -86,7 +86,9 @@ export async function initializeDb(db: Db) {
     db.createCollection('request-log'),
     db.createCollection('limited-log-mview'),
     db.createCollection('memes'),
-    db.createCollection('users'),
+    // ? Collation allows for case-insensitive searching. See:
+    // ? https://stackoverflow.com/a/40914924/1367414
+    db.createCollection('users', { collation: { locale: 'en', strength: 2 } }),
     db.createCollection('info')
   ]);
 
@@ -99,7 +101,7 @@ export async function initializeDb(db: Db) {
 }
 
 // TODO: XXX: turn this into a package of some sort (and abstract away key type)
-type ItemExistsOptions = { exclude_id?: ObjectId };
+type ItemExistsOptions = { exclude_id?: ObjectId; caseInsensitive?: boolean };
 /**
  * Checks if an item identified by some `key` (default identifier is `"_id"`)
  * exists within `collection`.
@@ -130,14 +132,16 @@ export async function itemExists<T>(
     }
   }
 
-  return (
-    (await collection
-      .find({
-        [key]: id,
-        ...(options?.exclude_id ? { _id: { $ne: options.exclude_id } } : {})
-      })
-      .count()) != 0
-  );
+  const result = collection.find({
+    [key]: id,
+    ...(options?.exclude_id ? { _id: { $ne: options.exclude_id } } : {})
+  });
+
+  if (options?.caseInsensitive) {
+    result.collation({ locale: 'en', strength: 2 });
+  }
+
+  return (await result.count()) != 0;
 }
 
 export type IdItem<T extends ObjectId> = WithId<unknown> | string | T | Nullish;
