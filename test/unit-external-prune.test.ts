@@ -1,43 +1,115 @@
 import { setClientAndDb } from 'universe/backend/db';
-import { setupTestDb } from 'testverse/db';
-import pruneLogs from 'externals/prune-data';
+import { dummyDbData, setupTestDb } from 'testverse/db';
+import pruneData from 'externals/prune-data';
 
 import type { InternalRequestLogEntry } from 'types/global';
-import type { WithId, Db } from 'mongodb';
+import type { WithId } from 'mongodb';
+import { withMockedEnv } from './setup';
+
+const testCollections = ['request-log', 'limited-log-mview', 'users', 'memes'];
 
 const { getDb, getNewClientAndDb } = setupTestDb();
 
-const getCount = (db: Db) =>
-  db.collection<WithId<InternalRequestLogEntry>>('request-log').countDocuments();
+const countCollection = async (collections: string | string[]) => {
+  const result = Object.assign(
+    {},
+    ...(await Promise.all(
+      [collections].flat().map((collection) =>
+        getDb().then((db) =>
+          db
+            .collection<WithId<InternalRequestLogEntry>>(collection)
+            .countDocuments()
+            .then((count) => ({ [collection]: count }))
+        )
+      )
+    ))
+  );
+
+  return Object.keys(result).length == 1
+    ? (result[collections.toString()] as number)
+    : (result as Record<string, number>);
+};
 
 describe('external-scripts/prune-data', () => {
-  it('ensures at most PRUNE_DATA_MAX_LOGS log entries exist', async () => {
+  it('ensures at most PRUNE_DATA_MAX_X entries exist', async () => {
     expect.hasAssertions();
 
-    expect(await getCount(await getDb())).toStrictEqual(22);
+    expect(await countCollection(testCollections)).toStrictEqual({
+      'request-log': 22,
+      'limited-log-mview': 3,
+      users: dummyDbData.users.length,
+      memes: dummyDbData.memes.length
+    });
 
-    process.env.PRUNE_DATA_MAX_LOGS = '10';
-    await pruneLogs();
+    await withMockedEnv(
+      async () => {
+        await pruneData();
+        setClientAndDb(await getNewClientAndDb());
+        expect(await countCollection(testCollections)).toStrictEqual({
+          'request-log': 10,
+          'limited-log-mview': 2,
+          users: 2,
+          memes: 2
+        });
+      },
+      {
+        PRUNE_DATA_MAX_LOGS: '10',
+        PRUNE_DATA_MAX_BANNED: '2',
+        PRUNE_DATA_MAX_USERS: '2',
+        PRUNE_DATA_MAX_MEMES: '2'
+      },
+      { replace: false }
+    );
 
-    setClientAndDb(await getNewClientAndDb());
-    expect(await getCount(await getDb())).toStrictEqual(10);
-
-    process.env.PRUNE_DATA_MAX_LOGS = '1';
-    await pruneLogs();
-
-    setClientAndDb(await getNewClientAndDb());
-    expect(await getCount(await getDb())).toStrictEqual(1);
+    await withMockedEnv(
+      async () => {
+        await pruneData();
+        setClientAndDb(await getNewClientAndDb());
+        expect(await countCollection(testCollections)).toStrictEqual({
+          'request-log': 1,
+          'limited-log-mview': 1,
+          users: 1,
+          memes: 1
+        });
+      },
+      {
+        PRUNE_DATA_MAX_LOGS: '1',
+        PRUNE_DATA_MAX_BANNED: '1',
+        PRUNE_DATA_MAX_USERS: '1',
+        PRUNE_DATA_MAX_MEMES: '1'
+      },
+      { replace: false }
+    );
   });
 
-  it('only deletes log entries if necessary', async () => {
+  it('only deletes entries if necessary', async () => {
     expect.hasAssertions();
 
-    expect(await getCount(await getDb())).toStrictEqual(22);
+    expect(await countCollection(testCollections)).toStrictEqual({
+      'request-log': 22,
+      'limited-log-mview': 3,
+      users: dummyDbData.users.length,
+      memes: dummyDbData.memes.length
+    });
 
-    process.env.PRUNE_DATA_MAX_LOGS = '100';
-    await pruneLogs();
-
-    setClientAndDb(await getNewClientAndDb());
-    expect(await getCount(await getDb())).toStrictEqual(22);
+    await withMockedEnv(
+      async () => {
+        await pruneData();
+        setClientAndDb(await getNewClientAndDb());
+        expect(await countCollection(testCollections)).toStrictEqual({
+          'request-log': 22,
+          'limited-log-mview': 3,
+          users: dummyDbData.users.length,
+          memes: dummyDbData.memes.length
+        });
+      },
+      {
+        PRUNE_DATA_MAX_LOGS: '100',
+        PRUNE_DATA_MAX_BANNED: '100',
+        PRUNE_DATA_MAX_USERS: '100',
+        PRUNE_DATA_MAX_MEMES: '100'
+      },
+      { replace: false }
+    );
   });
 });
