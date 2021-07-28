@@ -1,6 +1,10 @@
+import { name as pkgName } from 'package';
 import { parse as parseAsBytes } from 'bytes';
 import { isServer } from 'is-server-side';
 import { AppError } from 'universe/backend/error';
+import debugFactory from 'debug';
+
+const debug = debugFactory(`${pkgName}:env`);
 
 const HTTP2_METHODS = [
   'GET',
@@ -24,7 +28,7 @@ const envToArray = (envVal: string) => {
     .filter(Boolean);
 };
 
-export function getEnv(loud = false) {
+export function getEnv() {
   const env = {
     NODE_ENV:
       process.env.APP_ENV || process.env.NODE_ENV || process.env.BABEL_ENV || 'unknown',
@@ -76,10 +80,20 @@ export function getEnv(loud = false) {
     PRUNE_DATA_MAX_LOGS: !!process.env.PRUNE_DATA_MAX_LOGS
       ? Number(process.env.PRUNE_DATA_MAX_LOGS)
       : null,
+    PRUNE_DATA_MAX_BANNED: !!process.env.PRUNE_DATA_MAX_BANNED
+      ? Number(process.env.PRUNE_DATA_MAX_BANNED)
+      : null,
+    PRUNE_DATA_MAX_USERS: !!process.env.PRUNE_DATA_MAX_USERS
+      ? Number(process.env.PRUNE_DATA_MAX_USERS)
+      : null,
+    PRUNE_DATA_MAX_MEMES: !!process.env.PRUNE_DATA_MAX_MEMES
+      ? Number(process.env.PRUNE_DATA_MAX_MEMES)
+      : null,
     HYDRATE_DB_ON_STARTUP:
       !!process.env.HYDRATE_DB_ON_STARTUP &&
       process.env.HYDRATE_DB_ON_STARTUP !== 'false',
     API_ROOT_URI: (process.env.API_ROOT_URI || '').toString(),
+    DEBUG: process.env.DEBUG ?? null,
     DEBUG_INSPECTING: !!process.env.VSCODE_INSPECTOR_OPTIONS,
     VERCEL_REGION: (process.env.VERCEL_REGION || 'unknown').toString(),
     TZ: (process.env.TZ || 'unknown').toString().replace(':', ''),
@@ -88,31 +102,34 @@ export function getEnv(loud = false) {
     ).toString()
   };
 
-  if (loud && env.NODE_ENV == 'development') {
-    /* eslint-disable-next-line no-console */
-    console.info(`debug - ${env}`);
-  }
-
-  const mustBeGtZero = [
-    env.RESULTS_PER_PAGE,
-    env.REQUESTS_PER_CONTRIVED_ERROR,
-    env.MAX_CONTENT_LENGTH_BYTES
-  ];
+  debug(env);
 
   // ? Typescript troubles
   const NODE_X: string = env.NODE_ENV;
   const errors = [];
+
+  const envIsGtZero = (name: keyof typeof env) => {
+    if (
+      typeof env[name] != 'number' ||
+      isNaN(env[name] as number) ||
+      (env[name] as number) < 0
+    ) {
+      errors.push(`bad ${name}, saw "${env[name]}" (expected a non-negative number)`);
+    }
+  };
 
   if (NODE_X == 'unknown') errors.push(`bad NODE_ENV, saw "${NODE_X}"`);
 
   if (isServer()) {
     if (env.MONGODB_URI === '') errors.push(`bad MONGODB_URI, saw "${env.MONGODB_URI}"`);
 
-    mustBeGtZero.forEach(
-      (v) =>
-        (typeof v != 'number' || isNaN(v) || v < 0) &&
-        errors.push(`bad value "${v}", expected a non-negative number`)
-    );
+    (
+      [
+        'RESULTS_PER_PAGE',
+        'REQUESTS_PER_CONTRIVED_ERROR',
+        'MAX_CONTENT_LENGTH_BYTES'
+      ] as (keyof typeof env)[]
+    ).forEach((name) => envIsGtZero(name));
 
     env.DISALLOWED_METHODS.forEach(
       (method) =>

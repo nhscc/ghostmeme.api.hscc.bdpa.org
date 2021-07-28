@@ -77,7 +77,7 @@ const externalsConfig = {
   entry: {
     'ban-hammer': `${__dirname}/external-scripts/ban-hammer.ts`,
     'prune-data': `${__dirname}/external-scripts/prune-data.ts`,
-    'generate-activity': `${__dirname}/external-scripts/generate-activity.ts`,
+    'initialize-data': `${__dirname}/external-scripts/initialize-data.ts`,
     'simulate-activity': `${__dirname}/external-scripts/simulate-activity.ts`
   },
 
@@ -105,7 +105,8 @@ const externalsConfig = {
       multiverse: `${__dirname}/lib/`,
       testverse: `${__dirname}/test/`,
       externals: `${__dirname}/external-scripts/`,
-      types: `${__dirname}/types/`
+      types: `${__dirname}/types/`,
+      package: `${__dirname}/package.json`
     }
   },
   module: {

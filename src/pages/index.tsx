@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { version as pkgVersion } from '../../package.json';
+import { version as pkgVersion } from 'package';
 import { getEnv } from 'universe/backend/env';
 
 import type { Awaited } from '@ergodark/types';

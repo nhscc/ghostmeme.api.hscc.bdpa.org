@@ -1,45 +1,66 @@
-/* eslint-disable no-console */
+import { name as pkgName } from 'package';
 import { getEnv } from 'universe/backend/env';
 import { AppError } from 'universe/backend/error';
 import { getDb, closeDb } from 'universe/backend/db';
+import debugFactory from 'debug';
 
-import type { WithId } from 'mongodb';
-import type { InternalRequestLogEntry } from 'types/global';
+import { toss } from 'toss-expression';
 
-export default async function main(isCLI = false) {
-  try {
-    isCLI && console.log('[ initializing ]');
+const debugNamespace = `${pkgName}:prune-data`;
+const log = debugFactory(debugNamespace);
+const debug = debugFactory(debugNamespace);
 
-    const { PRUNE_DATA_MAX_LOGS } = getEnv();
-
-    if (!PRUNE_DATA_MAX_LOGS || !(Number(PRUNE_DATA_MAX_LOGS) > 0))
-      throw new AppError('illegal environment detected, check environment variables');
-
-    isCLI && console.log(`[ connecting to external database ]`);
-
-    const db = await getDb({ external: true });
-
-    const requestLog = db.collection<WithId<InternalRequestLogEntry>>('request-log');
-    const cursor = requestLog.find().sort({ _id: -1 }).skip(PRUNE_DATA_MAX_LOGS).limit(1);
-    const thresholdEntry = await cursor.next();
-
-    if (thresholdEntry) {
-      const result = await requestLog.deleteMany({ _id: { $lte: thresholdEntry._id } });
-      isCLI && console.log(`[ pruned ${result.deletedCount} request-log entries ]`);
-    } else isCLI && console.log('[ found no entries to prune ]');
-
-    isCLI && console.log('[ closing connection ]');
-
-    await cursor.close();
-    await closeDb();
-
-    isCLI && console.log('[ execution complete ]');
-  } catch (e) {
-    if (isCLI) {
-      console.error('EXCEPTION:', e);
-      process.exit(1);
-    } else throw e;
-  }
+if (getEnv().DEBUG === null && getEnv().NODE_ENV != 'test') {
+  debugFactory.enable(`${debugNamespace},${debugNamespace}:*`);
+  debug.enabled = false;
 }
 
-!module.parent && main(true);
+export default async function main() {
+  log('initializing');
+
+  const env = getEnv();
+  const limits = {
+    'request-log':
+      env.PRUNE_DATA_MAX_LOGS ||
+      toss(new AppError('PRUNE_DATA_MAX_LOGS must be greater than zero')),
+    users:
+      env.PRUNE_DATA_MAX_USERS ||
+      toss(new AppError('PRUNE_DATA_MAX_USERS must be greater than zero')),
+    memes:
+      env.PRUNE_DATA_MAX_MEMES ||
+      toss(new AppError('PRUNE_DATA_MAX_MEMES must be greater than zero')),
+    'limited-log-mview':
+      env.PRUNE_DATA_MAX_BANNED ||
+      toss(new AppError('PRUNE_DATA_MAX_BANNED must be greater than zero'))
+  };
+
+  debug(`final limits: %O`, limits);
+  log('connecting to external database');
+
+  const db = await getDb({ external: true });
+
+  await Promise.all(
+    Object.entries(limits).map(async ([collectionName, limitThreshold]) => {
+      const subLog = log.extend(collectionName);
+      const collection = db.collection(collectionName);
+      const total = await collection.countDocuments();
+      const cursor = collection.find().sort({ _id: -1 }).skip(limitThreshold).limit(1);
+      const thresholdEntry = await cursor.next();
+
+      if (thresholdEntry) {
+        const result = await collection.deleteMany({ _id: { $lte: thresholdEntry._id } });
+        subLog(`pruned ${result.deletedCount}/${total} "${collectionName}" entries`);
+      } else {
+        subLog(`no prunable "${collectionName}" entries (${total} <= ${limitThreshold})`);
+      }
+
+      cursor.close();
+    })
+  );
+
+  debug('closing connection');
+  await closeDb();
+  log('execution complete');
+}
+
+!module.parent && main().catch((e) => log.extend('exception')(e));

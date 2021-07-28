@@ -21,7 +21,8 @@
       "multiverse/*": ["lib/*"],
       "testverse/*": ["test/*"],
       "externals/*": ["external-scripts/*"],
-      "types/*": ["types/*"]
+      "types/*": ["types/*"],
+      "package": ["package.json"]
     },
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,

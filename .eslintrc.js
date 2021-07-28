@@ -114,7 +114,8 @@ module.exports = {
           ['multiverse', './lib'],
           ['testverse', './test'],
           ['externals', './external-scripts'],
-          ['types', './types']
+          ['types', './types'],
+          ['package', './package.json']
         ],
         extensions: ['.js', '.jsx', '.ts', '.tsx']
       },
