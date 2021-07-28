@@ -1,6 +1,10 @@
+import { name as pkgName } from 'package';
 import { parse as parseAsBytes } from 'bytes';
 import { isServer } from 'is-server-side';
 import { AppError } from 'universe/backend/error';
+import debugFactory from 'debug';
+
+const debug = debugFactory(`${pkgName}:env`);
 
 const HTTP2_METHODS = [
   'GET',
@@ -24,7 +28,7 @@ const envToArray = (envVal: string) => {
     .filter(Boolean);
 };
 
-export function getEnv(loud = false) {
+export function getEnv() {
   const env = {
     NODE_ENV:
       process.env.APP_ENV || process.env.NODE_ENV || process.env.BABEL_ENV || 'unknown',
@@ -80,6 +84,7 @@ export function getEnv(loud = false) {
       !!process.env.HYDRATE_DB_ON_STARTUP &&
       process.env.HYDRATE_DB_ON_STARTUP !== 'false',
     API_ROOT_URI: (process.env.API_ROOT_URI || '').toString(),
+    DEBUG: process.env.DEBUG ?? null,
     DEBUG_INSPECTING: !!process.env.VSCODE_INSPECTOR_OPTIONS,
     VERCEL_REGION: (process.env.VERCEL_REGION || 'unknown').toString(),
     TZ: (process.env.TZ || 'unknown').toString().replace(':', ''),
@@ -88,10 +93,7 @@ export function getEnv(loud = false) {
     ).toString()
   };
 
-  if (loud && env.NODE_ENV == 'development') {
-    /* eslint-disable-next-line no-console */
-    console.info(`debug - ${env}`);
-  }
+  debug(env);
 
   // ? Typescript troubles
   const NODE_X: string = env.NODE_ENV;
