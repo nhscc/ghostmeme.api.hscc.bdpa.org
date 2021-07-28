@@ -1,5 +1,5 @@
 // import 'expect-puppeteer'
-import { name as pkgName, version as pkgVersion } from '../package.json';
+import { name as pkgName, version as pkgVersion } from 'package';
 import { verifyEnvironment } from '../expect-env';
 import { AppError, GuruMeditationError } from 'universe/backend/error';
 import { sendHttpErrorResponse } from 'multiverse/next-respond';
