@@ -1,10 +1,10 @@
-/* eslint-disable no-console */
 import { getEnv } from 'universe/backend/env';
 import { getDb, closeDb } from 'universe/backend/db';
 import { AppError } from 'universe/backend/error';
 
 const oneSecondInMs = 1000;
 
+// TODO: replace AppError with IllegalExternalEnvironmentError
 export default async function main(isCLI = false) {
   try {
     isCLI && console.log('[ initializing ]');

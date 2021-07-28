@@ -7,6 +7,7 @@ import debugFactory from 'debug';
 import { toss } from 'toss-expression';
 
 const debugNamespace = `${pkgName}:prune-data`;
+
 const log = debugFactory(debugNamespace);
 const debug = debugFactory(debugNamespace);
 
@@ -18,6 +19,7 @@ if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
   debug.enabled = false;
 }
 
+// TODO: replace AppError with IllegalExternalEnvironmentError
 export default async function main() {
   log('initializing');
 

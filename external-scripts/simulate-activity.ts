@@ -1,28 +1,44 @@
-/* eslint-disable no-console */
-import { getDbClient, closeDb } from 'universe/backend/db';
+import { name as pkgName } from 'package';
+import { getEnv } from 'universe/backend/env';
+import { AppError } from 'universe/backend/error';
+import { getDb, closeDb } from 'universe/backend/db';
+import debugFactory from 'debug';
 
-export default async function main(isCLI = false) {
-  try {
-    isCLI && console.log(`[ connecting to external database ]`);
+const debugNamespace = `${pkgName}:simulate-activity`;
 
-    // ? We call this here to ensure the external mongo connect URI is used
-    await getDbClient({ external: true });
+const log = debugFactory(debugNamespace);
+const debug = debugFactory(debugNamespace);
 
-    isCLI && console.log(`[ bootstrapping activity generation ]`);
+// eslint-disable-next-line no-console
+log.log = console.info.bind(console);
 
-    //await generateActivity(!isCLI);
-
-    isCLI && console.log('[ closing connection ]');
-
-    await closeDb();
-
-    isCLI && console.log('[ execution complete ]');
-  } catch (e) {
-    if (isCLI) {
-      console.error('EXCEPTION:', e);
-      process.exit(1);
-    } else throw e;
-  }
+if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
+  debugFactory.enable(`${debugNamespace},${debugNamespace}:*`);
+  debug.enabled = false;
 }
 
-!module.parent && main(true);
+// TODO: replace AppError with IllegalExternalEnvironmentError
+export default async function main() {
+  log('initializing');
+
+  // eslint-disable-next-line no-empty-pattern
+  const {
+    // TODO: ...
+  } = getEnv();
+
+  // TODO:
+  void AppError;
+
+  log('connecting to external database');
+
+  const db = await getDb({ external: true });
+
+  // TODO:
+  void db;
+
+  debug('closing connection');
+  await closeDb();
+  log('execution complete');
+}
+
+!module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));
