@@ -10,6 +10,9 @@ const debugNamespace = `${pkgName}:prune-data`;
 const log = debugFactory(debugNamespace);
 const debug = debugFactory(debugNamespace);
 
+// eslint-disable-next-line no-console
+log.log = console.info.bind(console);
+
 if (getEnv().DEBUG === null && getEnv().NODE_ENV != 'test') {
   debugFactory.enable(`${debugNamespace},${debugNamespace}:*`);
   debug.enabled = false;
