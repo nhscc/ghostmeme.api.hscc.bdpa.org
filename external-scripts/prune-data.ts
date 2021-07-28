@@ -63,7 +63,4 @@ export default async function main() {
   log('execution complete');
 }
 
-!module.parent &&
-  main().catch((e) =>
-    log.extend('exception')(e instanceof Error ? e.message : e.toString())
-  );
+!module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));
