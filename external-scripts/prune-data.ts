@@ -43,13 +43,16 @@ export default async function main() {
     Object.entries(limits).map(async ([collectionName, limitThreshold]) => {
       const subLog = log.extend(collectionName);
       const collection = db.collection(collectionName);
+      const total = await collection.countDocuments();
       const cursor = collection.find().sort({ _id: -1 }).skip(limitThreshold).limit(1);
       const thresholdEntry = await cursor.next();
 
       if (thresholdEntry) {
         const result = await collection.deleteMany({ _id: { $lte: thresholdEntry._id } });
-        subLog(`pruned ${result.deletedCount} "${collectionName}" entries`);
-      } else subLog(`found no "${collectionName}" entries to prune`);
+        subLog(`pruned ${result.deletedCount}/${total} "${collectionName}" entries`);
+      } else {
+        subLog(`no prunable "${collectionName}" entries (${total} <= ${limitThreshold})`);
+      }
 
       cursor.close();
     })
