@@ -93,26 +93,32 @@ export function getEnv(loud = false) {
     console.info(`debug - ${env}`);
   }
 
-  const mustBeGtZero = [
-    env.RESULTS_PER_PAGE,
-    env.REQUESTS_PER_CONTRIVED_ERROR,
-    env.MAX_CONTENT_LENGTH_BYTES
-  ];
-
   // ? Typescript troubles
   const NODE_X: string = env.NODE_ENV;
   const errors = [];
+
+  const envIsGtZero = (name: keyof typeof env) => {
+    if (
+      typeof env[name] != 'number' ||
+      isNaN(env[name] as number) ||
+      (env[name] as number) < 0
+    ) {
+      errors.push(`bad ${name}, saw "${env[name]}" (expected a non-negative number)`);
+    }
+  };
 
   if (NODE_X == 'unknown') errors.push(`bad NODE_ENV, saw "${NODE_X}"`);
 
   if (isServer()) {
     if (env.MONGODB_URI === '') errors.push(`bad MONGODB_URI, saw "${env.MONGODB_URI}"`);
 
-    mustBeGtZero.forEach(
-      (v) =>
-        (typeof v != 'number' || isNaN(v) || v < 0) &&
-        errors.push(`bad value "${v}", expected a non-negative number`)
-    );
+    (
+      [
+        'RESULTS_PER_PAGE',
+        'REQUESTS_PER_CONTRIVED_ERROR',
+        'MAX_CONTENT_LENGTH_BYTES'
+      ] as (keyof typeof env)[]
+    ).forEach((name) => envIsGtZero(name));
 
     env.DISALLOWED_METHODS.forEach(
       (method) =>
