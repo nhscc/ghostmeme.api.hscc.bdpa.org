@@ -80,6 +80,15 @@ export function getEnv() {
     PRUNE_DATA_MAX_LOGS: !!process.env.PRUNE_DATA_MAX_LOGS
       ? Number(process.env.PRUNE_DATA_MAX_LOGS)
       : null,
+    PRUNE_DATA_MAX_BANNED: !!process.env.PRUNE_DATA_MAX_BANNED
+      ? Number(process.env.PRUNE_DATA_MAX_BANNED)
+      : null,
+    PRUNE_DATA_MAX_USERS: !!process.env.PRUNE_DATA_MAX_USERS
+      ? Number(process.env.PRUNE_DATA_MAX_USERS)
+      : null,
+    PRUNE_DATA_MAX_MEMES: !!process.env.PRUNE_DATA_MAX_MEMES
+      ? Number(process.env.PRUNE_DATA_MAX_MEMES)
+      : null,
     HYDRATE_DB_ON_STARTUP:
       !!process.env.HYDRATE_DB_ON_STARTUP &&
       process.env.HYDRATE_DB_ON_STARTUP !== 'false',
