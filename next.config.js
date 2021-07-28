@@ -26,7 +26,8 @@ module.exports = () => {
           universe: `${__dirname}/src/`,
           multiverse: `${__dirname}/lib/`,
           externals: `${__dirname}/external-scripts/`,
-          types: `${__dirname}/types/`
+          types: `${__dirname}/types/`,
+          package: `${__dirname}/package.json`
         });
 
       return config;

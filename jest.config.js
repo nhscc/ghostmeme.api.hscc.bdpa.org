@@ -14,7 +14,8 @@ module.exports = {
     '^multiverse/(.*)$': '<rootDir>/lib/$1',
     '^testverse/(.*)$': '<rootDir>/test/$1',
     '^externals/(.*)$': '<rootDir>/external-scripts/$1',
-    '^types/(.*)$': '<rootDir>/types/$1'
+    '^types/(.*)$': '<rootDir>/types/$1',
+    '^package$': '<rootDir>/package.json'
   },
   setupFilesAfterEnv: ['./test/setup.ts'],
   collectCoverageFrom: ['src/**/*.ts?(x)', 'external-scripts/**/*.ts?(x)']

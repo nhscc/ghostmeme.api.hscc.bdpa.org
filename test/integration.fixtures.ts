@@ -1,8 +1,8 @@
+import { name as pkgName } from 'package';
 import { ObjectId } from 'mongodb';
 import { toss } from 'toss-expression';
 import { dummyDbData } from 'testverse/db';
 import { GuruMeditationError } from 'universe/backend/error';
-import { name as pkgName } from '../package.json';
 import { getEnv } from 'universe/backend/env';
 import debugFactory from 'debug';
 

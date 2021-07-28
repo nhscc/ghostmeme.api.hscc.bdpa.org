@@ -105,7 +105,8 @@ const externalsConfig = {
       multiverse: `${__dirname}/lib/`,
       testverse: `${__dirname}/test/`,
       externals: `${__dirname}/external-scripts/`,
-      types: `${__dirname}/types/`
+      types: `${__dirname}/types/`,
+      package: `${__dirname}/package.json`
     }
   },
   module: {
