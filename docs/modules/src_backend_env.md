@@ -12,13 +12,7 @@
 
 ### getEnv
 
-▸ **getEnv**(`loud?`): `Object`
-
-#### Parameters
-
-| Name   | Type      | Default value |
-| :----- | :-------- | :------------ |
-| `loud` | `boolean` | `false`       |
+▸ **getEnv**(): `Object`
 
 #### Returns
 
@@ -32,6 +26,7 @@
 | `BAN_HAMMER_RECIDIVISM_PUNISH_MULTIPLIER` | `null` \| `number` |
 | `BAN_HAMMER_RESOLUTION_WINDOW_SECONDS`    | `null` \| `number` |
 | `BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS` | `null` \| `number` |
+| `DEBUG`                                   | `null` \| `string` |
 | `DEBUG_INSPECTING`                        | `boolean`          |
 | `DISABLED_API_VERSIONS`                   | `string`[]         |
 | `DISALLOWED_METHODS`                      | `string`[]         |
@@ -44,7 +39,10 @@
 | `MONGODB_MS_PORT`                         | `null` \| `number` |
 | `MONGODB_URI`                             | `string`           |
 | `NODE_ENV`                                | `string`           |
+| `PRUNE_DATA_MAX_BANNED`                   | `null` \| `number` |
 | `PRUNE_DATA_MAX_LOGS`                     | `null` \| `number` |
+| `PRUNE_DATA_MAX_MEMES`                    | `null` \| `number` |
+| `PRUNE_DATA_MAX_USERS`                    | `null` \| `number` |
 | `REQUESTS_PER_CONTRIVED_ERROR`            | `number`           |
 | `RESULTS_PER_PAGE`                        | `number`           |
 | `TZ`                                      | `string`           |
@@ -53,9 +51,9 @@
 
 #### Defined in
 
-[src/backend/env.ts:27][3]
+[src/backend/env.ts:31][3]
 
 [1]: ../README.md
 [2]: src_backend_env.md#getenv
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/src/backend/env.ts#L27
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/env.ts#L31
