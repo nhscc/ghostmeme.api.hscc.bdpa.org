@@ -12,13 +12,7 @@
 
 ### default
 
-▸ **default**(`isCLI?`): `Promise`<`void`>
-
-#### Parameters
-
-| Name    | Type      | Default value |
-| :------ | :-------- | :------------ |
-| `isCLI` | `boolean` | `false`       |
+▸ **default**(): `Promise`<`void`>
 
 #### Returns
 
@@ -26,9 +20,9 @@
 
 #### Defined in
 
-[external-scripts/prune-data.ts:9][3]
+[external-scripts/prune-data.ts:18][3]
 
 [1]: ../README.md
 [2]: external_scripts_prune_data.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/external-scripts/prune-data.ts#L9
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/external-scripts/prune-data.ts#L18

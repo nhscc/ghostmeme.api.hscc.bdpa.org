@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[test/db.ts:48][10]
+[test/db.ts:49][10]
 
 ## Functions
 
@@ -65,7 +65,7 @@
 
 #### Defined in
 
-[test/db.ts:190][11]
+[test/db.ts:191][11]
 
 ---
 
@@ -93,7 +93,7 @@ Setup a test version of the database using jest lifecycle hooks.
 
 #### Defined in
 
-[test/db.ts:229][12]
+[test/db.ts:230][12]
 
 [1]: ../README.md
 [2]: test_db.md#dummydbdata
@@ -104,10 +104,10 @@ Setup a test version of the database using jest lifecycle hooks.
 [7]: types_global.md#internalmeme
 [8]: types_global.md#internaluser
 [9]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/test/db.ts#L36
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L36
 [10]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/test/db.ts#L48
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L49
 [11]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/test/db.ts#L190
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L191
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/9eb38c4/test/db.ts#L229
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L230

@@ -7,7 +7,7 @@ ghostmeme.api.hscc.bdpa.org
 ### Modules
 
 - [external-scripts/ban-hammer][1]
-- [external-scripts/generate-activity][2]
+- [external-scripts/initialize-data][2]
 - [external-scripts/prune-data][3]
 - [external-scripts/simulate-activity][4]
 - [lib/next-isomorphic-redirect][5]
@@ -43,7 +43,7 @@ ghostmeme.api.hscc.bdpa.org
 - [types/unique-filename][35]
 
 [1]: modules/external_scripts_ban_hammer.md
-[2]: modules/external_scripts_generate_activity.md
+[2]: modules/external_scripts_initialize_data.md
 [3]: modules/external_scripts_prune_data.md
 [4]: modules/external_scripts_simulate_activity.md
 [5]: modules/lib_next_isomorphic_redirect.md
