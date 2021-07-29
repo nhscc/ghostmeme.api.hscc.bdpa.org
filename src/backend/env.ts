@@ -18,8 +18,7 @@ const HTTP2_METHODS = [
   'PATCH'
 ];
 
-// TODO: unit test env.ts and all other backend abstraction layers, perhaps in
-// TODO: own files in new subfolder
+// TODO: unit test env.ts and other testable abstraction layers
 
 const envToArray = (envVal: string) => {
   return envVal
