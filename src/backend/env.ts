@@ -56,9 +56,6 @@ export function getEnv() {
       process.env.MONGODB_URI ||
       ''
     ).toString(),
-    EXTERNAL_SCRIPTS_BE_VERBOSE:
-      !!process.env.EXTERNAL_SCRIPTS_BE_VERBOSE &&
-      process.env.EXTERNAL_SCRIPTS_BE_VERBOSE !== 'false',
     BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS: !!process.env
       .BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS
       ? Number(process.env.BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS)
