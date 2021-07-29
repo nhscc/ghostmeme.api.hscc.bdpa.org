@@ -35,7 +35,7 @@ const DUMMY_USER_COUNT = 10;
 
 export type DummyDbData = {
   /**
-   * Timestamp of when this dummy data was generated (in ms since unix epoch)
+   * Timestamp of when this dummy data was generated (in ms since unix epoch).
    */
   generatedAt: number;
   keys: WithId<InternalApiKey>[];
