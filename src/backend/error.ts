@@ -16,6 +16,8 @@ export {
 // TODO: XXX: update named-app-errors with new naming paradigm:
 // TODO: XXX:   - rename "XTypeError"s
 // TODO: XXX:   - add InvalidIdError
+// TODO: XXX:   - add ExternalError (extended by the following new classes)
+// TODO: XXX:   - add IllegalExternalEnvironmentError, IllegalEnvironmentError
 // TODO: XXX:   - BC: rename "NotFoundError" to "ItemNotFoundError" and
 // TODO: XXX:     "NotFoundError" now takes any message
 
