@@ -2,9 +2,8 @@ import { name as pkgName } from 'package';
 import { getEnv } from 'universe/backend/env';
 import { AppError } from 'universe/backend/error';
 import { getDb, closeDb } from 'universe/backend/db';
-import debugFactory from 'debug';
-
 import { toss } from 'toss-expression';
+import debugFactory from 'debug';
 
 const debugNamespace = `${pkgName}:prune-data`;
 
