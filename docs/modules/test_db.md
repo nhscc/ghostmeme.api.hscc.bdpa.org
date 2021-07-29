@@ -104,10 +104,10 @@ Setup a test version of the database using jest lifecycle hooks.
 [7]: types_global.md#internalmeme
 [8]: types_global.md#internaluser
 [9]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L36
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L36
 [10]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L49
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L49
 [11]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L191
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L191
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/db.ts#L230
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L230

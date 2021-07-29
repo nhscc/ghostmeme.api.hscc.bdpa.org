@@ -12,13 +12,7 @@
 
 ### default
 
-▸ **default**(`isCLI?`): `Promise`<`void`>
-
-#### Parameters
-
-| Name    | Type      | Default value |
-| :------ | :-------- | :------------ |
-| `isCLI` | `boolean` | `false`       |
+▸ **default**(): `Promise`<`void`>
 
 #### Returns
 
@@ -26,9 +20,9 @@
 
 #### Defined in
 
-[external-scripts/simulate-activity.ts:4][3]
+[external-scripts/simulate-activity.ts:21][3]
 
 [1]: ../README.md
 [2]: external_scripts_simulate_activity.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/external-scripts/simulate-activity.ts#L4
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/external-scripts/simulate-activity.ts#L21

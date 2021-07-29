@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[src/backend/error.ts:51][12]
+[src/backend/error.ts:53][12]
 
 ## Properties
 
@@ -189,7 +189,7 @@ node_modules/@types/node/globals.d.ts:4
 [10]: src_backend_error.InvalidIdError.md#capturestacktrace
 [11]: src_backend_error.AppError.md#constructor
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/error.ts#L51
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/backend/error.ts#L53
 [13]: src_backend_error.AppError.md#message
 [14]: src_backend_error.AppError.md#name
 [15]: src_backend_error.AppError.md#stack

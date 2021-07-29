@@ -30,7 +30,6 @@
 | `DEBUG_INSPECTING`                        | `boolean`          |
 | `DISABLED_API_VERSIONS`                   | `string`[]         |
 | `DISALLOWED_METHODS`                      | `string`[]         |
-| `EXTERNAL_SCRIPTS_BE_VERBOSE`             | `boolean`          |
 | `EXTERNAL_SCRIPTS_MONGODB_URI`            | `string`           |
 | `HYDRATE_DB_ON_STARTUP`                   | `boolean`          |
 | `IGNORE_RATE_LIMITS`                      | `boolean`          |
@@ -56,4 +55,4 @@
 [1]: ../README.md
 [2]: src_backend_env.md#getenv
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/env.ts#L31
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/backend/env.ts#L31

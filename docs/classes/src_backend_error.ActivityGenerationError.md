@@ -47,7 +47,7 @@ ActivityGenerationError
 
 #### Defined in
 
-[src/backend/error.ts:31][12]
+[src/backend/error.ts:33][12]
 
 ## Properties
 
@@ -178,7 +178,7 @@ node_modules/@types/node/globals.d.ts:4
 [10]: src_backend_error.ActivityGenerationError.md#capturestacktrace
 [11]: src_backend_error.AppError.md#constructor
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/error.ts#L31
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/backend/error.ts#L33
 [13]: src_backend_error.AppError.md#message
 [14]: src_backend_error.AppError.md#name
 [15]: src_backend_error.AppError.md#stack

@@ -20,9 +20,9 @@
 
 #### Defined in
 
-[external-scripts/prune-data.ts:18][3]
+[external-scripts/prune-data.ts:22][3]
 
 [1]: ../README.md
 [2]: external_scripts_prune_data.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/external-scripts/prune-data.ts#L18
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/external-scripts/prune-data.ts#L22

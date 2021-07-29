@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[test/setup.ts:465][9]
+[test/setup.ts:464][9]
 
 ---
 
@@ -37,7 +37,7 @@
 
 #### Defined in
 
-[test/setup.ts:464][10]
+[test/setup.ts:463][10]
 
 ---
 
@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[test/setup.ts:466][12]
+[test/setup.ts:465][12]
 
 ---
 
@@ -57,7 +57,7 @@
 
 #### Defined in
 
-[test/setup.ts:467][13]
+[test/setup.ts:466][13]
 
 [1]: ../README.md
 [2]: ../modules/test_setup.md
@@ -68,11 +68,11 @@
 [7]: test_setup.MockFixture.md#teardown
 [8]: ../modules/test_setup.md#returnsstring
 [9]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L465
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L464
 [10]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L464
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L463
 [11]: ../modules/test_setup.md#fixtureaction
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L466
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L465
 [13]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L467
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L466

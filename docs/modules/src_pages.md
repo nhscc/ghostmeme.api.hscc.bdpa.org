@@ -47,6 +47,6 @@
 [2]: src_pages.md#default
 [3]: src_pages.md#getserversideprops
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/pages/index.tsx#L22
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/pages/index.tsx#L22
 [5]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/pages/index.tsx#L7
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/pages/index.tsx#L7

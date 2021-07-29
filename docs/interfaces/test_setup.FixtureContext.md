@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[test/setup.ts:435][15]
+[test/setup.ts:434][15]
 
 ---
 
@@ -56,7 +56,7 @@
 
 #### Defined in
 
-[test/setup.ts:434][16]
+[test/setup.ts:433][16]
 
 ---
 
@@ -70,7 +70,7 @@ Partial.git
 
 #### Defined in
 
-[test/setup.ts:450][17]
+[test/setup.ts:449][17]
 
 ---
 
@@ -80,7 +80,7 @@ Partial.git
 
 #### Defined in
 
-[test/setup.ts:432][19]
+[test/setup.ts:431][19]
 
 ---
 
@@ -90,7 +90,7 @@ Partial.git
 
 #### Defined in
 
-[test/setup.ts:430][20]
+[test/setup.ts:429][20]
 
 ---
 
@@ -100,7 +100,7 @@ Partial.git
 
 #### Defined in
 
-[test/setup.ts:431][21]
+[test/setup.ts:430][21]
 
 ---
 
@@ -122,7 +122,7 @@ Partial.testResult
 
 #### Defined in
 
-[test/setup.ts:440][22]
+[test/setup.ts:439][22]
 
 ---
 
@@ -136,7 +136,7 @@ Partial.treeOutput
 
 #### Defined in
 
-[test/setup.ts:445][23]
+[test/setup.ts:444][23]
 
 ---
 
@@ -146,7 +146,7 @@ Partial.treeOutput
 
 #### Defined in
 
-[test/setup.ts:433][26]
+[test/setup.ts:432][26]
 
 [1]: ../README.md
 [2]: ../modules/test_setup.md
@@ -163,23 +163,23 @@ Partial.treeOutput
 [13]: test_setup.FixtureContext.md#treeoutput
 [14]: test_setup.FixtureContext.md#using
 [15]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L435
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L434
 [16]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L434
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L433
 [17]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L450
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L449
 [18]: test_setup.FixtureOptions.md
 [19]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L432
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L431
 [20]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L430
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L429
 [21]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L431
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L430
 [22]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L440
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L439
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L445
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L444
 [24]: test_setup.MockFixture.md
 [25]: test_setup.FixtureContext.md
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L433
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L432

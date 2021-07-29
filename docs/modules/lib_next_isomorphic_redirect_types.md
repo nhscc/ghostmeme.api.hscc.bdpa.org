@@ -81,8 +81,8 @@ node_modules/@ergodark/types/dist/modules/index.d.ts:21
 [4]: lib_next_isomorphic_redirect_types.md#httpstatuscode
 [5]: lib_next_isomorphic_redirect_types.md#isomorphicredirectconfig
 [6]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/lib/next-isomorphic-redirect/types.ts#L9
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/lib/next-isomorphic-redirect/types.ts#L9
 [7]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/lib/next-isomorphic-redirect/types.ts#L4
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/lib/next-isomorphic-redirect/types.ts#L4
 [8]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/lib/next-isomorphic-redirect/types.ts#L15
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/lib/next-isomorphic-redirect/types.ts#L15
