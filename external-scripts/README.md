@@ -1,6 +1,18 @@
+# External Scripts
+
+External scripts or "externals" are stand-alone packages that aid in the proper
+functioning of the API. Each external should be run via cron as often as is
+appropriate.
+
+Note that externals must first be compiled before they can be run, i.e.
+`npm run build-externals`.
+
+## Example Template
+
+```Typescript
 import { name as pkgName } from 'package';
 import { getEnv } from 'universe/backend/env';
-import { AppError } from 'universe/backend/error';
+import { IllegalExternalEnvironmentError } from 'universe/backend/error';
 import { getDb, closeDb } from 'universe/backend/db';
 import debugFactory from 'debug';
 
@@ -10,7 +22,6 @@ const debugNamespace = `${pkgName}:EXTERNAL_SCRIPT_NAME_HERE`;
 const log = debugFactory(debugNamespace);
 const debug = debugFactory(debugNamespace);
 
-// eslint-disable-next-line no-console
 log.log = console.info.bind(console);
 
 if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
@@ -18,7 +29,6 @@ if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
   debug.enabled = false;
 }
 
-// TODO: XXX: replace AppError with IllegalExternalEnvironmentError
 export default async function main() {
   log('initializing');
 
@@ -28,7 +38,7 @@ export default async function main() {
   } = getEnv();
 
   // TODO:
-  void AppError;
+  void IllegalExternalEnvironmentError;
 
   log('connecting to external database');
 
@@ -43,3 +53,4 @@ export default async function main() {
 }
 
 !module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));
+```
