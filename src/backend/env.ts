@@ -1,7 +1,7 @@
 import { name as pkgName } from 'package';
 import { parse as parseAsBytes } from 'bytes';
 import { isServer } from 'is-server-side';
-import { AppError } from 'universe/backend/error';
+import { IllegalEnvironmentError } from 'universe/backend/error';
 import debugFactory from 'debug';
 
 const debug = debugFactory(`${pkgName}:env`);
@@ -142,6 +142,8 @@ export function getEnv() {
   }
 
   if (errors.length) {
-    throw new AppError(`illegal environment detected:\n - ${errors.join('\n - ')}`);
+    throw new IllegalEnvironmentError(
+      `illegal environment detected:\n - ${errors.join('\n - ')}`
+    );
   } else return env;
 }

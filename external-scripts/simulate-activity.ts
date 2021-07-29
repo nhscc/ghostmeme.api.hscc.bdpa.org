@@ -1,6 +1,6 @@
 import { name as pkgName } from 'package';
 import { getEnv } from 'universe/backend/env';
-import { AppError } from 'universe/backend/error';
+import { ExternalError, IllegalExternalEnvironmentError } from 'universe/backend/error';
 import { getDb, closeDb } from 'universe/backend/db';
 import debugFactory from 'debug';
 
@@ -17,7 +17,6 @@ if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
   debug.enabled = false;
 }
 
-// TODO: replace AppError with IllegalExternalEnvironmentError
 export default async function main() {
   log('initializing');
 
@@ -27,7 +26,7 @@ export default async function main() {
   } = getEnv();
 
   // TODO:
-  void AppError;
+  void ExternalError, IllegalExternalEnvironmentError;
 
   log('connecting to external database');
 

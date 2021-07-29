@@ -12,7 +12,7 @@ Note that externals must first be compiled before they can be run, i.e.
 ```Typescript
 import { name as pkgName } from 'package';
 import { getEnv } from 'universe/backend/env';
-import { IllegalExternalEnvironmentError } from 'universe/backend/error';
+import { ExternalError, IllegalExternalEnvironmentError } from 'universe/backend/error';
 import { getDb, closeDb } from 'universe/backend/db';
 import debugFactory from 'debug';
 
@@ -30,26 +30,30 @@ if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
 }
 
 export default async function main() {
-  log('initializing');
+  try {
+    log('initializing');
 
-  // eslint-disable-next-line no-empty-pattern
-  const {
-    // TODO: ...
-  } = getEnv();
+    // eslint-disable-next-line no-empty-pattern
+    const {
+      // TODO: ...
+    } = getEnv();
 
-  // TODO:
-  void IllegalExternalEnvironmentError;
+    // TODO:
+    void ExternalError, IllegalExternalEnvironmentError;
 
-  log('connecting to external database');
+    log('connecting to external database');
 
-  const db = await getDb({ external: true });
+    const db = await getDb({ external: true });
 
-  // TODO:
-  void db;
+    // TODO:
+    void db;
 
-  debug('closing connection');
-  await closeDb();
-  log('execution complete');
+    debug('closing connection');
+    await closeDb();
+    log('execution complete');
+  } catch (e) {
+    throw new ExternalError(e.message || e.toString());
+  }
 }
 
 !module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));

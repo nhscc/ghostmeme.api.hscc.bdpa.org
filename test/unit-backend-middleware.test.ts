@@ -27,13 +27,11 @@ import {
   InvalidIdError,
   InvalidKeyError,
   ValidationError,
-  ActivityGenerationError,
   NotAuthorizedError,
   NotFoundError,
   ItemNotFoundError,
   AppError,
-  GuruMeditationError,
-  ActivitySimulationError
+  GuruMeditationError
 } from 'universe/backend/error';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -270,8 +268,6 @@ describe('::handleEndpoint', () => {
       [new InvalidKeyError(), 400],
       [new ValidationError(), 400],
       [new ValidationError(''), 400], // ! Edge case for code coverage
-      [new ActivityGenerationError(), 500],
-      [new ActivitySimulationError(), 500],
       [new NotAuthorizedError(), 403],
       [new NotFoundError(), 404],
       [new ItemNotFoundError(), 404],
