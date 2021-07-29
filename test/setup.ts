@@ -1,4 +1,3 @@
-// import 'expect-puppeteer'
 import { name as pkgName, version as pkgVersion } from 'package';
 import { verifyEnvironment } from '../expect-env';
 import { AppError, GuruMeditationError } from 'universe/backend/error';
