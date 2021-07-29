@@ -2818,7 +2818,7 @@ describe('::isRateLimited', () => {
   it('returns true if ip or key are rate limited', async () => {
     expect.hasAssertions();
     const _now = Date.now;
-    const now = Date.now();
+    const now = dummyDbData.generatedAt;
     Date.now = () => now;
 
     const req1 = await Backend.isRateLimited({
@@ -2868,12 +2868,13 @@ describe('::isRateLimited', () => {
     expect(req4.limited).toBeTrue();
     expect(req5.limited).toBeTrue();
 
-    expect(req1.retryAfter).toBeWithin(1000 * 60 * 15 - 1000, 1000 * 60 * 15 + 1000);
-    expect(req2.retryAfter).toBeWithin(1000 * 60 * 60 - 1000, 1000 * 60 * 60 + 1000);
-    expect(req3.retryAfter).toBeWithin(1000 * 60 * 15 - 1000, 1000 * 60 * 15 + 1000);
-    expect(req4.retryAfter).toBeWithin(1000 * 60 * 15 - 1000, 1000 * 60 * 15 + 1000);
+    const minToMs = (minutes: number) => 1000 * 60 * minutes;
+    expect(req1.retryAfter).toBeWithin(minToMs(15) - 1000, minToMs(15) + 1000);
+    expect(req2.retryAfter).toBeWithin(minToMs(60) - 1000, minToMs(60) + 1000);
+    expect(req3.retryAfter).toBeWithin(minToMs(15) - 1000, minToMs(15) + 1000);
+    expect(req4.retryAfter).toBeWithin(minToMs(15) - 1000, minToMs(15) + 1000);
     // ? Should return greater of the two ban times (key time > ip time)
-    expect(req5.retryAfter).toBeWithin(1000 * 60 * 60 - 1000, 1000 * 60 * 60 + 1000);
+    expect(req5.retryAfter).toBeWithin(minToMs(60) - 1000, minToMs(60) + 1000);
 
     Date.now = _now;
   });

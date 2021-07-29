@@ -35,8 +35,8 @@ describe('external-scripts/prune-data', () => {
     expect.hasAssertions();
 
     expect(await countCollection(testCollections)).toStrictEqual({
-      'request-log': 22,
-      'limited-log-mview': 3,
+      'request-log': dummyDbData.logs.length,
+      'limited-log-mview': dummyDbData.bans.length,
       users: dummyDbData.users.length,
       memes: dummyDbData.memes.length
     });
@@ -86,8 +86,8 @@ describe('external-scripts/prune-data', () => {
     expect.hasAssertions();
 
     expect(await countCollection(testCollections)).toStrictEqual({
-      'request-log': 22,
-      'limited-log-mview': 3,
+      'request-log': dummyDbData.logs.length,
+      'limited-log-mview': dummyDbData.bans.length,
       users: dummyDbData.users.length,
       memes: dummyDbData.memes.length
     });
@@ -97,8 +97,8 @@ describe('external-scripts/prune-data', () => {
         await pruneData();
         setClientAndDb(await getNewClientAndDb());
         expect(await countCollection(testCollections)).toStrictEqual({
-          'request-log': 22,
-          'limited-log-mview': 3,
+          'request-log': dummyDbData.logs.length,
+          'limited-log-mview': dummyDbData.bans.length,
           users: dummyDbData.users.length,
           memes: dummyDbData.memes.length
         });
