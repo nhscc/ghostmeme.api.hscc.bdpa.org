@@ -40,7 +40,7 @@ Partial.directoryPaths
 
 #### Defined in
 
-[test/setup.ts:421][12]
+[test/setup.ts:420][12]
 
 ---
 
@@ -54,7 +54,7 @@ Partial.directoryPaths
 
 #### Defined in
 
-[test/setup.ts:406][13]
+[test/setup.ts:405][13]
 
 ---
 
@@ -64,7 +64,7 @@ Partial.directoryPaths
 
 #### Defined in
 
-[test/setup.ts:404][14]
+[test/setup.ts:403][14]
 
 ---
 
@@ -74,7 +74,7 @@ Partial.directoryPaths
 
 #### Defined in
 
-[test/setup.ts:405][17]
+[test/setup.ts:404][17]
 
 ---
 
@@ -88,7 +88,7 @@ Partial.webpackVersion
 
 #### Defined in
 
-[test/setup.ts:411][18]
+[test/setup.ts:410][18]
 
 ## Methods
 
@@ -112,7 +112,7 @@ Partial.setupGit
 
 #### Defined in
 
-[test/setup.ts:416][19]
+[test/setup.ts:415][19]
 
 [1]: ../README.md
 [2]: ../modules/test_setup.md
@@ -126,16 +126,16 @@ Partial.setupGit
 [10]: test_setup.FixtureOptions.md#webpackversion
 [11]: test_setup.FixtureOptions.md#setupgit
 [12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L421
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L420
 [13]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L406
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L405
 [14]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L404
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L403
 [15]: test_setup.MockFixture.md
 [16]: test_setup.FixtureContext.md
 [17]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L405
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L404
 [18]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L411
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L410
 [19]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L416
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L415

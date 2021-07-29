@@ -12,13 +12,7 @@
 
 ### default
 
-▸ **default**(`isCLI?`): `Promise`<`void`>
-
-#### Parameters
-
-| Name    | Type      | Default value |
-| :------ | :-------- | :------------ |
-| `isCLI` | `boolean` | `false`       |
+▸ **default**(): `Promise`<`void`>
 
 #### Returns
 
@@ -26,9 +20,9 @@
 
 #### Defined in
 
-[external-scripts/ban-hammer.ts:8][3]
+[external-scripts/ban-hammer.ts:22][3]
 
 [1]: ../README.md
 [2]: external_scripts_ban_hammer.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/external-scripts/ban-hammer.ts#L8
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/external-scripts/ban-hammer.ts#L22
