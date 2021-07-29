@@ -1,6 +1,6 @@
 import { name as pkgName, version as pkgVersion } from 'package';
 import { verifyEnvironment } from '../expect-env';
-import { AppError, GuruMeditationError } from 'universe/backend/error';
+import { TestError, GuruMeditationError } from 'universe/backend/error';
 import { sendHttpErrorResponse } from 'multiverse/next-respond';
 import { tmpdir } from 'os';
 import { promises as fs } from 'fs';
@@ -114,7 +114,7 @@ export function asMockedNextApiMiddleware(
   });
 }
 
-export class FactoryExhaustionError extends AppError {}
+export class FactoryExhaustionError extends TestError {}
 export function itemFactory<T>(testItems: T[]) {
   const nextItem = Object.assign(
     () => {
