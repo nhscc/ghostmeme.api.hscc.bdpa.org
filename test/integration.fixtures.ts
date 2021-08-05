@@ -82,6 +82,13 @@ export type TestFixture = {
    */
   id?: string;
   /**
+   * If `invisible == true`, the test is not counted when generating positional
+   * fixtures.
+   *
+   * @default false
+   */
+  invisible?: boolean;
+  /**
    * The test index X (as in "#X") that is reported to the user when a test
    * fails.
    */
@@ -139,9 +146,7 @@ export type TestFixture = {
   };
 };
 
-export async function getFixtures(
-  api: Record<string, NextApiHandlerMixin>
-): Promise<TestFixture[]> {
+export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixture[] {
   const initialMemeCount = dummyDbData.memes.length;
   const initialUserCount = dummyDbData.users.length;
 
@@ -183,7 +188,7 @@ export async function getFixtures(
     },
     {
       id: 'user-hillary',
-      subject: 'valid create user',
+      subject: 'valid create user #1',
       handler: api.users,
       method: 'POST',
       body: {
@@ -245,7 +250,7 @@ export async function getFixtures(
     },
     {
       id: 'user-test-1',
-      subject: 'valid create user',
+      subject: 'valid create user #2',
       handler: api.users,
       method: 'POST',
       body: {
@@ -274,7 +279,7 @@ export async function getFixtures(
     },
     {
       id: 'user-test-2',
-      subject: 'valid create user',
+      subject: 'valid create user #3',
       handler: api.users,
       method: 'POST',
       body: {
@@ -458,20 +463,18 @@ export async function getFixtures(
       }
     },
     {
-      subject: 'invalid create user #9',
+      invisible: true,
+      subject: 'invalid create user (image too big)',
       handler: api.users,
       method: 'POST',
-      body: {
+      body: async () => ({
         name: 'Test User 2',
         email: 'test2@test.com',
         phone: '555-666-7777',
         username: 'test-user-2',
         imageBase64: (await import('testverse/images')).image13MB
-      },
-      response: {
-        status: 400,
-        json: { error: expect.stringContaining('JSON') }
-      }
+      }),
+      response: { status: 413 }
     },
     {
       subject: 'confirm metadata',
@@ -631,12 +634,13 @@ export async function getFixtures(
         user_id: getResultAt<string>('user-test-1', 'user.user_id')
       }),
       method: 'PUT',
-      body: {
-        name: 'Elizabeth Warren',
-        email: 'liz@ewarren.com',
-        phone: '978-555-5555',
-        imageBase64: (await import('testverse/images')).image17KB
-      } as PatchUser,
+      body: async () =>
+        ({
+          name: 'Elizabeth Warren',
+          email: 'liz@ewarren.com',
+          phone: '978-555-5555',
+          imageBase64: (await import('testverse/images')).image17KB
+        } as PatchUser),
       response: { status: 200 }
     },
     {
@@ -713,19 +717,21 @@ export async function getFixtures(
       }
     },
     {
+      invisible: true,
       subject: "can't upload image that's too big",
       handler: api.usersId,
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id')
       }),
       method: 'PUT',
-      body: {
-        name: 'Elizabeth Warren',
-        email: 'liz@ewarren.com',
-        phone: '978-555-5555',
-        imageBase64: (await import('testverse/images')).image13MB
-      } as PatchUser,
-      response: { status: 200 }
+      body: async () =>
+        ({
+          name: 'Elizabeth Warren',
+          email: 'liz@ewarren.com',
+          phone: '978-555-5555',
+          imageBase64: (await import('testverse/images')).image13MB
+        } as PatchUser),
+      response: { status: 413 }
     },
     {
       subject: "can't use invalid base64",
@@ -1090,7 +1096,8 @@ export async function getFixtures(
       }
     },
     {
-      subject: 'invalid create meme #16',
+      invisible: true,
+      subject: 'invalid create meme (image too big)',
       handler: api.memes,
       method: 'POST',
       body: async ({ getResultAt }) => ({
@@ -1103,10 +1110,7 @@ export async function getFixtures(
         imageUrl: null,
         imageBase64: (await import('testverse/images')).image13MB
       }),
-      response: {
-        status: 400,
-        json: { error: expect.stringContaining('`owner`') }
-      }
+      response: { status: 413 }
     },
     {
       subject: 'like meme',
@@ -2304,7 +2308,16 @@ export async function getFixtures(
 
   // TODO: XXX: with @xunnamius/fable, have an "every X" type construct (the below is "every 10")
   // TODO: XXX: also allow middleware
+  // TODO: XXX: also custom props for fixtures
   for (let i = 9; i < filteredFixtures.length; i += 10) {
+    const invisibleCount = filteredFixtures
+      .slice(Math.max(0, i - 10), i)
+      .filter((f) => f.invisible).length;
+
+    // ? Ensure counts remain aligned by skipping tests that don't increase
+    // ? internal contrived counter
+    i += invisibleCount;
+
     filteredFixtures.splice(i, 0, {
       displayIndex: -1,
       subject: 'handle contrived',
