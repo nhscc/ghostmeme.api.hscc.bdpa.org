@@ -1,6 +1,6 @@
+test
 docs
 coverage
 .husky
 .github
-test/images.ts
 *.no-vercel.*
