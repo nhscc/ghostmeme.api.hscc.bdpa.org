@@ -92,6 +92,37 @@ const matchableStrings = [
  */
 const matchableSubStrings = ['$gt', '$lt', '$gte', '$lte'];
 
+const validateUserData = (data: Partial<NewUser | PatchUser>) => {
+  if (!isPlainObject(data)) {
+    throw new ValidationError('only JSON content is allowed');
+  } else if (
+    typeof data.name != 'string' ||
+    data.name.length < 3 ||
+    data.name.length > 30 ||
+    !nameRegex.test(data.name)
+  ) {
+    throw new ValidationError(
+      '`name` must be an alphanumeric string between 3 and 30 characters'
+    );
+  } else if (
+    typeof data.email != 'string' ||
+    data.email.length < 5 ||
+    data.email.length > 50 ||
+    !emailRegex.test(data.email)
+  ) {
+    throw new ValidationError(
+      '`email` must be a valid email address between 5 and 50 characters'
+    );
+  } else if (
+    data.phone !== null &&
+    (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
+  ) {
+    throw new ValidationError('`phone` must be a valid phone number or null');
+  }
+
+  return true;
+};
+
 export const publicMemeProjection = {
   _id: false,
   meme_id: { $toString: '$_id' },
@@ -260,7 +291,6 @@ export async function createMeme({
   );
 }
 
-// TODO: DRY some of this validation logic out as well (see create/updateUser)
 export async function updateMemes({
   meme_ids,
   data
@@ -502,35 +532,14 @@ export async function createUser({
   creatorKey: string;
   data: Partial<NewUser>;
 }): Promise<PublicUser> {
-  if (!isPlainObject(data)) {
-    throw new ValidationError('only JSON content is allowed');
-  } else if (
-    typeof data.name != 'string' ||
-    data.name.length < 3 ||
-    data.name.length > 30 ||
-    !nameRegex.test(data.name)
-  ) {
-    throw new ValidationError(
-      '`name` must be an alphanumeric string between 3 and 30 characters'
-    );
-  } else if (
-    typeof data.email != 'string' ||
-    data.email.length < 5 ||
-    data.email.length > 50 ||
-    !emailRegex.test(data.email)
-  ) {
-    throw new ValidationError(
-      '`email` must be a valid email address between 5 and 50 characters'
-    );
-  } else if (
-    data.phone !== null &&
-    (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
-  ) {
-    throw new ValidationError('`phone` must be a valid phone number or null');
-  } else if (typeof data.username != 'string' || !usernameRegex.test(data.username)) {
+  validateUserData(data);
+
+  if (typeof data.username != 'string' || !usernameRegex.test(data.username)) {
     throw new ValidationError(
       '`username` must be an alphanumeric string between 5 and 20 characters'
     );
+  } else if (!creatorKey || typeof creatorKey != 'string') {
+    throw new InvalidKeyError();
   } else if (
     data.imageBase64 !== null &&
     (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
@@ -538,26 +547,16 @@ export async function createUser({
     throw new ValidationError(
       '`imageBase64` must be a valid non-empty base64 string, data uri, or null'
     );
-  } else if (!creatorKey || typeof creatorKey != 'string') {
-    throw new InvalidKeyError();
   }
 
-  let imageUrl: string | null = null;
-
-  if (data.imageBase64) {
-    // TODO: validate and use imageBase64 to resolve new imageUrl
-    // eslint-disable-next-line no-self-assign
-    imageUrl = imageUrl;
-  }
-
-  const { email, name, phone, username, ...rest } = data;
+  const { email, name, phone, username, ...rest } = data as NewUser;
 
   if (Object.keys(rest).length != 1) {
     throw new ValidationError('unexpected properties encountered');
   }
 
   const db = await getDb();
-  const users = await db.collection<InternalUser>('users');
+  const users = db.collection<InternalUser>('users');
 
   if (await itemExists(users, username, 'username', { caseInsensitive: true })) {
     throw new ValidationError('a user with that username already exists');
@@ -589,7 +588,6 @@ export async function createUser({
   return getUser({ user_id: (newUser as WithId<InternalUser>)._id });
 }
 
-// TODO: factor out the validation code for both user creation and update (DRY)
 export async function updateUser({
   user_id,
   data
@@ -597,43 +595,21 @@ export async function updateUser({
   user_id: UserId;
   data: Partial<PatchUser>;
 }): Promise<void> {
+  validateUserData(data);
+
   if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
-  } else if (!isPlainObject(data)) {
-    throw new ValidationError('only JSON content is allowed');
-  } else if (
-    typeof data.name != 'string' ||
-    data.name.length < 3 ||
-    data.name.length > 30 ||
-    !nameRegex.test(data.name)
-  ) {
-    throw new ValidationError(
-      '`name` must be an alphanumeric string between 3 and 30 characters'
-    );
-  } else if (
-    typeof data.email != 'string' ||
-    data.email.length < 5 ||
-    data.email.length > 50 ||
-    !emailRegex.test(data.email)
-  ) {
-    throw new ValidationError(
-      '`email` must be a valid email address between 5 and 50 characters'
-    );
-  } else if (
-    data.phone !== null &&
-    (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
-  ) {
-    throw new ValidationError('`phone` must be a valid phone number or null');
   } else if (
     data.imageBase64 !== null &&
+    data.imageBase64 !== undefined &&
     (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
   ) {
     throw new ValidationError(
-      '`imageBase64` must be a valid base64 string, data uri, or null'
+      '`imageBase64` must be a valid non-empty base64 string, data uri, or null'
     );
   }
 
-  const { email, name, phone, imageBase64, ...rest } = data;
+  const { email, name, phone, imageBase64, ...rest } = data as PatchUser;
 
   if (Object.keys(rest).length > 0)
     throw new ValidationError('unexpected properties encountered');
