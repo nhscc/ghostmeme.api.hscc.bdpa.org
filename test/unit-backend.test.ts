@@ -3129,8 +3129,19 @@ describe('::isDueForContrivedError', () => {
 });
 
 describe('::handleImageUpload', () => {
-  test.todo('unpacks base64 string to image and uploads it to imgur API');
-  test.todo('duplicate uploads use LRU cache instead of imgur API, return same uri');
-  test.todo('rejects badly formatted base64 strings');
-  test.todo('handles imgur API errors gracefully');
+  it('unpacks base64 string to image and uploads it to imgur API', async () => {
+    expect.hasAssertions();
+  });
+
+  it('duplicate uploads use LRU cache instead of imgur API, return same uri', async () => {
+    expect.hasAssertions();
+  });
+
+  it('rejects badly formatted base64 strings', async () => {
+    expect.hasAssertions();
+  });
+
+  it('handles imgur API errors gracefully', async () => {
+    expect.hasAssertions();
+  });
 });
