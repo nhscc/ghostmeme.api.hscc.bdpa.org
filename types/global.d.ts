@@ -220,7 +220,7 @@ export type PatchMeme = {
  * The shape of a received update to an existing user.
  */
 export type PatchUser = Pick<InternalUser, 'name' | 'email' | 'phone'> & {
-  imageBase64: string | null;
+  imageBase64?: string | null;
 };
 
 export type FriendRequestType = 'incoming' | 'outgoing';
