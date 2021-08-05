@@ -1,49 +1,40 @@
-[ghostmeme.api.hscc.bdpa.org][1] /
-src/pages/api/v1/users/%5Buser_id%5D/requests/%5Brequest_type%5D
+[ghostmeme.api.hscc.bdpa.org](../README.md) / src/pages/api/v1/users/%5Buser_id%5D/requests/%5Brequest_type%5D
 
-# Module: src/pages/api/v1/users/\[user_id]/requests/\[request_type]
+# Module: src/pages/api/v1/users/[user\_id]/requests/[request\_type]
 
 ## Table of contents
 
 ### References
 
-- [config][2]
+- [config](src_pages_api_v1_users__user_id__requests__request_type_.md#config)
 
 ### Functions
 
-- [default][3]
+- [default](src_pages_api_v1_users__user_id__requests__request_type_.md#default)
 
 ## References
 
 ### config
 
-Renames and exports: [defaultConfig][4]
+Renames and exports: [defaultConfig](src_backend_middleware.md#defaultconfig)
 
 ## Functions
 
 ### default
 
-▸ **default**(`req`, `res`): `Promise`<`void`>
+▸ **default**(`req`, `res`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name  | Type              |
-| :---- | :---------------- |
-| `req` | `NextApiRequest`  |
+| Name | Type |
+| :------ | :------ |
+| `req` | `NextApiRequest` |
 | `res` | `NextApiResponse` |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/pages/api/v1/users/\[user_id\]/requests/\[request_type\]/index.ts:13][5]
-
-[1]: ../README.md
-[2]: src_pages_api_v1_users__user_id__requests__request_type_.md#config
-[3]: src_pages_api_v1_users__user_id__requests__request_type_.md#default
-[4]: src_backend_middleware.md#defaultconfig
-
-[5]:
-https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/pages/api/v1/users/[user_id]/requests/[request_type]/index.ts#L13
+[src/pages/api/v1/users/[user_id]/requests/[request_type]/index.ts:13](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/pages/api/v1/users/[user_id]/requests/[request_type]/index.ts#L13)

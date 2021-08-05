@@ -1,12 +1,12 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / FactoryExhaustionError
+[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / FactoryExhaustionError
 
 # Class: FactoryExhaustionError
 
-[test/setup][2].FactoryExhaustionError
+[test/setup](../modules/test_setup.md).FactoryExhaustionError
 
 ## Hierarchy
 
-- [`AppError`][3]
+- [`TestError`](src_backend_error.TestError.md)
 
   ↳ **`FactoryExhaustionError`**
 
@@ -14,19 +14,19 @@
 
 ### Constructors
 
-- [constructor][4]
+- [constructor](test_setup.FactoryExhaustionError.md#constructor)
 
 ### Properties
 
-- [message][5]
-- [name][6]
-- [stack][7]
-- [prepareStackTrace][8]
-- [stackTraceLimit][9]
+- [message](test_setup.FactoryExhaustionError.md#message)
+- [name](test_setup.FactoryExhaustionError.md#name)
+- [stack](test_setup.FactoryExhaustionError.md#stack)
+- [prepareStackTrace](test_setup.FactoryExhaustionError.md#preparestacktrace)
+- [stackTraceLimit](test_setup.FactoryExhaustionError.md#stacktracelimit)
 
 ### Methods
 
-- [captureStackTrace][10]
+- [captureStackTrace](test_setup.FactoryExhaustionError.md#capturestacktrace)
 
 ## Constructors
 
@@ -36,13 +36,13 @@
 
 #### Parameters
 
-| Name       | Type     |
-| :--------- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `message?` | `string` |
 
 #### Inherited from
 
-[AppError][3].[constructor][11]
+[TestError](src_backend_error.TestError.md).[constructor](src_backend_error.TestError.md#constructor)
 
 #### Defined in
 
@@ -56,13 +56,13 @@ node_modules/typescript/lib/lib.es5.d.ts:979
 
 #### Inherited from
 
-[AppError][3].[message][12]
+[TestError](src_backend_error.TestError.md).[message](src_backend_error.TestError.md#message)
 
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:974
 
----
+___
 
 ### name
 
@@ -70,13 +70,13 @@ node_modules/typescript/lib/lib.es5.d.ts:974
 
 #### Inherited from
 
-[AppError][3].[name][13]
+[TestError](src_backend_error.TestError.md).[name](src_backend_error.TestError.md#name)
 
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:973
 
----
+___
 
 ### stack
 
@@ -84,18 +84,17 @@ node_modules/typescript/lib/lib.es5.d.ts:973
 
 #### Inherited from
 
-[AppError][3].[stack][14]
+[TestError](src_backend_error.TestError.md).[stack](src_backend_error.TestError.md#stack)
 
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:975
 
----
+___
 
 ### prepareStackTrace
 
-▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`:
-`CallSite`\[]) => `any`
+▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`: `CallSite`[]) => `any`
 
 Optional override for formatting stack traces
 
@@ -107,9 +106,9 @@ Optional override for formatting stack traces
 
 ##### Parameters
 
-| Name          | Type         |
-| :------------ | :----------- |
-| `err`         | `Error`      |
+| Name | Type |
+| :------ | :------ |
+| `err` | `Error` |
 | `stackTraces` | `CallSite`[] |
 
 ##### Returns
@@ -118,13 +117,13 @@ Optional override for formatting stack traces
 
 #### Inherited from
 
-[AppError][3].[prepareStackTrace][15]
+[TestError](src_backend_error.TestError.md).[prepareStackTrace](src_backend_error.TestError.md#preparestacktrace)
 
 #### Defined in
 
 node_modules/@types/node/globals.d.ts:11
 
----
+___
 
 ### stackTraceLimit
 
@@ -132,7 +131,7 @@ node_modules/@types/node/globals.d.ts:11
 
 #### Inherited from
 
-[AppError][3].[stackTraceLimit][16]
+[TestError](src_backend_error.TestError.md).[stackTraceLimit](src_backend_error.TestError.md#stacktracelimit)
 
 #### Defined in
 
@@ -148,9 +147,9 @@ Create .stack property on a target object
 
 #### Parameters
 
-| Name              | Type       |
-| :---------------- | :--------- |
-| `targetObject`    | `object`   |
+| Name | Type |
+| :------ | :------ |
+| `targetObject` | `object` |
 | `constructorOpt?` | `Function` |
 
 #### Returns
@@ -159,26 +158,8 @@ Create .stack property on a target object
 
 #### Inherited from
 
-[AppError][3].[captureStackTrace][17]
+[TestError](src_backend_error.TestError.md).[captureStackTrace](src_backend_error.TestError.md#capturestacktrace)
 
 #### Defined in
 
 node_modules/@types/node/globals.d.ts:4
-
-[1]: ../README.md
-[2]: ../modules/test_setup.md
-[3]: src_backend_error.AppError.md
-[4]: test_setup.FactoryExhaustionError.md#constructor
-[5]: test_setup.FactoryExhaustionError.md#message
-[6]: test_setup.FactoryExhaustionError.md#name
-[7]: test_setup.FactoryExhaustionError.md#stack
-[8]: test_setup.FactoryExhaustionError.md#preparestacktrace
-[9]: test_setup.FactoryExhaustionError.md#stacktracelimit
-[10]: test_setup.FactoryExhaustionError.md#capturestacktrace
-[11]: src_backend_error.AppError.md#constructor
-[12]: src_backend_error.AppError.md#message
-[13]: src_backend_error.AppError.md#name
-[14]: src_backend_error.AppError.md#stack
-[15]: src_backend_error.AppError.md#preparestacktrace
-[16]: src_backend_error.AppError.md#stacktracelimit
-[17]: src_backend_error.AppError.md#capturestacktrace

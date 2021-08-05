@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / test/setup
+[ghostmeme.api.hscc.bdpa.org](../README.md) / test/setup
 
 # Module: test/setup
 
@@ -6,89 +6,89 @@
 
 ### Classes
 
-- [FactoryExhaustionError][2]
+- [FactoryExhaustionError](../classes/test_setup.FactoryExhaustionError.md)
 
 ### Interfaces
 
-- [DummyDirectoriesFixtureOptions][3]
-- [FixtureContext][4]
-- [FixtureOptions][5]
-- [GitProvider][6]
-- [GitRepositoryFixtureOptions][7]
-- [MockFixture][8]
-- [RunOptions][9]
-- [TestResultProvider][10]
-- [TreeOutputProvider][11]
-- [WebpackTestFixtureOptions][12]
+- [DummyDirectoriesFixtureOptions](../interfaces/test_setup.DummyDirectoriesFixtureOptions.md)
+- [FixtureContext](../interfaces/test_setup.FixtureContext.md)
+- [FixtureOptions](../interfaces/test_setup.FixtureOptions.md)
+- [GitProvider](../interfaces/test_setup.GitProvider.md)
+- [GitRepositoryFixtureOptions](../interfaces/test_setup.GitRepositoryFixtureOptions.md)
+- [MockFixture](../interfaces/test_setup.MockFixture.md)
+- [RunOptions](../interfaces/test_setup.RunOptions.md)
+- [TestResultProvider](../interfaces/test_setup.TestResultProvider.md)
+- [TreeOutputProvider](../interfaces/test_setup.TreeOutputProvider.md)
+- [WebpackTestFixtureOptions](../interfaces/test_setup.WebpackTestFixtureOptions.md)
 
 ### Type aliases
 
-- [FixtureAction][13]
-- [MockArgvOptions][14]
-- [MockEnvOptions][15]
-- [ReturnsString][16]
+- [FixtureAction](test_setup.md#fixtureaction)
+- [MockArgvOptions](test_setup.md#mockargvoptions)
+- [MockEnvOptions](test_setup.md#mockenvoptions)
+- [ReturnsString](test_setup.md#returnsstring)
 
 ### Functions
 
-- [asMockedFunction][17]
-- [asMockedNextApiMiddleware][18]
-- [describeRootFixture][19]
-- [dummyDirectoriesFixture][20]
-- [dummyFilesFixture][21]
-- [dummyNpmPackageFixture][22]
-- [gitRepositoryFixture][23]
-- [isolatedImport][24]
-- [isolatedImportFactory][25]
-- [itemFactory][26]
-- [mockArgvFactory][27]
-- [mockEnvFactory][28]
-- [mockFixtureFactory][29]
-- [nodeImportTestFixture][30]
-- [npmLinkSelfFixture][31]
-- [protectedImportFactory][32]
-- [rootFixture][33]
-- [run][34]
-- [runnerFactory][35]
-- [toPublicMeme][36]
-- [toPublicUser][37]
-- [webpackTestFixture][38]
-- [withMockedArgv][39]
-- [withMockedEnv][40]
-- [withMockedExit][41]
-- [withMockedFixture][42]
-- [withMockedOutput][43]
+- [asMockedFunction](test_setup.md#asmockedfunction)
+- [asMockedNextApiMiddleware](test_setup.md#asmockednextapimiddleware)
+- [describeRootFixture](test_setup.md#describerootfixture)
+- [dummyDirectoriesFixture](test_setup.md#dummydirectoriesfixture)
+- [dummyFilesFixture](test_setup.md#dummyfilesfixture)
+- [dummyNpmPackageFixture](test_setup.md#dummynpmpackagefixture)
+- [gitRepositoryFixture](test_setup.md#gitrepositoryfixture)
+- [isolatedImport](test_setup.md#isolatedimport)
+- [isolatedImportFactory](test_setup.md#isolatedimportfactory)
+- [itemFactory](test_setup.md#itemfactory)
+- [mockArgvFactory](test_setup.md#mockargvfactory)
+- [mockEnvFactory](test_setup.md#mockenvfactory)
+- [mockFixtureFactory](test_setup.md#mockfixturefactory)
+- [nodeImportTestFixture](test_setup.md#nodeimporttestfixture)
+- [npmLinkSelfFixture](test_setup.md#npmlinkselffixture)
+- [protectedImportFactory](test_setup.md#protectedimportfactory)
+- [rootFixture](test_setup.md#rootfixture)
+- [run](test_setup.md#run)
+- [runnerFactory](test_setup.md#runnerfactory)
+- [toPublicMeme](test_setup.md#topublicmeme)
+- [toPublicUser](test_setup.md#topublicuser)
+- [webpackTestFixture](test_setup.md#webpacktestfixture)
+- [withMockedArgv](test_setup.md#withmockedargv)
+- [withMockedEnv](test_setup.md#withmockedenv)
+- [withMockedExit](test_setup.md#withmockedexit)
+- [withMockedFixture](test_setup.md#withmockedfixture)
+- [withMockedOutput](test_setup.md#withmockedoutput)
 
 ## Type aliases
 
 ### FixtureAction
 
-Ƭ **FixtureAction**<`Context`>: (`ctx`: `Context`) => `Promise`<`unknown`>
+Ƭ **FixtureAction**<`Context`\>: (`ctx`: `Context`) => `Promise`<`unknown`\>
 
 #### Type parameters
 
-| Name      | Type                  |
-| :-------- | :-------------------- |
-| `Context` | [`FixtureContext`][4] |
+| Name | Type |
+| :------ | :------ |
+| `Context` | [`FixtureContext`](../interfaces/test_setup.FixtureContext.md) |
 
 #### Type declaration
 
-▸ (`ctx`): `Promise`<`unknown`>
+▸ (`ctx`): `Promise`<`unknown`\>
 
 ##### Parameters
 
-| Name  | Type      |
-| :---- | :-------- |
+| Name | Type |
+| :------ | :------ |
 | `ctx` | `Context` |
 
 ##### Returns
 
-`Promise`<`unknown`>
+`Promise`<`unknown`\>
 
 #### Defined in
 
-[test/setup.ts:454][44]
+[test/setup.ts:454](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L454)
 
----
+___
 
 ### MockArgvOptions
 
@@ -96,15 +96,15 @@
 
 #### Type declaration
 
-| Name       | Type      | Description                                                                                                                                                                 |
-| :--------- | :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `replace?` | `boolean` | By default, the first two elements in `process.argv` are preserved. Setting `replace` to `true` will cause the entire process.argv array to be replaced **`default`** false |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `replace?` | `boolean` | By default, the first two elements in `process.argv` are preserved. Setting `replace` to `true` will cause the entire process.argv array to be replaced  **`default`** false |
 
 #### Defined in
 
-[test/setup.ts:175][45]
+[test/setup.ts:175](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L175)
 
----
+___
 
 ### MockEnvOptions
 
@@ -112,88 +112,87 @@
 
 #### Type declaration
 
-| Name       | Type      | Description                                                                                                                                                               |
-| :--------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `replace?` | `boolean` | By default, the `process.env` object is emptied and re-hydrated with `newEnv`. Setting `replace` to `false` will cause `newEnv` to be appended instead **`default`** true |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `replace?` | `boolean` | By default, the `process.env` object is emptied and re-hydrated with `newEnv`. Setting `replace` to `false` will cause `newEnv` to be appended instead  **`default`** true |
 
 #### Defined in
 
-[test/setup.ts:185][46]
+[test/setup.ts:185](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L185)
 
----
+___
 
 ### ReturnsString
 
-Ƭ **ReturnsString**<`Context`>: (`ctx`: `Context`) => `Promise`<`string`> |
-`string`
+Ƭ **ReturnsString**<`Context`\>: (`ctx`: `Context`) => `Promise`<`string`\> \| `string`
 
 #### Type parameters
 
-| Name      | Type                  |
-| :-------- | :-------------------- |
-| `Context` | [`FixtureContext`][4] |
+| Name | Type |
+| :------ | :------ |
+| `Context` | [`FixtureContext`](../interfaces/test_setup.FixtureContext.md) |
 
 #### Type declaration
 
-▸ (`ctx`): `Promise`<`string`> | `string`
+▸ (`ctx`): `Promise`<`string`\> \| `string`
 
 ##### Parameters
 
-| Name  | Type      |
-| :---- | :-------- |
+| Name | Type |
+| :------ | :------ |
 | `ctx` | `Context` |
 
 ##### Returns
 
-`Promise`<`string`> | `string`
+`Promise`<`string`\> \| `string`
 
 #### Defined in
 
-[test/setup.ts:457][47]
+[test/setup.ts:457](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L457)
 
 ## Functions
 
 ### asMockedFunction
 
-▸ **asMockedFunction**<`T`>(): `jest.MockedFunction`<`T`>
+▸ **asMockedFunction**<`T`\>(): `jest.MockedFunction`<`T`\>
 
 #### Type parameters
 
-| Name | Type                           |
-| :--- | :----------------------------- |
-| `T`  | extends ` AnyFunction``never ` |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `AnyFunction``never` |
 
 #### Returns
 
-`jest.MockedFunction`<`T`>
+`jest.MockedFunction`<`T`\>
 
 #### Defined in
 
-[test/setup.ts:166][48]
+[test/setup.ts:166](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L166)
 
-▸ **asMockedFunction**<`T`>(`fn`): `jest.MockedFunction`<`T`>
+▸ **asMockedFunction**<`T`\>(`fn`): `jest.MockedFunction`<`T`\>
 
 #### Type parameters
 
-| Name | Type                  |
-| :--- | :-------------------- |
-| `T`  | extends `AnyFunction` |
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `AnyFunction` |
 
 #### Parameters
 
 | Name | Type |
-| :--- | :--- |
-| `fn` | `T`  |
+| :------ | :------ |
+| `fn` | `T` |
 
 #### Returns
 
-`jest.MockedFunction`<`T`>
+`jest.MockedFunction`<`T`\>
 
 #### Defined in
 
-[test/setup.ts:167][49]
+[test/setup.ts:167](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L167)
 
----
+___
 
 ### asMockedNextApiMiddleware
 
@@ -201,9 +200,9 @@
 
 #### Parameters
 
-| Name          | Type                                            |
-| :------------ | :---------------------------------------------- |
-| `wrapHandler` | [`src/backend/middleware`][50][`"wrapHandler"`] |
+| Name | Type |
+| :------ | :------ |
+| `wrapHandler` | [`src/backend/middleware`](src_backend_middleware.md)[``"wrapHandler"``] |
 
 #### Returns
 
@@ -211,688 +210,556 @@
 
 #### Defined in
 
-[test/setup.ts:92][51]
+[test/setup.ts:92](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L92)
 
----
+___
 
 ### describeRootFixture
 
-▸ **describeRootFixture**(): [`MockFixture`][8]
+▸ **describeRootFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:692][52]
+[test/setup.ts:692](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L692)
 
----
+___
 
 ### dummyDirectoriesFixture
 
-▸ **dummyDirectoriesFixture**(): [`MockFixture`][8]
+▸ **dummyDirectoriesFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:646][53]
+[test/setup.ts:646](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L646)
 
----
+___
 
 ### dummyFilesFixture
 
-▸ **dummyFilesFixture**(): [`MockFixture`][8]
+▸ **dummyFilesFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:667][54]
+[test/setup.ts:667](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L667)
 
----
+___
 
 ### dummyNpmPackageFixture
 
-▸ **dummyNpmPackageFixture**(): [`MockFixture`][8]
+▸ **dummyNpmPackageFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:489][55]
+[test/setup.ts:489](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L489)
 
----
+___
 
 ### gitRepositoryFixture
 
-▸ **gitRepositoryFixture**(): [`MockFixture`][8]
+▸ **gitRepositoryFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:622][56]
+[test/setup.ts:622](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L622)
 
----
+___
 
 ### isolatedImport
 
-▸ **isolatedImport**(`path`): `Promise`<`unknown`>
+▸ **isolatedImport**(`path`): `Promise`<`unknown`\>
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `path` | `string` |
 
 #### Returns
 
-`Promise`<`unknown`>
+`Promise`<`unknown`\>
 
 #### Defined in
 
-[test/setup.ts:270][57]
+[test/setup.ts:270](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L270)
 
----
+___
 
 ### isolatedImportFactory
 
-▸ **isolatedImportFactory**(`path`): () => `Promise`<`unknown`>
+▸ **isolatedImportFactory**(`path`): () => `Promise`<`unknown`\>
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `path` | `string` |
 
 #### Returns
 
 `fn`
 
-▸ (): `Promise`<`unknown`>
+▸ (): `Promise`<`unknown`\>
 
 ##### Returns
 
-`Promise`<`unknown`>
+`Promise`<`unknown`\>
 
 #### Defined in
 
-[test/setup.ts:294][58]
+[test/setup.ts:294](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L294)
 
----
+___
 
 ### itemFactory
 
-▸ **itemFactory**<`T`>(`testItems`): () => `T` & { `$iter`:
-`IterableIterator`<`T`> ; `count`: `number` ; `items`: `T`\[] ;
-`[asyncIterator]`: () => `AsyncGenerator`<`T`, `void`, `unknown`> ;
-`[iterator]`: () => `Generator`<`T`, `void`, `unknown`> }
+▸ **itemFactory**<`T`\>(`testItems`): () => `T` & { `$iter`: `IterableIterator`<`T`\> ; `count`: `number` ; `items`: `T`[] ; `[asyncIterator]`: () => `AsyncGenerator`<`T`, `void`, `unknown`\> ; `[iterator]`: () => `Generator`<`T`, `void`, `unknown`\>  }
 
 #### Type parameters
 
 | Name |
-| :--- |
-| `T`  |
+| :------ |
+| `T` |
 
 #### Parameters
 
-| Name        | Type  |
-| :---------- | :---- |
+| Name | Type |
+| :------ | :------ |
 | `testItems` | `T`[] |
 
 #### Returns
 
-() => `T` & { `$iter`: `IterableIterator`<`T`> ; `count`: `number` ; `items`:
-`T`\[] ; `[asyncIterator]`: () => `AsyncGenerator`<`T`, `void`, `unknown`> ;
-`[iterator]`: () => `Generator`<`T`, `void`, `unknown`> }
+() => `T` & { `$iter`: `IterableIterator`<`T`\> ; `count`: `number` ; `items`: `T`[] ; `[asyncIterator]`: () => `AsyncGenerator`<`T`, `void`, `unknown`\> ; `[iterator]`: () => `Generator`<`T`, `void`, `unknown`\>  }
 
 #### Defined in
 
-[test/setup.ts:118][59]
+[test/setup.ts:118](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L118)
 
----
+___
 
 ### mockArgvFactory
 
-▸ **mockArgvFactory**(`newArgv`, `options?`): (`fn`: () => `AnyVoid`,
-`newArgv?`: `string`\[], `options?`: [`MockArgvOptions`][14]) =>
-`Promise`<`void`>
+▸ **mockArgvFactory**(`newArgv`, `options?`): (`fn`: () => `AnyVoid`, `newArgv?`: `string`[], `options?`: [`MockArgvOptions`](test_setup.md#mockargvoptions)) => `Promise`<`void`\>
 
 #### Parameters
 
-| Name      | Type                    |
-| :-------- | :---------------------- |
-| `newArgv` | typeof `process.argv`   |
-| `options` | [`MockArgvOptions`][14] |
+| Name | Type |
+| :------ | :------ |
+| `newArgv` | typeof `process.argv` |
+| `options` | [`MockArgvOptions`](test_setup.md#mockargvoptions) |
 
 #### Returns
 
 `fn`
 
-▸ (`fn`, `newArgv?`, `options?`): `Promise`<`void`>
+▸ (`fn`, `newArgv?`, `options?`): `Promise`<`void`\>
 
 ##### Parameters
 
-| Name       | Type                    |
-| :--------- | :---------------------- |
-| `fn`       | () => `AnyVoid`         |
-| `newArgv?` | `string`[]              |
-| `options?` | [`MockArgvOptions`][14] |
+| Name | Type |
+| :------ | :------ |
+| `fn` | () => `AnyVoid` |
+| `newArgv?` | `string`[] |
+| `options?` | [`MockArgvOptions`](test_setup.md#mockargvoptions) |
 
 ##### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:212][60]
+[test/setup.ts:212](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L212)
 
----
+___
 
 ### mockEnvFactory
 
-▸ **mockEnvFactory**(`newEnv`, `options?`): (`fn`: () => `AnyVoid`, `newEnv?`:
-`Record`<`string`, `string`>, `options?`: [`MockEnvOptions`][15]) =>
-`Promise`<`void`>
+▸ **mockEnvFactory**(`newEnv`, `options?`): (`fn`: () => `AnyVoid`, `newEnv?`: `Record`<`string`, `string`\>, `options?`: [`MockEnvOptions`](test_setup.md#mockenvoptions)) => `Promise`<`void`\>
 
 #### Parameters
 
-| Name      | Type                         |
-| :-------- | :--------------------------- |
-| `newEnv`  | `Record`<`string`, `string`> |
-| `options` | [`MockEnvOptions`][15]       |
+| Name | Type |
+| :------ | :------ |
+| `newEnv` | `Record`<`string`, `string`\> |
+| `options` | [`MockEnvOptions`](test_setup.md#mockenvoptions) |
 
 #### Returns
 
 `fn`
 
-▸ (`fn`, `newEnv?`, `options?`): `Promise`<`void`>
+▸ (`fn`, `newEnv?`, `options?`): `Promise`<`void`\>
 
 ##### Parameters
 
-| Name       | Type                         |
-| :--------- | :--------------------------- |
-| `fn`       | () => `AnyVoid`              |
-| `newEnv?`  | `Record`<`string`, `string`> |
-| `options?` | [`MockEnvOptions`][15]       |
+| Name | Type |
+| :------ | :------ |
+| `fn` | () => `AnyVoid` |
+| `newEnv?` | `Record`<`string`, `string`\> |
+| `options?` | [`MockEnvOptions`](test_setup.md#mockenvoptions) |
 
 ##### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:249][61]
+[test/setup.ts:249](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L249)
 
----
+___
 
 ### mockFixtureFactory
 
-▸ **mockFixtureFactory**<`CustomOptions`, `CustomContext`>(`testIdentifier`,
-`options?`): (`fn`:
-[`FixtureAction`][13]<[`FixtureContext`][4]<[`FixtureOptions`][5] &
-`Partial`<`Record`<`string`, `unknown`> & `CustomOptions`>> & `CustomContext`>)
-=> `Promise`<`void`>
+▸ **mockFixtureFactory**<`CustomOptions`, `CustomContext`\>(`testIdentifier`, `options?`): (`fn`: [`FixtureAction`](test_setup.md#fixtureaction)<[`FixtureContext`](../interfaces/test_setup.FixtureContext.md)<[`FixtureOptions`](../interfaces/test_setup.FixtureOptions.md) & `Partial`<`Record`<`string`, `unknown`\> & `CustomOptions`\>\> & `CustomContext`\>) => `Promise`<`void`\>
 
 #### Type parameters
 
-| Name            | Type                                    |
-| :-------------- | :-------------------------------------- |
-| `CustomOptions` | extends `Record`<`string`, `unknown`>{} |
-| `CustomContext` | extends `Record`<`string`, `unknown`>{} |
+| Name | Type |
+| :------ | :------ |
+| `CustomOptions` | extends `Record`<`string`, `unknown`\>{} |
+| `CustomContext` | extends `Record`<`string`, `unknown`\>{} |
 
 #### Parameters
 
-| Name             | Type                                               |
-| :--------------- | :------------------------------------------------- |
-| `testIdentifier` | `string`                                           |
-| `options?`       | `Partial`<[`FixtureOptions`][5] & `CustomOptions`> |
+| Name | Type |
+| :------ | :------ |
+| `testIdentifier` | `string` |
+| `options?` | `Partial`<[`FixtureOptions`](../interfaces/test_setup.FixtureOptions.md) & `CustomOptions`\> |
 
 #### Returns
 
 `fn`
 
-▸ (`fn`): `Promise`<`void`>
+▸ (`fn`): `Promise`<`void`\>
 
 ##### Parameters
 
-| Name | Type                                                                                                                                               |
-| :--- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fn` | [`FixtureAction`][13]<[`FixtureContext`][4]<[`FixtureOptions`][5] & `Partial`<`Record`<`string`, `unknown`> & `CustomOptions`>> & `CustomContext`> |
+| Name | Type |
+| :------ | :------ |
+| `fn` | [`FixtureAction`](test_setup.md#fixtureaction)<[`FixtureContext`](../interfaces/test_setup.FixtureContext.md)<[`FixtureOptions`](../interfaces/test_setup.FixtureOptions.md) & `Partial`<`Record`<`string`, `unknown`\> & `CustomOptions`\>\> & `CustomContext`\> |
 
 ##### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:818][62]
+[test/setup.ts:818](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L818)
 
----
+___
 
 ### nodeImportTestFixture
 
-▸ **nodeImportTestFixture**(): [`MockFixture`][8]
+▸ **nodeImportTestFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:588][63]
+[test/setup.ts:588](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L588)
 
----
+___
 
 ### npmLinkSelfFixture
 
-▸ **npmLinkSelfFixture**(): [`MockFixture`][8]
+▸ **npmLinkSelfFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:514][64]
+[test/setup.ts:514](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L514)
 
----
+___
 
 ### protectedImportFactory
 
-▸ **protectedImportFactory**(`path`): (`params?`: { `expectedExitCode?`:
-`number` }) => `Promise`<`unknown`>
+▸ **protectedImportFactory**(`path`): (`params?`: { `expectedExitCode?`: `number`  }) => `Promise`<`unknown`\>
 
 #### Parameters
 
-| Name   | Type     |
-| :----- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `path` | `string` |
 
 #### Returns
 
 `fn`
 
-▸ (`params?`): `Promise`<`unknown`>
+▸ (`params?`): `Promise`<`unknown`\>
 
 ##### Parameters
 
-| Name                       | Type     |
-| :------------------------- | :------- |
-| `params?`                  | `Object` |
+| Name | Type |
+| :------ | :------ |
+| `params?` | `Object` |
 | `params.expectedExitCode?` | `number` |
 
 ##### Returns
 
-`Promise`<`unknown`>
+`Promise`<`unknown`\>
 
 #### Defined in
 
-[test/setup.ts:314][65]
+[test/setup.ts:314](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L314)
 
----
+___
 
 ### rootFixture
 
-▸ **rootFixture**(): [`MockFixture`][8]
+▸ **rootFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:470][66]
+[test/setup.ts:470](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L470)
 
----
+___
 
 ### run
 
-▸ **run**(`file`, `args?`, `options?`): `Promise`<`ExecaReturnValue`<`string`> &
-{ `code`: `number` }>
+▸ **run**(`file`, `args?`, `options?`): `Promise`<`ExecaReturnValue`<`string`\> & { `code`: `number`  }\>
 
 #### Parameters
 
-| Name       | Type              |
-| :--------- | :---------------- |
-| `file`     | `string`          |
-| `args?`    | `string`[]        |
-| `options?` | [`RunOptions`][9] |
+| Name | Type |
+| :------ | :------ |
+| `file` | `string` |
+| `args?` | `string`[] |
+| `options?` | [`RunOptions`](../interfaces/test_setup.RunOptions.md) |
 
 #### Returns
 
-`Promise`<`ExecaReturnValue`<`string`> & { `code`: `number` }>
+`Promise`<`ExecaReturnValue`<`string`\> & { `code`: `number`  }\>
 
 #### Defined in
 
-[test/setup.ts:378][67]
+[test/setup.ts:378](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L378)
 
----
+___
 
 ### runnerFactory
 
-▸ **runnerFactory**(`file`, `args?`, `options?`): (`args?`: `string`\[],
-`options?`: [`RunOptions`][9]) => `Promise`<`ExecaReturnValue`<`string`> & {
-`code`: `number` }>
+▸ **runnerFactory**(`file`, `args?`, `options?`): (`args?`: `string`[], `options?`: [`RunOptions`](../interfaces/test_setup.RunOptions.md)) => `Promise`<`ExecaReturnValue`<`string`\> & { `code`: `number`  }\>
 
 #### Parameters
 
-| Name       | Type              |
-| :--------- | :---------------- |
-| `file`     | `string`          |
-| `args?`    | `string`[]        |
-| `options?` | [`RunOptions`][9] |
+| Name | Type |
+| :------ | :------ |
+| `file` | `string` |
+| `args?` | `string`[] |
+| `options?` | [`RunOptions`](../interfaces/test_setup.RunOptions.md) |
 
 #### Returns
 
 `fn`
 
-▸ (`args?`, `options?`): `Promise`<`ExecaReturnValue`<`string`> & { `code`:
-`number` }>
+▸ (`args?`, `options?`): `Promise`<`ExecaReturnValue`<`string`\> & { `code`: `number`  }\>
 
 ##### Parameters
 
-| Name       | Type              |
-| :--------- | :---------------- |
-| `args?`    | `string`[]        |
-| `options?` | [`RunOptions`][9] |
+| Name | Type |
+| :------ | :------ |
+| `args?` | `string`[] |
+| `options?` | [`RunOptions`](../interfaces/test_setup.RunOptions.md) |
 
 ##### Returns
 
-`Promise`<`ExecaReturnValue`<`string`> & { `code`: `number` }>
+`Promise`<`ExecaReturnValue`<`string`\> & { `code`: `number`  }\>
 
 #### Defined in
 
-[test/setup.ts:390][68]
+[test/setup.ts:390](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L390)
 
----
+___
 
 ### toPublicMeme
 
-▸ **toPublicMeme**(`internal`): [`PublicMeme`][69]
+▸ **toPublicMeme**(`internal`): [`PublicMeme`](types_global.md#publicmeme)
 
 #### Parameters
 
-| Name       | Type                           |
-| :--------- | :----------------------------- |
-| `internal` | `WithId`<[`InternalMeme`][70]> |
+| Name | Type |
+| :------ | :------ |
+| `internal` | `WithId`<[`InternalMeme`](types_global.md#internalmeme)\> |
 
 #### Returns
 
-[`PublicMeme`][69]
+[`PublicMeme`](types_global.md#publicmeme)
 
 #### Defined in
 
-[test/setup.ts:54][71]
+[test/setup.ts:54](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L54)
 
----
+___
 
 ### toPublicUser
 
-▸ **toPublicUser**(`internal`): [`PublicUser`][72]
+▸ **toPublicUser**(`internal`): [`PublicUser`](types_global.md#publicuser)
 
 #### Parameters
 
-| Name       | Type                           |
-| :--------- | :----------------------------- |
-| `internal` | `WithId`<[`InternalUser`][73]> |
+| Name | Type |
+| :------ | :------ |
+| `internal` | `WithId`<[`InternalUser`](types_global.md#internaluser)\> |
 
 #### Returns
 
-[`PublicUser`][72]
+[`PublicUser`](types_global.md#publicuser)
 
 #### Defined in
 
-[test/setup.ts:40][74]
+[test/setup.ts:40](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L40)
 
----
+___
 
 ### webpackTestFixture
 
-▸ **webpackTestFixture**(): [`MockFixture`][8]
+▸ **webpackTestFixture**(): [`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Returns
 
-[`MockFixture`][8]
+[`MockFixture`](../interfaces/test_setup.MockFixture.md)
 
 #### Defined in
 
-[test/setup.ts:529][75]
+[test/setup.ts:529](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L529)
 
----
+___
 
 ### withMockedArgv
 
-▸ **withMockedArgv**(`fn`, `newArgv`, `options?`): `Promise`<`void`>
+▸ **withMockedArgv**(`fn`, `newArgv`, `options?`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name      | Type                    |
-| :-------- | :---------------------- |
-| `fn`      | () => `AnyVoid`         |
-| `newArgv` | `string`[]              |
-| `options` | [`MockArgvOptions`][14] |
+| Name | Type |
+| :------ | :------ |
+| `fn` | () => `AnyVoid` |
+| `newArgv` | `string`[] |
+| `options` | [`MockArgvOptions`](test_setup.md#mockargvoptions) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:196][76]
+[test/setup.ts:196](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L196)
 
----
+___
 
 ### withMockedEnv
 
-▸ **withMockedEnv**(`fn`, `newEnv`, `options?`): `Promise`<`void`>
+▸ **withMockedEnv**(`fn`, `newEnv`, `options?`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name      | Type                         |
-| :-------- | :--------------------------- |
-| `fn`      | () => `AnyVoid`              |
-| `newEnv`  | `Record`<`string`, `string`> |
-| `options` | [`MockEnvOptions`][15]       |
+| Name | Type |
+| :------ | :------ |
+| `fn` | () => `AnyVoid` |
+| `newEnv` | `Record`<`string`, `string`\> |
+| `options` | [`MockEnvOptions`](test_setup.md#mockenvoptions) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:229][77]
+[test/setup.ts:229](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L229)
 
----
+___
 
 ### withMockedExit
 
-▸ **withMockedExit**(`fn`): `Promise`<`void`>
+▸ **withMockedExit**(`fn`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name | Type                                                      |
-| :--- | :-------------------------------------------------------- |
-| `fn` | (`spies`: { `exitSpy`: `jest.SpyInstance` }) => `AnyVoid` |
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`spies`: { `exitSpy`: `jest.SpyInstance`  }) => `AnyVoid` |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:299][78]
+[test/setup.ts:299](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L299)
 
----
+___
 
 ### withMockedFixture
 
-▸ **withMockedFixture**<`CustomOptions`, `CustomContext`>(`(destructured)`):
-`Promise`<`void`>
+▸ **withMockedFixture**<`CustomOptions`, `CustomContext`\>(`(destructured)`): `Promise`<`void`\>
 
 #### Type parameters
 
-| Name            | Type                                    |
-| :-------------- | :-------------------------------------- |
-| `CustomOptions` | extends `Record`<`string`, `unknown`>{} |
-| `CustomContext` | extends `Record`<`string`, `unknown`>{} |
+| Name | Type |
+| :------ | :------ |
+| `CustomOptions` | extends `Record`<`string`, `unknown`\>{} |
+| `CustomContext` | extends `Record`<`string`, `unknown`\>{} |
 
 #### Parameters
 
-| Name                     | Type                                                                                                                                               |
-| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `(destructured)`         | `Object`                                                                                                                                           |
-| ▶ `({ fn })`             | [`FixtureAction`][13]<[`FixtureContext`][4]<[`FixtureOptions`][5] & `Partial`<`Record`<`string`, `unknown`> & `CustomOptions`>> & `CustomContext`> |
-| ▶ `({ options? })`       | `Partial`<[`FixtureOptions`][5] & `CustomOptions`>                                                                                                 |
-| ▶ `({ testIdentifier })` | `string`                                                                                                                                           |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ fn })` | [`FixtureAction`](test_setup.md#fixtureaction)<[`FixtureContext`](../interfaces/test_setup.FixtureContext.md)<[`FixtureOptions`](../interfaces/test_setup.FixtureOptions.md) & `Partial`<`Record`<`string`, `unknown`\> & `CustomOptions`\>\> & `CustomContext`\> |
+| ▶ `({ options? })` | `Partial`<[`FixtureOptions`](../interfaces/test_setup.FixtureOptions.md) & `CustomOptions`\> |
+| ▶ `({ testIdentifier })` | `string` |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:706][79]
+[test/setup.ts:706](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L706)
 
----
+___
 
 ### withMockedOutput
 
-▸ **withMockedOutput**(`fn`): `Promise`<`void`>
+▸ **withMockedOutput**(`fn`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name | Type                                                                                                                                                                                                                          |
-| :--- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fn` | (`spies`: { `errorSpy`: `jest.SpyInstance` ; `infoSpy`: `jest.SpyInstance` ; `logSpy`: `jest.SpyInstance` ; `stdErrSpy`: `jest.SpyInstance` ; `stdoutSpy`: `jest.SpyInstance` ; `warnSpy`: `jest.SpyInstance` }) => `AnyVoid` |
+| Name | Type |
+| :------ | :------ |
+| `fn` | (`spies`: { `errorSpy`: `jest.SpyInstance` ; `infoSpy`: `jest.SpyInstance` ; `logSpy`: `jest.SpyInstance` ; `stdErrSpy`: `jest.SpyInstance` ; `stdoutSpy`: `jest.SpyInstance` ; `warnSpy`: `jest.SpyInstance`  }) => `AnyVoid` |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[test/setup.ts:331][80]
-
-[1]: ../README.md
-[2]: ../classes/test_setup.FactoryExhaustionError.md
-[3]: ../interfaces/test_setup.DummyDirectoriesFixtureOptions.md
-[4]: ../interfaces/test_setup.FixtureContext.md
-[5]: ../interfaces/test_setup.FixtureOptions.md
-[6]: ../interfaces/test_setup.GitProvider.md
-[7]: ../interfaces/test_setup.GitRepositoryFixtureOptions.md
-[8]: ../interfaces/test_setup.MockFixture.md
-[9]: ../interfaces/test_setup.RunOptions.md
-[10]: ../interfaces/test_setup.TestResultProvider.md
-[11]: ../interfaces/test_setup.TreeOutputProvider.md
-[12]: ../interfaces/test_setup.WebpackTestFixtureOptions.md
-[13]: test_setup.md#fixtureaction
-[14]: test_setup.md#mockargvoptions
-[15]: test_setup.md#mockenvoptions
-[16]: test_setup.md#returnsstring
-[17]: test_setup.md#asmockedfunction
-[18]: test_setup.md#asmockednextapimiddleware
-[19]: test_setup.md#describerootfixture
-[20]: test_setup.md#dummydirectoriesfixture
-[21]: test_setup.md#dummyfilesfixture
-[22]: test_setup.md#dummynpmpackagefixture
-[23]: test_setup.md#gitrepositoryfixture
-[24]: test_setup.md#isolatedimport
-[25]: test_setup.md#isolatedimportfactory
-[26]: test_setup.md#itemfactory
-[27]: test_setup.md#mockargvfactory
-[28]: test_setup.md#mockenvfactory
-[29]: test_setup.md#mockfixturefactory
-[30]: test_setup.md#nodeimporttestfixture
-[31]: test_setup.md#npmlinkselffixture
-[32]: test_setup.md#protectedimportfactory
-[33]: test_setup.md#rootfixture
-[34]: test_setup.md#run
-[35]: test_setup.md#runnerfactory
-[36]: test_setup.md#topublicmeme
-[37]: test_setup.md#topublicuser
-[38]: test_setup.md#webpacktestfixture
-[39]: test_setup.md#withmockedargv
-[40]: test_setup.md#withmockedenv
-[41]: test_setup.md#withmockedexit
-[42]: test_setup.md#withmockedfixture
-[43]: test_setup.md#withmockedoutput
-[44]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L454
-[45]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L175
-[46]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L185
-[47]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L457
-[48]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L166
-[49]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L167
-[50]: src_backend_middleware.md
-[51]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L92
-[52]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L692
-[53]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L646
-[54]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L667
-[55]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L489
-[56]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L622
-[57]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L270
-[58]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L294
-[59]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L118
-[60]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L212
-[61]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L249
-[62]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L818
-[63]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L588
-[64]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L514
-[65]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L314
-[66]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L470
-[67]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L378
-[68]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L390
-[69]: types_global.md#publicmeme
-[70]: types_global.md#internalmeme
-[71]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L54
-[72]: types_global.md#publicuser
-[73]: types_global.md#internaluser
-[74]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L40
-[75]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L529
-[76]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L196
-[77]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L229
-[78]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L299
-[79]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L706
-[80]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L331
+[test/setup.ts:331](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L331)
