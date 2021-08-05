@@ -37,7 +37,7 @@
 
 #### Defined in
 
-[test/db.ts:36](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L36)
+[test/db.ts:36](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L36)
 
 ## Variables
 
@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[test/db.ts:56](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L56)
+[test/db.ts:56](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L56)
 
 ## Functions
 
@@ -68,7 +68,7 @@
 
 #### Defined in
 
-[test/db.ts:212](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L212)
+[test/db.ts:212](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L212)
 
 ___
 
@@ -96,4 +96,4 @@ Setup a test version of the database using jest lifecycle hooks.
 
 #### Defined in
 
-[test/db.ts:235](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L235)
+[test/db.ts:235](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L235)

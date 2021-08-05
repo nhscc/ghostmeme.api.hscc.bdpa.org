@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[src/backend/middleware.ts:48](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/backend/middleware.ts#L48)
+[src/backend/middleware.ts:48](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/middleware.ts#L48)
 
 ## Functions
 
@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[src/backend/middleware.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/backend/middleware.ts#L58)
+[src/backend/middleware.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/middleware.ts#L58)
 
 ___
 
@@ -73,4 +73,4 @@ stub out endpoints for later implementation.
 
 #### Defined in
 
-[src/backend/middleware.ts:90](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/backend/middleware.ts#L90)
+[src/backend/middleware.ts:90](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/middleware.ts#L90)

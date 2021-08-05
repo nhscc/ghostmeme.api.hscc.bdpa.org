@@ -20,4 +20,4 @@
 
 #### Defined in
 
-[external-scripts/prune-data.ts:21](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/external-scripts/prune-data.ts#L21)
+[external-scripts/prune-data.ts:21](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/external-scripts/prune-data.ts#L21)

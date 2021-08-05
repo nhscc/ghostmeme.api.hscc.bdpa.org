@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[src/backend/error.ts:67](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/backend/error.ts#L67)
+[src/backend/error.ts:67](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/error.ts#L67)
 
 ## Properties
 
