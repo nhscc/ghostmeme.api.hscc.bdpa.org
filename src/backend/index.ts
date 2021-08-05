@@ -50,23 +50,25 @@ const usernameRegex = /^[a-zA-Z0-9_-]{5,20}$/;
 let requestCounter = 0;
 
 /**
- * This key is guaranteed never to appear in the system and can be checked
- * against.
+ * This key is guaranteed never to appear in dummy data generated during tests.
+ * In production, this key is used in place of `null` where a string key is
+ * required (e.g. the `meta.creator` field for auto-generated users).
  */
 export const NULL_KEY = '00000000-0000-0000-0000-000000000000';
 
 /**
- * This key is only valid when running in a Jest test environment.
+ * This key is valid only when running in a test environment.
  */
 export const DUMMY_KEY = '12349b61-83a7-4036-b060-213784b491';
 
 /**
- * This key is guaranteed to be rate limited.
+ * This key is guaranteed to be rate limited when running in a test environment.
  */
 export const BANNED_KEY = 'banned-h54e-6rt7-gctfh-hrftdygct0';
 
 /**
- * This key can be used to authenticate with local deployments.
+ * This key can be used to authenticate with local and non-production
+ * deployments.
  */
 export const DEV_KEY = 'dev-xunn-dev-294a-536h-9751-rydmj';
 
