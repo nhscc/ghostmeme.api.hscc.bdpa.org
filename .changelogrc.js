@@ -1,3 +1,4 @@
+'use strict';
 // ? See https://github.com/conventional-changelog/conventional-changelog
 
 const debug = require('debug')(
