@@ -5,12 +5,21 @@ import cloneDeep from 'clone-deep';
 import * as Backend from 'universe/backend';
 import { getEnv } from 'universe/backend/env';
 import { setupTestDb, dummyDbData } from 'testverse/db';
-import { mockEnvFactory, toPublicUser, toPublicMeme } from 'testverse/setup';
 import { itemToObjectId, itemToStringId } from 'universe/backend/db';
 import { GuruMeditationError } from 'universe/backend/error';
+import fetch from 'node-fetch';
 
-import type { NextApiRequest, NextApiResponse } from 'next';
 import {
+  mockEnvFactory,
+  toPublicUser,
+  toPublicMeme,
+  asMockedFunction
+} from 'testverse/setup';
+
+import type { Response as FetchResponse } from 'node-fetch';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+import type {
   InternalRequestLogEntry,
   InternalLimitedLogEntry,
   InternalInfo,
@@ -25,29 +34,13 @@ import {
   InternalApiKey
 } from 'types/global';
 
-// ? A mock-typed version of backend.handleImageUpload
-let mockHandleImageUpload: jest.MockedFunction<typeof Backend.handleImageUpload>;
+jest.mock('node-fetch');
 
-jest.mock('universe/backend', () => {
-  type mockBackend = typeof import('universe/backend');
-  const backend = jest.requireActual('universe/backend') as mockBackend & {
-    _handleImageUpload: mockBackend['handleImageUpload'];
-  };
-
-  backend._handleImageUpload = backend.handleImageUpload;
-  backend.handleImageUpload = jest.fn();
-  return backend;
-});
+const mockedFetch = asMockedFunction(fetch);
 
 const { getDb } = setupTestDb();
 
 const withMockedEnv = mockEnvFactory({}, { replace: false });
-
-beforeEach(() => {
-  mockHandleImageUpload = (
-    Backend.handleImageUpload as unknown as typeof mockHandleImageUpload
-  ).mockImplementation(() => Promise.resolve(null));
-});
 
 describe('::getSystemInfo', () => {
   it('returns summary system metadata', async () => {
@@ -956,6 +949,9 @@ describe('::createMeme', () => {
   it('handles imageBase64 uploads', async () => {
     expect.hasAssertions();
 
+    // TODO:
+    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+
     const items: NewMeme[] = [
       {
         owner: dummyDbData.users[0]._id.toString(),
@@ -966,16 +962,6 @@ describe('::createMeme', () => {
         replyTo: null,
         imageUrl: null,
         imageBase64: (await import('testverse/images')).image17KB
-      },
-      {
-        owner: dummyDbData.users[0]._id.toString(),
-        receiver: null,
-        expiredAt: -1,
-        description: null,
-        private: false,
-        replyTo: null,
-        imageUrl: null,
-        imageBase64: (await import('testverse/images')).image5MB
       }
     ];
 
@@ -2175,6 +2161,9 @@ describe('::createUser', () => {
   it('handles imageBase64 uploads', async () => {
     expect.hasAssertions();
 
+    // TODO:
+    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+
     const items: NewUser[] = [
       {
         name: 'one name',
@@ -2182,13 +2171,6 @@ describe('::createUser', () => {
         phone: '111-111-1111',
         username: 'uzr-1',
         imageBase64: (await import('testverse/images')).image17KB
-      },
-      {
-        name: 'two name',
-        email: '2-two@email.address',
-        phone: null,
-        username: 'uzr-2-12345678901234',
-        imageBase64: (await import('testverse/images')).image5MB
       }
     ];
 
@@ -2452,18 +2434,15 @@ describe('::updateUser', () => {
   it('handles imageBase64 uploads', async () => {
     expect.hasAssertions();
 
+    // TODO:
+    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+
     const items: PatchUser[] = [
       {
         name: 'one name',
         email: '1-one@email.address',
         phone: '111-111-1111',
         imageBase64: (await import('testverse/images')).image17KB
-      },
-      {
-        name: 'two name',
-        email: '2-two@email.address',
-        phone: null,
-        imageBase64: (await import('testverse/images')).image5MB
       }
     ];
 
@@ -3131,17 +3110,29 @@ describe('::isDueForContrivedError', () => {
 describe('::handleImageUpload', () => {
   it('unpacks base64 string to image and uploads it to imgur API', async () => {
     expect.hasAssertions();
+
+    // TODO:
+    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
   });
 
   it('duplicate uploads use LRU cache instead of imgur API, return same uri', async () => {
     expect.hasAssertions();
+
+    // TODO:
+    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
   });
 
   it('rejects badly formatted base64 strings', async () => {
     expect.hasAssertions();
+
+    // TODO:
+    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
   });
 
   it('handles imgur API errors gracefully', async () => {
     expect.hasAssertions();
+
+    // TODO:
+    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
   });
 });
