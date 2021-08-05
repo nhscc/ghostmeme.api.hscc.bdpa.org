@@ -119,6 +119,16 @@ export const publicUserProjection = {
   imageUrl: true
 };
 
+export async function handleImageUpload(imageBase64: string | null | undefined) {
+  const imageUrl = null;
+
+  if (imageBase64) {
+    // TODO
+  }
+
+  return imageUrl;
+}
+
 export async function getSystemInfo(): Promise<InternalInfo> {
   return (
     (await (await getDb())
@@ -171,7 +181,6 @@ export async function createMeme({
   let owner: UserId | undefined = undefined;
   let receiver: UserId | null | undefined = undefined;
   let replyTo: MemeId | null | undefined = undefined;
-  let imageUrl = data.imageUrl;
 
   if (typeof data.owner == 'string' && data.owner.length) {
     try {
@@ -199,13 +208,8 @@ export async function createMeme({
     }
   } else replyTo = null;
 
-  if (data.imageBase64) {
-    // TODO: validate and use imageBase64 to resolve new imageUrl
-    // eslint-disable-next-line no-self-assign
-    imageUrl = imageUrl;
-  }
-
   const { description, private: priv, expiredAt, ...rest } = data;
+  const imageUrl = data.imageUrl || (await handleImageUpload(data.imageBase64));
 
   const db = await getDb();
   const memes = db.collection<InternalMeme>('memes');
@@ -570,7 +574,7 @@ export async function createUser({
     phone,
     username,
     friends: [],
-    imageUrl,
+    imageUrl: await handleImageUpload(data.imageBase64),
     requests: { incoming: [], outgoing: [] },
     liked: [],
     deleted: false,
@@ -651,16 +655,14 @@ export async function updateUser({
     throw new ValidationError('a user with that phone number already exists');
   }
 
-  // TODO: validate and use imageBase64 to resolve new imageUrl
-  void imageBase64;
-  const imageUrl = null;
-
   // * At this point, we can finally trust this data is not malicious
-  const patchUser: Omit<PatchUser, 'imageBase64'> & { imageUrl: string | null } = {
+  const patchUser: Omit<PatchUser, 'imageBase64'> & { imageUrl?: string | null } = {
     name,
     email,
     phone,
-    imageUrl
+    ...(imageBase64 !== undefined
+      ? { imageUrl: await handleImageUpload(imageBase64) }
+      : {})
   };
 
   if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);

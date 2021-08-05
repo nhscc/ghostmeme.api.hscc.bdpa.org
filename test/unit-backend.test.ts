@@ -25,9 +25,29 @@ import {
   InternalApiKey
 } from 'types/global';
 
+// ? A mock-typed version of backend.handleImageUpload
+let mockHandleImageUpload: jest.MockedFunction<typeof Backend.handleImageUpload>;
+
+jest.mock('universe/backend', () => {
+  type mockBackend = typeof import('universe/backend');
+  const backend = jest.requireActual('universe/backend') as mockBackend & {
+    _handleImageUpload: mockBackend['handleImageUpload'];
+  };
+
+  backend._handleImageUpload = backend.handleImageUpload;
+  backend.handleImageUpload = jest.fn();
+  return backend;
+});
+
 const { getDb } = setupTestDb();
 
 const withMockedEnv = mockEnvFactory({}, { replace: false });
+
+beforeEach(() => {
+  mockHandleImageUpload = (
+    Backend.handleImageUpload as unknown as typeof mockHandleImageUpload
+  ).mockImplementation(() => Promise.resolve(null));
+});
 
 describe('::getSystemInfo', () => {
   it('returns summary system metadata', async () => {
@@ -931,6 +951,77 @@ describe('::createMeme', () => {
         .findOne({})
         .then((r) => r?.totalMemes)
     ).toStrictEqual(dummyDbData.info.totalMemes + 2);
+  });
+
+  it('handles imageBase64 uploads', async () => {
+    expect.hasAssertions();
+
+    const items: NewMeme[] = [
+      {
+        owner: dummyDbData.users[0]._id.toString(),
+        receiver: null,
+        expiredAt: -1,
+        description: null,
+        private: false,
+        replyTo: null,
+        imageUrl: null,
+        imageBase64: (await import('testverse/images')).image17KB
+      },
+      {
+        owner: dummyDbData.users[0]._id.toString(),
+        receiver: null,
+        expiredAt: -1,
+        description: null,
+        private: false,
+        replyTo: null,
+        imageUrl: null,
+        imageBase64: (await import('testverse/images')).image5MB
+      }
+    ];
+
+    const newMemes = await Promise.all(
+      items.map((data) => Backend.createMeme({ creatorKey: Backend.DUMMY_KEY, data }))
+    );
+
+    const removeImageBase64 = (item: NewMeme): Omit<NewMeme, 'imageBase64'> => {
+      const { imageBase64: _, ...remaining } = item;
+      return remaining;
+    };
+
+    expect(newMemes).toIncludeSameMembers(
+      items.map((item) => expect.objectContaining(removeImageBase64(item)))
+    );
+
+    const expectedInternalMemes = items.map<InternalMeme>((item) => {
+      const internal: InternalMeme & { imageBase64?: string | null } = {
+        ...item,
+        _id: expect.any(ObjectId),
+        owner: new ObjectId(item.owner),
+        receiver: item.receiver ? new ObjectId(item.receiver) : null,
+        createdAt: expect.any(Number),
+        likes: [],
+        totalLikes: 0,
+        imageUrl: expect.stringContaining('https://i.imgur.com/'),
+        replyTo: item.replyTo ? new ObjectId(item.replyTo) : null,
+        meta: expect.objectContaining({
+          creator: Backend.DUMMY_KEY,
+          likeability: expect.any(Number),
+          gregariousness: expect.any(Number)
+        })
+      } as InternalMeme;
+
+      delete internal.imageBase64;
+      return internal;
+    });
+
+    expect(
+      await (
+        await getDb()
+      )
+        .collection<InternalMeme>('memes')
+        .find({ _id: { $in: newMemes.map((b) => new ObjectId(b.meme_id)) } })
+        .toArray()
+    ).toIncludeSameMembers(expectedInternalMemes);
   });
 });
 
@@ -2080,6 +2171,63 @@ describe('::createUser', () => {
         .then((r) => r?.totalUsers)
     ).toStrictEqual(dummyDbData.info.totalUsers + 1);
   });
+
+  it('handles imageBase64 uploads', async () => {
+    expect.hasAssertions();
+
+    const items: NewUser[] = [
+      {
+        name: 'one name',
+        email: '1-one@email.address',
+        phone: '111-111-1111',
+        username: 'uzr-1',
+        imageBase64: (await import('testverse/images')).image17KB
+      },
+      {
+        name: 'two name',
+        email: '2-two@email.address',
+        phone: null,
+        username: 'uzr-2-12345678901234',
+        imageBase64: (await import('testverse/images')).image5MB
+      }
+    ];
+
+    const newUsers = await Promise.all(
+      items.map((data) => Backend.createUser({ creatorKey: Backend.DUMMY_KEY, data }))
+    );
+
+    const expectedInternalUsers = items.map<InternalUser>((item) => {
+      const { imageBase64: _, ...rest } = item;
+      return {
+        ...rest,
+        _id: expect.any(ObjectId),
+        deleted: false,
+        liked: [],
+        friends: [],
+        requests: { incoming: [], outgoing: [] },
+        imageUrl: expect.stringContaining('https://i.imgur.com/'),
+        meta: expect.objectContaining({
+          creator: Backend.DUMMY_KEY
+        })
+      };
+    });
+
+    expect(newUsers).toIncludeSameMembers(
+      items.map((item) => {
+        const { imageBase64: _, ...rest } = item;
+        return expect.objectContaining(rest);
+      })
+    );
+
+    expect(
+      await (
+        await getDb()
+      )
+        .collection<InternalUser>('users')
+        .find({ _id: { $in: newUsers.map((b) => new ObjectId(b.user_id)) } })
+        .toArray()
+    ).toIncludeSameMembers(expectedInternalUsers);
+  });
 });
 
 describe('::updateUser', () => {
@@ -2104,6 +2252,11 @@ describe('::updateUser', () => {
         email: '3-three@email.address',
         phone: '333.333.3333 x5467',
         imageBase64: null
+      },
+      {
+        name: 'tre giles',
+        email: 'valid@email.address',
+        phone: '773-773-7773'
       }
     ];
 
@@ -2250,14 +2403,6 @@ describe('::updateUser', () => {
         {
           name: 'tre giles',
           email: 'valid@email.address',
-          phone: '773-773-7773'
-        } as unknown as PatchUser,
-        'string, data uri, or null'
-      ],
-      [
-        {
-          name: 'tre giles',
-          email: 'valid@email.address',
           phone: '773-773-7773',
           imageBase64: 5
         } as unknown as PatchUser,
@@ -2302,6 +2447,46 @@ describe('::updateUser', () => {
     ).rejects.toMatchObject({
       message: expect.stringContaining(id.toString())
     });
+  });
+
+  it('handles imageBase64 uploads', async () => {
+    expect.hasAssertions();
+
+    const items: PatchUser[] = [
+      {
+        name: 'one name',
+        email: '1-one@email.address',
+        phone: '111-111-1111',
+        imageBase64: (await import('testverse/images')).image17KB
+      },
+      {
+        name: 'two name',
+        email: '2-two@email.address',
+        phone: null,
+        imageBase64: (await import('testverse/images')).image5MB
+      }
+    ];
+
+    await Promise.all(
+      items.map((data, ndx) =>
+        Backend.updateUser({ user_id: dummyDbData.users[ndx]._id, data })
+      )
+    );
+
+    const users = (await getDb()).collection<InternalUser>('users');
+    const patchedUserIds = itemToObjectId(dummyDbData.users.slice(0, items.length));
+
+    expect(
+      await users.find({ _id: { $in: patchedUserIds } }).toArray()
+    ).toIncludeSameMembers(
+      items.map((item) => {
+        const { imageBase64: _, ...rest } = item;
+        return expect.objectContaining({
+          rest,
+          imageUrl: expect.stringContaining('https://i.imgur.com/')
+        });
+      })
+    );
   });
 });
 
@@ -2941,4 +3126,11 @@ describe('::isDueForContrivedError', () => {
       true
     ]);
   });
+});
+
+describe('::handleImageUpload', () => {
+  test.todo('unpacks base64 string to image and uploads it to imgur API');
+  test.todo('duplicate uploads use LRU cache instead of imgur API, return same uri');
+  test.todo('rejects badly formatted base64 strings');
+  test.todo('handles imgur API errors gracefully');
 });
