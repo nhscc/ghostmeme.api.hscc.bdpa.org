@@ -27,7 +27,7 @@ Re-exports: [HttpStatusCode](lib_next_isomorphic_redirect_types.md#httpstatuscod
 
 #### Defined in
 
-[lib/next-respond/types.ts:2](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/lib/next-respond/types.ts#L2)
+[lib/next-respond/types.ts:2](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-respond/types.ts#L2)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 #### Defined in
 
-[lib/next-respond/types.ts:1](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/lib/next-respond/types.ts#L1)
+[lib/next-respond/types.ts:1](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-respond/types.ts#L1)

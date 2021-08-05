@@ -37,4 +37,4 @@ Renames and exports: [defaultConfig](src_backend_middleware.md#defaultconfig)
 
 #### Defined in
 
-[src/pages/api/v1/memes/index.ts:13](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/pages/api/v1/memes/index.ts#L13)
+[src/pages/api/v1/memes/index.ts:13](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/pages/api/v1/memes/index.ts#L13)

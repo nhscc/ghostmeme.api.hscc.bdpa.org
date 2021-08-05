@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[src/pages/index.tsx:22](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/pages/index.tsx#L22)
+[src/pages/index.tsx:22](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/pages/index.tsx#L22)
 
 ___
 
@@ -41,4 +41,4 @@ ___
 
 #### Defined in
 
-[src/pages/index.tsx:7](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/pages/index.tsx#L7)
+[src/pages/index.tsx:7](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/pages/index.tsx#L7)

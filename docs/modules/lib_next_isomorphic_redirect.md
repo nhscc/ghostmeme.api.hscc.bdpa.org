@@ -37,7 +37,7 @@ default.
 
 #### Defined in
 
-[lib/next-isomorphic-redirect/index.ts:40](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/lib/next-isomorphic-redirect/index.ts#L40)
+[lib/next-isomorphic-redirect/index.ts:40](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-isomorphic-redirect/index.ts#L40)
 
 ___
 
@@ -68,7 +68,7 @@ Router is bypassed and window.location will be used for a "hard" redirect.
 
 #### Defined in
 
-[lib/next-isomorphic-redirect/index.ts:24](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/lib/next-isomorphic-redirect/index.ts#L24)
+[lib/next-isomorphic-redirect/index.ts:24](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-isomorphic-redirect/index.ts#L24)
 
 ___
 
@@ -97,4 +97,4 @@ case.
 
 #### Defined in
 
-[lib/next-isomorphic-redirect/index.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/lib/next-isomorphic-redirect/index.ts#L58)
+[lib/next-isomorphic-redirect/index.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-isomorphic-redirect/index.ts#L58)
