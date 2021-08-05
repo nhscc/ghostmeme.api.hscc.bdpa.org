@@ -1,3 +1,5 @@
+'use strict';
+
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const { verifyEnvironment } = require('./expect-env');
 
