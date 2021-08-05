@@ -458,6 +458,22 @@ export async function getFixtures(
       }
     },
     {
+      subject: 'invalid create user #9',
+      handler: api.users,
+      method: 'POST',
+      body: {
+        name: 'Test User 2',
+        email: 'test2@test.com',
+        phone: '555-666-7777',
+        username: 'test-user-2',
+        imageBase64: (await import('testverse/images')).image13MB
+      },
+      response: {
+        status: 400,
+        json: { error: expect.stringContaining('JSON') }
+      }
+    },
+    {
       subject: 'confirm metadata',
       handler: api.info,
       method: 'GET',
@@ -595,7 +611,21 @@ export async function getFixtures(
       }
     },
     {
-      subject: 'new user properties',
+      subject: 'new user properties (without imageBase64)',
+      handler: api.usersId,
+      params: ({ getResultAt }) => ({
+        user_id: getResultAt<string>('user-test-1', 'user.user_id')
+      }),
+      method: 'PUT',
+      body: {
+        name: 'Elizabeth Warren',
+        email: 'liz@ewarren.com',
+        phone: '978-555-5555'
+      } as PatchUser,
+      response: { status: 200 }
+    },
+    {
+      subject: 'new user properties (with imageBase64)',
       handler: api.usersId,
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id')
@@ -605,7 +635,7 @@ export async function getFixtures(
         name: 'Elizabeth Warren',
         email: 'liz@ewarren.com',
         phone: '978-555-5555',
-        imageBase64: null
+        imageBase64: (await import('testverse/images')).image17KB
       } as PatchUser,
       response: { status: 200 }
     },
@@ -681,6 +711,36 @@ export async function getFixtures(
         status: 400,
         json: { error: expect.stringContaining('with that phone number') }
       }
+    },
+    {
+      subject: "can't upload image that's too big",
+      handler: api.usersId,
+      params: ({ getResultAt }) => ({
+        user_id: getResultAt<string>('user-test-1', 'user.user_id')
+      }),
+      method: 'PUT',
+      body: {
+        name: 'Elizabeth Warren',
+        email: 'liz@ewarren.com',
+        phone: '978-555-5555',
+        imageBase64: (await import('testverse/images')).image13MB
+      } as PatchUser,
+      response: { status: 200 }
+    },
+    {
+      subject: "can't use invalid base64",
+      handler: api.usersId,
+      params: ({ getResultAt }) => ({
+        user_id: getResultAt<string>('user-test-1', 'user.user_id')
+      }),
+      method: 'PUT',
+      body: {
+        name: 'Elizabeth Warren',
+        email: 'liz@ewarren.com',
+        phone: '978-555-5555',
+        imageBase64: 'bad-base64'
+      } as PatchUser,
+      response: { status: 200 }
     },
     {
       subject: 'get user like count',
@@ -1024,6 +1084,25 @@ export async function getFixtures(
         imageUrl: null,
         imageBase64: null
       },
+      response: {
+        status: 400,
+        json: { error: expect.stringContaining('`owner`') }
+      }
+    },
+    {
+      subject: 'invalid create meme #16',
+      handler: api.memes,
+      method: 'POST',
+      body: async ({ getResultAt }) => ({
+        owner: getResultAt<string>('user-test-1', 'user.user_id'),
+        receiver: null,
+        expiredAt: 123,
+        description: 'Hello, meme world!',
+        private: true,
+        replyTo: null,
+        imageUrl: null,
+        imageBase64: (await import('testverse/images')).image13MB
+      }),
       response: {
         status: 400,
         json: { error: expect.stringContaining('`owner`') }
