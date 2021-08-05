@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / test/db
+[ghostmeme.api.hscc.bdpa.org](../README.md) / test/db
 
 # Module: test/db
 
@@ -6,16 +6,16 @@
 
 ### Type aliases
 
-- [DummyDbData][2]
+- [DummyDbData](test_db.md#dummydbdata)
 
 ### Variables
 
-- [dummyDbData][2]
+- [dummyDbData](test_db.md#dummydbdata)
 
 ### Functions
 
-- [hydrateDb][3]
-- [setupTestDb][4]
+- [hydrateDb](test_db.md#hydratedb)
+- [setupTestDb](test_db.md#setuptestdb)
 
 ## Type aliases
 
@@ -25,49 +25,52 @@
 
 #### Type declaration
 
-| Name    | Type                              |
-| :------ | :-------------------------------- |
-| `info`  | `WithId`<[`InternalInfo`][5]>     |
-| `keys`  | `WithId`<[`InternalApiKey`][6]>[] |
-| `memes` | `WithId`<[`InternalMeme`][7]>[]   |
-| `users` | `WithId`<[`InternalUser`][8]>[]   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `bans` | `WithId`<[`InternalLimitedLogEntry`](types_global.md#internallimitedlogentry)\>[] | - |
+| `generatedAt` | `number` | Timestamp of when this dummy data was generated (in ms since unix epoch). |
+| `info` | `WithId`<[`InternalInfo`](types_global.md#internalinfo)\> | - |
+| `keys` | `WithId`<[`InternalApiKey`](types_global.md#internalapikey)\>[] | - |
+| `logs` | `WithId`<[`InternalRequestLogEntry`](types_global.md#internalrequestlogentry)\>[] | - |
+| `memes` | `WithId`<[`InternalMeme`](types_global.md#internalmeme)\>[] | - |
+| `users` | `WithId`<[`InternalUser`](types_global.md#internaluser)\>[] | - |
 
 #### Defined in
 
-[test/db.ts:36][9]
+[test/db.ts:36](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L36)
 
 ## Variables
 
 ### dummyDbData
 
-• `Const` **dummyDbData**: [`DummyDbData`][2]
+• `Const` **dummyDbData**: [`DummyDbData`](test_db.md#dummydbdata)
 
 #### Defined in
 
-[test/db.ts:49][10]
+[test/db.ts:56](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L56)
 
 ## Functions
 
 ### hydrateDb
 
-▸ **hydrateDb**(`db`, `data`): `Promise`<[`DummyDbData`][2]>
+▸ **hydrateDb**(`db`, `data`): `Promise`<[`DummyDbData`](test_db.md#dummydbdata)\>
 
 #### Parameters
 
-| Name   | Type               |
-| :----- | :----------------- |
-| `db`   | `Db`               |
-| `data` | [`DummyDbData`][2] |
+| Name | Type |
+| :------ | :------ |
+| `db` | `Db` |
+| `data` | [`DummyDbData`](test_db.md#dummydbdata) |
 
 #### Returns
 
-`Promise`<[`DummyDbData`][2]>
+`Promise`<[`DummyDbData`](test_db.md#dummydbdata)\>
 
 #### Defined in
 
-[test/db.ts:191][11]
+[test/db.ts:212](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L212)
 
----
+___
 
 ### setupTestDb
 
@@ -77,37 +80,20 @@ Setup a test version of the database using jest lifecycle hooks.
 
 #### Parameters
 
-| Name    | Type      | Default value | Description                                                                                                                                                                                                     |
-| :------ | :-------- | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `defer` | `boolean` | `false`       | If `true`, `beforeEach` and `afterEach` lifecycle hooks are skipped and the database is initialized and hydrated once before all tests are run. **In this mode, all tests will share the same database state!** |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `defer` | `boolean` | `false` | If `true`, `beforeEach` and `afterEach` lifecycle hooks are skipped and the database is initialized and hydrated once before all tests are run. **In this mode, all tests will share the same database state!** |
 
 #### Returns
 
 `Object`
 
-| Name                | Type                                                            |
-| :------------------ | :-------------------------------------------------------------- |
-| `getDb`             | (`params?`: { `external`: `true` }) => `Promise`<`Db`>          |
-| `getDbClient`       | (`params?`: { `external`: `true` }) => `Promise`<`MongoClient`> |
-| `getNewClientAndDb` | () => `Promise`<`Object`>                                       |
+| Name | Type |
+| :------ | :------ |
+| `getDb` | (`params?`: { `external`: ``true``  }) => `Promise`<`Db`\> |
+| `getDbClient` | (`params?`: { `external`: ``true``  }) => `Promise`<`MongoClient`\> |
+| `getNewClientAndDb` | () => `Promise`<`Object`\> |
 
 #### Defined in
 
-[test/db.ts:230][12]
-
-[1]: ../README.md
-[2]: test_db.md#dummydbdata
-[3]: test_db.md#hydratedb
-[4]: test_db.md#setuptestdb
-[5]: types_global.md#internalinfo
-[6]: types_global.md#internalapikey
-[7]: types_global.md#internalmeme
-[8]: types_global.md#internaluser
-[9]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L36
-[10]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L49
-[11]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L191
-[12]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/db.ts#L230
+[test/db.ts:235](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/db.ts#L235)

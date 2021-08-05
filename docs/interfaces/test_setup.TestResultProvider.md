@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / TestResultProvider
+[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / TestResultProvider
 
 # Interface: TestResultProvider
 
-[test/setup][2].TestResultProvider
+[test/setup](../modules/test_setup.md).TestResultProvider
 
 ## Table of contents
 
 ### Properties
 
-- [testResult][3]
+- [testResult](test_setup.TestResultProvider.md#testresult)
 
 ## Properties
 
@@ -18,18 +18,12 @@
 
 #### Type declaration
 
-| Name     | Type     |
-| :------- | :------- |
-| `code`   | `number` |
+| Name | Type |
+| :------ | :------ |
+| `code` | `number` |
 | `stderr` | `string` |
 | `stdout` | `string` |
 
 #### Defined in
 
-[test/setup.ts:439][4]
-
-[1]: ../README.md
-[2]: ../modules/test_setup.md
-[3]: test_setup.TestResultProvider.md#testresult
-[4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L439
+[test/setup.ts:439](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L439)

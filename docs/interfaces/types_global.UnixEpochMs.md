@@ -1,14 +1,11 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [types/global][2] / UnixEpochMs
+[ghostmeme.api.hscc.bdpa.org](../README.md) / [types/global](../modules/types_global.md) / UnixEpochMs
 
 # Interface: UnixEpochMs
 
-[types/global][2].UnixEpochMs
+[types/global](../modules/types_global.md).UnixEpochMs
 
 ## Hierarchy
 
 - `any`
 
   ↳ **`UnixEpochMs`**
-
-[1]: ../README.md
-[2]: ../modules/types_global.md

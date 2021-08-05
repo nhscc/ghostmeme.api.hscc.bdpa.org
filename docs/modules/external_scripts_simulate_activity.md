@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / external-scripts/simulate-activity
+[ghostmeme.api.hscc.bdpa.org](../README.md) / external-scripts/simulate-activity
 
 # Module: external-scripts/simulate-activity
 
@@ -6,23 +6,18 @@
 
 ### Functions
 
-- [default][2]
+- [default](external_scripts_simulate_activity.md#default)
 
 ## Functions
 
 ### default
 
-▸ **default**(): `Promise`<`void`>
+▸ **default**(): `Promise`<`void`\>
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[external-scripts/simulate-activity.ts:21][3]
-
-[1]: ../README.md
-[2]: external_scripts_simulate_activity.md#default
-[3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/external-scripts/simulate-activity.ts#L21
+external-scripts/simulate-activity/index.ts:20

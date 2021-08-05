@@ -1,28 +1,21 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] /
-DummyDirectoriesFixtureOptions
+[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / DummyDirectoriesFixtureOptions
 
 # Interface: DummyDirectoriesFixtureOptions
 
-[test/setup][2].DummyDirectoriesFixtureOptions
+[test/setup](../modules/test_setup.md).DummyDirectoriesFixtureOptions
 
 ## Table of contents
 
 ### Properties
 
-- [directoryPaths][3]
+- [directoryPaths](test_setup.DummyDirectoriesFixtureOptions.md#directorypaths)
 
 ## Properties
 
 ### directoryPaths
 
-• **directoryPaths**: `string`\[]
+• **directoryPaths**: `string`[]
 
 #### Defined in
 
-[test/setup.ts:420][4]
-
-[1]: ../README.md
-[2]: ../modules/test_setup.md
-[3]: test_setup.DummyDirectoriesFixtureOptions.md#directorypaths
-[4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/test/setup.ts#L420
+[test/setup.ts:420](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/test/setup.ts#L420)

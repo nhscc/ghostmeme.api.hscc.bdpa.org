@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / src/pages
+[ghostmeme.api.hscc.bdpa.org](../README.md) / src/pages
 
 # Module: src/pages
 
@@ -6,8 +6,8 @@
 
 ### Functions
 
-- [default][2]
-- [getServerSideProps][3]
+- [default](src_pages.md#default)
+- [getServerSideProps](src_pages.md#getserversideprops)
 
 ## Functions
 
@@ -17,9 +17,9 @@
 
 #### Parameters
 
-| Name             | Type                                                                 |
-| :--------------- | :------------------------------------------------------------------- |
-| `(destructured)` | `Awaited`<`ReturnType`<typeof [`getServerSideProps`][3]>>[`"props"`] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Awaited`<`ReturnType`<typeof [`getServerSideProps`](src_pages.md#getserversideprops)\>\>[``"props"``] |
 
 #### Returns
 
@@ -27,26 +27,18 @@
 
 #### Defined in
 
-[src/pages/index.tsx:22][4]
+[src/pages/index.tsx:22](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/pages/index.tsx#L22)
 
----
+___
 
 ### getServerSideProps
 
-▸ **getServerSideProps**(): `Promise`<`Object`>
+▸ **getServerSideProps**(): `Promise`<`Object`\>
 
 #### Returns
 
-`Promise`<`Object`>
+`Promise`<`Object`\>
 
 #### Defined in
 
-[src/pages/index.tsx:7][5]
-
-[1]: ../README.md
-[2]: src_pages.md#default
-[3]: src_pages.md#getserversideprops
-[4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/pages/index.tsx#L22
-[5]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/32c83e2/src/pages/index.tsx#L7
+[src/pages/index.tsx:7](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/40f330c/src/pages/index.tsx#L7)
