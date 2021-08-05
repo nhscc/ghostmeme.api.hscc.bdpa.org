@@ -5,10 +5,11 @@ import { dummyDbData } from 'testverse/db';
 import { GuruMeditationError } from 'universe/backend/error';
 import { getEnv } from 'universe/backend/env';
 import debugFactory from 'debug';
+import { toPublicMeme } from './setup';
 
 import type { PatchUser, PublicMeme, PublicUser } from 'types/global';
 import type { NextApiHandler, PageConfig } from 'next';
-import { toPublicMeme } from './setup';
+import type { Promisable } from 'type-fest';
 
 // TODO: XXX: turn a lot of this into some kind of package; needs to be generic
 // TODO: XXX: enough to handle various use cases though :) Maybe
@@ -102,13 +103,13 @@ export type TestFixture = {
    */
   params?:
     | Record<string, string | string[]>
-    | ((prevResults: TestResultset) => Record<string, string | string[]>);
+    | ((prevResults: TestResultset) => Promisable<Record<string, string | string[]>>);
   /**
    * The body of the mock request. Automatically stringified.
    */
   body?:
     | Record<string, unknown>
-    | ((prevResults: TestResultset) => Record<string, unknown>);
+    | ((prevResults: TestResultset) => Promisable<Record<string, unknown>>);
   /**
    * The expected shape of the HTTP response.
    */
@@ -120,7 +121,7 @@ export type TestFixture = {
      */
     status?:
       | number
-      | ((status: number, prevResults: TestResultset) => number | undefined);
+      | ((status: number, prevResults: TestResultset) => Promisable<number | undefined>);
     /**
      * The expected JSON response body. No need to test for `success` as that is
      * handled automatically (unless a status callback was used and it returned
@@ -134,11 +135,13 @@ export type TestFixture = {
       | ((
           json: Record<string, unknown> | undefined,
           prevResults: TestResultset
-        ) => Record<string, unknown> | jest.AsymmetricMatcher | undefined);
+        ) => Promisable<Record<string, unknown> | jest.AsymmetricMatcher | undefined>);
   };
 };
 
-export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixture[] {
+export async function getFixtures(
+  api: Record<string, NextApiHandlerMixin>
+): Promise<TestFixture[]> {
   const initialMemeCount = dummyDbData.memes.length;
   const initialUserCount = dummyDbData.users.length;
 
