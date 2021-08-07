@@ -13,7 +13,8 @@ import {
   mockEnvFactory,
   toPublicUser,
   toPublicMeme,
-  asMockedFunction
+  asMockedFunction,
+  withMockedOutput
 } from 'testverse/setup';
 
 import type { Response as FetchResponse } from 'node-fetch';
@@ -511,7 +512,7 @@ describe('::createMeme', () => {
 
     mockedFetch.mockImplementation(() =>
       Promise.resolve({
-        json: async () => ({ link: 'https://i.imgur.com/fake' })
+        json: async () => ({ data: { link: 'https://i.imgur.com/fake' } })
       } as FetchResponse)
     );
 
@@ -999,7 +1000,7 @@ describe('::createMeme', () => {
 
     mockedFetch.mockImplementation(() =>
       Promise.resolve({
-        json: async () => ({ link: 'https://i.imgur.com/fake' })
+        json: async () => ({ data: { link: 'https://i.imgur.com/fake' } })
       } as FetchResponse)
     );
 
@@ -1936,7 +1937,7 @@ describe('::createUser', () => {
 
     mockedFetch.mockImplementation(() =>
       Promise.resolve({
-        json: async () => ({ link: 'https://i.imgur.com/fake' })
+        json: async () => ({ data: { link: 'https://i.imgur.com/fake' } })
       } as FetchResponse)
     );
 
@@ -2240,7 +2241,7 @@ describe('::createUser', () => {
 
     mockedFetch.mockImplementation(() =>
       Promise.resolve({
-        json: async () => ({ link: 'https://i.imgur.com/fake' })
+        json: async () => ({ data: { link: 'https://i.imgur.com/fake' } })
       } as FetchResponse)
     );
 
@@ -2298,7 +2299,7 @@ describe('::updateUser', () => {
 
     mockedFetch.mockImplementation(() =>
       Promise.resolve({
-        json: async () => ({ link: 'https://i.imgur.com/fake' })
+        json: async () => ({ data: { link: 'https://i.imgur.com/fake' } })
       } as FetchResponse)
     );
 
@@ -2549,7 +2550,7 @@ describe('::updateUser', () => {
 
     mockedFetch.mockImplementation(() =>
       Promise.resolve({
-        json: async () => ({ link: 'https://i.imgur.com/fake' })
+        json: async () => ({ data: { link: 'https://i.imgur.com/fake' } })
       } as FetchResponse)
     );
 
@@ -3241,7 +3242,7 @@ describe('::handleImageUpload', () => {
     try {
       server = http.createServer((_, res) => {
         if (sent) throw new TestError('respond already sent (caching test failed)');
-        res.end(JSON.stringify({ link: 'https://i.imgur.com/fake' }));
+        res.end(JSON.stringify({ data: { link: 'https://i.imgur.com/fake' } }));
         sent = true;
       });
 
@@ -3299,10 +3300,21 @@ describe('::handleImageUpload', () => {
     expect.hasAssertions();
 
     const imageBase64 = (await import('testverse/images')).image17KB;
-    mockedFetch.mockImplementation(async () => toss(new TestError('badness')));
 
-    await expect(
-      Backend.handleImageUpload(Backend.DUMMY_KEY, imageBase64)
-    ).rejects.toMatchObject({ message: expect.stringContaining('image upload failed') });
+    mockedFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: async () => ({ data: { error: 'big ol bad error' }, success: false })
+      } as FetchResponse)
+    );
+
+    await withMockedOutput(async ({ errorSpy }) => {
+      await expect(
+        Backend.handleImageUpload(Backend.DUMMY_KEY, imageBase64)
+      ).rejects.toMatchObject({
+        message: expect.stringContaining('image upload failed')
+      });
+
+      expect(errorSpy).toBeCalledWith(expect.stringContaining('big ol bad error'));
+    });
   });
 });

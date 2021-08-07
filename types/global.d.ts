@@ -15,6 +15,17 @@ export interface FriendRequestId extends MemeId {}
 export interface UnixEpochMs extends number {}
 
 /**
+ * The shape of an imgur image upload response.
+ * @see https://apidocs.imgur.com
+ */
+export type ImgurApiResponse = {
+  data: {
+    link?: string;
+    error?: string;
+  };
+};
+
+/**
  * A type combining NextApiRequest and NextApiResponse.
  */
 export type NextApiState<T = unknown> = {
