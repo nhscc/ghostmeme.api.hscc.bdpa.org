@@ -40,7 +40,7 @@ Partial.directoryPaths
 
 #### Defined in
 
-[test/setup.ts:420](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/setup.ts#L420)
+[test/setup.ts:420](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/setup.ts#L420)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[test/setup.ts:405](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/setup.ts#L405)
+[test/setup.ts:405](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/setup.ts#L405)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[test/setup.ts:403](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/setup.ts#L403)
+[test/setup.ts:403](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/setup.ts#L403)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[test/setup.ts:404](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/setup.ts#L404)
+[test/setup.ts:404](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/setup.ts#L404)
 
 ___
 
@@ -88,7 +88,7 @@ Partial.webpackVersion
 
 #### Defined in
 
-[test/setup.ts:410](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/setup.ts#L410)
+[test/setup.ts:410](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/setup.ts#L410)
 
 ## Methods
 
@@ -112,4 +112,4 @@ Partial.setupGit
 
 #### Defined in
 
-[test/setup.ts:415](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/setup.ts#L415)
+[test/setup.ts:415](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/setup.ts#L415)
