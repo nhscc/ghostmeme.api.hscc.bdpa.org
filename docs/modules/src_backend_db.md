@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[src/backend/db.ts:147](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L147)
+[src/backend/db.ts:149](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L149)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[src/backend/db.ts:148](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L148)
+[src/backend/db.ts:150](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L150)
 
 ## Functions
 
@@ -67,7 +67,7 @@ Kills the MongoClient and closes any lingering database connections.
 
 #### Defined in
 
-[src/backend/db.ts:49](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L49)
+[src/backend/db.ts:49](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L49)
 
 ___
 
@@ -90,7 +90,7 @@ safely. Used primarily for testing purposes.
 
 #### Defined in
 
-[src/backend/db.ts:68](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L68)
+[src/backend/db.ts:68](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L68)
 
 ___
 
@@ -114,7 +114,7 @@ the app runs.
 
 #### Defined in
 
-[src/backend/db.ts:19](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L19)
+[src/backend/db.ts:19](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L19)
 
 ___
 
@@ -137,7 +137,7 @@ Returns the MongoClient instance used to connect to the database.
 
 #### Defined in
 
-[src/backend/db.ts:40](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L40)
+[src/backend/db.ts:40](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L40)
 
 ___
 
@@ -160,7 +160,7 @@ and can be called without worry of data loss.
 
 #### Defined in
 
-[src/backend/db.ts:83](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L83)
+[src/backend/db.ts:84](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L84)
 
 ___
 
@@ -192,7 +192,7 @@ exists within `collection`.
 
 #### Defined in
 
-[src/backend/db.ts:109](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L109)
+[src/backend/db.ts:111](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L111)
 
 ▸ **itemExists**<`T`\>(`collection`, `id`, `key`, `options?`): `Promise`<`boolean`\>
 
@@ -217,7 +217,7 @@ exists within `collection`.
 
 #### Defined in
 
-[src/backend/db.ts:115](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L115)
+[src/backend/db.ts:117](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L117)
 
 ___
 
@@ -245,7 +245,7 @@ Reduces an `item` down to its `ObjectId` instance.
 
 #### Defined in
 
-[src/backend/db.ts:157](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L157)
+[src/backend/db.ts:159](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L159)
 
 ▸ **itemToObjectId**<`T`\>(`item`): `T`[]
 
@@ -269,7 +269,7 @@ Reduces an array of `item`s down to its `ObjectId` instances.
 
 #### Defined in
 
-[src/backend/db.ts:161](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L161)
+[src/backend/db.ts:163](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L163)
 
 ___
 
@@ -298,7 +298,7 @@ instance.
 
 #### Defined in
 
-[src/backend/db.ts:192](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L192)
+[src/backend/db.ts:194](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L194)
 
 ▸ **itemToStringId**<`T`\>(`item`): `string`[]
 
@@ -323,7 +323,7 @@ respective `ObjectId` instances.
 
 #### Defined in
 
-[src/backend/db.ts:197](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L197)
+[src/backend/db.ts:199](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L199)
 
 ___
 
@@ -348,4 +348,4 @@ purposes.
 
 #### Defined in
 
-[src/backend/db.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/db.ts#L58)
+[src/backend/db.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/db.ts#L58)

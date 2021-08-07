@@ -33,11 +33,12 @@
 | `keys` | `WithId`<[`InternalApiKey`](types_global.md#internalapikey)\>[] | - |
 | `logs` | `WithId`<[`InternalRequestLogEntry`](types_global.md#internalrequestlogentry)\>[] | - |
 | `memes` | `WithId`<[`InternalMeme`](types_global.md#internalmeme)\>[] | - |
+| `uploads` | `WithId`<[`InternalUpload`](types_global.md#internalupload)\>[] | - |
 | `users` | `WithId`<[`InternalUser`](types_global.md#internaluser)\>[] | - |
 
 #### Defined in
 
-[test/db.ts:36](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L36)
+[test/db.ts:37](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/db.ts#L37)
 
 ## Variables
 
@@ -47,7 +48,7 @@
 
 #### Defined in
 
-[test/db.ts:56](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L56)
+[test/db.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/db.ts#L58)
 
 ## Functions
 
@@ -68,7 +69,7 @@
 
 #### Defined in
 
-[test/db.ts:212](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L212)
+[test/db.ts:235](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/db.ts#L235)
 
 ___
 
@@ -96,4 +97,4 @@ Setup a test version of the database using jest lifecycle hooks.
 
 #### Defined in
 
-[test/db.ts:235](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/db.ts#L235)
+[test/db.ts:261](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/db.ts#L261)

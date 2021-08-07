@@ -9,6 +9,7 @@
 - [BANNED\_KEY](src_backend.md#banned_key)
 - [DEV\_KEY](src_backend.md#dev_key)
 - [DUMMY\_KEY](src_backend.md#dummy_key)
+- [IMGUR\_API\_URI](src_backend.md#imgur_api_uri)
 - [NULL\_KEY](src_backend.md#null_key)
 - [publicMemeProjection](src_backend.md#publicmemeprojection)
 - [publicUserProjection](src_backend.md#publicuserprojection)
@@ -55,7 +56,7 @@ This key is guaranteed to be rate limited when running in a test environment.
 
 #### Defined in
 
-[src/backend/index.ts:67](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L67)
+[src/backend/index.ts:80](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L80)
 
 ___
 
@@ -68,7 +69,7 @@ deployments.
 
 #### Defined in
 
-[src/backend/index.ts:73](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L73)
+[src/backend/index.ts:86](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L86)
 
 ___
 
@@ -80,7 +81,19 @@ This key is valid only when running in a test environment.
 
 #### Defined in
 
-[src/backend/index.ts:62](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L62)
+[src/backend/index.ts:75](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L75)
+
+___
+
+### IMGUR\_API\_URI
+
+• `Const` **IMGUR\_API\_URI**: ``"https://api.imgur.com/3/image"``
+
+The imgur API URL used throughout the API backend
+
+#### Defined in
+
+[src/backend/index.ts:63](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L63)
 
 ___
 
@@ -94,7 +107,7 @@ required (e.g. the `meta.creator` field for auto-generated users).
 
 #### Defined in
 
-[src/backend/index.ts:57](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L57)
+[src/backend/index.ts:70](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L70)
 
 ___
 
@@ -124,7 +137,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:126](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L126)
+[src/backend/index.ts:139](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L139)
 
 ___
 
@@ -152,7 +165,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:140](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L140)
+[src/backend/index.ts:153](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L153)
 
 ## Functions
 
@@ -175,7 +188,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:943](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L943)
+[src/backend/index.ts:1034](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1034)
 
 ___
 
@@ -197,7 +210,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:496](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L496)
+[src/backend/index.ts:583](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L583)
 
 ___
 
@@ -220,7 +233,7 @@ forget!
 
 #### Defined in
 
-[src/backend/index.ts:1233](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L1233)
+[src/backend/index.ts:1324](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1324)
 
 ___
 
@@ -242,7 +255,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:811](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L811)
+[src/backend/index.ts:902](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L902)
 
 ___
 
@@ -264,7 +277,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:173](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L173)
+[src/backend/index.ts:261](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L261)
 
 ___
 
@@ -286,7 +299,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:528](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L528)
+[src/backend/index.ts:615](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L615)
 
 ___
 
@@ -307,7 +320,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:648](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L648)
+[src/backend/index.ts:739](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L739)
 
 ___
 
@@ -328,7 +341,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:667](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L667)
+[src/backend/index.ts:758](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L758)
 
 ___
 
@@ -342,7 +355,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:1244](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L1244)
+[src/backend/index.ts:1335](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1335)
 
 ___
 
@@ -365,7 +378,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:838](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L838)
+[src/backend/index.ts:929](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L929)
 
 ___
 
@@ -387,7 +400,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:350](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L350)
+[src/backend/index.ts:437](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L437)
 
 ___
 
@@ -408,7 +421,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:319](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L319)
+[src/backend/index.ts:406](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L406)
 
 ___
 
@@ -422,7 +435,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:163](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L163)
+[src/backend/index.ts:251](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L251)
 
 ___
 
@@ -444,7 +457,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:691](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L691)
+[src/backend/index.ts:782](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L782)
 
 ___
 
@@ -466,7 +479,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:717](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L717)
+[src/backend/index.ts:808](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L808)
 
 ___
 
@@ -488,27 +501,28 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:393](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L393)
+[src/backend/index.ts:480](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L480)
 
 ___
 
 ### handleImageUpload
 
-▸ **handleImageUpload**(`imageBase64`): `Promise`<``null``\>
+▸ **handleImageUpload**(`creatorKey`, `imageBase64`): `Promise`<``null`` \| `string`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
+| `creatorKey` | `string` |
 | `imageBase64` | `string` \| ``null`` \| `undefined` |
 
 #### Returns
 
-`Promise`<``null``\>
+`Promise`<``null`` \| `string`\>
 
 #### Defined in
 
-[src/backend/index.ts:153](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L153)
+[src/backend/index.ts:166](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L166)
 
 ___
 
@@ -525,7 +539,7 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1218](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L1218)
+[src/backend/index.ts:1309](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1309)
 
 ___
 
@@ -548,7 +562,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:884](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L884)
+[src/backend/index.ts:975](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L975)
 
 ___
 
@@ -568,7 +582,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:1183](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L1183)
+[src/backend/index.ts:1274](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1274)
 
 ___
 
@@ -590,7 +604,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:436](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L436)
+[src/backend/index.ts:523](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L523)
 
 ___
 
@@ -610,7 +624,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:1192](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L1192)
+[src/backend/index.ts:1283](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1283)
 
 ___
 
@@ -632,7 +646,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:759](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L759)
+[src/backend/index.ts:850](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L850)
 
 ___
 
@@ -655,7 +669,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:916](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L916)
+[src/backend/index.ts:1007](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1007)
 
 ___
 
@@ -677,7 +691,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:467](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L467)
+[src/backend/index.ts:554](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L554)
 
 ___
 
@@ -699,7 +713,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:789](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L789)
+[src/backend/index.ts:880](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L880)
 
 ___
 
@@ -722,7 +736,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:974](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L974)
+[src/backend/index.ts:1065](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L1065)
 
 ___
 
@@ -744,7 +758,7 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:294](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L294)
+[src/backend/index.ts:381](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L381)
 
 ___
 
@@ -757,6 +771,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `(destructured)` | `Object` |
+| ▶ `({ creatorKey })` | `string` |
 | ▶ `({ data })` | `Partial`<[`PatchUser`](types_global.md#patchuser)\> |
 | ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
@@ -766,4 +781,4 @@ ___
 
 #### Defined in
 
-[src/backend/index.ts:591](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/backend/index.ts#L591)
+[src/backend/index.ts:678](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/index.ts#L678)

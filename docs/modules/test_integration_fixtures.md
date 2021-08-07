@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[test/integration.fixtures.ts:28](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/integration.fixtures.ts#L28)
+[test/integration.fixtures.ts:28](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/integration.fixtures.ts#L28)
 
 ___
 
@@ -42,6 +42,7 @@ for correctness.
 | `displayIndex` | `number` | The test index X (as in "#X") that is reported to the user when a test fails. |
 | `handler?` | [`NextApiHandlerMixin`](test_integration_fixtures.md#nextapihandlermixin) | The handler under test. |
 | `id?` | `string` | An optional id that can be used to reference the result from this fixture directly as opposed to by index.  **`example`** getResultAt('my-id') === getResultAt(22) |
+| `invisible?` | `boolean` | If `invisible == true`, the test is not counted when generating positional fixtures.  **`default`** false |
 | `method?` | ``"GET"`` \| ``"POST"`` \| ``"PUT"`` \| ``"DELETE"`` | The method of the mock request. |
 | `params?` | `Record`<`string`, `string` \| `string`[]\> \| (`prevResults`: [`TestResultset`](test_integration_fixtures.md#testresultset)) => `Promisable`<`Record`<`string`, `string` \| `string`[]\>\> | Represents mock "processed" dynamic route components and query params. |
 | `response?` | `Object` | The expected shape of the HTTP response. |
@@ -51,7 +52,7 @@ for correctness.
 
 #### Defined in
 
-[test/integration.fixtures.ts:76](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/integration.fixtures.ts#L76)
+[test/integration.fixtures.ts:76](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/integration.fixtures.ts#L76)
 
 ___
 
@@ -76,7 +77,7 @@ A single test result stored in `memory`.
 
 #### Defined in
 
-[test/integration.fixtures.ts:37](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/integration.fixtures.ts#L37)
+[test/integration.fixtures.ts:37](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/integration.fixtures.ts#L37)
 
 ___
 
@@ -89,13 +90,13 @@ runs via `memory`.
 
 #### Defined in
 
-[test/integration.fixtures.ts:46](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/integration.fixtures.ts#L46)
+[test/integration.fixtures.ts:46](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/integration.fixtures.ts#L46)
 
 ## Functions
 
 ### getFixtures
 
-▸ **getFixtures**(`api`): `Promise`<[`TestFixture`](test_integration_fixtures.md#testfixture)[]\>
+▸ **getFixtures**(`api`): [`TestFixture`](test_integration_fixtures.md#testfixture)[]
 
 #### Parameters
 
@@ -105,8 +106,8 @@ runs via `memory`.
 
 #### Returns
 
-`Promise`<[`TestFixture`](test_integration_fixtures.md#testfixture)[]\>
+[`TestFixture`](test_integration_fixtures.md#testfixture)[]
 
 #### Defined in
 
-[test/integration.fixtures.ts:142](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/test/integration.fixtures.ts#L142)
+[test/integration.fixtures.ts:149](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/test/integration.fixtures.ts#L149)

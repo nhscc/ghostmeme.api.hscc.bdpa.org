@@ -26,4 +26,4 @@
 
 #### Defined in
 
-[src/pages/_app.tsx:8](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/src/pages/_app.tsx#L8)
+[src/pages/_app.tsx:8](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/pages/_app.tsx#L8)

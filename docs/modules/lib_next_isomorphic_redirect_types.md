@@ -27,7 +27,7 @@
 
 #### Defined in
 
-[lib/next-isomorphic-redirect/types.ts:9](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-isomorphic-redirect/types.ts#L9)
+[lib/next-isomorphic-redirect/types.ts:9](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/lib/next-isomorphic-redirect/types.ts#L9)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/next-isomorphic-redirect/types.ts:4](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-isomorphic-redirect/types.ts#L4)
+[lib/next-isomorphic-redirect/types.ts:4](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/lib/next-isomorphic-redirect/types.ts#L4)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 #### Defined in
 
-[lib/next-isomorphic-redirect/types.ts:15](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/lib/next-isomorphic-redirect/types.ts#L15)
+[lib/next-isomorphic-redirect/types.ts:15](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/lib/next-isomorphic-redirect/types.ts#L15)

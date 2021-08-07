@@ -10,6 +10,7 @@
 - [FriendRequestId](../interfaces/types_global.FriendRequestId.md)
 - [MemeId](../interfaces/types_global.MemeId.md)
 - [UnixEpochMs](../interfaces/types_global.UnixEpochMs.md)
+- [UploadId](../interfaces/types_global.UploadId.md)
 - [UserId](../interfaces/types_global.UserId.md)
 
 ### Type aliases
@@ -22,6 +23,7 @@
 - [InternalLimitedLogEntry](types_global.md#internallimitedlogentry)
 - [InternalMeme](types_global.md#internalmeme)
 - [InternalRequestLogEntry](types_global.md#internalrequestlogentry)
+- [InternalUpload](types_global.md#internalupload)
 - [InternalUser](types_global.md#internaluser)
 - [NewMeme](types_global.md#newmeme)
 - [NewUser](types_global.md#newuser)
@@ -48,7 +50,7 @@ The shape of precomputed conversation corpus data.
 
 #### Defined in
 
-[types/global.d.ts:231](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L231)
+[types/global.d.ts:255](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L255)
 
 ___
 
@@ -67,7 +69,7 @@ The shape of a single line of precomputed conversation corpus data.
 
 #### Defined in
 
-[types/global.d.ts:239](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L239)
+[types/global.d.ts:263](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L263)
 
 ___
 
@@ -75,9 +77,11 @@ ___
 
 Ƭ **FriendRequestType**: ``"incoming"`` \| ``"outgoing"``
 
+Available types of friend requests.
+
 #### Defined in
 
-[types/global.d.ts:226](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L226)
+[types/global.d.ts:250](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L250)
 
 ___
 
@@ -96,7 +100,7 @@ The shape of an API key.
 
 #### Defined in
 
-[types/global.d.ts:247](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L247)
+[types/global.d.ts:271](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L271)
 
 ___
 
@@ -111,11 +115,12 @@ The shape of API metadata stored in MongoDb.
 | Name | Type |
 | :------ | :------ |
 | `totalMemes` | `number` |
+| `totalUploads` | `number` |
 | `totalUsers` | `number` |
 
 #### Defined in
 
-[types/global.d.ts:26](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L26)
+[types/global.d.ts:28](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L28)
 
 ___
 
@@ -127,7 +132,7 @@ The shape of a limited log entry.
 
 #### Defined in
 
-[types/global.d.ts:267](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L267)
+[types/global.d.ts:291](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L291)
 
 ___
 
@@ -158,7 +163,7 @@ The shape of a meme stored in MongoDb.
 
 #### Defined in
 
-[types/global.d.ts:34](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L34)
+[types/global.d.ts:37](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L37)
 
 ___
 
@@ -181,7 +186,27 @@ The shape of a request log entry.
 
 #### Defined in
 
-[types/global.d.ts:255](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L255)
+[types/global.d.ts:279](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L279)
+
+___
+
+### InternalUpload
+
+Ƭ **InternalUpload**: `Object`
+
+The shape of upload metadata LRU cache stored in MongoDb.
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `hash` | `string` | The sha1 hash of the base64 image data. |
+| `lastUsedAt` | [`UnixEpochMs`](../interfaces/types_global.UnixEpochMs.md) | Updated whenever the record is used (milliseconds since unix epoch). |
+| `uri` | `string` | The imgur uri for the image. |
+
+#### Defined in
+
+[types/global.d.ts:172](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L172)
 
 ___
 
@@ -211,7 +236,7 @@ The shape of a user stored in MongoDb.
 
 #### Defined in
 
-[types/global.d.ts:105](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L105)
+[types/global.d.ts:108](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L108)
 
 ___
 
@@ -223,7 +248,7 @@ The shape of a newly received meme.
 
 #### Defined in
 
-[types/global.d.ts:195](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L195)
+[types/global.d.ts:216](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L216)
 
 ___
 
@@ -235,7 +260,7 @@ The shape of a newly received user.
 
 #### Defined in
 
-[types/global.d.ts:208](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L208)
+[types/global.d.ts:229](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L229)
 
 ___
 
@@ -260,7 +285,7 @@ A type combining NextApiRequest and NextApiResponse.
 
 #### Defined in
 
-[types/global.d.ts:18](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L18)
+[types/global.d.ts:20](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L20)
 
 ___
 
@@ -278,7 +303,7 @@ The shape of a received update to an existing meme.
 
 #### Defined in
 
-[types/global.d.ts:215](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L215)
+[types/global.d.ts:236](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L236)
 
 ___
 
@@ -290,7 +315,7 @@ The shape of a received update to an existing user.
 
 #### Defined in
 
-[types/global.d.ts:222](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L222)
+[types/global.d.ts:243](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L243)
 
 ___
 
@@ -302,7 +327,7 @@ The shape of a publicly available meme.
 
 #### Defined in
 
-[types/global.d.ts:169](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L169)
+[types/global.d.ts:190](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L190)
 
 ___
 
@@ -314,4 +339,4 @@ The shape of a publicly available user.
 
 #### Defined in
 
-[types/global.d.ts:183](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/311fb73/types/global.d.ts#L183)
+[types/global.d.ts:204](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/types/global.d.ts#L204)
