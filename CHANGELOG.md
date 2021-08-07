@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits][1], and this project adheres to
 [Semantic Versioning][2].
 
-# 1.1.0 (2021-08-05)
+# 1.1.0 (2021-08-07)
 
 ### Bug Fixes
 
@@ -29,18 +29,25 @@ The format is based on [Conventional Commits][1], and this project adheres to
 
 ### Build System
 
-- **deps:** bump @types/mongodb from 3.6.19 to 3.6.20 ([32a49ef][20])
+- **.vercelignore:** add more restrictions ([b8af35d][20])
+- **.vercelignore:** do not upload files under /test to vercel ([4bab606][21])
+- **.vercelignore:** do not upload large or irrelevant files to vercel
+  ([9b46494][22])
+- **.vercelignore:** unrestrict expect-env for now ([de4c71f][23])
+- Modernize build process ([34948c4][24])
+- **deps:** bump @types/mongodb from 3.6.19 to 3.6.20 ([32a49ef][25])
 - **deps:** bump @typescript-eslint/eslint-plugin from 4.28.1 to 4.28.2
-  ([a655f46][21])
-- **deps:** bump @typescript-eslint/parser from 4.28.1 to 4.28.2 ([e4dd0a9][22])
-- **deps:** bump mongodb-memory-server from 6.9.6 to 7.1.0 ([b5493a0][23])
-- **deps:** bump webpack from 5.42.0 to 5.42.1 ([2b2bd63][24])
+  ([a655f46][26])
+- **deps:** bump @typescript-eslint/parser from 4.28.1 to 4.28.2 ([e4dd0a9][27])
+- **deps:** bump mongodb-memory-server from 6.9.6 to 7.1.0 ([b5493a0][28])
+- **deps:** bump webpack from 5.42.0 to 5.42.1 ([2b2bd63][29])
 
 ### Features
 
-- **\_example.ts:** add example external script ([dbde825][25])
-- Add more debug info to index page ([0f19688][26])
-- More versatile prune-data external ([51b8f28][27])
+- Add new imgur-based image upload functionality ([b50e614][30])
+- **\_example.ts:** add example external script ([dbde825][31])
+- Add more debug info to index page ([0f19688][32])
+- More versatile prune-data external ([51b8f28][33])
 
 [1]: https://conventionalcommits.org
 [2]: https://semver.org
@@ -79,18 +86,30 @@ The format is based on [Conventional Commits][1], and this project adheres to
 [19]:
   https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/7792308e448f40001098bc1be5eadb15bc820176
 [20]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/32a49efd2359f01959b8dcb0a4b0cbd15dad3b08
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/b8af35db8e1cd14d64954ba2c0434ea7a6dd256e
 [21]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/a655f46bc29106759c6faf50b8a4be166f2c5b6b
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/4bab606593c863b034bab9b229ee4d658ad494a4
 [22]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/e4dd0a98414982c8f0a675f81ff7b4469fa9b87b
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/9b4649495a917f5cf66e18defb2fa48013f700f3
 [23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/b5493a0df1c2e427768067ab6bb4a88d38b5e50c
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/de4c71f10bf213a5b814a0533434c5029b6e209d
 [24]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/2b2bd638ffdd324aca15ef3329a647df5a6ff07c
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/34948c417ae0466c4612d50541a7ac3450fb8258
 [25]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/dbde825516db40a293b74dafec61365f70248cdc
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/32a49efd2359f01959b8dcb0a4b0cbd15dad3b08
 [26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/0f19688a551bb223adb3cdcbd8213b633b74d322
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/a655f46bc29106759c6faf50b8a4be166f2c5b6b
 [27]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/e4dd0a98414982c8f0a675f81ff7b4469fa9b87b
+[28]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/b5493a0df1c2e427768067ab6bb4a88d38b5e50c
+[29]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/2b2bd638ffdd324aca15ef3329a647df5a6ff07c
+[30]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/b50e614027638cee945b34a9b3d0e62b84feaf0f
+[31]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/dbde825516db40a293b74dafec61365f70248cdc
+[32]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/0f19688a551bb223adb3cdcbd8213b633b74d322
+[33]:
   https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/commit/51b8f286d72793fb66e5649c97b5ad57b1cade3c
