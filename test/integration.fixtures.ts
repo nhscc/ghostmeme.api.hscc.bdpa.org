@@ -149,6 +149,7 @@ export type TestFixture = {
 export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixture[] {
   const initialMemeCount = dummyDbData.memes.length;
   const initialUserCount = dummyDbData.users.length;
+  const initialUploadCount = dummyDbData.uploads.length;
 
   const runOnly = process.env.RUN_ONLY?.split(',')
     .flatMap((n) => {
@@ -183,7 +184,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       response: {
         status: 200,
-        json: { totalMemes: initialMemeCount, totalUsers: initialUserCount }
+        json: {
+          totalMemes: initialMemeCount,
+          totalUsers: initialUserCount,
+          totalUploads: initialUploadCount
+        }
       }
     },
     {
@@ -221,7 +226,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       response: {
         status: 200,
-        json: { totalMemes: initialMemeCount, totalUsers: initialUserCount + 1 }
+        json: {
+          totalMemes: initialMemeCount,
+          totalUsers: initialUserCount + 1,
+          totalUploads: initialUploadCount
+        }
       }
     },
     {
@@ -312,7 +321,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       response: {
         status: 200,
-        json: { totalMemes: initialMemeCount, totalUsers: initialUserCount + 3 }
+        json: {
+          totalMemes: initialMemeCount,
+          totalUsers: initialUserCount + 3,
+          totalUploads: initialUploadCount
+        }
       }
     },
     {
@@ -482,7 +495,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       response: {
         status: 200,
-        json: { totalMemes: initialMemeCount, totalUsers: initialUserCount + 3 }
+        json: {
+          totalMemes: initialMemeCount,
+          totalUsers: initialUserCount + 3,
+          totalUploads: initialUploadCount
+        }
       }
     },
     {
@@ -571,7 +588,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       response: {
         status: 200,
-        json: { totalMemes: initialMemeCount, totalUsers: initialUserCount + 2 }
+        json: {
+          totalMemes: initialMemeCount,
+          totalUsers: initialUserCount + 2,
+          totalUploads: initialUploadCount
+        }
       }
     },
     {
@@ -610,7 +631,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       response: {
         status: 200,
-        json: { totalMemes: initialMemeCount, totalUsers: initialUserCount + 2 }
+        json: {
+          totalMemes: initialMemeCount,
+          totalUsers: initialUserCount + 2,
+          totalUploads: initialUploadCount
+        }
       }
     },
     {
@@ -641,7 +666,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
           phone: '978-555-5555',
           imageBase64: (await import('testverse/images')).image17KB
         } as PatchUser),
-      response: { status: 200 }
+      response: { status: 500, json: { error: 'image upload failed' } }
     },
     {
       subject: "can't change username",
@@ -746,7 +771,32 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         phone: '978-555-5555',
         imageBase64: 'bad-base64'
       } as PatchUser,
-      response: { status: 200 }
+      response: {
+        status: 400,
+        json: {
+          error: expect.stringContaining('invalid base64 data URL')
+        }
+      }
+    },
+    {
+      subject: "can't use invalid media type",
+      handler: api.usersId,
+      params: ({ getResultAt }) => ({
+        user_id: getResultAt<string>('user-test-1', 'user.user_id')
+      }),
+      method: 'PUT',
+      body: {
+        name: 'Elizabeth Warren',
+        email: 'liz@ewarren.com',
+        phone: '978-555-5555',
+        imageBase64: 'data:bad/bad;base64,/9j/4AAQ'
+      } as PatchUser,
+      response: {
+        status: 400,
+        json: {
+          error: expect.stringContaining('invalid media type "bad/bad"')
+        }
+      }
     },
     {
       subject: 'get user like count',
@@ -801,7 +851,11 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       method: 'GET',
       response: {
         status: 200,
-        json: { totalMemes: initialMemeCount + 1, totalUsers: initialUserCount + 2 }
+        json: {
+          totalMemes: initialMemeCount + 1,
+          totalUsers: initialUserCount + 2,
+          totalUploads: initialUploadCount
+        }
       }
     },
     {
@@ -2305,6 +2359,8 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       return true;
     }
   );
+
+  // TODO: XXX: add ability to capture/suppress output via fixture option (even better: selectively use mock plugins like withMockEnv and withMockOutput via config options)
 
   // TODO: XXX: with @xunnamius/fable, have an "every X" type construct (the below is "every 10")
   // TODO: XXX: also allow middleware
