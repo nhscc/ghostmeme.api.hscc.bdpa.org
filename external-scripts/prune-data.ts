@@ -104,7 +104,7 @@ export default async function main() {
           );
         }
 
-        cursor.close();
+        await cursor.close();
       })
     );
 
