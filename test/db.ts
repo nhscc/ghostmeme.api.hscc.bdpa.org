@@ -23,7 +23,8 @@ import type {
   InternalLimitedLogEntry,
   InternalMeme,
   InternalUser,
-  InternalInfo
+  InternalInfo,
+  InternalUpload
 } from 'types/global';
 
 import { toss } from 'toss-expression';
@@ -41,6 +42,7 @@ export type DummyDbData = {
   keys: WithId<InternalApiKey>[];
   memes: WithId<InternalMeme>[];
   users: WithId<InternalUser>[];
+  uploads: WithId<InternalUpload>[];
   info: WithId<InternalInfo>;
   logs: WithId<InternalRequestLogEntry>[];
   bans: WithId<InternalLimitedLogEntry>[];
@@ -92,10 +94,31 @@ export const dummyDbData: DummyDbData = {
     imageUrl: null,
     meta: { creator: DUMMY_KEY }
   })),
+  uploads: [
+    {
+      _id: new ObjectId(),
+      uri: 'https://uri1',
+      hash: 'hash-1',
+      lastUsedAt: now - 1000
+    },
+    {
+      _id: new ObjectId(),
+      uri: 'https://uri2',
+      hash: 'hash-2',
+      lastUsedAt: now
+    },
+    {
+      _id: new ObjectId(),
+      uri: 'https://uri3',
+      hash: 'hash-3',
+      lastUsedAt: now + 1000
+    }
+  ],
   info: {
     _id: new ObjectId(),
     totalMemes: memes.length,
-    totalUsers: DUMMY_USER_COUNT
+    totalUsers: DUMMY_USER_COUNT,
+    totalUploads: 3
   },
   logs: [...Array(22)].map((_, ndx) => ({
     _id: new ObjectId(),
@@ -218,6 +241,9 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
     ...[newData.keys.length ? db.collection('keys').insertMany(newData.keys) : null],
     ...[newData.users.length ? db.collection('users').insertMany(newData.users) : null],
     ...[newData.memes.length ? db.collection('memes').insertMany(newData.memes) : null],
+    ...[
+      newData.uploads.length ? db.collection('uploads').insertMany(newData.uploads) : null
+    ],
     ...[newData.logs ? db.collection('request-log').insertMany(newData.logs) : null],
     ...[newData.bans ? db.collection('limited-log-mview').insertMany(newData.bans) : null]
   ]);

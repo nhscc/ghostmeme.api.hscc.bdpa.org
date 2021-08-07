@@ -6,7 +6,7 @@ import * as Backend from 'universe/backend';
 import { getEnv } from 'universe/backend/env';
 import { setupTestDb, dummyDbData } from 'testverse/db';
 import { itemToObjectId, itemToStringId } from 'universe/backend/db';
-import { GuruMeditationError } from 'universe/backend/error';
+import { GuruMeditationError, TestError } from 'universe/backend/error';
 import fetch from 'node-fetch';
 
 import {
@@ -19,7 +19,7 @@ import {
 import type { Response as FetchResponse } from 'node-fetch';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import type {
+import {
   InternalRequestLogEntry,
   InternalLimitedLogEntry,
   InternalInfo,
@@ -31,7 +31,8 @@ import type {
   NewUser,
   PatchMeme,
   PatchUser,
-  InternalApiKey
+  InternalApiKey,
+  InternalUpload
 } from 'types/global';
 
 jest.mock('node-fetch');
@@ -42,12 +43,17 @@ const { getDb } = setupTestDb();
 
 const withMockedEnv = mockEnvFactory({}, { replace: false });
 
+beforeEach(() =>
+  mockedFetch.mockImplementation(() => toss(new TestError('illegal fetch attempt')))
+);
+
 describe('::getSystemInfo', () => {
   it('returns summary system metadata', async () => {
     expect.hasAssertions();
     expect(await Backend.getSystemInfo()).toStrictEqual<InternalInfo>({
       totalMemes: dummyDbData.info.totalMemes,
-      totalUsers: dummyDbData.info.totalUsers
+      totalUsers: dummyDbData.info.totalUsers,
+      totalUploads: dummyDbData.info.totalUploads
     });
   });
 
@@ -56,11 +62,12 @@ describe('::getSystemInfo', () => {
 
     await (await getDb())
       .collection('info')
-      .updateOne({}, { $set: { totalMemes: 0, totalUsers: 0 } });
+      .updateOne({}, { $set: { totalMemes: 0, totalUsers: 0, totalUploads: 0 } });
 
     expect(await Backend.getSystemInfo()).toStrictEqual<InternalInfo>({
       totalMemes: 0,
-      totalUsers: 0
+      totalUsers: 0,
+      totalUploads: 0
     });
   });
 });
@@ -502,6 +509,12 @@ describe('::createMeme', () => {
   it('creates and returns a new meme', async () => {
     expect.hasAssertions();
 
+    mockedFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: async () => ({ link: 'https://i.imgur.com/fake' })
+      } as FetchResponse)
+    );
+
     const items: NewMeme[] = [
       {
         owner: dummyDbData.users[0]._id.toString(),
@@ -521,7 +534,7 @@ describe('::createMeme', () => {
         private: false,
         replyTo: null,
         imageUrl: null,
-        imageBase64: 'pretend-base64'
+        imageBase64: (await import('testverse/images')).image17KB
       },
       {
         owner: dummyDbData.users[0]._id.toString(),
@@ -573,7 +586,7 @@ describe('::createMeme', () => {
         private: true,
         replyTo: null,
         imageUrl: null,
-        imageBase64: 'not-base64'
+        imageBase64: (await import('testverse/images')).image17KB
       }
     ];
 
@@ -583,7 +596,12 @@ describe('::createMeme', () => {
 
     const removeImageBase64 = (item: NewMeme): Omit<NewMeme, 'imageBase64'> => {
       const { imageBase64: _, ...remaining } = item;
-      return remaining;
+      return {
+        ...remaining,
+        ...(item.imageBase64
+          ? { imageUrl: expect.stringContaining('https://i.imgur.com/') }
+          : {})
+      };
     };
 
     expect(newMemes).toIncludeSameMembers(
@@ -593,6 +611,9 @@ describe('::createMeme', () => {
     const expectedInternalMemes = items.map<InternalMeme>((item) => {
       const internal: InternalMeme & { imageBase64?: string | null } = {
         ...item,
+        ...(item.imageBase64
+          ? { imageUrl: expect.stringContaining('https://i.imgur.com/') }
+          : {}),
         _id: expect.any(ObjectId),
         owner: new ObjectId(item.owner),
         receiver: item.receiver ? new ObjectId(item.receiver) : null,
@@ -626,6 +647,7 @@ describe('::createMeme', () => {
 
     const userId = dummyDbData.users[0]._id.toHexString();
     const memeId = dummyDbData.memes[0]._id.toHexString();
+    const { image17KB } = await import('testverse/images');
 
     const items: [NewMeme, string][] = [
       [undefined as unknown as NewMeme, 'only JSON'],
@@ -693,7 +715,7 @@ describe('::createMeme', () => {
           private: false,
           receiver: null,
           replyTo: null,
-          imageBase64: 'something',
+          imageBase64: image17KB,
           imageUrl: 'https://some.url'
         } as unknown as NewMeme,
         'at the same time'
@@ -731,7 +753,7 @@ describe('::createMeme', () => {
           private: false,
           receiver: 'bad',
           replyTo: null,
-          imageBase64: 'pretend-its-base64',
+          imageBase64: image17KB,
           imageUrl: null,
           expiredAt: -1
         } as unknown as NewMeme,
@@ -744,7 +766,7 @@ describe('::createMeme', () => {
           private: false,
           receiver: null,
           replyTo: 'bad',
-          imageBase64: 'pretend-its-base64',
+          imageBase64: image17KB,
           imageUrl: null,
           expiredAt: -1
         } as unknown as NewMeme,
@@ -757,7 +779,7 @@ describe('::createMeme', () => {
           private: true,
           receiver: new ObjectId().toHexString(),
           replyTo: memeId,
-          imageBase64: 'pretend-its-base64',
+          imageBase64: image17KB,
           imageUrl: null,
           expiredAt: -1
         } as unknown as NewMeme,
@@ -770,7 +792,7 @@ describe('::createMeme', () => {
           private: false,
           receiver: new ObjectId().toHexString(),
           replyTo: null,
-          imageBase64: 'pretend-its-base64',
+          imageBase64: image17KB,
           imageUrl: null,
           expiredAt: 123456789
         } as unknown as NewMeme,
@@ -783,7 +805,7 @@ describe('::createMeme', () => {
           private: false,
           receiver: null,
           replyTo: memeId,
-          imageBase64: 'pretend-its-base64',
+          imageBase64: image17KB,
           imageUrl: null,
           expiredAt: -1
         } as unknown as NewMeme,
@@ -798,7 +820,7 @@ describe('::createMeme', () => {
           private: false,
           receiver: null,
           replyTo: null,
-          imageBase64: 'pretend-its-base64',
+          imageBase64: image17KB,
           imageUrl: null,
           expiredAt: -1
         } as unknown as NewMeme,
@@ -811,7 +833,7 @@ describe('::createMeme', () => {
           private: false,
           receiver: null,
           replyTo: null,
-          imageBase64: 'pretend-its-base64',
+          imageBase64: image17KB,
           imageUrl: null,
           expiredAt: -1,
           extraProp: true
@@ -894,6 +916,32 @@ describe('::createMeme', () => {
           imageBase64: null
         } as unknown as NewMeme,
         'empty'
+      ],
+      [
+        {
+          owner: dummyDbData.users[0]._id.toString(),
+          receiver: null,
+          expiredAt: -1,
+          description: null,
+          private: false,
+          replyTo: null,
+          imageUrl: null,
+          imageBase64: 'invalid-base64'
+        } as unknown as NewMeme,
+        'invalid base64 data URL'
+      ],
+      [
+        {
+          owner: dummyDbData.users[0]._id.toString(),
+          receiver: null,
+          expiredAt: -1,
+          description: null,
+          private: false,
+          replyTo: null,
+          imageUrl: null,
+          imageBase64: 'data:image/fake;base64,/9j/4AAQ'
+        } as unknown as NewMeme,
+        'invalid media type "image/fake"'
       ]
     ];
 
@@ -949,8 +997,11 @@ describe('::createMeme', () => {
   it('handles imageBase64 uploads', async () => {
     expect.hasAssertions();
 
-    // TODO:
-    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+    mockedFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: async () => ({ link: 'https://i.imgur.com/fake' })
+      } as FetchResponse)
+    );
 
     const items: NewMeme[] = [
       {
@@ -971,7 +1022,7 @@ describe('::createMeme', () => {
 
     const removeImageBase64 = (item: NewMeme): Omit<NewMeme, 'imageBase64'> => {
       const { imageBase64: _, ...remaining } = item;
-      return remaining;
+      return { ...remaining, imageUrl: expect.stringContaining('https://i.imgur.com/') };
     };
 
     expect(newMemes).toIncludeSameMembers(
@@ -1883,6 +1934,12 @@ describe('::createUser', () => {
   it('creates and returns a new user', async () => {
     expect.hasAssertions();
 
+    mockedFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: async () => ({ link: 'https://i.imgur.com/fake' })
+      } as FetchResponse)
+    );
+
     const items: NewUser[] = [
       {
         name: 'one name',
@@ -1903,7 +1960,7 @@ describe('::createUser', () => {
         email: '3-three@email.address',
         phone: '333.333.3333 x5467',
         username: 'user_3',
-        imageBase64: 'pretend-base64'
+        imageBase64: (await import('testverse/images')).image17KB
       }
     ];
 
@@ -1912,7 +1969,7 @@ describe('::createUser', () => {
     );
 
     const expectedInternalUsers = items.map<InternalUser>((item) => {
-      const { imageBase64: _, ...rest } = item;
+      const { imageBase64, ...rest } = item;
       return {
         ...rest,
         _id: expect.any(ObjectId),
@@ -1920,7 +1977,7 @@ describe('::createUser', () => {
         liked: [],
         friends: [],
         requests: { incoming: [], outgoing: [] },
-        imageUrl: null,
+        imageUrl: imageBase64 ? expect.stringContaining('https://i.imgur.com/') : null,
         meta: expect.objectContaining({
           creator: Backend.DUMMY_KEY
         })
@@ -2122,6 +2179,26 @@ describe('::createUser', () => {
           admin: true
         } as unknown as NewUser,
         'unexpected properties'
+      ],
+      [
+        {
+          name: 'tre giles',
+          email: 'valid@email.address',
+          phone: '777-777-7777',
+          username: 'xunnamius',
+          imageBase64: 'invalid-base64'
+        } as unknown as NewUser,
+        'invalid base64 data URL'
+      ],
+      [
+        {
+          name: 'tre giles',
+          email: 'valid@email.address',
+          phone: '777-777-7777',
+          username: 'xunnamius',
+          imageBase64: 'data:image/fake;base64,/9j/4AAQ'
+        } as unknown as NewUser,
+        'invalid media type "image/fake"'
       ]
     ];
 
@@ -2161,8 +2238,11 @@ describe('::createUser', () => {
   it('handles imageBase64 uploads', async () => {
     expect.hasAssertions();
 
-    // TODO:
-    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+    mockedFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: async () => ({ link: 'https://i.imgur.com/fake' })
+      } as FetchResponse)
+    );
 
     const items: NewUser[] = [
       {
@@ -2216,6 +2296,12 @@ describe('::updateUser', () => {
   it('updates an existing user in the database', async () => {
     expect.hasAssertions();
 
+    mockedFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: async () => ({ link: 'https://i.imgur.com/fake' })
+      } as FetchResponse)
+    );
+
     const items: PatchUser[] = [
       {
         name: 'one name',
@@ -2227,7 +2313,7 @@ describe('::updateUser', () => {
         name: 'two name',
         email: '2-two@email.address',
         phone: null,
-        imageBase64: 'pretend-base64'
+        imageBase64: (await import('testverse/images')).image17KB
       },
       {
         name: 'three name',
@@ -2244,7 +2330,11 @@ describe('::updateUser', () => {
 
     await Promise.all(
       items.map((data, ndx) =>
-        Backend.updateUser({ user_id: dummyDbData.users[ndx]._id, data })
+        Backend.updateUser({
+          creatorKey: Backend.DUMMY_KEY,
+          user_id: dummyDbData.users[ndx]._id,
+          data
+        })
       )
     );
 
@@ -2395,17 +2485,39 @@ describe('::updateUser', () => {
           name: 'tre giles',
           email: 'valid@email.address',
           phone: '777-777-7777',
-          imageBase64: 'fake-base64',
+          imageBase64: (await import('testverse/images')).image17KB,
           username: 'xunnamius'
         } as unknown as PatchUser,
         'unexpected properties'
+      ],
+      [
+        {
+          name: 'tre giles',
+          email: 'valid@email.address',
+          phone: '777-777-7777',
+          imageBase64: 'invalid-base64'
+        } as unknown as NewUser,
+        'invalid base64 data URL'
+      ],
+      [
+        {
+          name: 'tre giles',
+          email: 'valid@email.address',
+          phone: '777-777-7777',
+          imageBase64: 'data:image/fake;base64,/9j/4AAQ'
+        } as unknown as NewUser,
+        'invalid media type "image/fake"'
       ]
     ];
 
     await Promise.all(
       items.map(([data, message]) =>
         expect(
-          Backend.updateUser({ user_id: new ObjectId(), data })
+          Backend.updateUser({
+            creatorKey: Backend.DUMMY_KEY,
+            user_id: new ObjectId(),
+            data
+          })
         ).rejects.toMatchObject({ message: expect.stringContaining(message) })
       )
     );
@@ -2418,6 +2530,7 @@ describe('::updateUser', () => {
 
     await expect(
       Backend.updateUser({
+        creatorKey: Backend.DUMMY_KEY,
         user_id: id,
         data: {
           name: 'one name',
@@ -2434,8 +2547,11 @@ describe('::updateUser', () => {
   it('handles imageBase64 uploads', async () => {
     expect.hasAssertions();
 
-    // TODO:
-    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+    mockedFetch.mockImplementation(() =>
+      Promise.resolve({
+        json: async () => ({ link: 'https://i.imgur.com/fake' })
+      } as FetchResponse)
+    );
 
     const items: PatchUser[] = [
       {
@@ -2448,7 +2564,11 @@ describe('::updateUser', () => {
 
     await Promise.all(
       items.map((data, ndx) =>
-        Backend.updateUser({ user_id: dummyDbData.users[ndx]._id, data })
+        Backend.updateUser({
+          creatorKey: Backend.DUMMY_KEY,
+          user_id: dummyDbData.users[ndx]._id,
+          data
+        })
       )
     );
 
@@ -2461,7 +2581,7 @@ describe('::updateUser', () => {
       items.map((item) => {
         const { imageBase64: _, ...rest } = item;
         return expect.objectContaining({
-          rest,
+          ...rest,
           imageUrl: expect.stringContaining('https://i.imgur.com/')
         });
       })
@@ -3108,31 +3228,81 @@ describe('::isDueForContrivedError', () => {
 });
 
 describe('::handleImageUpload', () => {
-  it('unpacks base64 string to image and uploads it to imgur API', async () => {
+  it('uploads base64 image to imgur API and caches it; duplicate upload uses cache', async () => {
     expect.hasAssertions();
+    let sent = false;
 
-    // TODO:
-    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
-  });
+    const listen = (await import('test-listen')).default;
+    const http = await import('http');
+    const fetchActual = jest.requireActual('node-fetch');
+    const uploadsDb = (await getDb()).collection<WithId<InternalUpload>>('uploads');
+    let server: ReturnType<typeof http.createServer> | undefined;
 
-  it('duplicate uploads use LRU cache instead of imgur API, return same uri', async () => {
-    expect.hasAssertions();
+    try {
+      server = http.createServer((_, res) => {
+        if (sent) throw new TestError('respond already sent (caching test failed)');
+        res.end(JSON.stringify({ link: 'https://i.imgur.com/fake' }));
+        sent = true;
+      });
 
-    // TODO:
-    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+      const url = await listen(server);
+
+      mockedFetch.mockImplementation(async (_, init) => fetchActual(url, init));
+
+      const imageBase64 = (await import('testverse/images')).image17KB;
+
+      await expect(
+        Backend.handleImageUpload(Backend.DUMMY_KEY, imageBase64)
+      ).resolves.toStrictEqual('https://i.imgur.com/fake');
+
+      expect(await uploadsDb.countDocuments({ uri: 'https://i.imgur.com/fake' })).toBe(1);
+
+      const then =
+        (await uploadsDb
+          .findOne({ uri: 'https://i.imgur.com/fake' })
+          .then((r) => r?.lastUsedAt)) ||
+        toss(new TestError('illegal lastUsedAt access'));
+
+      await expect(
+        Backend.handleImageUpload(Backend.DUMMY_KEY, imageBase64)
+      ).resolves.toStrictEqual('https://i.imgur.com/fake');
+
+      expect(await uploadsDb.countDocuments({ uri: 'https://i.imgur.com/fake' })).toBe(1);
+
+      const now =
+        (await uploadsDb
+          .findOne({ uri: 'https://i.imgur.com/fake' })
+          .then((r) => r?.lastUsedAt)) ||
+        toss(new TestError('illegal lastUsedAt access'));
+
+      expect(now).toBeGreaterThan(then as number);
+    } finally {
+      server?.close();
+    }
   });
 
   it('rejects badly formatted base64 strings', async () => {
     expect.hasAssertions();
 
-    // TODO:
-    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+    await expect(
+      Backend.handleImageUpload(Backend.DUMMY_KEY, 'bad-base64')
+    ).rejects.toMatchObject({ message: expect.stringContaining('invalid base64') });
+
+    await expect(
+      Backend.handleImageUpload(Backend.DUMMY_KEY, 'data:image/bad;base64,/9j/4AAQ')
+    ).rejects.toMatchObject({
+      message: expect.stringContaining('invalid media type "image/bad"')
+    });
   });
 
   it('handles imgur API errors gracefully', async () => {
     expect.hasAssertions();
 
-    // TODO:
-    mockedFetch.mockImplementationOnce(() => Promise.resolve({} as FetchResponse));
+    const imageBase64 = (await import('testverse/images')).image17KB;
+    mockedFetch.mockImplementation(async () => toss(new TestError('badness')));
+
+    await expect(
+      Backend.handleImageUpload(Backend.DUMMY_KEY, imageBase64)
+    ).rejects.toMatchObject({ message: expect.stringContaining('image upload failed') });
   });
 });
