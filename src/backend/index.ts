@@ -40,7 +40,8 @@ import {
   NewUser,
   PatchMeme,
   PatchUser,
-  InternalUpload
+  InternalUpload,
+  ImgurApiResponse
 } from 'types/global';
 
 /**
@@ -216,11 +217,16 @@ export async function handleImageUpload(
             body
           });
 
-          imageUrl = ((await res.json()) as { link: string }).link;
+          const json: ImgurApiResponse = await res.json();
+
+          imageUrl =
+            json.data.link ||
+            toss(
+              new AppError(json?.data?.error || 'could not resolve uploaded image link')
+            );
         } catch (e) {
-          getEnv().NODE_ENV != 'test' &&
-            // eslint-disable-next-line no-console
-            console.error(`image upload failure reason: ${e.message || e}`);
+          // eslint-disable-next-line no-console
+          console.error(`image upload failure reason: ${e.message || e}`);
           throw new AppError('image upload failed');
         }
 
