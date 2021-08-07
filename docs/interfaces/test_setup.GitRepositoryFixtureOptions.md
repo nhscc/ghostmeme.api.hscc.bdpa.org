@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / GitRepositoryFixtureOptions
+[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / GitRepositoryFixtureOptions
 
 # Interface: GitRepositoryFixtureOptions
 
-[test/setup][2].GitRepositoryFixtureOptions
+[test/setup](../modules/test_setup.md).GitRepositoryFixtureOptions
 
 ## Table of contents
 
 ### Methods
 
-- [setupGit][3]
+- [setupGit](test_setup.GitRepositoryFixtureOptions.md#setupgit)
 
 ## Methods
 
@@ -18,8 +18,8 @@
 
 #### Parameters
 
-| Name  | Type        |
-| :---- | :---------- |
+| Name | Type |
+| :------ | :------ |
 | `git` | `SimpleGit` |
 
 #### Returns
@@ -28,10 +28,4 @@
 
 #### Defined in
 
-[test/setup.ts:416][4]
-
-[1]: ../README.md
-[2]: ../modules/test_setup.md
-[3]: test_setup.GitRepositoryFixtureOptions.md#setupgit
-[4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L416
+[test/setup.ts:415](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L415)

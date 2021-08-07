@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / lib/next-respond/types
+[ghostmeme.api.hscc.bdpa.org](../README.md) / lib/next-respond/types
 
 # Module: lib/next-respond/types
 
@@ -6,46 +6,35 @@
 
 ### References
 
-- [HttpStatusCode][2]
+- [HttpStatusCode](lib_next_respond_types.md#httpstatuscode)
 
 ### Type aliases
 
-- [ErrorJsonResponse][3]
-- [SuccessJsonResponse][4]
+- [ErrorJsonResponse](lib_next_respond_types.md#errorjsonresponse)
+- [SuccessJsonResponse](lib_next_respond_types.md#successjsonresponse)
 
 ## References
 
 ### HttpStatusCode
 
-Re-exports: [HttpStatusCode][5]
+Re-exports: [HttpStatusCode](lib_next_isomorphic_redirect_types.md#httpstatuscode)
 
 ## Type aliases
 
 ### ErrorJsonResponse
 
-Ƭ **ErrorJsonResponse**: `Record`<`string`, `unknown`> & { `error`: `string` ;
-`success`: `false` }
+Ƭ **ErrorJsonResponse**: `Record`<`string`, `unknown`\> & { `error`: `string` ; `success`: ``false``  }
 
 #### Defined in
 
-[lib/next-respond/types.ts:2][6]
+[lib/next-respond/types.ts:2](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/types.ts#L2)
 
----
+___
 
 ### SuccessJsonResponse
 
-Ƭ **SuccessJsonResponse**: `Record`<`string`, `unknown`> & { `success`: `true` }
+Ƭ **SuccessJsonResponse**: `Record`<`string`, `unknown`\> & { `success`: ``true``  }
 
 #### Defined in
 
-[lib/next-respond/types.ts:1][7]
-
-[1]: ../README.md
-[2]: lib_next_respond_types.md#httpstatuscode
-[3]: lib_next_respond_types.md#errorjsonresponse
-[4]: lib_next_respond_types.md#successjsonresponse
-[5]: lib_next_isomorphic_redirect_types.md#httpstatuscode
-[6]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/lib/next-respond/types.ts#L2
-[7]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/lib/next-respond/types.ts#L1
+[lib/next-respond/types.ts:1](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/types.ts#L1)

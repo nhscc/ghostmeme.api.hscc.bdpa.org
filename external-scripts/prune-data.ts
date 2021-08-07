@@ -1,69 +1,119 @@
 import { name as pkgName } from 'package';
 import { getEnv } from 'universe/backend/env';
-import { AppError } from 'universe/backend/error';
+import { ExternalError, IllegalExternalEnvironmentError } from 'universe/backend/error';
 import { getDb, closeDb } from 'universe/backend/db';
+import { toss } from 'toss-expression';
 import debugFactory from 'debug';
 
-import { toss } from 'toss-expression';
-
 const debugNamespace = `${pkgName}:prune-data`;
+
 const log = debugFactory(debugNamespace);
 const debug = debugFactory(debugNamespace);
 
 // eslint-disable-next-line no-console
 log.log = console.info.bind(console);
 
-if (getEnv().DEBUG === null && getEnv().NODE_ENV != 'test') {
+if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
   debugFactory.enable(`${debugNamespace},${debugNamespace}:*`);
   debug.enabled = false;
 }
 
-export default async function main() {
-  log('initializing');
-
-  const env = getEnv();
+const COLLECTION_LIMITS = (env: ReturnType<typeof getEnv>) => {
   const limits = {
     'request-log':
       env.PRUNE_DATA_MAX_LOGS ||
-      toss(new AppError('PRUNE_DATA_MAX_LOGS must be greater than zero')),
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_LOGS must be greater than zero'
+        )
+      ),
     users:
       env.PRUNE_DATA_MAX_USERS ||
-      toss(new AppError('PRUNE_DATA_MAX_USERS must be greater than zero')),
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_USERS must be greater than zero'
+        )
+      ),
     memes:
       env.PRUNE_DATA_MAX_MEMES ||
-      toss(new AppError('PRUNE_DATA_MAX_MEMES must be greater than zero')),
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_MEMES must be greater than zero'
+        )
+      ),
     'limited-log-mview':
       env.PRUNE_DATA_MAX_BANNED ||
-      toss(new AppError('PRUNE_DATA_MAX_BANNED must be greater than zero'))
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_BANNED must be greater than zero'
+        )
+      ),
+    uploads: {
+      limit:
+        env.PRUNE_DATA_MAX_UPLOADS ||
+        toss(
+          new IllegalExternalEnvironmentError(
+            'PRUNE_DATA_MAX_UPLOADS must be greater than zero'
+          )
+        ),
+      orderBy: 'lastUsedAt'
+    }
   };
 
-  debug(`final limits: %O`, limits);
-  log('connecting to external database');
+  debug('limits: %O', limits);
+  return limits;
+};
 
-  const db = await getDb({ external: true });
+export default async function main() {
+  try {
+    log('initializing');
 
-  await Promise.all(
-    Object.entries(limits).map(async ([collectionName, limitThreshold]) => {
-      const subLog = log.extend(collectionName);
-      const collection = db.collection(collectionName);
-      const total = await collection.countDocuments();
-      const cursor = collection.find().sort({ _id: -1 }).skip(limitThreshold).limit(1);
-      const thresholdEntry = await cursor.next();
+    const limits = COLLECTION_LIMITS(getEnv());
 
-      if (thresholdEntry) {
-        const result = await collection.deleteMany({ _id: { $lte: thresholdEntry._id } });
-        subLog(`pruned ${result.deletedCount}/${total} "${collectionName}" entries`);
-      } else {
-        subLog(`no prunable "${collectionName}" entries (${total} <= ${limitThreshold})`);
-      }
+    log('connecting to external database');
 
-      cursor.close();
-    })
-  );
+    const db = await getDb({ external: true });
 
-  debug('closing connection');
-  await closeDb();
-  log('execution complete');
+    await Promise.all(
+      Object.entries(limits).map(async ([collectionName, limitObj]) => {
+        const { limit: limitThreshold, orderBy } =
+          typeof limitObj == 'number' ? { limit: limitObj, orderBy: '_id' } : limitObj;
+
+        const subLog = log.extend(collectionName);
+        const collection = db.collection(collectionName);
+        const total = await collection.countDocuments();
+
+        const cursor = collection
+          .find()
+          .sort({ [orderBy]: -1 })
+          .skip(limitThreshold)
+          .limit(1);
+
+        const thresholdEntry = await cursor.next();
+
+        if (thresholdEntry) {
+          const result = await collection.deleteMany({
+            [orderBy]: { $lte: thresholdEntry[orderBy] }
+          });
+          subLog(
+            `pruned ${result.deletedCount}/${total} "${collectionName}" entries (ordered by "${orderBy}")`
+          );
+        } else {
+          subLog(
+            `no prunable "${collectionName}" entries (${total} <= ${limitThreshold})`
+          );
+        }
+
+        await cursor.close();
+      })
+    );
+
+    debug('closing connection');
+    await closeDb();
+    log('execution complete');
+  } catch (e) {
+    throw new ExternalError(e.message || e.toString());
+  }
 }
 
 !module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));

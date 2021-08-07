@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   restoreMocks: true,
   resetMocks: true,

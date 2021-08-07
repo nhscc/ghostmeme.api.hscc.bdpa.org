@@ -1,7 +1,7 @@
 import { name as pkgName } from 'package';
 import { parse as parseAsBytes } from 'bytes';
 import { isServer } from 'is-server-side';
-import { AppError } from 'universe/backend/error';
+import { IllegalEnvironmentError } from 'universe/backend/error';
 import debugFactory from 'debug';
 
 const debug = debugFactory(`${pkgName}:env`);
@@ -18,8 +18,7 @@ const HTTP2_METHODS = [
   'PATCH'
 ];
 
-// TODO: unit test env.ts and all other backend abstraction layers, perhaps in
-// TODO: own files in new subfolder
+// TODO: unit test env.ts and other testable abstraction layers
 
 const envToArray = (envVal: string) => {
   return envVal
@@ -32,7 +31,7 @@ export function getEnv() {
   const env = {
     NODE_ENV:
       process.env.APP_ENV || process.env.NODE_ENV || process.env.BABEL_ENV || 'unknown',
-    MONGODB_URI: (process.env.MONGODB_URI || '').toString(),
+    MONGODB_URI: process.env.MONGODB_URI || '',
     MONGODB_MS_PORT: !!process.env.MONGODB_MS_PORT
       ? Number(process.env.MONGODB_MS_PORT)
       : null,
@@ -56,9 +55,6 @@ export function getEnv() {
       process.env.MONGODB_URI ||
       ''
     ).toString(),
-    EXTERNAL_SCRIPTS_BE_VERBOSE:
-      !!process.env.EXTERNAL_SCRIPTS_BE_VERBOSE &&
-      process.env.EXTERNAL_SCRIPTS_BE_VERBOSE !== 'false',
     BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS: !!process.env
       .BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS
       ? Number(process.env.BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS)
@@ -89,10 +85,15 @@ export function getEnv() {
     PRUNE_DATA_MAX_MEMES: !!process.env.PRUNE_DATA_MAX_MEMES
       ? Number(process.env.PRUNE_DATA_MAX_MEMES)
       : null,
+    PRUNE_DATA_MAX_UPLOADS: !!process.env.PRUNE_DATA_MAX_UPLOADS
+      ? Number(process.env.PRUNE_DATA_MAX_UPLOADS)
+      : null,
     HYDRATE_DB_ON_STARTUP:
       !!process.env.HYDRATE_DB_ON_STARTUP &&
       process.env.HYDRATE_DB_ON_STARTUP !== 'false',
-    API_ROOT_URI: (process.env.API_ROOT_URI || '').toString(),
+    API_ROOT_URI: process.env.API_ROOT_URI || '',
+    IMGUR_ALBUM_HASH: process.env.IMGUR_ALBUM_HASH || '',
+    IMGUR_CLIENT_ID: process.env.IMGUR_CLIENT_ID || '',
     DEBUG: process.env.DEBUG ?? null,
     DEBUG_INSPECTING: !!process.env.VSCODE_INSPECTOR_OPTIONS,
     VERCEL_REGION: (process.env.VERCEL_REGION || 'unknown').toString(),
@@ -108,6 +109,7 @@ export function getEnv() {
   const NODE_X: string = env.NODE_ENV;
   const errors = [];
 
+  // TODO: retire all this logic when expect-env is created
   const envIsGtZero = (name: keyof typeof env) => {
     if (
       typeof env[name] != 'number' ||
@@ -120,6 +122,7 @@ export function getEnv() {
 
   if (NODE_X == 'unknown') errors.push(`bad NODE_ENV, saw "${NODE_X}"`);
 
+  // TODO: expect-env should cover this use-case (server-only) as well
   if (isServer()) {
     if (env.MONGODB_URI === '') errors.push(`bad MONGODB_URI, saw "${env.MONGODB_URI}"`);
 
@@ -135,16 +138,22 @@ export function getEnv() {
       (method) =>
         !HTTP2_METHODS.includes(method) &&
         errors.push(
-          `unknown method "${method}", must be one of: ${HTTP2_METHODS.join(',')}`
+          `unknown method "${method}", must be one of: ${HTTP2_METHODS.join(', ')}`
         )
     );
 
     if (env.MONGODB_MS_PORT && env.MONGODB_MS_PORT <= 1024) {
       errors.push(`optional environment variable MONGODB_MS_PORT must be > 1024`);
     }
+
+    if (!env.IMGUR_ALBUM_HASH || !env.IMGUR_CLIENT_ID) {
+      errors.push('IMGUR_ALBUM_HASH and IMGUR_CLIENT_ID must be defined');
+    }
   }
 
   if (errors.length) {
-    throw new AppError(`illegal environment detected:\n - ${errors.join('\n - ')}`);
+    throw new IllegalEnvironmentError(
+      `illegal environment detected:\n - ${errors.join('\n - ')}`
+    );
   } else return env;
 }

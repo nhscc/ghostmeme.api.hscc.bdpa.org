@@ -1,47 +1,72 @@
-/* eslint-disable no-console */
+import { name as pkgName } from 'package';
 import { getEnv } from 'universe/backend/env';
+import { ExternalError, IllegalExternalEnvironmentError } from 'universe/backend/error';
 import { getDb, closeDb } from 'universe/backend/db';
-import { AppError } from 'universe/backend/error';
+import debugFactory from 'debug';
+
+const debugNamespace = `${pkgName}:prune-data`;
 
 const oneSecondInMs = 1000;
+const log = debugFactory(debugNamespace);
+const debug = debugFactory(debugNamespace);
 
-export default async function main(isCLI = false) {
+// eslint-disable-next-line no-console
+log.log = console.info.bind(console);
+
+if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
+  debugFactory.enable(`${debugNamespace},${debugNamespace}:*`);
+  debug.enabled = false;
+}
+
+export default async function main() {
   try {
-    isCLI && console.log('[ initializing ]');
+    log('initializing');
 
     const {
       BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS: calledEverySeconds,
       BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: maxRequestsPerWindow,
       BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: resolutionWindowSeconds,
       BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES: defaultBanTimeMinutes,
-      BAN_HAMMER_RECIDIVISM_PUNISH_MULTIPLIER: punishMultiplier,
-      EXTERNAL_SCRIPTS_BE_VERBOSE: beVerbose
+      BAN_HAMMER_RECIDIVISM_PUNISH_MULTIPLIER: punishMultiplier
     } = getEnv();
 
-    if (
-      !calledEverySeconds ||
-      !(Number(calledEverySeconds) > 0) ||
-      !maxRequestsPerWindow ||
-      !(Number(maxRequestsPerWindow) > 0) ||
-      !resolutionWindowSeconds ||
-      !(Number(resolutionWindowSeconds) > 0) ||
-      !defaultBanTimeMinutes ||
-      !(Number(defaultBanTimeMinutes) > 0) ||
-      !punishMultiplier ||
-      !(Number(punishMultiplier) > 0)
-    ) {
-      throw new AppError('illegal environment detected, check environment variables');
+    if (!calledEverySeconds || !(Number(calledEverySeconds) > 0)) {
+      throw new IllegalExternalEnvironmentError(
+        'BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS must be greater than zero'
+      );
+    }
+
+    if (!maxRequestsPerWindow || !(Number(maxRequestsPerWindow) > 0)) {
+      throw new IllegalExternalEnvironmentError(
+        'BAN_HAMMER_MAX_REQUESTS_PER_WINDOW must be greater than zero'
+      );
+    }
+
+    if (!resolutionWindowSeconds || !(Number(resolutionWindowSeconds) > 0)) {
+      throw new IllegalExternalEnvironmentError(
+        'BAN_HAMMER_RESOLUTION_WINDOW_SECONDS must be greater than zero'
+      );
+    }
+
+    if (!defaultBanTimeMinutes || !(Number(defaultBanTimeMinutes) > 0)) {
+      throw new IllegalExternalEnvironmentError(
+        'BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES must be greater than zero'
+      );
+    }
+
+    if (!punishMultiplier || !(Number(punishMultiplier) > 0)) {
+      throw new IllegalExternalEnvironmentError(
+        'BAN_HAMMER_RECIDIVISM_PUNISH_MULTIPLIER must be greater than zero'
+      );
     }
 
     const calledEveryMs = oneSecondInMs * calledEverySeconds;
     const defaultBanTimeMs = oneSecondInMs * 60 * defaultBanTimeMinutes;
     const resolutionWindowMs = oneSecondInMs * resolutionWindowSeconds;
 
-    isCLI && console.log(`[ connecting to external database ]`);
+    log('connecting to external database');
 
     const db = await getDb({ external: true });
-
-    isCLI && console.log(`[ running aggregate pipeline on request-log ]`);
 
     const pipeline = [
       {
@@ -226,24 +251,18 @@ export default async function main(isCLI = false) {
       }
     ];
 
+    debug('aggregation pipeline: %O', pipeline);
+
     const cursor = db.collection('request-log').aggregate(pipeline);
-
-    isCLI && beVerbose && console.dir(pipeline, { depth: null });
-
     await cursor.next();
+    cursor.close();
 
-    isCLI && console.log('[ closing connection ]');
-
-    await cursor.close();
+    debug('closing connection');
     await closeDb();
-
-    isCLI && console.log('[ execution complete ]');
+    log('execution complete');
   } catch (e) {
-    if (isCLI) {
-      console.error('EXCEPTION:', e);
-      process.exit(1);
-    } else throw e;
+    throw new ExternalError(e.message || e.toString());
   }
 }
 
-!module.parent && main(true);
+!module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));

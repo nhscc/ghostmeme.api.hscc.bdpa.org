@@ -23,7 +23,8 @@ import type {
   InternalLimitedLogEntry,
   InternalMeme,
   InternalUser,
-  InternalInfo
+  InternalInfo,
+  InternalUpload
 } from 'types/global';
 
 import { toss } from 'toss-expression';
@@ -34,10 +35,17 @@ import { toss } from 'toss-expression';
 const DUMMY_USER_COUNT = 10;
 
 export type DummyDbData = {
+  /**
+   * Timestamp of when this dummy data was generated (in ms since unix epoch).
+   */
+  generatedAt: number;
   keys: WithId<InternalApiKey>[];
   memes: WithId<InternalMeme>[];
   users: WithId<InternalUser>[];
+  uploads: WithId<InternalUpload>[];
   info: WithId<InternalInfo>;
+  logs: WithId<InternalRequestLogEntry>[];
+  bans: WithId<InternalLimitedLogEntry>[];
 };
 
 // ? Expand the 100 corpus memes into something bigger
@@ -45,8 +53,10 @@ const memes = Array.from({ length: Math.ceil(DUMMY_USER_COUNT / 10) })
   .map((_, ndx) => (ndx % 2 == 0 ? Memes.slice() : Memes.slice().reverse()))
   .flat();
 
-// TODO: add limited-log-mview, request-log, et al to dummyDbData
+const now = Date.now();
+
 export const dummyDbData: DummyDbData = {
+  generatedAt: now,
   keys: [
     {
       _id: new ObjectId(),
@@ -84,19 +94,54 @@ export const dummyDbData: DummyDbData = {
     imageUrl: null,
     meta: { creator: DUMMY_KEY }
   })),
+  uploads: [
+    {
+      _id: new ObjectId(),
+      uri: 'https://uri1',
+      hash: 'hash-1',
+      lastUsedAt: now - 1000
+    },
+    {
+      _id: new ObjectId(),
+      uri: 'https://uri2',
+      hash: 'hash-2',
+      lastUsedAt: now
+    },
+    {
+      _id: new ObjectId(),
+      uri: 'https://uri3',
+      hash: 'hash-3',
+      lastUsedAt: now + 1000
+    }
+  ],
   info: {
     _id: new ObjectId(),
     totalMemes: memes.length,
-    totalUsers: DUMMY_USER_COUNT
-  }
+    totalUsers: DUMMY_USER_COUNT,
+    totalUploads: 3
+  },
+  logs: [...Array(22)].map((_, ndx) => ({
+    _id: new ObjectId(),
+    ip: '1.2.3.4',
+    key: ndx % 2 ? null : BANNED_KEY,
+    method: ndx % 3 ? 'GET' : 'POST',
+    route: 'fake/route',
+    time: now + 10 ** 6,
+    resStatusCode: 200
+  })),
+  bans: [
+    { _id: new ObjectId(), ip: '1.2.3.4', until: now + 1000 * 60 * 15 },
+    { _id: new ObjectId(), ip: '5.6.7.8', until: now + 1000 * 60 * 15 },
+    { _id: new ObjectId(), key: BANNED_KEY, until: now + 1000 * 60 * 60 }
+  ]
 };
 
-let lastRandomMoment = Math.floor(Date.now() / randomInt(10000000));
+let lastRandomMoment = Math.floor(now / randomInt(10000000));
 
 // ? Monotonically increasing moments occurring after one another but not
 // ? bunching up at the end
 const getRandomMoment = () =>
-  (lastRandomMoment += Math.floor(randomInt(Date.now() - lastRandomMoment) / 2));
+  (lastRandomMoment += Math.floor(randomInt(now - lastRandomMoment) / 2));
 
 const unique = <T>(...args: T[]) => Array.from(new Set(args.flat()));
 
@@ -139,8 +184,7 @@ dummyDbData.memes = memes.map(({ url: imageUrl }, ndx) => ({
           : '.')
       : null,
   createdAt: getRandomMoment(),
-  expiredAt:
-    ndx % 3 == 0 ? -1 : Date.now() + (ndx % 2 == 0 ? randomInt(10 ** 6) : Date.now()),
+  expiredAt: ndx % 3 == 0 ? -1 : now + (ndx % 2 == 0 ? randomInt(10 ** 6) : now),
   likes: [],
   totalLikes: (ndx + 3) % 10 == 0 ? DUMMY_USER_COUNT : 0,
   private: true,
@@ -192,29 +236,16 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
   const newData = cloneDeep(data);
 
   await Promise.all([
+    ...[newData.info ? db.collection('info').insertMany([newData.info]) : null],
+
     ...[newData.keys.length ? db.collection('keys').insertMany(newData.keys) : null],
     ...[newData.users.length ? db.collection('users').insertMany(newData.users) : null],
     ...[newData.memes.length ? db.collection('memes').insertMany(newData.memes) : null],
-    ...[newData.info ? db.collection('info').insertMany([newData.info]) : null],
-
-    db.collection<WithId<InternalRequestLogEntry>>('request-log').insertMany(
-      [...Array(22)].map((_, ndx) => ({
-        ip: '1.2.3.4',
-        key: ndx % 2 ? null : BANNED_KEY,
-        method: ndx % 3 ? 'GET' : 'POST',
-        route: 'fake/route',
-        time: Date.now() + 10 ** 6,
-        resStatusCode: 200
-      }))
-    ),
-
-    db
-      .collection<WithId<InternalLimitedLogEntry>>('limited-log-mview')
-      .insertMany([
-        { ip: '1.2.3.4', until: Date.now() + 1000 * 60 * 15 } as InternalLimitedLogEntry,
-        { ip: '5.6.7.8', until: Date.now() + 1000 * 60 * 15 } as InternalLimitedLogEntry,
-        { key: BANNED_KEY, until: Date.now() + 1000 * 60 * 60 } as InternalLimitedLogEntry
-      ])
+    ...[
+      newData.uploads.length ? db.collection('uploads').insertMany(newData.uploads) : null
+    ],
+    ...[newData.logs ? db.collection('request-log').insertMany(newData.logs) : null],
+    ...[newData.bans ? db.collection('limited-log-mview').insertMany(newData.bans) : null]
   ]);
 
   return newData;

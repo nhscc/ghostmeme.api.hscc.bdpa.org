@@ -5,10 +5,11 @@ import { dummyDbData } from 'testverse/db';
 import { GuruMeditationError } from 'universe/backend/error';
 import { getEnv } from 'universe/backend/env';
 import debugFactory from 'debug';
+import { toPublicMeme } from './setup';
 
 import type { PatchUser, PublicMeme, PublicUser } from 'types/global';
 import type { NextApiHandler, PageConfig } from 'next';
-import { toPublicMeme } from './setup';
+import type { Promisable } from 'type-fest';
 
 // TODO: XXX: turn a lot of this into some kind of package; needs to be generic
 // TODO: XXX: enough to handle various use cases though :) Maybe
@@ -81,6 +82,13 @@ export type TestFixture = {
    */
   id?: string;
   /**
+   * If `invisible == true`, the test is not counted when generating positional
+   * fixtures.
+   *
+   * @default false
+   */
+  invisible?: boolean;
+  /**
    * The test index X (as in "#X") that is reported to the user when a test
    * fails.
    */
@@ -102,13 +110,13 @@ export type TestFixture = {
    */
   params?:
     | Record<string, string | string[]>
-    | ((prevResults: TestResultset) => Record<string, string | string[]>);
+    | ((prevResults: TestResultset) => Promisable<Record<string, string | string[]>>);
   /**
    * The body of the mock request. Automatically stringified.
    */
   body?:
     | Record<string, unknown>
-    | ((prevResults: TestResultset) => Record<string, unknown>);
+    | ((prevResults: TestResultset) => Promisable<Record<string, unknown>>);
   /**
    * The expected shape of the HTTP response.
    */
@@ -120,7 +128,7 @@ export type TestFixture = {
      */
     status?:
       | number
-      | ((status: number, prevResults: TestResultset) => number | undefined);
+      | ((status: number, prevResults: TestResultset) => Promisable<number | undefined>);
     /**
      * The expected JSON response body. No need to test for `success` as that is
      * handled automatically (unless a status callback was used and it returned
@@ -134,7 +142,7 @@ export type TestFixture = {
       | ((
           json: Record<string, unknown> | undefined,
           prevResults: TestResultset
-        ) => Record<string, unknown> | jest.AsymmetricMatcher | undefined);
+        ) => Promisable<Record<string, unknown> | jest.AsymmetricMatcher | undefined>);
   };
 };
 
@@ -180,7 +188,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
     },
     {
       id: 'user-hillary',
-      subject: 'valid create user',
+      subject: 'valid create user #1',
       handler: api.users,
       method: 'POST',
       body: {
@@ -242,7 +250,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
     },
     {
       id: 'user-test-1',
-      subject: 'valid create user',
+      subject: 'valid create user #2',
       handler: api.users,
       method: 'POST',
       body: {
@@ -271,7 +279,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
     },
     {
       id: 'user-test-2',
-      subject: 'valid create user',
+      subject: 'valid create user #3',
       handler: api.users,
       method: 'POST',
       body: {
@@ -455,6 +463,20 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       }
     },
     {
+      invisible: true,
+      subject: 'invalid create user (image too big)',
+      handler: api.users,
+      method: 'POST',
+      body: async () => ({
+        name: 'Test User 2',
+        email: 'test2@test.com',
+        phone: '555-666-7777',
+        username: 'test-user-2',
+        imageBase64: (await import('testverse/images')).image13MB
+      }),
+      response: { status: 413 }
+    },
+    {
       subject: 'confirm metadata',
       handler: api.info,
       method: 'GET',
@@ -592,7 +614,7 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       }
     },
     {
-      subject: 'new user properties',
+      subject: 'new user properties (without imageBase64)',
       handler: api.usersId,
       params: ({ getResultAt }) => ({
         user_id: getResultAt<string>('user-test-1', 'user.user_id')
@@ -601,9 +623,24 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
       body: {
         name: 'Elizabeth Warren',
         email: 'liz@ewarren.com',
-        phone: '978-555-5555',
-        imageBase64: null
+        phone: '978-555-5555'
       } as PatchUser,
+      response: { status: 200 }
+    },
+    {
+      subject: 'new user properties (with imageBase64)',
+      handler: api.usersId,
+      params: ({ getResultAt }) => ({
+        user_id: getResultAt<string>('user-test-1', 'user.user_id')
+      }),
+      method: 'PUT',
+      body: async () =>
+        ({
+          name: 'Elizabeth Warren',
+          email: 'liz@ewarren.com',
+          phone: '978-555-5555',
+          imageBase64: (await import('testverse/images')).image17KB
+        } as PatchUser),
       response: { status: 200 }
     },
     {
@@ -678,6 +715,38 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         status: 400,
         json: { error: expect.stringContaining('with that phone number') }
       }
+    },
+    {
+      invisible: true,
+      subject: "can't upload image that's too big",
+      handler: api.usersId,
+      params: ({ getResultAt }) => ({
+        user_id: getResultAt<string>('user-test-1', 'user.user_id')
+      }),
+      method: 'PUT',
+      body: async () =>
+        ({
+          name: 'Elizabeth Warren',
+          email: 'liz@ewarren.com',
+          phone: '978-555-5555',
+          imageBase64: (await import('testverse/images')).image13MB
+        } as PatchUser),
+      response: { status: 413 }
+    },
+    {
+      subject: "can't use invalid base64",
+      handler: api.usersId,
+      params: ({ getResultAt }) => ({
+        user_id: getResultAt<string>('user-test-1', 'user.user_id')
+      }),
+      method: 'PUT',
+      body: {
+        name: 'Elizabeth Warren',
+        email: 'liz@ewarren.com',
+        phone: '978-555-5555',
+        imageBase64: 'bad-base64'
+      } as PatchUser,
+      response: { status: 200 }
     },
     {
       subject: 'get user like count',
@@ -1025,6 +1094,23 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
         status: 400,
         json: { error: expect.stringContaining('`owner`') }
       }
+    },
+    {
+      invisible: true,
+      subject: 'invalid create meme (image too big)',
+      handler: api.memes,
+      method: 'POST',
+      body: async ({ getResultAt }) => ({
+        owner: getResultAt<string>('user-test-1', 'user.user_id'),
+        receiver: null,
+        expiredAt: 123,
+        description: 'Hello, meme world!',
+        private: true,
+        replyTo: null,
+        imageUrl: null,
+        imageBase64: (await import('testverse/images')).image13MB
+      }),
+      response: { status: 413 }
     },
     {
       subject: 'like meme',
@@ -2222,7 +2308,16 @@ export function getFixtures(api: Record<string, NextApiHandlerMixin>): TestFixtu
 
   // TODO: XXX: with @xunnamius/fable, have an "every X" type construct (the below is "every 10")
   // TODO: XXX: also allow middleware
+  // TODO: XXX: also custom props for fixtures
   for (let i = 9; i < filteredFixtures.length; i += 10) {
+    const invisibleCount = filteredFixtures
+      .slice(Math.max(0, i - 10), i)
+      .filter((f) => f.invisible).length;
+
+    // ? Ensure counts remain aligned by skipping tests that don't increase
+    // ? internal contrived counter
+    i += invisibleCount;
+
     filteredFixtures.splice(i, 0, {
       displayIndex: -1,
       subject: 'handle contrived',

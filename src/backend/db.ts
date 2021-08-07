@@ -1,9 +1,13 @@
+import { name as pkgName } from 'package';
 import { MongoClient, Db, ObjectId, Collection, WithId } from 'mongodb';
 import { GuruMeditationError } from 'named-app-errors';
 import { toss } from 'toss-expression';
 import { getEnv } from 'universe/backend/env';
+import debugFactory from 'debug';
 
 import type { Nullish } from '@ergodark/types';
+
+const debug = debugFactory(`${pkgName}:jest-setup`);
 
 type InternalMemory = { client: MongoClient; db: Db } | null;
 let memory: InternalMemory = null;
@@ -17,13 +21,9 @@ export async function getDb(params?: { external: true }) {
     memory = {} as NonNullable<InternalMemory>;
 
     let uri = getEnv().MONGODB_URI;
+    if (params?.external) uri = getEnv().EXTERNAL_SCRIPTS_MONGODB_URI;
 
-    if (params?.external) {
-      uri = getEnv().EXTERNAL_SCRIPTS_MONGODB_URI;
-      getEnv().EXTERNAL_SCRIPTS_BE_VERBOSE &&
-        // eslint-disable-next-line no-console
-        console.log(`[ connecting to mongo database at ${uri} ]`);
-    }
+    debug(`connecting to mongo database at ${uri}`);
 
     memory.client = await MongoClient.connect(uri);
     memory.db = memory.client.db();
@@ -72,7 +72,8 @@ export async function destroyDb(db: Db) {
     db.dropCollection('limited-log-mview'),
     db.dropCollection('memes'),
     db.dropCollection('users'),
-    db.dropCollection('info')
+    db.dropCollection('info'),
+    db.dropCollection('uploads')
   ]);
 }
 
@@ -89,7 +90,8 @@ export async function initializeDb(db: Db) {
     // ? Collation allows for case-insensitive searching. See:
     // ? https://stackoverflow.com/a/40914924/1367414
     db.createCollection('users', { collation: { locale: 'en', strength: 2 } }),
-    db.createCollection('info')
+    db.createCollection('info'),
+    db.createCollection('uploads')
   ]);
 
   // TODO:

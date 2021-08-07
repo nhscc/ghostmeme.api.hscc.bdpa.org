@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / src/backend
+[ghostmeme.api.hscc.bdpa.org](../README.md) / src/backend
 
 # Module: src/backend
 
@@ -6,93 +6,110 @@
 
 ### Variables
 
-- [BANNED_KEY][2]
-- [DEV_KEY][3]
-- [DUMMY_KEY][4]
-- [NULL_KEY][5]
-- [publicMemeProjection][6]
-- [publicUserProjection][7]
+- [BANNED\_KEY](src_backend.md#banned_key)
+- [DEV\_KEY](src_backend.md#dev_key)
+- [DUMMY\_KEY](src_backend.md#dummy_key)
+- [IMGUR\_API\_URI](src_backend.md#imgur_api_uri)
+- [NULL\_KEY](src_backend.md#null_key)
+- [publicMemeProjection](src_backend.md#publicmemeprojection)
+- [publicUserProjection](src_backend.md#publicuserprojection)
 
 ### Functions
 
-- [addFriendRequest][8]
-- [addLikedMeme][9]
-- [addToRequestLog][10]
-- [addUserAsFriend][11]
-- [createMeme][12]
-- [createUser][13]
-- [deleteUser][14]
-- [getAllUsers][15]
-- [getApiKeys][16]
-- [getFriendRequestsOfType][17]
-- [getMemeLikesUserIds][18]
-- [getMemes][19]
-- [getSystemInfo][20]
-- [getUser][21]
-- [getUserFriendsUserIds][22]
-- [getUserLikedMemeIds][23]
-- [isDueForContrivedError][24]
-- [isFriendRequestOfType][25]
-- [isKeyAuthentic][26]
-- [isMemeLiked][27]
-- [isRateLimited][28]
-- [isUserAFriend][29]
-- [removeFriendRequest][30]
-- [removeLikedMeme][31]
-- [removeUserAsFriend][32]
-- [searchMemes][33]
-- [updateMemes][34]
-- [updateUser][35]
+- [addFriendRequest](src_backend.md#addfriendrequest)
+- [addLikedMeme](src_backend.md#addlikedmeme)
+- [addToRequestLog](src_backend.md#addtorequestlog)
+- [addUserAsFriend](src_backend.md#adduserasfriend)
+- [createMeme](src_backend.md#creatememe)
+- [createUser](src_backend.md#createuser)
+- [deleteUser](src_backend.md#deleteuser)
+- [getAllUsers](src_backend.md#getallusers)
+- [getApiKeys](src_backend.md#getapikeys)
+- [getFriendRequestsOfType](src_backend.md#getfriendrequestsoftype)
+- [getMemeLikesUserIds](src_backend.md#getmemelikesuserids)
+- [getMemes](src_backend.md#getmemes)
+- [getSystemInfo](src_backend.md#getsysteminfo)
+- [getUser](src_backend.md#getuser)
+- [getUserFriendsUserIds](src_backend.md#getuserfriendsuserids)
+- [getUserLikedMemeIds](src_backend.md#getuserlikedmemeids)
+- [handleImageUpload](src_backend.md#handleimageupload)
+- [isDueForContrivedError](src_backend.md#isdueforcontrivederror)
+- [isFriendRequestOfType](src_backend.md#isfriendrequestoftype)
+- [isKeyAuthentic](src_backend.md#iskeyauthentic)
+- [isMemeLiked](src_backend.md#ismemeliked)
+- [isRateLimited](src_backend.md#isratelimited)
+- [isUserAFriend](src_backend.md#isuserafriend)
+- [removeFriendRequest](src_backend.md#removefriendrequest)
+- [removeLikedMeme](src_backend.md#removelikedmeme)
+- [removeUserAsFriend](src_backend.md#removeuserasfriend)
+- [searchMemes](src_backend.md#searchmemes)
+- [updateMemes](src_backend.md#updatememes)
+- [updateUser](src_backend.md#updateuser)
 
 ## Variables
 
-### BANNED_KEY
+### BANNED\_KEY
 
-• `Const` **BANNED_KEY**: `"banned-h54e-6rt7-gctfh-hrftdygct0"`
+• `Const` **BANNED\_KEY**: ``"banned-h54e-6rt7-gctfh-hrftdygct0"``
 
-This key is guaranteed to be rate limited.
-
-#### Defined in
-
-[src/backend/index.ts:66][36]
-
----
-
-### DEV_KEY
-
-• `Const` **DEV_KEY**: `"dev-xunn-dev-294a-536h-9751-rydmj"`
-
-This key can be used to authenticate with local deployments.
+This key is guaranteed to be rate limited when running in a test environment.
 
 #### Defined in
 
-[src/backend/index.ts:71][37]
+[src/backend/index.ts:80](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L80)
 
----
+___
 
-### DUMMY_KEY
+### DEV\_KEY
 
-• `Const` **DUMMY_KEY**: `"12349b61-83a7-4036-b060-213784b491"`
+• `Const` **DEV\_KEY**: ``"dev-xunn-dev-294a-536h-9751-rydmj"``
 
-This key is only valid when running in a Jest test environment.
-
-#### Defined in
-
-[src/backend/index.ts:61][38]
-
----
-
-### NULL_KEY
-
-• `Const` **NULL_KEY**: `"00000000-0000-0000-0000-000000000000"`
-
-This key is guaranteed never to appear in the system and can be checked against.
+This key can be used to authenticate with local and non-production
+deployments.
 
 #### Defined in
 
-[src/backend/index.ts:56][39]
+[src/backend/index.ts:86](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L86)
 
----
+___
+
+### DUMMY\_KEY
+
+• `Const` **DUMMY\_KEY**: ``"12349b61-83a7-4036-b060-213784b491"``
+
+This key is valid only when running in a test environment.
+
+#### Defined in
+
+[src/backend/index.ts:75](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L75)
+
+___
+
+### IMGUR\_API\_URI
+
+• `Const` **IMGUR\_API\_URI**: ``"https://api.imgur.com/3/image"``
+
+The imgur API URL used throughout the API backend
+
+#### Defined in
+
+[src/backend/index.ts:63](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L63)
+
+___
+
+### NULL\_KEY
+
+• `Const` **NULL\_KEY**: ``"00000000-0000-0000-0000-000000000000"``
+
+This key is guaranteed never to appear in dummy data generated during tests.
+In production, this key is used in place of `null` where a string key is
+required (e.g. the `meta.creator` field for auto-generated users).
+
+#### Defined in
+
+[src/backend/index.ts:70](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L70)
+
+___
 
 ### publicMemeProjection
 
@@ -100,29 +117,29 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Type declaration
 
-| Name                 | Type      |
-| :------------------- | :-------- |
-| `_id`                | `boolean` |
-| `createdAt`          | `boolean` |
-| `description`        | `boolean` |
-| `expiredAt`          | `boolean` |
-| `imageUrl`           | `boolean` |
-| `likes`              | `string`  |
-| `meme_id`            | `Object`  |
-| `meme_id.$toString`  | `string`  |
-| `owner`              | `Object`  |
-| `owner.$toString`    | `string`  |
-| `private`            | `boolean` |
-| `receiver`           | `Object`  |
-| `receiver.$toString` | `string`  |
-| `replyTo`            | `Object`  |
-| `replyTo.$toString`  | `string`  |
+| Name | Type |
+| :------ | :------ |
+| `_id` | `boolean` |
+| `createdAt` | `boolean` |
+| `description` | `boolean` |
+| `expiredAt` | `boolean` |
+| `imageUrl` | `boolean` |
+| `likes` | `string` |
+| `meme_id` | `Object` |
+| `meme_id.$toString` | `string` |
+| `owner` | `Object` |
+| `owner.$toString` | `string` |
+| `private` | `boolean` |
+| `receiver` | `Object` |
+| `receiver.$toString` | `string` |
+| `replyTo` | `Object` |
+| `replyTo.$toString` | `string` |
 
 #### Defined in
 
-[src/backend/index.ts:93][40]
+[src/backend/index.ts:139](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L139)
 
----
+___
 
 ### publicUserProjection
 
@@ -130,362 +147,384 @@ This key is guaranteed never to appear in the system and can be checked against.
 
 #### Type declaration
 
-| Name                | Type      |
-| :------------------ | :-------- |
-| `_id`               | `boolean` |
-| `deleted`           | `boolean` |
-| `email`             | `boolean` |
-| `friends`           | `Object`  |
-| `friends.$size`     | `string`  |
-| `imageUrl`          | `boolean` |
-| `liked`             | `Object`  |
-| `liked.$size`       | `string`  |
-| `name`              | `boolean` |
-| `phone`             | `boolean` |
-| `user_id`           | `Object`  |
-| `user_id.$toString` | `string`  |
-| `username`          | `boolean` |
+| Name | Type |
+| :------ | :------ |
+| `_id` | `boolean` |
+| `deleted` | `boolean` |
+| `email` | `boolean` |
+| `friends` | `Object` |
+| `friends.$size` | `string` |
+| `imageUrl` | `boolean` |
+| `liked` | `Object` |
+| `liked.$size` | `string` |
+| `name` | `boolean` |
+| `phone` | `boolean` |
+| `user_id` | `Object` |
+| `user_id.$toString` | `string` |
+| `username` | `boolean` |
 
 #### Defined in
 
-[src/backend/index.ts:107][41]
+[src/backend/index.ts:153](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L153)
 
 ## Functions
 
 ### addFriendRequest
 
-▸ **addFriendRequest**(`(destructured)`): `Promise`<`void`>
+▸ **addFriendRequest**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name                   | Type                      |
-| :--------------------- | :------------------------ |
-| `(destructured)`       | `Object`                  |
-| ▶ `({ request_type })` | [`FriendRequestType`][42] |
-| ▶ `({ target_id })`    | [`UserId`][43]            |
-| ▶ `({ user_id })`      | [`UserId`][43]            |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ request_type })` | [`FriendRequestType`](types_global.md#friendrequesttype) |
+| ▶ `({ target_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:963][44]
+[src/backend/index.ts:1034](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1034)
 
----
+___
 
 ### addLikedMeme
 
-▸ **addLikedMeme**(`(destructured)`): `Promise`<`void`>
+▸ **addLikedMeme**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name              | Type           |
-| :---------------- | :------------- |
-| `(destructured)`  | `Object`       |
-| ▶ `({ meme_id })` | [`MemeId`][45] |
-| ▶ `({ user_id })` | [`UserId`][43] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ meme_id })` | [`MemeId`](../interfaces/types_global.MemeId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:460][46]
+[src/backend/index.ts:583](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L583)
 
----
+___
 
 ### addToRequestLog
 
-▸ **addToRequestLog**(`(destructured)`): `Promise`<`void`>
+▸ **addToRequestLog**(`(destructured)`): `Promise`<`void`\>
 
-Note that this async function does not have to be awaited. It's fire and forget!
+Note that this async function does not have to be awaited. It's fire and
+forget!
 
 #### Parameters
 
-| Name             | Type                 |
-| :--------------- | :------------------- |
-| `(destructured)` | [`NextApiState`][47] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | [`NextApiState`](types_global.md#nextapistate) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:1253][48]
+[src/backend/index.ts:1324](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1324)
 
----
+___
 
 ### addUserAsFriend
 
-▸ **addUserAsFriend**(`(destructured)`): `Promise`<`void`>
+▸ **addUserAsFriend**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name                | Type           |
-| :------------------ | :------------- |
-| `(destructured)`    | `Object`       |
-| ▶ `({ friend_id })` | [`UserId`][43] |
-| ▶ `({ user_id })`   | [`UserId`][43] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ friend_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:831][49]
+[src/backend/index.ts:902](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L902)
 
----
+___
 
 ### createMeme
 
-▸ **createMeme**(`(destructured)`): `Promise`<[`PublicMeme`][50]>
+▸ **createMeme**(`(destructured)`): `Promise`<[`PublicMeme`](types_global.md#publicmeme)\>
 
 #### Parameters
 
-| Name                 | Type                       |
-| :------------------- | :------------------------- |
-| `(destructured)`     | `Object`                   |
-| ▶ `({ creatorKey })` | `string`                   |
-| ▶ `({ data })`       | `Partial`<[`NewMeme`][51]> |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ creatorKey })` | `string` |
+| ▶ `({ data })` | `Partial`<[`NewMeme`](types_global.md#newmeme)\> |
 
 #### Returns
 
-`Promise`<[`PublicMeme`][50]>
+`Promise`<[`PublicMeme`](types_global.md#publicmeme)\>
 
 #### Defined in
 
-[src/backend/index.ts:130][52]
+[src/backend/index.ts:261](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L261)
 
----
+___
 
 ### createUser
 
-▸ **createUser**(`(destructured)`): `Promise`<[`PublicUser`][53]>
+▸ **createUser**(`(destructured)`): `Promise`<[`PublicUser`](types_global.md#publicuser)\>
 
 #### Parameters
 
-| Name                 | Type                       |
-| :------------------- | :------------------------- |
-| `(destructured)`     | `Object`                   |
-| ▶ `({ creatorKey })` | `string`                   |
-| ▶ `({ data })`       | `Partial`<[`NewUser`][54]> |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ creatorKey })` | `string` |
+| ▶ `({ data })` | `Partial`<[`NewUser`](types_global.md#newuser)\> |
 
 #### Returns
 
-`Promise`<[`PublicUser`][53]>
+`Promise`<[`PublicUser`](types_global.md#publicuser)\>
 
 #### Defined in
 
-[src/backend/index.ts:492][55]
+[src/backend/index.ts:615](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L615)
 
----
+___
 
 ### deleteUser
 
-▸ **deleteUser**(`(destructured)`): `Promise`<`void`>
+▸ **deleteUser**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name              | Type           |
-| :---------------- | :------------- |
-| `(destructured)`  | `Object`       |
-| ▶ `({ user_id })` | [`UserId`][43] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:668][56]
+[src/backend/index.ts:739](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L739)
 
----
+___
 
 ### getAllUsers
 
-▸ **getAllUsers**(`(destructured)`): `Promise`<[`PublicUser`][53]\[]>
+▸ **getAllUsers**(`(destructured)`): `Promise`<[`PublicUser`](types_global.md#publicuser)[]\>
 
 #### Parameters
 
-| Name             | Type                     |
-| :--------------- | :----------------------- |
-| `(destructured)` | `Object`                 |
-| ▶ `({ after })`  | [`UserId`][43] \| `null` |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ after })` | [`UserId`](../interfaces/types_global.UserId.md) \| ``null`` |
 
 #### Returns
 
-`Promise`<[`PublicUser`][53]\[]>
+`Promise`<[`PublicUser`](types_global.md#publicuser)[]\>
 
 #### Defined in
 
-[src/backend/index.ts:687][57]
+[src/backend/index.ts:758](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L758)
 
----
+___
 
 ### getApiKeys
 
-▸ **getApiKeys**(): `Promise`<{ `key`: `string` ; `owner`: `string` }\[]>
+▸ **getApiKeys**(): `Promise`<{ `key`: `string` ; `owner`: `string`  }[]\>
 
 #### Returns
 
-`Promise`<{ `key`: `string` ; `owner`: `string` }\[]>
+`Promise`<{ `key`: `string` ; `owner`: `string`  }[]\>
 
 #### Defined in
 
-[src/backend/index.ts:1264][58]
+[src/backend/index.ts:1335](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1335)
 
----
+___
 
 ### getFriendRequestsOfType
 
-▸ **getFriendRequestsOfType**(`(destructured)`): `Promise`<`string`\[]>
+▸ **getFriendRequestsOfType**(`(destructured)`): `Promise`<`string`[]\>
 
 #### Parameters
 
-| Name                   | Type                              |
-| :--------------------- | :-------------------------------- |
-| `(destructured)`       | `Object`                          |
-| ▶ `({ after })`        | [`FriendRequestId`][59] \| `null` |
-| ▶ `({ request_type })` | [`FriendRequestType`][42]         |
-| ▶ `({ user_id })`      | [`UserId`][43]                    |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ after })` | [`FriendRequestId`](../interfaces/types_global.FriendRequestId.md) \| ``null`` |
+| ▶ `({ request_type })` | [`FriendRequestType`](types_global.md#friendrequesttype) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`string`\[]>
+`Promise`<`string`[]\>
 
 #### Defined in
 
-[src/backend/index.ts:858][60]
+[src/backend/index.ts:929](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L929)
 
----
+___
 
 ### getMemeLikesUserIds
 
-▸ **getMemeLikesUserIds**(`(destructured)`): `Promise`<`string`\[]>
+▸ **getMemeLikesUserIds**(`(destructured)`): `Promise`<`string`[]\>
 
 #### Parameters
 
-| Name              | Type                     |
-| :---------------- | :----------------------- |
-| `(destructured)`  | `Object`                 |
-| ▶ `({ after })`   | [`UserId`][43] \| `null` |
-| ▶ `({ meme_id })` | [`MemeId`][45]           |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ after })` | [`UserId`](../interfaces/types_global.UserId.md) \| ``null`` |
+| ▶ `({ meme_id })` | [`MemeId`](../interfaces/types_global.MemeId.md) |
 
 #### Returns
 
-`Promise`<`string`\[]>
+`Promise`<`string`[]\>
 
 #### Defined in
 
-[src/backend/index.ts:314][61]
+[src/backend/index.ts:437](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L437)
 
----
+___
 
 ### getMemes
 
-▸ **getMemes**(`(destructured)`): `Promise`<[`PublicMeme`][50]\[]>
+▸ **getMemes**(`(destructured)`): `Promise`<[`PublicMeme`](types_global.md#publicmeme)[]\>
 
 #### Parameters
 
-| Name               | Type             |
-| :----------------- | :--------------- |
-| `(destructured)`   | `Object`         |
-| ▶ `({ meme_ids })` | [`MemeId`][45][] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ meme_ids })` | [`MemeId`](../interfaces/types_global.MemeId.md)[] |
 
 #### Returns
 
-`Promise`<[`PublicMeme`][50]\[]>
+`Promise`<[`PublicMeme`](types_global.md#publicmeme)[]\>
 
 #### Defined in
 
-[src/backend/index.ts:283][62]
+[src/backend/index.ts:406](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L406)
 
----
+___
 
 ### getSystemInfo
 
-▸ **getSystemInfo**(): `Promise`<[`InternalInfo`][63]>
+▸ **getSystemInfo**(): `Promise`<[`InternalInfo`](types_global.md#internalinfo)\>
 
 #### Returns
 
-`Promise`<[`InternalInfo`][63]>
+`Promise`<[`InternalInfo`](types_global.md#internalinfo)\>
 
 #### Defined in
 
-[src/backend/index.ts:120][64]
+[src/backend/index.ts:251](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L251)
 
----
+___
 
 ### getUser
 
-▸ **getUser**(`(destructured)`): `Promise`<[`PublicUser`][53]>
+▸ **getUser**(`(destructured)`): `Promise`<[`PublicUser`](types_global.md#publicuser)\>
 
 #### Parameters
 
-| Name                | Type           |
-| :------------------ | :------------- |
-| `(destructured)`    | `Object`       |
-| ▶ `({ user_id? })`  | [`UserId`][43] |
-| ▶ `({ username? })` | `string`       |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ user_id? })` | [`UserId`](../interfaces/types_global.UserId.md) |
+| ▶ `({ username? })` | `string` |
 
 #### Returns
 
-`Promise`<[`PublicUser`][53]>
+`Promise`<[`PublicUser`](types_global.md#publicuser)\>
 
 #### Defined in
 
-[src/backend/index.ts:711][65]
+[src/backend/index.ts:782](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L782)
 
----
+___
 
 ### getUserFriendsUserIds
 
-▸ **getUserFriendsUserIds**(`(destructured)`): `Promise`<`string`\[]>
+▸ **getUserFriendsUserIds**(`(destructured)`): `Promise`<`string`[]\>
 
 #### Parameters
 
-| Name              | Type                     |
-| :---------------- | :----------------------- |
-| `(destructured)`  | `Object`                 |
-| ▶ `({ after })`   | [`UserId`][43] \| `null` |
-| ▶ `({ user_id })` | [`UserId`][43]           |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ after })` | [`UserId`](../interfaces/types_global.UserId.md) \| ``null`` |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`string`\[]>
+`Promise`<`string`[]\>
 
 #### Defined in
 
-[src/backend/index.ts:737][66]
+[src/backend/index.ts:808](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L808)
 
----
+___
 
 ### getUserLikedMemeIds
 
-▸ **getUserLikedMemeIds**(`(destructured)`): `Promise`<`string`\[]>
+▸ **getUserLikedMemeIds**(`(destructured)`): `Promise`<`string`[]\>
 
 #### Parameters
 
-| Name              | Type                     |
-| :---------------- | :----------------------- |
-| `(destructured)`  | `Object`                 |
-| ▶ `({ after })`   | [`MemeId`][45] \| `null` |
-| ▶ `({ user_id })` | [`UserId`][43]           |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ after })` | [`MemeId`](../interfaces/types_global.MemeId.md) \| ``null`` |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`string`\[]>
+`Promise`<`string`[]\>
 
 #### Defined in
 
-[src/backend/index.ts:357][67]
+[src/backend/index.ts:480](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L480)
 
----
+___
+
+### handleImageUpload
+
+▸ **handleImageUpload**(`creatorKey`, `imageBase64`): `Promise`<``null`` \| `string`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `creatorKey` | `string` |
+| `imageBase64` | `string` \| ``null`` \| `undefined` |
+
+#### Returns
+
+`Promise`<``null`` \| `string`\>
+
+#### Defined in
+
+[src/backend/index.ts:166](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L166)
+
+___
 
 ### isDueForContrivedError
 
@@ -500,361 +539,246 @@ across all Vercel virtual machines.
 
 #### Defined in
 
-[src/backend/index.ts:1238][68]
+[src/backend/index.ts:1309](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1309)
 
----
+___
 
 ### isFriendRequestOfType
 
-▸ **isFriendRequestOfType**(`(destructured)`): `Promise`<`boolean`>
+▸ **isFriendRequestOfType**(`(destructured)`): `Promise`<`boolean`\>
 
 #### Parameters
 
-| Name                   | Type                      |
-| :--------------------- | :------------------------ |
-| `(destructured)`       | `Object`                  |
-| ▶ `({ request_type })` | [`FriendRequestType`][42] |
-| ▶ `({ target_id })`    | [`UserId`][43]            |
-| ▶ `({ user_id })`      | [`UserId`][43]            |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ request_type })` | [`FriendRequestType`](types_global.md#friendrequesttype) |
+| ▶ `({ target_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`boolean`>
+`Promise`<`boolean`\>
 
 #### Defined in
 
-[src/backend/index.ts:904][69]
+[src/backend/index.ts:975](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L975)
 
----
+___
 
 ### isKeyAuthentic
 
-▸ **isKeyAuthentic**(`key`): `Promise`<`boolean`>
+▸ **isKeyAuthentic**(`key`): `Promise`<`boolean`\>
 
 #### Parameters
 
-| Name  | Type     |
-| :---- | :------- |
+| Name | Type |
+| :------ | :------ |
 | `key` | `string` |
 
 #### Returns
 
-`Promise`<`boolean`>
+`Promise`<`boolean`\>
 
 #### Defined in
 
-[src/backend/index.ts:1203][70]
+[src/backend/index.ts:1274](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1274)
 
----
+___
 
 ### isMemeLiked
 
-▸ **isMemeLiked**(`(destructured)`): `Promise`<`boolean`>
+▸ **isMemeLiked**(`(destructured)`): `Promise`<`boolean`\>
 
 #### Parameters
 
-| Name              | Type           |
-| :---------------- | :------------- |
-| `(destructured)`  | `Object`       |
-| ▶ `({ meme_id })` | [`MemeId`][45] |
-| ▶ `({ user_id })` | [`UserId`][43] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ meme_id })` | [`MemeId`](../interfaces/types_global.MemeId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`boolean`>
+`Promise`<`boolean`\>
 
 #### Defined in
 
-[src/backend/index.ts:400][71]
+[src/backend/index.ts:523](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L523)
 
----
+___
 
 ### isRateLimited
 
-▸ **isRateLimited**(`req`): `Promise`<`Object`>
+▸ **isRateLimited**(`req`): `Promise`<`Object`\>
 
 #### Parameters
 
-| Name  | Type             |
-| :---- | :--------------- |
+| Name | Type |
+| :------ | :------ |
 | `req` | `NextApiRequest` |
 
 #### Returns
 
-`Promise`<`Object`>
+`Promise`<`Object`\>
 
 #### Defined in
 
-[src/backend/index.ts:1212][72]
+[src/backend/index.ts:1283](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1283)
 
----
+___
 
 ### isUserAFriend
 
-▸ **isUserAFriend**(`(destructured)`): `Promise`<`boolean`>
+▸ **isUserAFriend**(`(destructured)`): `Promise`<`boolean`\>
 
 #### Parameters
 
-| Name                | Type           |
-| :------------------ | :------------- |
-| `(destructured)`    | `Object`       |
-| ▶ `({ friend_id })` | [`UserId`][43] |
-| ▶ `({ user_id })`   | [`UserId`][43] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ friend_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`boolean`>
+`Promise`<`boolean`\>
 
 #### Defined in
 
-[src/backend/index.ts:779][73]
+[src/backend/index.ts:850](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L850)
 
----
+___
 
 ### removeFriendRequest
 
-▸ **removeFriendRequest**(`(destructured)`): `Promise`<`void`>
+▸ **removeFriendRequest**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name                   | Type                      |
-| :--------------------- | :------------------------ |
-| `(destructured)`       | `Object`                  |
-| ▶ `({ request_type })` | [`FriendRequestType`][42] |
-| ▶ `({ target_id })`    | [`UserId`][43]            |
-| ▶ `({ user_id })`      | [`UserId`][43]            |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ request_type })` | [`FriendRequestType`](types_global.md#friendrequesttype) |
+| ▶ `({ target_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:936][74]
+[src/backend/index.ts:1007](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1007)
 
----
+___
 
 ### removeLikedMeme
 
-▸ **removeLikedMeme**(`(destructured)`): `Promise`<`void`>
+▸ **removeLikedMeme**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name              | Type           |
-| :---------------- | :------------- |
-| `(destructured)`  | `Object`       |
-| ▶ `({ meme_id })` | [`MemeId`][45] |
-| ▶ `({ user_id })` | [`UserId`][43] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ meme_id })` | [`MemeId`](../interfaces/types_global.MemeId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:431][75]
+[src/backend/index.ts:554](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L554)
 
----
+___
 
 ### removeUserAsFriend
 
-▸ **removeUserAsFriend**(`(destructured)`): `Promise`<`void`>
+▸ **removeUserAsFriend**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name                | Type           |
-| :------------------ | :------------- |
-| `(destructured)`    | `Object`       |
-| ▶ `({ friend_id })` | [`UserId`][43] |
-| ▶ `({ user_id })`   | [`UserId`][43] |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ friend_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:809][76]
+[src/backend/index.ts:880](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L880)
 
----
+___
 
 ### searchMemes
 
-▸ **searchMemes**(`(destructured)`): `Promise`<[`PublicMeme`][50]\[]>
+▸ **searchMemes**(`(destructured)`): `Promise`<[`PublicMeme`](types_global.md#publicmeme)[]\>
 
 #### Parameters
 
-| Name                 | Type                     |
-| :------------------- | :----------------------- |
-| `(destructured)`     | `Object`                 |
-| ▶ `({ after })`      | [`MemeId`][45] \| `null` |
-| ▶ `({ match })`      | `Object`                 |
-| ▶ `({ regexMatch })` | `Object`                 |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ after })` | [`MemeId`](../interfaces/types_global.MemeId.md) \| ``null`` |
+| ▶ `({ match })` | `Object` |
+| ▶ `({ regexMatch })` | `Object` |
 
 #### Returns
 
-`Promise`<[`PublicMeme`][50]\[]>
+`Promise`<[`PublicMeme`](types_global.md#publicmeme)[]\>
 
 #### Defined in
 
-[src/backend/index.ts:994][77]
+[src/backend/index.ts:1065](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L1065)
 
----
+___
 
 ### updateMemes
 
-▸ **updateMemes**(`(destructured)`): `Promise`<`void`>
+▸ **updateMemes**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name               | Type                         |
-| :----------------- | :--------------------------- |
-| `(destructured)`   | `Object`                     |
-| ▶ `({ data })`     | `Partial`<[`PatchMeme`][78]> |
-| ▶ `({ meme_ids })` | [`MemeId`][45][]             |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ data })` | `Partial`<[`PatchMeme`](types_global.md#patchmeme)\> |
+| ▶ `({ meme_ids })` | [`MemeId`](../interfaces/types_global.MemeId.md)[] |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:258][79]
+[src/backend/index.ts:381](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L381)
 
----
+___
 
 ### updateUser
 
-▸ **updateUser**(`(destructured)`): `Promise`<`void`>
+▸ **updateUser**(`(destructured)`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name              | Type                         |
-| :---------------- | :--------------------------- |
-| `(destructured)`  | `Object`                     |
-| ▶ `({ data })`    | `Partial`<[`PatchUser`][80]> |
-| ▶ `({ user_id })` | [`UserId`][43]               |
+| Name | Type |
+| :------ | :------ |
+| `(destructured)` | `Object` |
+| ▶ `({ creatorKey })` | `string` |
+| ▶ `({ data })` | `Partial`<[`PatchUser`](types_global.md#patchuser)\> |
+| ▶ `({ user_id })` | [`UserId`](../interfaces/types_global.UserId.md) |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/index.ts:587][81]
-
-[1]: ../README.md
-[2]: src_backend.md#banned_key
-[3]: src_backend.md#dev_key
-[4]: src_backend.md#dummy_key
-[5]: src_backend.md#null_key
-[6]: src_backend.md#publicmemeprojection
-[7]: src_backend.md#publicuserprojection
-[8]: src_backend.md#addfriendrequest
-[9]: src_backend.md#addlikedmeme
-[10]: src_backend.md#addtorequestlog
-[11]: src_backend.md#adduserasfriend
-[12]: src_backend.md#creatememe
-[13]: src_backend.md#createuser
-[14]: src_backend.md#deleteuser
-[15]: src_backend.md#getallusers
-[16]: src_backend.md#getapikeys
-[17]: src_backend.md#getfriendrequestsoftype
-[18]: src_backend.md#getmemelikesuserids
-[19]: src_backend.md#getmemes
-[20]: src_backend.md#getsysteminfo
-[21]: src_backend.md#getuser
-[22]: src_backend.md#getuserfriendsuserids
-[23]: src_backend.md#getuserlikedmemeids
-[24]: src_backend.md#isdueforcontrivederror
-[25]: src_backend.md#isfriendrequestoftype
-[26]: src_backend.md#iskeyauthentic
-[27]: src_backend.md#ismemeliked
-[28]: src_backend.md#isratelimited
-[29]: src_backend.md#isuserafriend
-[30]: src_backend.md#removefriendrequest
-[31]: src_backend.md#removelikedmeme
-[32]: src_backend.md#removeuserasfriend
-[33]: src_backend.md#searchmemes
-[34]: src_backend.md#updatememes
-[35]: src_backend.md#updateuser
-[36]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L66
-[37]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L71
-[38]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L61
-[39]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L56
-[40]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L93
-[41]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L107
-[42]: types_global.md#friendrequesttype
-[43]: ../interfaces/types_global.UserId.md
-[44]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L963
-[45]: ../interfaces/types_global.MemeId.md
-[46]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L460
-[47]: types_global.md#nextapistate
-[48]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L1253
-[49]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L831
-[50]: types_global.md#publicmeme
-[51]: types_global.md#newmeme
-[52]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L130
-[53]: types_global.md#publicuser
-[54]: types_global.md#newuser
-[55]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L492
-[56]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L668
-[57]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L687
-[58]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L1264
-[59]: ../interfaces/types_global.FriendRequestId.md
-[60]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L858
-[61]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L314
-[62]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L283
-[63]: types_global.md#internalinfo
-[64]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L120
-[65]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L711
-[66]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L737
-[67]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L357
-[68]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L1238
-[69]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L904
-[70]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L1203
-[71]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L400
-[72]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L1212
-[73]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L779
-[74]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L936
-[75]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L431
-[76]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L809
-[77]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L994
-[78]: types_global.md#patchmeme
-[79]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L258
-[80]: types_global.md#patchuser
-[81]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/index.ts#L587
+[src/backend/index.ts:678](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/index.ts#L678)

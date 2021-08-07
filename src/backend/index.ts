@@ -1,3 +1,4 @@
+import { version as pkgVersion } from 'package';
 import { createHash, randomInt } from 'crypto';
 import { ObjectId } from 'mongodb';
 import { toss } from 'toss-expression';
@@ -5,8 +6,10 @@ import { getClientIp } from 'request-ip';
 import { isPlainObject } from 'is-plain-object';
 import { getEnv } from 'universe/backend/env';
 import { getDb, itemExists, itemToObjectId, itemToStringId } from 'universe/backend/db';
+import fetch from 'node-fetch';
 
 import {
+  AppError,
   InvalidIdError,
   InvalidKeyError,
   ValidationError,
@@ -18,7 +21,7 @@ import {
 import type { NextApiRequest } from 'next';
 import type { WithId } from 'mongodb';
 
-import type {
+import {
   NextApiState,
   InternalRequestLogEntry,
   InternalLimitedLogEntry,
@@ -28,6 +31,7 @@ import type {
   InternalUser,
   UserId,
   MemeId,
+  UploadId,
   FriendRequestId,
   FriendRequestType,
   PublicMeme,
@@ -35,38 +39,50 @@ import type {
   NewMeme,
   NewUser,
   PatchMeme,
-  PatchUser
+  PatchUser,
+  InternalUpload,
+  ImgurApiResponse
 } from 'types/global';
-
-const nameRegex = /^[a-zA-Z0-9 -]+$/;
-const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-const phoneRegex =
-  /^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?$/;
-const usernameRegex = /^[a-zA-Z0-9_-]{5,20}$/;
 
 /**
  * Global (but only per serverless function instance) request counting state
  */
 let requestCounter = 0;
 
+const nameRegex = /^[a-zA-Z0-9 -]+$/;
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+const phoneRegex =
+  /^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?$/;
+const usernameRegex = /^[a-zA-Z0-9_-]{5,20}$/;
+const base64Regex = /^data:([\w/]+);base64,([a-zA-Z0-9+/]+={0,2})$/;
+
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
+
 /**
- * This key is guaranteed never to appear in the system and can be checked
- * against.
+ * The imgur API URL used throughout the API backend
+ */
+export const IMGUR_API_URI = 'https://api.imgur.com/3/image';
+
+/**
+ * This key is guaranteed never to appear in dummy data generated during tests.
+ * In production, this key is used in place of `null` where a string key is
+ * required (e.g. the `meta.creator` field for auto-generated users).
  */
 export const NULL_KEY = '00000000-0000-0000-0000-000000000000';
 
 /**
- * This key is only valid when running in a Jest test environment.
+ * This key is valid only when running in a test environment.
  */
 export const DUMMY_KEY = '12349b61-83a7-4036-b060-213784b491';
 
 /**
- * This key is guaranteed to be rate limited.
+ * This key is guaranteed to be rate limited when running in a test environment.
  */
 export const BANNED_KEY = 'banned-h54e-6rt7-gctfh-hrftdygct0';
 
 /**
- * This key can be used to authenticate with local deployments.
+ * This key can be used to authenticate with local and non-production
+ * deployments.
  */
 export const DEV_KEY = 'dev-xunn-dev-294a-536h-9751-rydmj';
 
@@ -89,6 +105,37 @@ const matchableStrings = [
  * including the special "$or" sub-matcher.
  */
 const matchableSubStrings = ['$gt', '$lt', '$gte', '$lte'];
+
+const validateUserData = (data: Partial<NewUser | PatchUser>) => {
+  if (!isPlainObject(data)) {
+    throw new ValidationError('only JSON content is allowed');
+  } else if (
+    typeof data.name != 'string' ||
+    data.name.length < 3 ||
+    data.name.length > 30 ||
+    !nameRegex.test(data.name)
+  ) {
+    throw new ValidationError(
+      '`name` must be an alphanumeric string between 3 and 30 characters'
+    );
+  } else if (
+    typeof data.email != 'string' ||
+    data.email.length < 5 ||
+    data.email.length > 50 ||
+    !emailRegex.test(data.email)
+  ) {
+    throw new ValidationError(
+      '`email` must be a valid email address between 5 and 50 characters'
+    );
+  } else if (
+    data.phone !== null &&
+    (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
+  ) {
+    throw new ValidationError('`phone` must be a valid phone number or null');
+  }
+
+  return true;
+};
 
 export const publicMemeProjection = {
   _id: false,
@@ -116,6 +163,96 @@ export const publicUserProjection = {
   deleted: true,
   imageUrl: true
 };
+
+export async function handleImageUpload(
+  creatorKey: string,
+  imageBase64: string | null | undefined
+) {
+  let imageUrl: string | null = null;
+
+  if (imageBase64) {
+    const [, imageType, imageData] = base64Regex.exec(imageBase64) || [];
+    if (imageType && imageData) {
+      const db = await getDb();
+      const uploadsDb = db.collection<WithId<InternalUpload>>('uploads');
+      const imageHash = createHash('sha1').update(imageData).digest('hex');
+      const cachedImage = await uploadsDb.findOne({ hash: imageHash });
+      const now = Date.now();
+
+      if (cachedImage) {
+        imageUrl = cachedImage.uri;
+        await uploadsDb.updateOne(
+          { _id: cachedImage._id },
+          { $set: { lastUsedAt: now } }
+        );
+      } else if (ALLOWED_IMAGE_TYPES.includes(imageType)) {
+        const { IMGUR_ALBUM_HASH, IMGUR_CLIENT_ID } = getEnv();
+        const body = new URLSearchParams();
+        const uploadId: UploadId = new ObjectId();
+
+        const chapterName = await db
+          .collection<InternalApiKey>('keys')
+          .findOne({ key: creatorKey })
+          .then((r) => r?.owner || toss(new InvalidKeyError()));
+
+        body.append('image', imageData);
+        body.append('album', IMGUR_ALBUM_HASH);
+        body.append('type', 'base64');
+        body.append('name', uploadId.toString());
+        body.append('title', `Upload ${uploadId}`);
+        body.append(
+          'description',
+          `Created by the ${chapterName} chapter at ${new Date(
+            now
+          ).toString()} using ghostmeme runtime v${pkgVersion}`
+        );
+
+        try {
+          const res = await fetch(IMGUR_API_URI, {
+            method: 'POST',
+            headers: {
+              authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
+              accept: 'application/json'
+            },
+            body
+          });
+
+          const json: ImgurApiResponse = await res.json();
+
+          imageUrl =
+            json.data.link ||
+            toss(
+              new AppError(json?.data?.error || 'could not resolve uploaded image link')
+            );
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error(`image upload failure reason: ${e.message || e}`);
+          throw new AppError('image upload failed');
+        }
+
+        await uploadsDb.insertOne({
+          _id: uploadId,
+          uri: imageUrl,
+          hash: imageHash,
+          lastUsedAt: now
+        });
+
+        await db
+          .collection<InternalInfo>('info')
+          .updateOne({}, { $inc: { totalUploads: 1 } });
+      } else {
+        const allowedTypes = ALLOWED_IMAGE_TYPES.join(', ');
+        throw new ValidationError(
+          `invalid media type "${imageType}", must be one of: ${allowedTypes}`
+        );
+      }
+    } else {
+      throw new ValidationError('invalid base64 data URL; see https://mzl.la/3AasmwQ');
+    }
+  }
+
+  return imageUrl;
+}
 
 export async function getSystemInfo(): Promise<InternalInfo> {
   return (
@@ -169,7 +306,6 @@ export async function createMeme({
   let owner: UserId | undefined = undefined;
   let receiver: UserId | null | undefined = undefined;
   let replyTo: MemeId | null | undefined = undefined;
-  let imageUrl = data.imageUrl;
 
   if (typeof data.owner == 'string' && data.owner.length) {
     try {
@@ -196,12 +332,6 @@ export async function createMeme({
       throw new ValidationError('invalid meme_id for `replyTo`');
     }
   } else replyTo = null;
-
-  if (data.imageBase64) {
-    // TODO: validate and use imageBase64 to resolve new imageUrl
-    // eslint-disable-next-line no-self-assign
-    imageUrl = imageUrl;
-  }
 
   const { description, private: priv, expiredAt, ...rest } = data;
 
@@ -238,7 +368,7 @@ export async function createMeme({
     totalLikes: 0,
     private: priv,
     replyTo,
-    imageUrl,
+    imageUrl: data.imageUrl || (await handleImageUpload(creatorKey, data.imageBase64)),
     meta: {
       creator: creatorKey,
       likeability: 1 / randomInt(100),
@@ -254,7 +384,6 @@ export async function createMeme({
   );
 }
 
-// TODO: DRY some of this validation logic out as well (see create/updateUser)
 export async function updateMemes({
   meme_ids,
   data
@@ -496,35 +625,14 @@ export async function createUser({
   creatorKey: string;
   data: Partial<NewUser>;
 }): Promise<PublicUser> {
-  if (!isPlainObject(data)) {
-    throw new ValidationError('only JSON content is allowed');
-  } else if (
-    typeof data.name != 'string' ||
-    data.name.length < 3 ||
-    data.name.length > 30 ||
-    !nameRegex.test(data.name)
-  ) {
-    throw new ValidationError(
-      '`name` must be an alphanumeric string between 3 and 30 characters'
-    );
-  } else if (
-    typeof data.email != 'string' ||
-    data.email.length < 5 ||
-    data.email.length > 50 ||
-    !emailRegex.test(data.email)
-  ) {
-    throw new ValidationError(
-      '`email` must be a valid email address between 5 and 50 characters'
-    );
-  } else if (
-    data.phone !== null &&
-    (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
-  ) {
-    throw new ValidationError('`phone` must be a valid phone number or null');
-  } else if (typeof data.username != 'string' || !usernameRegex.test(data.username)) {
+  validateUserData(data);
+
+  if (typeof data.username != 'string' || !usernameRegex.test(data.username)) {
     throw new ValidationError(
       '`username` must be an alphanumeric string between 5 and 20 characters'
     );
+  } else if (!creatorKey || typeof creatorKey != 'string') {
+    throw new InvalidKeyError();
   } else if (
     data.imageBase64 !== null &&
     (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
@@ -532,26 +640,16 @@ export async function createUser({
     throw new ValidationError(
       '`imageBase64` must be a valid non-empty base64 string, data uri, or null'
     );
-  } else if (!creatorKey || typeof creatorKey != 'string') {
-    throw new InvalidKeyError();
   }
 
-  let imageUrl: string | null = null;
-
-  if (data.imageBase64) {
-    // TODO: validate and use imageBase64 to resolve new imageUrl
-    // eslint-disable-next-line no-self-assign
-    imageUrl = imageUrl;
-  }
-
-  const { email, name, phone, username, ...rest } = data;
+  const { email, name, phone, username, ...rest } = data as NewUser;
 
   if (Object.keys(rest).length != 1) {
     throw new ValidationError('unexpected properties encountered');
   }
 
   const db = await getDb();
-  const users = await db.collection<InternalUser>('users');
+  const users = db.collection<InternalUser>('users');
 
   if (await itemExists(users, username, 'username', { caseInsensitive: true })) {
     throw new ValidationError('a user with that username already exists');
@@ -568,7 +666,7 @@ export async function createUser({
     phone,
     username,
     friends: [],
-    imageUrl,
+    imageUrl: await handleImageUpload(creatorKey, data.imageBase64),
     requests: { incoming: [], outgoing: [] },
     liked: [],
     deleted: false,
@@ -583,51 +681,32 @@ export async function createUser({
   return getUser({ user_id: (newUser as WithId<InternalUser>)._id });
 }
 
-// TODO: factor out the validation code for both user creation and update (DRY)
 export async function updateUser({
+  creatorKey,
   user_id,
   data
 }: {
+  creatorKey: string;
   user_id: UserId;
   data: Partial<PatchUser>;
 }): Promise<void> {
+  validateUserData(data);
+
   if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
-  } else if (!isPlainObject(data)) {
-    throw new ValidationError('only JSON content is allowed');
-  } else if (
-    typeof data.name != 'string' ||
-    data.name.length < 3 ||
-    data.name.length > 30 ||
-    !nameRegex.test(data.name)
-  ) {
-    throw new ValidationError(
-      '`name` must be an alphanumeric string between 3 and 30 characters'
-    );
-  } else if (
-    typeof data.email != 'string' ||
-    data.email.length < 5 ||
-    data.email.length > 50 ||
-    !emailRegex.test(data.email)
-  ) {
-    throw new ValidationError(
-      '`email` must be a valid email address between 5 and 50 characters'
-    );
-  } else if (
-    data.phone !== null &&
-    (typeof data.phone != 'string' || !phoneRegex.test(data.phone))
-  ) {
-    throw new ValidationError('`phone` must be a valid phone number or null');
+  } else if (!creatorKey || typeof creatorKey != 'string') {
+    throw new InvalidKeyError();
   } else if (
     data.imageBase64 !== null &&
+    data.imageBase64 !== undefined &&
     (typeof data.imageBase64 != 'string' || !data.imageBase64.length)
   ) {
     throw new ValidationError(
-      '`imageBase64` must be a valid base64 string, data uri, or null'
+      '`imageBase64` must be a valid non-empty base64 string, data uri, or null'
     );
   }
 
-  const { email, name, phone, imageBase64, ...rest } = data;
+  const { email, name, phone, imageBase64, ...rest } = data as PatchUser;
 
   if (Object.keys(rest).length > 0)
     throw new ValidationError('unexpected properties encountered');
@@ -649,16 +728,14 @@ export async function updateUser({
     throw new ValidationError('a user with that phone number already exists');
   }
 
-  // TODO: validate and use imageBase64 to resolve new imageUrl
-  void imageBase64;
-  const imageUrl = null;
-
   // * At this point, we can finally trust this data is not malicious
-  const patchUser: Omit<PatchUser, 'imageBase64'> & { imageUrl: string | null } = {
+  const patchUser: Omit<PatchUser, 'imageBase64'> & { imageUrl?: string | null } = {
     name,
     email,
     phone,
-    imageUrl
+    ...(imageBase64 !== undefined
+      ? { imageUrl: await handleImageUpload(creatorKey, imageBase64) }
+      : {})
   };
 
   if (!(await itemExists(users, user_id))) throw new ItemNotFoundError(user_id);

@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / external-scripts/prune-data
+[ghostmeme.api.hscc.bdpa.org](../README.md) / external-scripts/prune-data
 
 # Module: external-scripts/prune-data
 
@@ -6,23 +6,18 @@
 
 ### Functions
 
-- [default][2]
+- [default](external_scripts_prune_data.md#default)
 
 ## Functions
 
 ### default
 
-▸ **default**(): `Promise`<`void`>
+▸ **default**(): `Promise`<`void`\>
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[external-scripts/prune-data.ts:18][3]
-
-[1]: ../README.md
-[2]: external_scripts_prune_data.md#default
-[3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/external-scripts/prune-data.ts#L18
+[external-scripts/prune-data.ts:67](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/external-scripts/prune-data.ts#L67)

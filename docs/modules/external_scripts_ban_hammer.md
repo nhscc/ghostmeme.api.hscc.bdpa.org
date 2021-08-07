@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / external-scripts/ban-hammer
+[ghostmeme.api.hscc.bdpa.org](../README.md) / external-scripts/ban-hammer
 
 # Module: external-scripts/ban-hammer
 
@@ -6,29 +6,18 @@
 
 ### Functions
 
-- [default][2]
+- [default](external_scripts_ban_hammer.md#default)
 
 ## Functions
 
 ### default
 
-▸ **default**(`isCLI?`): `Promise`<`void`>
-
-#### Parameters
-
-| Name    | Type      | Default value |
-| :------ | :-------- | :------------ |
-| `isCLI` | `boolean` | `false`       |
+▸ **default**(): `Promise`<`void`\>
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[external-scripts/ban-hammer.ts:8][3]
-
-[1]: ../README.md
-[2]: external_scripts_ban_hammer.md#default
-[3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/external-scripts/ban-hammer.ts#L8
+[external-scripts/ban-hammer.ts:21](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/external-scripts/ban-hammer.ts#L21)

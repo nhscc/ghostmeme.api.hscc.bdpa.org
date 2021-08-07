@@ -1,4 +1,6 @@
+'use strict';
 /* eslint-disable no-console */
+
 const spellcheck = require('spellchecker');
 const pkg = require('./package.json');
 const read = require('fs').promises.readFile;

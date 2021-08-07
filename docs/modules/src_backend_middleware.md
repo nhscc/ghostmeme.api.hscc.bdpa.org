@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org][1] / src/backend/middleware
+[ghostmeme.api.hscc.bdpa.org](../README.md) / src/backend/middleware
 
 # Module: src/backend/middleware
 
@@ -6,12 +6,12 @@
 
 ### Variables
 
-- [defaultConfig][2]
+- [defaultConfig](src_backend_middleware.md#defaultconfig)
 
 ### Functions
 
-- [handleError][3]
-- [wrapHandler][4]
+- [handleError](src_backend_middleware.md#handleerror)
+- [wrapHandler](src_backend_middleware.md#wraphandler)
 
 ## Variables
 
@@ -19,71 +19,58 @@
 
 • `Const` **defaultConfig**: `PageConfig`
 
-**`see`** [https://nextjs.org/docs/api-routes/api-middlewares#custom-config][5]
+**`see`** https://nextjs.org/docs/api-routes/api-middlewares#custom-config
 
 #### Defined in
 
-[src/backend/middleware.ts:48][6]
+[src/backend/middleware.ts:48](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/middleware.ts#L48)
 
 ## Functions
 
 ### handleError
 
-▸ **handleError**(`res`, `error`): `Promise`<`void`>
+▸ **handleError**(`res`, `error`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name            | Type              |
-| :-------------- | :---------------- |
-| `res`           | `NextApiResponse` |
-| `error`         | `Object`          |
-| `error.message` | `string`          |
+| Name | Type |
+| :------ | :------ |
+| `res` | `NextApiResponse` |
+| `error` | `Object` |
+| `error.message` | `string` |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/middleware.ts:58][7]
+[src/backend/middleware.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/middleware.ts#L58)
 
----
+___
 
 ### wrapHandler
 
-▸ **wrapHandler**(`handler`, `(destructured)`): `Promise`<`void`>
+▸ **wrapHandler**(`handler`, `(destructured)`): `Promise`<`void`\>
 
-Generic middleware "glue" to handle api endpoints with consistent behavior like
-safe exception handling.
+Generic middleware "glue" to handle api endpoints with consistent behavior
+like safe exception handling.
 
 Passing `undefined` as `handler` or not calling `res.send()` in your handler
-will trigger an `HTTP 501 Not Implemented` response. This can be used to to stub
-out endpoints for later implementation.
+will trigger an `HTTP 501 Not Implemented` response. This can be used to to
+stub out endpoints for later implementation.
 
 #### Parameters
 
-| Name             | Type                                                                      |
-| :--------------- | :------------------------------------------------------------------------ |
-| `handler`        | `undefined` \| (`params`: [`NextApiState`][8]) => `Promise`<`void`>       |
-| `(destructured)` | [`NextApiState`][8] & { `apiVersion?`: `number` ; `methods`: `string`[] } |
+| Name | Type |
+| :------ | :------ |
+| `handler` | `undefined` \| (`params`: [`NextApiState`](types_global.md#nextapistate)) => `Promise`<`void`\> |
+| `(destructured)` | [`NextApiState`](types_global.md#nextapistate) & { `apiVersion?`: `number` ; `methods`: `string`[]  } |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/backend/middleware.ts:90][9]
-
-[1]: ../README.md
-[2]: src_backend_middleware.md#defaultconfig
-[3]: src_backend_middleware.md#handleerror
-[4]: src_backend_middleware.md#wraphandler
-[5]: https://nextjs.org/docs/api-routes/api-middlewares#custom-config
-[6]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/middleware.ts#L48
-[7]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/middleware.ts#L58
-[8]: types_global.md#nextapistate
-[9]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/backend/middleware.ts#L90
+[src/backend/middleware.ts:90](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/middleware.ts#L90)

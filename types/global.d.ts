@@ -6,11 +6,24 @@ export interface UserId extends ObjectId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface MemeId extends ObjectId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface UploadId extends ObjectId {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FriendId extends MemeId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FriendRequestId extends MemeId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface UnixEpochMs extends number {}
+
+/**
+ * The shape of an imgur image upload response.
+ * @see https://apidocs.imgur.com
+ */
+export type ImgurApiResponse = {
+  data: {
+    link?: string;
+    error?: string;
+  };
+};
 
 /**
  * A type combining NextApiRequest and NextApiResponse.
@@ -26,6 +39,7 @@ export type NextApiState<T = unknown> = {
 export type InternalInfo = {
   totalMemes: number;
   totalUsers: number;
+  totalUploads: number;
 };
 
 /**
@@ -164,6 +178,24 @@ export type InternalUser = {
 };
 
 /**
+ * The shape of upload metadata LRU cache stored in MongoDb.
+ */
+export type InternalUpload = {
+  /**
+   * The sha1 hash of the base64 image data.
+   */
+  hash: string;
+  /**
+   * The imgur uri for the image.
+   */
+  uri: string;
+  /**
+   * Updated whenever the record is used (milliseconds since unix epoch).
+   */
+  lastUsedAt: UnixEpochMs;
+};
+
+/**
  * The shape of a publicly available meme.
  */
 export type PublicMeme = Pick<
@@ -220,9 +252,12 @@ export type PatchMeme = {
  * The shape of a received update to an existing user.
  */
 export type PatchUser = Pick<InternalUser, 'name' | 'email' | 'phone'> & {
-  imageBase64: string | null;
+  imageBase64?: string | null;
 };
 
+/**
+ * Available types of friend requests.
+ */
 export type FriendRequestType = 'incoming' | 'outgoing';
 
 /**

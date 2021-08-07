@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / WebpackTestFixtureOptions
+[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / WebpackTestFixtureOptions
 
 # Interface: WebpackTestFixtureOptions
 
-[test/setup][2].WebpackTestFixtureOptions
+[test/setup](../modules/test_setup.md).WebpackTestFixtureOptions
 
 ## Table of contents
 
 ### Properties
 
-- [webpackVersion][3]
+- [webpackVersion](test_setup.WebpackTestFixtureOptions.md#webpackversion)
 
 ## Properties
 
@@ -18,10 +18,4 @@
 
 #### Defined in
 
-[test/setup.ts:411][4]
-
-[1]: ../README.md
-[2]: ../modules/test_setup.md
-[3]: test_setup.WebpackTestFixtureOptions.md#webpackversion
-[4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L411
+[test/setup.ts:410](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L410)

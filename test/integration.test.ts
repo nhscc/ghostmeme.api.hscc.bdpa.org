@@ -178,7 +178,7 @@ afterAll(() => {
 });
 
 getFixtures(api).forEach(
-  ({ displayIndex, subject, handler, method, response, body, id, params }) => {
+  ({ displayIndex, subject, handler, method, response, body, id, params, invisible }) => {
     if (!displayIndex) {
       throw new GuruMeditationError(
         'fixture is missing required property "displayIndex"'
@@ -186,7 +186,10 @@ getFixtures(api).forEach(
     }
 
     const shouldSkip =
-      !subject || !handler || !method || !response || typeof response.status != 'number';
+      !subject ||
+      !handler ||
+      !method ||
+      (!invisible && (!response || typeof response.status != 'number'));
 
     // eslint-disable-next-line jest/prefer-expect-assertions
     it(`${shouldSkip ? '<SKIPPED> ' : ''}${
@@ -224,9 +227,8 @@ getFixtures(api).forEach(
         return retval;
       };
 
-      const requestParams = typeof params == 'function' ? params(memory) : params;
-
-      const requestBody = typeof body == 'function' ? body(memory) : body;
+      const requestParams = typeof params == 'function' ? await params(memory) : params;
+      const requestBody = typeof body == 'function' ? await body(memory) : body;
 
       await withMockedEnv(
         async () => {
@@ -247,10 +249,16 @@ getFixtures(api).forEach(
 
               const expectedStatus =
                 typeof response?.status == 'function'
-                  ? response.status(res.status, memory)
+                  ? await response.status(res.status, memory)
                   : response?.status;
 
-              const json = await res.json();
+              let json: ReturnType<typeof JSON.parse>;
+
+              try {
+                const jsonText = await res.text();
+                json = `<invalid JSON>${jsonText}`;
+                json = JSON.parse(jsonText);
+              } catch {}
 
               if (expectedStatus) {
                 if (res.status != expectedStatus) {
@@ -267,7 +275,7 @@ getFixtures(api).forEach(
 
               const expectedJson =
                 typeof response?.json == 'function'
-                  ? response.json(json, memory)
+                  ? await response.json(json, memory)
                   : response?.json;
 
               if (expectedJson) {

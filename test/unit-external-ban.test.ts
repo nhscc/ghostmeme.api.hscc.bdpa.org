@@ -6,6 +6,7 @@ import banHammer from 'externals/ban-hammer';
 import type { InternalRequestLogEntry, InternalLimitedLogEntry } from 'types/global';
 import type { WithId } from 'mongodb';
 import { GuruMeditationError } from 'universe/backend/error';
+import { withMockedEnv } from './setup';
 
 const { getDb, getNewClientAndDb } = setupTestDb();
 
@@ -19,18 +20,25 @@ const getRateLimitUntils = async () =>
   (await getRateLimitsDb()).find().project({ _id: 0, until: 1 }).toArray();
 
 describe('external-scripts/ban-hammer', () => {
-  it('rate limits only the ips and their keys that exceed BAN_HAMMER_MAX_REQUESTS_PER_WINDOW/BAN_HAMMER_RESOLUTION_WINDOW_SECONDS', async () => {
+  it('rate limits only those ips/keys that exceed limits', async () => {
     expect.hasAssertions();
 
-    const now = ((_now: number) => _now - (_now % 5000) - 1000)(Date.now());
+    const now = ((n: number) => n - (n % 5000) - 1000)(Date.now());
 
     await (await getRateLimitsDb()).deleteMany({});
     await (await getRequestLogDb()).updateMany({}, { $set: { time: now } });
 
-    process.env.BAN_HAMMER_MAX_REQUESTS_PER_WINDOW = '10';
-    process.env.BAN_HAMMER_RESOLUTION_WINDOW_SECONDS = '1';
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: '10',
+        BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: '1'
+      },
+      { replace: false }
+    );
 
+    // ? Since ban-hammer closes the database connection after executing, we
+    // ? reopen it or funky things happen
     setClientAndDb(await getNewClientAndDb());
     expect(await getRateLimits()).toIncludeSameMembers([
       { ip: '1.2.3.4' },
@@ -42,7 +50,14 @@ describe('external-scripts/ban-hammer', () => {
       await getRequestLogDb()
     ).updateMany({ key: BANNED_KEY }, { $set: { ip: '9.8.7.6' } });
 
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: '10',
+        BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: '1'
+      },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     expect(await getRateLimits()).toIncludeSameMembers([
@@ -63,14 +78,26 @@ describe('external-scripts/ban-hammer', () => {
       time: now - 1000
     });
 
-    process.env.BAN_HAMMER_MAX_REQUESTS_PER_WINDOW = '11';
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: '11',
+        BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: '1'
+      },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     expect(await getRateLimits()).toBeArrayOfSize(0);
 
-    process.env.BAN_HAMMER_RESOLUTION_WINDOW_SECONDS = '5'; // ? 5000ms
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: '11',
+        BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: '5'
+      },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     expect(await getRateLimits()).toIncludeSameMembers([
@@ -80,14 +107,20 @@ describe('external-scripts/ban-hammer', () => {
 
     await (await getRateLimitsDb()).deleteMany({});
 
-    process.env.BAN_HAMMER_RESOLUTION_WINDOW_SECONDS = '1'; // ? vs 1000ms
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: '11',
+        BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: '1'
+      },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     expect(await getRateLimits()).toBeArrayOfSize(0);
   });
 
-  it('rate limits with respect to BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS', async () => {
+  it('rate limits with respect to invocation interval', async () => {
     expect.hasAssertions();
 
     await (await getRateLimitsDb()).deleteMany({});
@@ -102,16 +135,28 @@ describe('external-scripts/ban-hammer', () => {
     await requestLogDb.updateMany({ key: BANNED_KEY }, { $set: { ip: '9.8.7.6' } });
     await requestLogDb.updateMany({}, { $set: { time: now } });
 
-    process.env.BAN_HAMMER_MAX_REQUESTS_PER_WINDOW = '10';
-    process.env.BAN_HAMMER_RESOLUTION_WINDOW_SECONDS = '5';
-    process.env.BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS = '1'; // ? 1000ms
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: '10',
+        BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: '5',
+        BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS: '1'
+      },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     expect(await getRateLimits()).toBeArrayOfSize(0);
 
-    process.env.BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS = '8'; // ? vs 5000 + 2000 ms
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: '10',
+        BAN_HAMMER_RESOLUTION_WINDOW_SECONDS: '5',
+        BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS: '8'
+      },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     expect(await getRateLimits()).toIncludeSameMembers([
@@ -121,7 +166,7 @@ describe('external-scripts/ban-hammer', () => {
     ]);
   });
 
-  it('repeat offenders are punished with respect to BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES and BAN_HAMMER_RECIDIVISM_PUNISH_MULTIPLIER', async () => {
+  it('repeat offenders are punished to the maximum extent', async () => {
     expect.hasAssertions();
 
     await (await getRateLimitsDb()).deleteMany({});
@@ -131,10 +176,12 @@ describe('external-scripts/ban-hammer', () => {
 
     const now = Date.now();
 
-    process.env.BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES = '10';
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      { BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES: '10' },
+      { replace: false }
+    );
 
-    setClientAndDb(await getNewClientAndDb());
     const expectUntils = async (length: number, minutes: number, multi: number) => {
       const untils = await getRateLimitUntils();
 
@@ -142,23 +189,33 @@ describe('external-scripts/ban-hammer', () => {
 
       untils.forEach((u) => {
         // ? If tests are failing, try make toBeAround param #2 to be > 1000
-        // @ts-expect-error -- toBeAround is defined at the top of this file
+        // @ts-expect-error -- toBeAround is defined
         expect(u.until).toBeAround(now + minutes * 60 * 1000 * multi, multi * 1000);
       });
     };
 
+    setClientAndDb(await getNewClientAndDb());
     await expectUntils(3, 10, 1);
 
     await (await getRateLimitsDb()).deleteMany({});
 
-    process.env.BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES = '20';
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      { BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES: '20' },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     await expectUntils(3, 20, 1);
 
-    process.env.BAN_HAMMER_RECIDIVISM_PUNISH_MULTIPLIER = '5';
-    await banHammer();
+    await withMockedEnv(
+      banHammer,
+      {
+        BAN_HAMMER_DEFAULT_BAN_TIME_MINUTES: '20',
+        BAN_HAMMER_RECIDIVISM_PUNISH_MULTIPLIER: '5'
+      },
+      { replace: false }
+    );
 
     setClientAndDb(await getNewClientAndDb());
     await expectUntils(3, 20, 5);

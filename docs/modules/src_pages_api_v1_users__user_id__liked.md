@@ -1,48 +1,40 @@
-[ghostmeme.api.hscc.bdpa.org][1] / src/pages/api/v1/users/%5Buser_id%5D/liked
+[ghostmeme.api.hscc.bdpa.org](../README.md) / src/pages/api/v1/users/%5Buser_id%5D/liked
 
-# Module: src/pages/api/v1/users/\[user_id]/liked
+# Module: src/pages/api/v1/users/[user\_id]/liked
 
 ## Table of contents
 
 ### References
 
-- [config][2]
+- [config](src_pages_api_v1_users__user_id__liked.md#config)
 
 ### Functions
 
-- [default][3]
+- [default](src_pages_api_v1_users__user_id__liked.md#default)
 
 ## References
 
 ### config
 
-Renames and exports: [defaultConfig][4]
+Renames and exports: [defaultConfig](src_backend_middleware.md#defaultconfig)
 
 ## Functions
 
 ### default
 
-▸ **default**(`req`, `res`): `Promise`<`void`>
+▸ **default**(`req`, `res`): `Promise`<`void`\>
 
 #### Parameters
 
-| Name  | Type              |
-| :---- | :---------------- |
-| `req` | `NextApiRequest`  |
+| Name | Type |
+| :------ | :------ |
+| `req` | `NextApiRequest` |
 | `res` | `NextApiResponse` |
 
 #### Returns
 
-`Promise`<`void`>
+`Promise`<`void`\>
 
 #### Defined in
 
-[src/pages/api/v1/users/\[user_id\]/liked/index.ts:13][5]
-
-[1]: ../README.md
-[2]: src_pages_api_v1_users__user_id__liked.md#config
-[3]: src_pages_api_v1_users__user_id__liked.md#default
-[4]: src_backend_middleware.md#defaultconfig
-
-[5]:
-https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/src/pages/api/v1/users/[user_id]/liked/index.ts#L13
+[src/pages/api/v1/users/[user_id]/liked/index.ts:13](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/pages/api/v1/users/[user_id]/liked/index.ts#L13)

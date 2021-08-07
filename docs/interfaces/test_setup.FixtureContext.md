@@ -1,22 +1,22 @@
-[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / FixtureContext
+[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / FixtureContext
 
-# Interface: FixtureContext\<CustomOptions>
+# Interface: FixtureContext<CustomOptions\>
 
-[test/setup][2].FixtureContext
+[test/setup](../modules/test_setup.md).FixtureContext
 
 ## Type parameters
 
-| Name            | Type                                    |
-| :-------------- | :-------------------------------------- |
-| `CustomOptions` | extends `Record`<`string`, `unknown`>{} |
+| Name | Type |
+| :------ | :------ |
+| `CustomOptions` | extends `Record`<`string`, `unknown`\>{} |
 
 ## Hierarchy
 
-- `Partial`<[`TestResultProvider`][3]>
+- `Partial`<[`TestResultProvider`](test_setup.TestResultProvider.md)\>
 
-- `Partial`<[`TreeOutputProvider`][4]>
+- `Partial`<[`TreeOutputProvider`](test_setup.TreeOutputProvider.md)\>
 
-- `Partial`<[`GitProvider`][5]>
+- `Partial`<[`GitProvider`](test_setup.GitProvider.md)\>
 
   ↳ **`FixtureContext`**
 
@@ -24,15 +24,15 @@
 
 ### Properties
 
-- [debug][6]
-- [fileContents][7]
-- [git][8]
-- [options][9]
-- [root][10]
-- [testIdentifier][11]
-- [testResult][12]
-- [treeOutput][13]
-- [using][14]
+- [debug](test_setup.FixtureContext.md#debug)
+- [fileContents](test_setup.FixtureContext.md#filecontents)
+- [git](test_setup.FixtureContext.md#git)
+- [options](test_setup.FixtureContext.md#options)
+- [root](test_setup.FixtureContext.md#root)
+- [testIdentifier](test_setup.FixtureContext.md#testidentifier)
+- [testResult](test_setup.FixtureContext.md#testresult)
+- [treeOutput](test_setup.FixtureContext.md#treeoutput)
+- [using](test_setup.FixtureContext.md#using)
 
 ## Properties
 
@@ -42,9 +42,9 @@
 
 #### Defined in
 
-[test/setup.ts:435][15]
+[test/setup.ts:434](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L434)
 
----
+___
 
 ### fileContents
 
@@ -52,13 +52,13 @@
 
 #### Index signature
 
-▪ \[filePath: `string`]: `string`
+▪ [filePath: `string`]: `string`
 
 #### Defined in
 
-[test/setup.ts:434][16]
+[test/setup.ts:433](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L433)
 
----
+___
 
 ### git
 
@@ -70,19 +70,19 @@ Partial.git
 
 #### Defined in
 
-[test/setup.ts:450][17]
+[test/setup.ts:449](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L449)
 
----
+___
 
 ### options
 
-• **options**: [`FixtureOptions`][18] & `CustomOptions`
+• **options**: [`FixtureOptions`](test_setup.FixtureOptions.md) & `CustomOptions`
 
 #### Defined in
 
-[test/setup.ts:432][19]
+[test/setup.ts:431](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L431)
 
----
+___
 
 ### root
 
@@ -90,9 +90,9 @@ Partial.git
 
 #### Defined in
 
-[test/setup.ts:430][20]
+[test/setup.ts:429](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L429)
 
----
+___
 
 ### testIdentifier
 
@@ -100,9 +100,9 @@ Partial.git
 
 #### Defined in
 
-[test/setup.ts:431][21]
+[test/setup.ts:430](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L430)
 
----
+___
 
 ### testResult
 
@@ -110,9 +110,9 @@ Partial.git
 
 #### Type declaration
 
-| Name     | Type     |
-| :------- | :------- |
-| `code`   | `number` |
+| Name | Type |
+| :------ | :------ |
+| `code` | `number` |
 | `stderr` | `string` |
 | `stdout` | `string` |
 
@@ -122,9 +122,9 @@ Partial.testResult
 
 #### Defined in
 
-[test/setup.ts:440][22]
+[test/setup.ts:439](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L439)
 
----
+___
 
 ### treeOutput
 
@@ -136,50 +136,14 @@ Partial.treeOutput
 
 #### Defined in
 
-[test/setup.ts:445][23]
+[test/setup.ts:444](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L444)
 
----
+___
 
 ### using
 
-• **using**: [`MockFixture`][24]<[`FixtureContext`][25]<`Object`>>\[]
+• **using**: [`MockFixture`](test_setup.MockFixture.md)<[`FixtureContext`](test_setup.FixtureContext.md)<`Object`\>\>[]
 
 #### Defined in
 
-[test/setup.ts:433][26]
-
-[1]: ../README.md
-[2]: ../modules/test_setup.md
-[3]: test_setup.TestResultProvider.md
-[4]: test_setup.TreeOutputProvider.md
-[5]: test_setup.GitProvider.md
-[6]: test_setup.FixtureContext.md#debug
-[7]: test_setup.FixtureContext.md#filecontents
-[8]: test_setup.FixtureContext.md#git
-[9]: test_setup.FixtureContext.md#options
-[10]: test_setup.FixtureContext.md#root
-[11]: test_setup.FixtureContext.md#testidentifier
-[12]: test_setup.FixtureContext.md#testresult
-[13]: test_setup.FixtureContext.md#treeoutput
-[14]: test_setup.FixtureContext.md#using
-[15]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L435
-[16]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L434
-[17]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L450
-[18]: test_setup.FixtureOptions.md
-[19]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L432
-[20]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L430
-[21]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L431
-[22]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L440
-[23]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L445
-[24]: test_setup.MockFixture.md
-[25]: test_setup.FixtureContext.md
-[26]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/1f8d01f/test/setup.ts#L433
+[test/setup.ts:432](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L432)
