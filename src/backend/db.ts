@@ -72,7 +72,8 @@ export async function destroyDb(db: Db) {
     db.dropCollection('limited-log-mview'),
     db.dropCollection('memes'),
     db.dropCollection('users'),
-    db.dropCollection('info')
+    db.dropCollection('info'),
+    db.dropCollection('uploads')
   ]);
 }
 
@@ -89,7 +90,8 @@ export async function initializeDb(db: Db) {
     // ? Collation allows for case-insensitive searching. See:
     // ? https://stackoverflow.com/a/40914924/1367414
     db.createCollection('users', { collation: { locale: 'en', strength: 2 } }),
-    db.createCollection('info')
+    db.createCollection('info'),
+    db.createCollection('uploads')
   ]);
 
   // TODO:

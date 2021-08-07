@@ -18,60 +18,86 @@ if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
   debug.enabled = false;
 }
 
+const COLLECTION_LIMITS = (env: ReturnType<typeof getEnv>) => {
+  const limits = {
+    'request-log':
+      env.PRUNE_DATA_MAX_LOGS ||
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_LOGS must be greater than zero'
+        )
+      ),
+    users:
+      env.PRUNE_DATA_MAX_USERS ||
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_USERS must be greater than zero'
+        )
+      ),
+    memes:
+      env.PRUNE_DATA_MAX_MEMES ||
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_MEMES must be greater than zero'
+        )
+      ),
+    'limited-log-mview':
+      env.PRUNE_DATA_MAX_BANNED ||
+      toss(
+        new IllegalExternalEnvironmentError(
+          'PRUNE_DATA_MAX_BANNED must be greater than zero'
+        )
+      ),
+    uploads: {
+      limit:
+        env.PRUNE_DATA_MAX_UPLOADS ||
+        toss(
+          new IllegalExternalEnvironmentError(
+            'PRUNE_DATA_MAX_UPLOADS must be greater than zero'
+          )
+        ),
+      orderBy: 'lastUsedAt'
+    }
+  };
+
+  debug('limits: %O', limits);
+  return limits;
+};
+
 export default async function main() {
   try {
     log('initializing');
 
-    const env = getEnv();
-    const limits = {
-      'request-log':
-        env.PRUNE_DATA_MAX_LOGS ||
-        toss(
-          new IllegalExternalEnvironmentError(
-            'PRUNE_DATA_MAX_LOGS must be greater than zero'
-          )
-        ),
-      users:
-        env.PRUNE_DATA_MAX_USERS ||
-        toss(
-          new IllegalExternalEnvironmentError(
-            'PRUNE_DATA_MAX_USERS must be greater than zero'
-          )
-        ),
-      memes:
-        env.PRUNE_DATA_MAX_MEMES ||
-        toss(
-          new IllegalExternalEnvironmentError(
-            'PRUNE_DATA_MAX_MEMES must be greater than zero'
-          )
-        ),
-      'limited-log-mview':
-        env.PRUNE_DATA_MAX_BANNED ||
-        toss(
-          new IllegalExternalEnvironmentError(
-            'PRUNE_DATA_MAX_BANNED must be greater than zero'
-          )
-        )
-    };
+    const limits = COLLECTION_LIMITS(getEnv());
 
-    debug(`final limits: %O`, limits);
     log('connecting to external database');
 
     const db = await getDb({ external: true });
 
     await Promise.all(
-      Object.entries(limits).map(async ([collectionName, limitThreshold]) => {
+      Object.entries(limits).map(async ([collectionName, limitObj]) => {
+        const { limit: limitThreshold, orderBy } =
+          typeof limitObj == 'number' ? { limit: limitObj, orderBy: '_id' } : limitObj;
+
         const subLog = log.extend(collectionName);
         const collection = db.collection(collectionName);
         const total = await collection.countDocuments();
-        const cursor = collection.find().sort({ _id: -1 }).skip(limitThreshold).limit(1);
+
+        const cursor = collection
+          .find()
+          .sort({ [orderBy]: -1 })
+          .skip(limitThreshold)
+          .limit(1);
+
         const thresholdEntry = await cursor.next();
 
         if (thresholdEntry) {
           const result = await collection.deleteMany({
-            _id: { $lte: thresholdEntry._id }
+            [orderBy]: { $lte: thresholdEntry[orderBy] }
           });
-          subLog(`pruned ${result.deletedCount}/${total} "${collectionName}" entries`);
+          subLog(
+            `pruned ${result.deletedCount}/${total} "${collectionName}" entries (ordered by "${orderBy}")`
+          );
         } else {
           subLog(
             `no prunable "${collectionName}" entries (${total} <= ${limitThreshold})`
