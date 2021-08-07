@@ -1,3 +1,4 @@
+import { version as pkgVersion } from 'package';
 import { createHash, randomInt } from 'crypto';
 import { ObjectId } from 'mongodb';
 import { toss } from 'toss-expression';
@@ -5,8 +6,10 @@ import { getClientIp } from 'request-ip';
 import { isPlainObject } from 'is-plain-object';
 import { getEnv } from 'universe/backend/env';
 import { getDb, itemExists, itemToObjectId, itemToStringId } from 'universe/backend/db';
+import fetch from 'node-fetch';
 
 import {
+  AppError,
   InvalidIdError,
   InvalidKeyError,
   ValidationError,
@@ -18,7 +21,7 @@ import {
 import type { NextApiRequest } from 'next';
 import type { WithId } from 'mongodb';
 
-import type {
+import {
   NextApiState,
   InternalRequestLogEntry,
   InternalLimitedLogEntry,
@@ -28,6 +31,7 @@ import type {
   InternalUser,
   UserId,
   MemeId,
+  UploadId,
   FriendRequestId,
   FriendRequestType,
   PublicMeme,
@@ -35,19 +39,28 @@ import type {
   NewMeme,
   NewUser,
   PatchMeme,
-  PatchUser
+  PatchUser,
+  InternalUpload
 } from 'types/global';
+
+/**
+ * Global (but only per serverless function instance) request counting state
+ */
+let requestCounter = 0;
 
 const nameRegex = /^[a-zA-Z0-9 -]+$/;
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const phoneRegex =
   /^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?$/;
 const usernameRegex = /^[a-zA-Z0-9_-]{5,20}$/;
+const base64Regex = /^data:([\w/]+);base64,([a-zA-Z0-9+/]+={0,2})$/;
+
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
 
 /**
- * Global (but only per serverless function instance) request counting state
+ * The imgur API URL used throughout the API backend
  */
-let requestCounter = 0;
+export const IMGUR_API_URI = 'https://api.imgur.com/3/image';
 
 /**
  * This key is guaranteed never to appear in dummy data generated during tests.
@@ -150,11 +163,86 @@ export const publicUserProjection = {
   imageUrl: true
 };
 
-export async function handleImageUpload(imageBase64: string | null | undefined) {
-  const imageUrl = null;
+export async function handleImageUpload(
+  creatorKey: string,
+  imageBase64: string | null | undefined
+) {
+  let imageUrl: string | null = null;
 
   if (imageBase64) {
-    // TODO
+    const [, imageType, imageData] = base64Regex.exec(imageBase64) || [];
+    if (imageType && imageData) {
+      const db = await getDb();
+      const uploadsDb = db.collection<WithId<InternalUpload>>('uploads');
+      const imageHash = createHash('sha1').update(imageData).digest('hex');
+      const cachedImage = await uploadsDb.findOne({ hash: imageHash });
+      const now = Date.now();
+
+      if (cachedImage) {
+        imageUrl = cachedImage.uri;
+        await uploadsDb.updateOne(
+          { _id: cachedImage._id },
+          { $set: { lastUsedAt: now } }
+        );
+      } else if (ALLOWED_IMAGE_TYPES.includes(imageType)) {
+        const { IMGUR_ALBUM_HASH, IMGUR_CLIENT_ID } = getEnv();
+        const body = new URLSearchParams();
+        const uploadId: UploadId = new ObjectId();
+
+        const chapterName = await db
+          .collection<InternalApiKey>('keys')
+          .findOne({ key: creatorKey })
+          .then((r) => r?.owner || toss(new InvalidKeyError()));
+
+        body.append('image', imageData);
+        body.append('album', IMGUR_ALBUM_HASH);
+        body.append('type', 'base64');
+        body.append('name', uploadId.toString());
+        body.append('title', `Upload ${uploadId}`);
+        body.append(
+          'description',
+          `Created by the ${chapterName} chapter at ${new Date(
+            now
+          ).toString()} using ghostmeme runtime v${pkgVersion}`
+        );
+
+        try {
+          const res = await fetch(IMGUR_API_URI, {
+            method: 'POST',
+            headers: {
+              authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
+              accept: 'application/json'
+            },
+            body
+          });
+
+          imageUrl = ((await res.json()) as { link: string }).link;
+        } catch (e) {
+          getEnv().NODE_ENV != 'test' &&
+            // eslint-disable-next-line no-console
+            console.error(`image upload failure reason: ${e.message || e}`);
+          throw new AppError('image upload failed');
+        }
+
+        await uploadsDb.insertOne({
+          _id: uploadId,
+          uri: imageUrl,
+          hash: imageHash,
+          lastUsedAt: now
+        });
+
+        await db
+          .collection<InternalInfo>('info')
+          .updateOne({}, { $inc: { totalUploads: 1 } });
+      } else {
+        const allowedTypes = ALLOWED_IMAGE_TYPES.join(', ');
+        throw new ValidationError(
+          `invalid media type "${imageType}", must be one of: ${allowedTypes}`
+        );
+      }
+    } else {
+      throw new ValidationError('invalid base64 data URL; see https://mzl.la/3AasmwQ');
+    }
   }
 
   return imageUrl;
@@ -240,7 +328,6 @@ export async function createMeme({
   } else replyTo = null;
 
   const { description, private: priv, expiredAt, ...rest } = data;
-  const imageUrl = data.imageUrl || (await handleImageUpload(data.imageBase64));
 
   const db = await getDb();
   const memes = db.collection<InternalMeme>('memes');
@@ -275,7 +362,7 @@ export async function createMeme({
     totalLikes: 0,
     private: priv,
     replyTo,
-    imageUrl,
+    imageUrl: data.imageUrl || (await handleImageUpload(creatorKey, data.imageBase64)),
     meta: {
       creator: creatorKey,
       likeability: 1 / randomInt(100),
@@ -573,7 +660,7 @@ export async function createUser({
     phone,
     username,
     friends: [],
-    imageUrl: await handleImageUpload(data.imageBase64),
+    imageUrl: await handleImageUpload(creatorKey, data.imageBase64),
     requests: { incoming: [], outgoing: [] },
     liked: [],
     deleted: false,
@@ -589,9 +676,11 @@ export async function createUser({
 }
 
 export async function updateUser({
+  creatorKey,
   user_id,
   data
 }: {
+  creatorKey: string;
   user_id: UserId;
   data: Partial<PatchUser>;
 }): Promise<void> {
@@ -599,6 +688,8 @@ export async function updateUser({
 
   if (!(user_id instanceof ObjectId)) {
     throw new InvalidIdError(user_id);
+  } else if (!creatorKey || typeof creatorKey != 'string') {
+    throw new InvalidKeyError();
   } else if (
     data.imageBase64 !== null &&
     data.imageBase64 !== undefined &&
@@ -637,7 +728,7 @@ export async function updateUser({
     email,
     phone,
     ...(imageBase64 !== undefined
-      ? { imageUrl: await handleImageUpload(imageBase64) }
+      ? { imageUrl: await handleImageUpload(creatorKey, imageBase64) }
       : {})
   };
 

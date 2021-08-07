@@ -6,6 +6,8 @@ export interface UserId extends ObjectId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface MemeId extends ObjectId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface UploadId extends ObjectId {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FriendId extends MemeId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FriendRequestId extends MemeId {}
@@ -26,6 +28,7 @@ export type NextApiState<T = unknown> = {
 export type InternalInfo = {
   totalMemes: number;
   totalUsers: number;
+  totalUploads: number;
 };
 
 /**
@@ -164,6 +167,24 @@ export type InternalUser = {
 };
 
 /**
+ * The shape of upload metadata LRU cache stored in MongoDb.
+ */
+export type InternalUpload = {
+  /**
+   * The sha1 hash of the base64 image data.
+   */
+  hash: string;
+  /**
+   * The imgur uri for the image.
+   */
+  uri: string;
+  /**
+   * Updated whenever the record is used (milliseconds since unix epoch).
+   */
+  lastUsedAt: UnixEpochMs;
+};
+
+/**
  * The shape of a publicly available meme.
  */
 export type PublicMeme = Pick<
@@ -223,6 +244,9 @@ export type PatchUser = Pick<InternalUser, 'name' | 'email' | 'phone'> & {
   imageBase64?: string | null;
 };
 
+/**
+ * Available types of friend requests.
+ */
 export type FriendRequestType = 'incoming' | 'outgoing';
 
 /**

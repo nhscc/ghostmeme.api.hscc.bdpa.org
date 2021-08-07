@@ -14,6 +14,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   await wrapHandler(
     async ({ req, res }) => {
       const param = req.query.user_id;
+      const key = req.headers.key?.toString() || '';
       let user_id: UserId | undefined = undefined;
       let username: string | undefined = undefined;
 
@@ -34,7 +35,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         sendHttpOk(res);
       } else {
         // * PUT
-        await updateUser({ user_id, data: req.body });
+        await updateUser({ creatorKey: key, user_id, data: req.body });
         sendHttpOk(res);
       }
     },
