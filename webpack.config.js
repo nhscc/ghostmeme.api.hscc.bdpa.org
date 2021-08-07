@@ -88,7 +88,7 @@ const externalsConfig = {
     'ban-hammer': `${__dirname}/external-scripts/ban-hammer.ts`,
     'prune-data': `${__dirname}/external-scripts/prune-data.ts`,
     'initialize-data': `${__dirname}/external-scripts/initialize-data.ts`,
-    'simulate-activity': `${__dirname}/external-scripts/simulate-activity.ts`
+    'simulate-activity': `${__dirname}/external-scripts/simulate-activity/index.ts`
   },
 
   output: {
