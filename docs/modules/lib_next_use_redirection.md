@@ -50,4 +50,4 @@ error is defined    - error occurred
 
 #### Defined in
 
-[lib/next-use-redirection/index.ts:18](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/lib/next-use-redirection/index.ts#L18)
+[lib/next-use-redirection/index.ts:18](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-use-redirection/index.ts#L18)
