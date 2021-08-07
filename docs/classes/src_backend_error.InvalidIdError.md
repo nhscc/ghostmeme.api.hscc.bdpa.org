@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[src/backend/error.ts:43](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/src/backend/error.ts#L43)
+[src/backend/error.ts:43](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/error.ts#L43)
 
 ## Properties
 

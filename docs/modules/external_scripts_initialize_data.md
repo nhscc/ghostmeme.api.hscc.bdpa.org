@@ -20,4 +20,4 @@
 
 #### Defined in
 
-[external-scripts/initialize-data.ts:20](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/86898e9/external-scripts/initialize-data.ts#L20)
+[external-scripts/initialize-data.ts:20](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/external-scripts/initialize-data.ts#L20)
