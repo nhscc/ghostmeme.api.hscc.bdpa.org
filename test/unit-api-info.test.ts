@@ -19,7 +19,8 @@ beforeEach(() => {
   asMockedFunction(getSystemInfo).mockReturnValue(
     Promise.resolve({
       totalMemes: dummyDbData.memes.length,
-      totalUsers: dummyDbData.users.length
+      totalUsers: dummyDbData.users.length,
+      totalUploads: dummyDbData.uploads.length
     })
   );
 });
@@ -35,7 +36,8 @@ describe('api/v1/info', () => {
           expect(await fetch({ headers: { KEY } }).then((r) => r.json())).toStrictEqual({
             success: true,
             totalMemes: dummyDbData.memes.length,
-            totalUsers: dummyDbData.users.length
+            totalUsers: dummyDbData.users.length,
+            totalUploads: dummyDbData.uploads.length
           });
         }
       });
