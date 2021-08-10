@@ -65,24 +65,36 @@ export const IMGUR_API_URI = 'https://api.imgur.com/3/image';
 
 /**
  * This key is guaranteed never to appear in dummy data generated during tests.
- * In production, this key is used in place of `null` where a string key is
- * required (e.g. the `meta.creator` field for auto-generated users).
+ * In production, this key can be used to represent a `null` or non-existent
+ * key. This key cannot be used for authenticated HTTP access to the API.
  */
 export const NULL_KEY = '00000000-0000-0000-0000-000000000000';
 
 /**
- * This key is valid only when running in a test environment.
+ * This key is used by database initialization and activity simulation scripts.
+ * This key cannot be used for authenticated HTTP access to the API in
+ * production.
+ */
+export const MACHINE_KEY = '11111111-1111-1111-1111-111111111111';
+
+/**
+ * This key allows authenticated API access only when running in a test
+ * environment (i.e. `NODE_ENV=test`). This key cannot be used for authenticated
+ * HTTP access to the API in production.
  */
 export const DUMMY_KEY = '12349b61-83a7-4036-b060-213784b491';
 
 /**
- * This key is guaranteed to be rate limited when running in a test environment.
+ * This key is guaranteed to be rate limited when running in a test environment
+ * (i.e. `NODE_ENV=test`). This key cannot be used for authenticated HTTP access
+ * to the API in production.
  */
 export const BANNED_KEY = 'banned-h54e-6rt7-gctfh-hrftdygct0';
 
 /**
  * This key can be used to authenticate with local and non-production
- * deployments.
+ * deployments. This key cannot be used for authenticated HTTP access to the API
+ * in production.
  */
 export const DEV_KEY = 'dev-xunn-dev-294a-536h-9751-rydmj';
 
@@ -190,10 +202,13 @@ export async function handleImageUpload(
         const body = new URLSearchParams();
         const uploadId: UploadId = new ObjectId();
 
-        const chapterName = await db
-          .collection<InternalApiKey>('keys')
-          .findOne({ key: creatorKey })
-          .then((r) => r?.owner || toss(new InvalidKeyError()));
+        const chapterName =
+          creatorKey == MACHINE_KEY
+            ? 'ThE mAcHiNe'
+            : `the ${await db
+                .collection<InternalApiKey>('keys')
+                .findOne({ key: creatorKey })
+                .then((r) => r?.owner || toss(new InvalidKeyError()))} chapter`;
 
         body.append('image', imageData);
         body.append('album', IMGUR_ALBUM_HASH);
@@ -202,7 +217,7 @@ export async function handleImageUpload(
         body.append('title', `Upload ${uploadId}`);
         body.append(
           'description',
-          `Created by the ${chapterName} chapter at ${new Date(
+          `Created by ${chapterName} at ${new Date(
             now
           ).toString()} using ghostmeme runtime v${pkgVersion}`
         );
