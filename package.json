@@ -144,7 +144,7 @@
     "test-listen": "^1.1.0",
     "text-extensions": "^2.4.0",
     "threads": "^1.6.5",
-    "type-fest": "^2.0.0",
+    "type-fest": "^2.1.0",
     "typedoc": "^0.21.6",
     "typedoc-plugin-markdown": "^3.10.4",
     "unique-filename": "^1.1.1",
