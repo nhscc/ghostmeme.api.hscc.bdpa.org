@@ -1,14 +1,14 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / GitProvider
+[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / GitProvider
 
 # Interface: GitProvider
 
-[test/setup](../modules/test_setup.md).GitProvider
+[test/setup][2].GitProvider
 
 ## Table of contents
 
 ### Properties
 
-- [git](test_setup.GitProvider.md#git)
+- [git][3]
 
 ## Properties
 
@@ -18,4 +18,10 @@
 
 #### Defined in
 
-[test/setup.ts:449](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L449)
+[test/setup.ts:449][4]
+
+[1]: ../README.md
+[2]: ../modules/test_setup.md
+[3]: test_setup.GitProvider.md#git
+[4]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L449

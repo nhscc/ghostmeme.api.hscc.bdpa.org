@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / lib/next-respond
+[ghostmeme.api.hscc.bdpa.org][1] / lib/next-respond
 
 # Module: lib/next-respond
 
@@ -6,20 +6,20 @@
 
 ### Functions
 
-- [sendGenericHttpResponse](lib_next_respond.md#sendgenerichttpresponse)
-- [sendHttpBadMethod](lib_next_respond.md#sendhttpbadmethod)
-- [sendHttpBadRequest](lib_next_respond.md#sendhttpbadrequest)
-- [sendHttpContrivedError](lib_next_respond.md#sendhttpcontrivederror)
-- [sendHttpError](lib_next_respond.md#sendhttperror)
-- [sendHttpErrorResponse](lib_next_respond.md#sendhttperrorresponse)
-- [sendHttpNotFound](lib_next_respond.md#sendhttpnotfound)
-- [sendHttpOk](lib_next_respond.md#sendhttpok)
-- [sendHttpRateLimited](lib_next_respond.md#sendhttpratelimited)
-- [sendHttpSuccessResponse](lib_next_respond.md#sendhttpsuccessresponse)
-- [sendHttpTooLarge](lib_next_respond.md#sendhttptoolarge)
-- [sendHttpUnauthenticated](lib_next_respond.md#sendhttpunauthenticated)
-- [sendHttpUnauthorized](lib_next_respond.md#sendhttpunauthorized)
-- [sendNotImplementedError](lib_next_respond.md#sendnotimplementederror)
+- [sendGenericHttpResponse][2]
+- [sendHttpBadMethod][3]
+- [sendHttpBadRequest][4]
+- [sendHttpContrivedError][5]
+- [sendHttpError][6]
+- [sendHttpErrorResponse][7]
+- [sendHttpNotFound][8]
+- [sendHttpOk][9]
+- [sendHttpRateLimited][10]
+- [sendHttpSuccessResponse][11]
+- [sendHttpTooLarge][12]
+- [sendHttpUnauthenticated][13]
+- [sendHttpUnauthorized][14]
+- [sendNotImplementedError][15]
 
 ## Functions
 
@@ -29,11 +29,11 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `statusCode` | [`HttpStatusCode`](lib_next_isomorphic_redirect_types.md#httpstatuscode) |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `statusCode`    | [`HttpStatusCode`][16]        |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -41,9 +41,9 @@
 
 #### Defined in
 
-[lib/next-respond/index.ts:4](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L4)
+[lib/next-respond/index.ts:4][17]
 
-___
+---
 
 ### sendHttpBadMethod
 
@@ -51,10 +51,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -62,9 +62,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:76](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L76)
+[lib/next-respond/index.ts:76][18]
 
-___
+---
 
 ### sendHttpBadRequest
 
@@ -72,10 +72,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -83,9 +83,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:36](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L36)
+[lib/next-respond/index.ts:36][19]
 
-___
+---
 
 ### sendHttpContrivedError
 
@@ -93,10 +93,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -104,9 +104,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:126](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L126)
+[lib/next-respond/index.ts:126][20]
 
-___
+---
 
 ### sendHttpError
 
@@ -114,10 +114,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -125,31 +125,32 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:106](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L106)
+[lib/next-respond/index.ts:106][21]
 
-___
+---
 
 ### sendHttpErrorResponse
 
-▸ **sendHttpErrorResponse**(`res`, `statusCode`, `responseJson`): [`ErrorJsonResponse`](lib_next_respond_types.md#errorjsonresponse)
+▸ **sendHttpErrorResponse**(`res`, `statusCode`, `responseJson`):
+[`ErrorJsonResponse`][22]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `statusCode` | [`HttpStatusCode`](lib_next_isomorphic_redirect_types.md#httpstatuscode) |
-| `responseJson` | `Record`<`string`, `unknown`\> & { `error`: `string`  } |
+| Name           | Type                                                  |
+| :------------- | :---------------------------------------------------- |
+| `res`          | `NextApiResponse`                                     |
+| `statusCode`   | [`HttpStatusCode`][16]                                |
+| `responseJson` | `Record`<`string`, `unknown`> & { `error`: `string` } |
 
 #### Returns
 
-[`ErrorJsonResponse`](lib_next_respond_types.md#errorjsonresponse)
+[`ErrorJsonResponse`][22]
 
 #### Defined in
 
-[lib/next-respond/index.ts:22](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L22)
+[lib/next-respond/index.ts:22][23]
 
-___
+---
 
 ### sendHttpNotFound
 
@@ -157,10 +158,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -168,9 +169,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:66](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L66)
+[lib/next-respond/index.ts:66][24]
 
-___
+---
 
 ### sendHttpOk
 
@@ -178,10 +179,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -189,9 +190,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:32](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L32)
+[lib/next-respond/index.ts:32][25]
 
-___
+---
 
 ### sendHttpRateLimited
 
@@ -199,10 +200,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -210,31 +211,32 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:96](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L96)
+[lib/next-respond/index.ts:96][26]
 
-___
+---
 
 ### sendHttpSuccessResponse
 
-▸ **sendHttpSuccessResponse**(`res`, `statusCode`, `responseJson?`): [`SuccessJsonResponse`](lib_next_respond_types.md#successjsonresponse)
+▸ **sendHttpSuccessResponse**(`res`, `statusCode`, `responseJson?`):
+[`SuccessJsonResponse`][27]
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `statusCode` | [`HttpStatusCode`](lib_next_isomorphic_redirect_types.md#httpstatuscode) |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `statusCode`    | [`HttpStatusCode`][16]        |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
-[`SuccessJsonResponse`](lib_next_respond_types.md#successjsonresponse)
+[`SuccessJsonResponse`][27]
 
 #### Defined in
 
-[lib/next-respond/index.ts:12](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L12)
+[lib/next-respond/index.ts:12][28]
 
-___
+---
 
 ### sendHttpTooLarge
 
@@ -242,10 +244,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -253,9 +255,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:86](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L86)
+[lib/next-respond/index.ts:86][29]
 
-___
+---
 
 ### sendHttpUnauthenticated
 
@@ -263,10 +265,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -274,9 +276,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:46](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L46)
+[lib/next-respond/index.ts:46][30]
 
-___
+---
 
 ### sendHttpUnauthorized
 
@@ -284,10 +286,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -295,9 +297,9 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:56](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L56)
+[lib/next-respond/index.ts:56][31]
 
-___
+---
 
 ### sendNotImplementedError
 
@@ -305,10 +307,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `res` | `NextApiResponse` |
-| `responseJson?` | `Record`<`string`, `unknown`\> |
+| Name            | Type                          |
+| :-------------- | :---------------------------- |
+| `res`           | `NextApiResponse`             |
+| `responseJson?` | `Record`<`string`, `unknown`> |
 
 #### Returns
 
@@ -316,4 +318,51 @@ ___
 
 #### Defined in
 
-[lib/next-respond/index.ts:116](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/lib/next-respond/index.ts#L116)
+[lib/next-respond/index.ts:116][32]
+
+[1]: ../README.md
+[2]: lib_next_respond.md#sendgenerichttpresponse
+[3]: lib_next_respond.md#sendhttpbadmethod
+[4]: lib_next_respond.md#sendhttpbadrequest
+[5]: lib_next_respond.md#sendhttpcontrivederror
+[6]: lib_next_respond.md#sendhttperror
+[7]: lib_next_respond.md#sendhttperrorresponse
+[8]: lib_next_respond.md#sendhttpnotfound
+[9]: lib_next_respond.md#sendhttpok
+[10]: lib_next_respond.md#sendhttpratelimited
+[11]: lib_next_respond.md#sendhttpsuccessresponse
+[12]: lib_next_respond.md#sendhttptoolarge
+[13]: lib_next_respond.md#sendhttpunauthenticated
+[14]: lib_next_respond.md#sendhttpunauthorized
+[15]: lib_next_respond.md#sendnotimplementederror
+[16]: lib_next_isomorphic_redirect_types.md#httpstatuscode
+[17]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L4
+[18]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L76
+[19]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L36
+[20]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L126
+[21]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L106
+[22]: lib_next_respond_types.md#errorjsonresponse
+[23]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L22
+[24]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L66
+[25]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L32
+[26]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L96
+[27]: lib_next_respond_types.md#successjsonresponse
+[28]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L12
+[29]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L86
+[30]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L46
+[31]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L56
+[32]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/index.ts#L116
