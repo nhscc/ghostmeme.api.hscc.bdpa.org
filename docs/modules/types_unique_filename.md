@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / types/unique-filename
+[ghostmeme.api.hscc.bdpa.org][1] / types/unique-filename
 
 # Module: types/unique-filename
 
@@ -6,7 +6,7 @@
 
 ### Functions
 
-- [default](types_unique_filename.md#default)
+- [default][2]
 
 ## Functions
 
@@ -16,11 +16,11 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `dir` | `string` |
+| Name          | Type     |
+| :------------ | :------- |
+| `dir`         | `string` |
 | `filePrefix?` | `string` |
-| `uniqStr?` | `string` |
+| `uniqStr?`    | `string` |
 
 #### Returns
 
@@ -28,4 +28,9 @@
 
 #### Defined in
 
-[types/unique-filename.d.ts:2](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/unique-filename.d.ts#L2)
+[types/unique-filename.d.ts:2][3]
+
+[1]: ../README.md
+[2]: types_unique_filename.md#default
+[3]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/unique-filename.d.ts#L2

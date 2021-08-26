@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / src/pages/_app
+[ghostmeme.api.hscc.bdpa.org][1] / src/pages/\_app
 
 # Module: src/pages/\_app
 
@@ -6,7 +6,7 @@
 
 ### Functions
 
-- [default](src_pages__app.md#default)
+- [default][2]
 
 ## Functions
 
@@ -16,8 +16,8 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name             | Type       |
+| :--------------- | :--------- |
 | `(destructured)` | `AppProps` |
 
 #### Returns
@@ -26,4 +26,9 @@
 
 #### Defined in
 
-[src/pages/_app.tsx:8](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/pages/_app.tsx#L8)
+[src/pages/\_app.tsx:8][3]
+
+[1]: ../README.md
+[2]: src_pages__app.md#default
+[3]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/pages/_app.tsx#L8

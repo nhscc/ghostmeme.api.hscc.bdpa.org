@@ -1,16 +1,16 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / FixtureOptions
+[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / FixtureOptions
 
 # Interface: FixtureOptions
 
-[test/setup](../modules/test_setup.md).FixtureOptions
+[test/setup][2].FixtureOptions
 
 ## Hierarchy
 
-- `Partial`<[`WebpackTestFixtureOptions`](test_setup.WebpackTestFixtureOptions.md)\>
+- `Partial`<[`WebpackTestFixtureOptions`][3]>
 
-- `Partial`<[`GitRepositoryFixtureOptions`](test_setup.GitRepositoryFixtureOptions.md)\>
+- `Partial`<[`GitRepositoryFixtureOptions`][4]>
 
-- `Partial`<[`DummyDirectoriesFixtureOptions`](test_setup.DummyDirectoriesFixtureOptions.md)\>
+- `Partial`<[`DummyDirectoriesFixtureOptions`][5]>
 
   ↳ **`FixtureOptions`**
 
@@ -18,21 +18,21 @@
 
 ### Properties
 
-- [directoryPaths](test_setup.FixtureOptions.md#directorypaths)
-- [initialFileContents](test_setup.FixtureOptions.md#initialfilecontents)
-- [performCleanup](test_setup.FixtureOptions.md#performcleanup)
-- [use](test_setup.FixtureOptions.md#use)
-- [webpackVersion](test_setup.FixtureOptions.md#webpackversion)
+- [directoryPaths][6]
+- [initialFileContents][7]
+- [performCleanup][8]
+- [use][9]
+- [webpackVersion][10]
 
 ### Methods
 
-- [setupGit](test_setup.FixtureOptions.md#setupgit)
+- [setupGit][11]
 
 ## Properties
 
 ### directoryPaths
 
-• `Optional` **directoryPaths**: `string`[]
+• `Optional` **directoryPaths**: `string`\[]
 
 #### Inherited from
 
@@ -40,9 +40,9 @@ Partial.directoryPaths
 
 #### Defined in
 
-[test/setup.ts:420](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L420)
+[test/setup.ts:420][12]
 
-___
+---
 
 ### initialFileContents
 
@@ -50,13 +50,13 @@ ___
 
 #### Index signature
 
-▪ [filePath: `string`]: `string`
+▪ \[filePath: `string`]: `string`
 
 #### Defined in
 
-[test/setup.ts:405](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L405)
+[test/setup.ts:405][13]
 
-___
+---
 
 ### performCleanup
 
@@ -64,19 +64,19 @@ ___
 
 #### Defined in
 
-[test/setup.ts:403](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L403)
+[test/setup.ts:403][14]
 
-___
+---
 
 ### use
 
-• **use**: [`MockFixture`](test_setup.MockFixture.md)<[`FixtureContext`](test_setup.FixtureContext.md)<`Object`\>\>[]
+• **use**: [`MockFixture`][15]<[`FixtureContext`][16]<`Object`>>\[]
 
 #### Defined in
 
-[test/setup.ts:404](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L404)
+[test/setup.ts:404][17]
 
-___
+---
 
 ### webpackVersion
 
@@ -88,7 +88,7 @@ Partial.webpackVersion
 
 #### Defined in
 
-[test/setup.ts:410](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L410)
+[test/setup.ts:410][18]
 
 ## Methods
 
@@ -98,8 +98,8 @@ Partial.webpackVersion
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name  | Type        |
+| :---- | :---------- |
 | `git` | `SimpleGit` |
 
 #### Returns
@@ -112,4 +112,30 @@ Partial.setupGit
 
 #### Defined in
 
-[test/setup.ts:415](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L415)
+[test/setup.ts:415][19]
+
+[1]: ../README.md
+[2]: ../modules/test_setup.md
+[3]: test_setup.WebpackTestFixtureOptions.md
+[4]: test_setup.GitRepositoryFixtureOptions.md
+[5]: test_setup.DummyDirectoriesFixtureOptions.md
+[6]: test_setup.FixtureOptions.md#directorypaths
+[7]: test_setup.FixtureOptions.md#initialfilecontents
+[8]: test_setup.FixtureOptions.md#performcleanup
+[9]: test_setup.FixtureOptions.md#use
+[10]: test_setup.FixtureOptions.md#webpackversion
+[11]: test_setup.FixtureOptions.md#setupgit
+[12]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L420
+[13]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L405
+[14]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L403
+[15]: test_setup.MockFixture.md
+[16]: test_setup.FixtureContext.md
+[17]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L404
+[18]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L410
+[19]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L415

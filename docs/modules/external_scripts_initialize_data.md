@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / external-scripts/initialize-data
+[ghostmeme.api.hscc.bdpa.org][1] / external-scripts/initialize-data
 
 # Module: external-scripts/initialize-data
 
@@ -6,18 +6,21 @@
 
 ### Functions
 
-- [default](external_scripts_initialize_data.md#default)
+- [default][2]
 
 ## Functions
 
 ### default
 
-▸ **default**(): `Promise`<`void`\>
+▸ **default**(): `Promise`<`void`>
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`<`void`>
 
 #### Defined in
 
-[external-scripts/initialize-data.ts:20](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/external-scripts/initialize-data.ts#L20)
+external-scripts/initialize-data/index.ts:46
+
+[1]: ../README.md
+[2]: external_scripts_initialize_data.md#default

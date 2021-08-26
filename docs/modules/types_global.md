@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / types/global
+[ghostmeme.api.hscc.bdpa.org][1] / types/global
 
 # Module: types/global
 
@@ -6,34 +6,60 @@
 
 ### Interfaces
 
-- [FriendId](../interfaces/types_global.FriendId.md)
-- [FriendRequestId](../interfaces/types_global.FriendRequestId.md)
-- [MemeId](../interfaces/types_global.MemeId.md)
-- [UnixEpochMs](../interfaces/types_global.UnixEpochMs.md)
-- [UploadId](../interfaces/types_global.UploadId.md)
-- [UserId](../interfaces/types_global.UserId.md)
+- [FriendId][2]
+- [FriendRequestId][3]
+- [MemeId][4]
+- [UnixEpochMs][5]
+- [UploadId][6]
+- [UserId][7]
 
 ### Type aliases
 
-- [CorpusData](types_global.md#corpusdata)
-- [CorpusDialogLine](types_global.md#corpusdialogline)
-- [FriendRequestType](types_global.md#friendrequesttype)
-- [InternalApiKey](types_global.md#internalapikey)
-- [InternalInfo](types_global.md#internalinfo)
-- [InternalLimitedLogEntry](types_global.md#internallimitedlogentry)
-- [InternalMeme](types_global.md#internalmeme)
-- [InternalRequestLogEntry](types_global.md#internalrequestlogentry)
-- [InternalUpload](types_global.md#internalupload)
-- [InternalUser](types_global.md#internaluser)
-- [NewMeme](types_global.md#newmeme)
-- [NewUser](types_global.md#newuser)
-- [NextApiState](types_global.md#nextapistate)
-- [PatchMeme](types_global.md#patchmeme)
-- [PatchUser](types_global.md#patchuser)
-- [PublicMeme](types_global.md#publicmeme)
-- [PublicUser](types_global.md#publicuser)
+- [ChatsWorkerOptions][8]
+- [CorpusData][9]
+- [CorpusDialogLine][10]
+- [FriendRequestType][11]
+- [FriendsWorkerOptions][12]
+- [ImgurApiResponse][13]
+- [InteractionsWorkerOptions][14]
+- [InternalApiKey][15]
+- [InternalInfo][16]
+- [InternalLimitedLogEntry][17]
+- [InternalMeme][18]
+- [InternalRequestLogEntry][19]
+- [InternalUpload][20]
+- [InternalUser][21]
+- [MemesWorkerOptions][22]
+- [NewMeme][23]
+- [NewUser][24]
+- [NextApiState][25]
+- [PatchMeme][26]
+- [PatchUser][27]
+- [PublicMeme][28]
+- [PublicUser][29]
 
 ## Type aliases
+
+### ChatsWorkerOptions
+
+Ƭ **ChatsWorkerOptions**: `Object`
+
+The shape of the options object accepted by the chats worker.
+
+#### Type declaration
+
+| Name             | Type               |
+| :--------------- | :----------------- |
+| `debugNamespace` | `string`           |
+| `startTimeMs`    | [`UnixEpochMs`][5] |
+| `user_id`        | `string`           |
+| `username`       | `string`           |
+
+#### Defined in
+
+[types/global.d.ts:20][30]
+
+---
 
 ### CorpusData
 
@@ -43,16 +69,16 @@ The shape of precomputed conversation corpus data.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `dialogs` | [`CorpusDialogLine`](types_global.md#corpusdialogline)[][] |
-| `usernames` | `string`[] |
+| Name        | Type                           |
+| :---------- | :----------------------------- |
+| `dialogs`   | [`CorpusDialogLine`][10]\[]\[] |
+| `usernames` | `string`\[]                    |
 
 #### Defined in
 
-[types/global.d.ts:255](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L255)
+[types/global.d.ts:307][31]
 
-___
+---
 
 ### CorpusDialogLine
 
@@ -62,28 +88,93 @@ The shape of a single line of precomputed conversation corpus data.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `actor` | ``"A"`` \| ``"B"`` |
-| `line` | `string` |
+| Name    | Type           |
+| :------ | :------------- |
+| `actor` | `"A"` \| `"B"` |
+| `line`  | `string`       |
 
 #### Defined in
 
-[types/global.d.ts:263](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L263)
+[types/global.d.ts:315][32]
 
-___
+---
 
 ### FriendRequestType
 
-Ƭ **FriendRequestType**: ``"incoming"`` \| ``"outgoing"``
+Ƭ **FriendRequestType**: `"incoming"` | `"outgoing"`
 
 Available types of friend requests.
 
 #### Defined in
 
-[types/global.d.ts:250](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L250)
+[types/global.d.ts:302][33]
 
-___
+---
+
+### FriendsWorkerOptions
+
+Ƭ **FriendsWorkerOptions**: `Object`
+
+The shape of the options object accepted by the friends worker.
+
+#### Type declaration
+
+| Name             | Type               |
+| :--------------- | :----------------- |
+| `debugNamespace` | `string`           |
+| `startTimeMs`    | [`UnixEpochMs`][5] |
+| `user_id`        | `string`           |
+| `username`       | `string`           |
+
+#### Defined in
+
+[types/global.d.ts:30][34]
+
+---
+
+### ImgurApiResponse
+
+Ƭ **ImgurApiResponse**: `Object`
+
+The shape of an imgur image upload response.
+
+**`see`** [https://apidocs.imgur.com][35]
+
+#### Type declaration
+
+| Name          | Type     |
+| :------------ | :------- |
+| `data`        | `Object` |
+| `data.error?` | `string` |
+| `data.link?`  | `string` |
+
+#### Defined in
+
+[types/global.d.ts:62][36]
+
+---
+
+### InteractionsWorkerOptions
+
+Ƭ **InteractionsWorkerOptions**: `Object`
+
+The shape of the options object accepted by the interactions worker.
+
+#### Type declaration
+
+| Name             | Type               |
+| :--------------- | :----------------- |
+| `debugNamespace` | `string`           |
+| `friend_ids`     | `string`\[]        |
+| `startTimeMs`    | [`UnixEpochMs`][5] |
+| `user_id`        | `string`           |
+| `username`       | `string`           |
+
+#### Defined in
+
+[types/global.d.ts:40][37]
+
+---
 
 ### InternalApiKey
 
@@ -93,16 +184,16 @@ The shape of an API key.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `key` | `string` |
+| Name    | Type     |
+| :------ | :------- |
+| `key`   | `string` |
 | `owner` | `string` |
 
 #### Defined in
 
-[types/global.d.ts:271](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L271)
+[types/global.d.ts:323][38]
 
-___
+---
 
 ### InternalInfo
 
@@ -112,29 +203,31 @@ The shape of API metadata stored in MongoDb.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `totalMemes` | `number` |
+| Name           | Type     |
+| :------------- | :------- |
+| `totalMemes`   | `number` |
 | `totalUploads` | `number` |
-| `totalUsers` | `number` |
+| `totalUsers`   | `number` |
 
 #### Defined in
 
-[types/global.d.ts:28](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L28)
+[types/global.d.ts:80][39]
 
-___
+---
 
 ### InternalLimitedLogEntry
 
-Ƭ **InternalLimitedLogEntry**: { `ip`: `string` \| ``null`` ; `key?`: `never` ; `until`: `number`  } \| { `ip?`: `never` ; `key`: `string` \| ``null`` ; `until`: `number`  }
+Ƭ **InternalLimitedLogEntry**: { `ip`: `string` | `null` ; `key?`: `never` ;
+`until`: `number` } | { `ip?`: `never` ; `key`: `string` | `null` ; `until`:
+`number` }
 
 The shape of a limited log entry.
 
 #### Defined in
 
-[types/global.d.ts:291](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L291)
+[types/global.d.ts:343][40]
 
-___
+---
 
 ### InternalMeme
 
@@ -144,28 +237,28 @@ The shape of a meme stored in MongoDb.
 
 #### Type declaration
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `createdAt` | [`UnixEpochMs`](../interfaces/types_global.UnixEpochMs.md) | When this meme was created creation (milliseconds since unix epoch). |
-| `description` | `string` \| ``null`` | The utf-8 content of this meme. |
-| `expiredAt` | [`UnixEpochMs`](../interfaces/types_global.UnixEpochMs.md) \| ``-1`` | When this meme was created creation (milliseconds since unix epoch). |
-| `imageUrl` | `string` \| ``null`` | The HTTP image url of this meme. |
-| `likes` | [`UserId`](../interfaces/types_global.UserId.md)[] | A list of user IDs that liked this meme. |
-| `meta` | `Object` | Metadata information only relevant to the server runtime and completely opaque to API consumers. |
-| `meta.creator` | `string` | The API key responsible for creating this meme. |
-| `meta.gregariousness` | `number` | Determines how likely machine users are to comment on (reply to) this meme. |
-| `meta.likeability` | `number` | Determines how likely machine users are to take like-based actions on this meme. |
-| `owner` | [`UserId`](../interfaces/types_global.UserId.md) | The ID of the user that created and owns this meme. |
-| `private` | `boolean` | If `true`, this meme should only be visible to authorized users. |
-| `receiver` | [`UserId`](../interfaces/types_global.UserId.md) \| ``null`` | The ID of the user that created and owns this meme. |
-| `replyTo` | [`MemeId`](../interfaces/types_global.MemeId.md) \| ``null`` | The ID of the meme this meme was created in response to. |
-| `totalLikes` | `number` | Integer number of likes this meme has received. We'll cache this data instead of calculating it via the aggregation for performance reasons. |
+| Name                  | Type                       | Description                                                                                                                                  |
+| :-------------------- | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| `createdAt`           | [`UnixEpochMs`][5]         | When this meme was created creation (milliseconds since unix epoch).                                                                         |
+| `description`         | `string` \| `null`         | The utf-8 content of this meme.                                                                                                              |
+| `expiredAt`           | [`UnixEpochMs`][5] \| `-1` | When this meme was created creation (milliseconds since unix epoch).                                                                         |
+| `imageUrl`            | `string` \| `null`         | The HTTP image url of this meme.                                                                                                             |
+| `likes`               | [`UserId`][7]\[]           | A list of user IDs that liked this meme.                                                                                                     |
+| `meta`                | `Object`                   | Metadata information only relevant to the server runtime and completely opaque to API consumers.                                             |
+| `meta.creator`        | `string`                   | The API key responsible for creating this meme.                                                                                              |
+| `meta.gregariousness` | `number`                   | Determines how likely machine users are to comment on (reply to) this meme.                                                                  |
+| `meta.likeability`    | `number`                   | Determines how likely machine users are to take like-based actions on this meme.                                                             |
+| `owner`               | [`UserId`][7]              | The ID of the user that created and owns this meme.                                                                                          |
+| `private`             | `boolean`                  | If `true`, this meme should only be visible to authorized users.                                                                             |
+| `receiver`            | [`UserId`][7] \| `null`    | The ID of the user that created and owns this meme.                                                                                          |
+| `replyTo`             | [`MemeId`][4] \| `null`    | The ID of the meme this meme was created in response to.                                                                                     |
+| `totalLikes`          | `number`                   | Integer number of likes this meme has received. We'll cache this data instead of calculating it via the aggregation for performance reasons. |
 
 #### Defined in
 
-[types/global.d.ts:37](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L37)
+[types/global.d.ts:89][41]
 
-___
+---
 
 ### InternalRequestLogEntry
 
@@ -175,20 +268,20 @@ The shape of a request log entry.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `ip` | `string` \| ``null`` |
-| `key` | `string` \| ``null`` |
-| `method` | `string` \| ``null`` |
-| `resStatusCode` | `number` |
-| `route` | `string` \| ``null`` |
-| `time` | `number` |
+| Name            | Type               |
+| :-------------- | :----------------- |
+| `ip`            | `string` \| `null` |
+| `key`           | `string` \| `null` |
+| `method`        | `string` \| `null` |
+| `resStatusCode` | `number`           |
+| `route`         | `string` \| `null` |
+| `time`          | `number`           |
 
 #### Defined in
 
-[types/global.d.ts:279](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L279)
+[types/global.d.ts:331][42]
 
-___
+---
 
 ### InternalUpload
 
@@ -198,17 +291,17 @@ The shape of upload metadata LRU cache stored in MongoDb.
 
 #### Type declaration
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `hash` | `string` | The sha1 hash of the base64 image data. |
-| `lastUsedAt` | [`UnixEpochMs`](../interfaces/types_global.UnixEpochMs.md) | Updated whenever the record is used (milliseconds since unix epoch). |
-| `uri` | `string` | The imgur uri for the image. |
+| Name         | Type               | Description                                                          |
+| :----------- | :----------------- | :------------------------------------------------------------------- |
+| `hash`       | `string`           | The sha1 hash of the base64 image data.                              |
+| `lastUsedAt` | [`UnixEpochMs`][5] | Updated whenever the record is used (milliseconds since unix epoch). |
+| `uri`        | `string`           | The imgur uri for the image.                                         |
 
 #### Defined in
 
-[types/global.d.ts:172](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L172)
+[types/global.d.ts:224][43]
 
-___
+---
 
 ### InternalUser
 
@@ -218,76 +311,100 @@ The shape of a user stored in MongoDb.
 
 #### Type declaration
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `deleted` | `boolean` | If `true`, the user is for all intents and purposes non-existent in the system.  **`default`** false |
-| `email` | `string` | Email address |
-| `friends` | [`UserId`](../interfaces/types_global.UserId.md)[] | A list of user IDs this user is friends with. |
-| `imageUrl` | `string` \| ``null`` | The HTTP image url of this user's profile pic. |
-| `liked` | [`MemeId`](../interfaces/types_global.MemeId.md)[] | A list of meme IDs that this user has liked. |
-| `meta` | `Object` | Metadata information only relevant to the server runtime and completely opaque to API consumers. |
-| `meta.creator` | `string` | The API key responsible for creating this meme. |
-| `name` | `string` | User first, full, etc name |
-| `phone` | `string` \| ``null`` | Phone number |
-| `requests` | `Object` | A list of friend requests involving this user. |
-| `requests.incoming` | [`UserId`](../interfaces/types_global.UserId.md)[] | Friend requests that have been sent to this user. |
-| `requests.outgoing` | [`UserId`](../interfaces/types_global.UserId.md)[] | Friend requests this user has sent to others. |
-| `username` | `string` | Username. Must be unique in the system. |
+| Name                | Type               | Description                                                                                         |
+| :------------------ | :----------------- | :-------------------------------------------------------------------------------------------------- |
+| `deleted`           | `boolean`          | If `true`, the user is for all intents and purposes non-existent in the system. **`default`** false |
+| `email`             | `string`           | Email address                                                                                       |
+| `friends`           | [`UserId`][7]\[]   | A list of user IDs this user is friends with.                                                       |
+| `imageUrl`          | `string` \| `null` | The HTTP image url of this user's profile pic.                                                      |
+| `liked`             | [`MemeId`][4]\[]   | A list of meme IDs that this user has liked.                                                        |
+| `meta`              | `Object`           | Metadata information only relevant to the server runtime and completely opaque to API consumers.    |
+| `meta.creator`      | `string`           | The API key responsible for creating this meme.                                                     |
+| `name`              | `string`           | User first, full, etc name                                                                          |
+| `phone`             | `string` \| `null` | Phone number                                                                                        |
+| `requests`          | `Object`           | A list of friend requests involving this user.                                                      |
+| `requests.incoming` | [`UserId`][7]\[]   | Friend requests that have been sent to this user.                                                   |
+| `requests.outgoing` | [`UserId`][7]\[]   | Friend requests this user has sent to others.                                                       |
+| `username`          | `string`           | Username. Must be unique in the system.                                                             |
 
 #### Defined in
 
-[types/global.d.ts:108](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L108)
+[types/global.d.ts:160][44]
 
-___
+---
+
+### MemesWorkerOptions
+
+Ƭ **MemesWorkerOptions**: `Object`
+
+The shape of the options object accepted by the memes worker.
+
+#### Type declaration
+
+| Name             | Type               |
+| :--------------- | :----------------- |
+| `debugNamespace` | `string`           |
+| `startTimeMs`    | [`UnixEpochMs`][5] |
+| `user_id`        | `string`           |
+| `username`       | `string`           |
+
+#### Defined in
+
+[types/global.d.ts:51][45]
+
+---
 
 ### NewMeme
 
-Ƭ **NewMeme**: `Pick`<[`InternalMeme`](types_global.md#internalmeme), ``"expiredAt"`` \| ``"description"`` \| ``"private"`` \| ``"imageUrl"``\> & { `imageBase64`: `string` \| ``null`` ; `owner`: `string` ; `receiver`: `string` \| ``null`` ; `replyTo`: `string` \| ``null``  }
+Ƭ **NewMeme**: `Pick`<[`InternalMeme`][18], `"expiredAt"` | `"description"` |
+`"private"` | `"imageUrl"`> & { `imageBase64`: `string` | `null` ; `owner`:
+`string` ; `receiver`: `string` | `null` ; `replyTo`: `string` | `null` }
 
 The shape of a newly received meme.
 
 #### Defined in
 
-[types/global.d.ts:216](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L216)
+[types/global.d.ts:268][46]
 
-___
+---
 
 ### NewUser
 
-Ƭ **NewUser**: `Pick`<[`InternalUser`](types_global.md#internaluser), ``"name"`` \| ``"email"`` \| ``"phone"`` \| ``"username"``\> & { `imageBase64`: `string` \| ``null``  }
+Ƭ **NewUser**: `Pick`<[`InternalUser`][21], `"name"` | `"email"` | `"phone"` |
+`"username"`> & { `imageBase64`: `string` | `null` }
 
 The shape of a newly received user.
 
 #### Defined in
 
-[types/global.d.ts:229](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L229)
+[types/global.d.ts:281][47]
 
-___
+---
 
 ### NextApiState
 
-Ƭ **NextApiState**<`T`\>: `Object`
+Ƭ **NextApiState**<`T`>: `Object`
 
 A type combining NextApiRequest and NextApiResponse.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | `unknown` |
+| Name | Type      |
+| :--- | :-------- |
+| `T`  | `unknown` |
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `req` | `NextApiRequest` |
-| `res` | `NextApiResponse`<`T`\> |
+| Name  | Type                   |
+| :---- | :--------------------- |
+| `req` | `NextApiRequest`       |
+| `res` | `NextApiResponse`<`T`> |
 
 #### Defined in
 
-[types/global.d.ts:20](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L20)
+[types/global.d.ts:72][48]
 
-___
+---
 
 ### PatchMeme
 
@@ -297,46 +414,127 @@ The shape of a received update to an existing meme.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `expiredAt` | [`InternalMeme`](types_global.md#internalmeme)[``"expiredAt"``] |
+| Name        | Type                                 |
+| :---------- | :----------------------------------- |
+| `expiredAt` | [`InternalMeme`][18]\[`"expiredAt"`] |
 
 #### Defined in
 
-[types/global.d.ts:236](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L236)
+[types/global.d.ts:288][49]
 
-___
+---
 
 ### PatchUser
 
-Ƭ **PatchUser**: `Pick`<[`InternalUser`](types_global.md#internaluser), ``"name"`` \| ``"email"`` \| ``"phone"``\> & { `imageBase64?`: `string` \| ``null``  }
+Ƭ **PatchUser**: `Pick`<[`InternalUser`][21], `"name"` | `"email"` | `"phone"`>
+& { `imageBase64?`: `string` | `null` }
 
 The shape of a received update to an existing user.
 
 #### Defined in
 
-[types/global.d.ts:243](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L243)
+[types/global.d.ts:295][50]
 
-___
+---
 
 ### PublicMeme
 
-Ƭ **PublicMeme**: `Pick`<[`InternalMeme`](types_global.md#internalmeme), ``"createdAt"`` \| ``"expiredAt"`` \| ``"description"`` \| ``"private"`` \| ``"imageUrl"``\> & { `likes`: [`InternalMeme`](types_global.md#internalmeme)[``"totalLikes"``] ; `meme_id`: `string` ; `owner`: `string` ; `receiver`: `string` \| ``null`` ; `replyTo`: `string` \| ``null``  }
+Ƭ **PublicMeme**: `Pick`<[`InternalMeme`][18], `"createdAt"` | `"expiredAt"` |
+`"description"` | `"private"` | `"imageUrl"`> & { `likes`:
+[`InternalMeme`][18]\[`"totalLikes"`] ; `meme_id`: `string` ; `owner`: `string`
+; `receiver`: `string` | `null` ; `replyTo`: `string` | `null` }
 
 The shape of a publicly available meme.
 
 #### Defined in
 
-[types/global.d.ts:190](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L190)
+[types/global.d.ts:242][51]
 
-___
+---
 
 ### PublicUser
 
-Ƭ **PublicUser**: `Pick`<[`InternalUser`](types_global.md#internaluser), ``"name"`` \| ``"email"`` \| ``"phone"`` \| ``"username"`` \| ``"deleted"`` \| ``"imageUrl"``\> & { `friends`: `number` ; `liked`: `number` ; `user_id`: `string`  }
+Ƭ **PublicUser**: `Pick`<[`InternalUser`][21], `"name"` | `"email"` | `"phone"`
+| `"username"` | `"deleted"` | `"imageUrl"`> & { `friends`: `number` ; `liked`:
+`number` ; `user_id`: `string` }
 
 The shape of a publicly available user.
 
 #### Defined in
 
-[types/global.d.ts:204](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/types/global.d.ts#L204)
+[types/global.d.ts:256][52]
+
+[1]: ../README.md
+[2]: ../interfaces/types_global.FriendId.md
+[3]: ../interfaces/types_global.FriendRequestId.md
+[4]: ../interfaces/types_global.MemeId.md
+[5]: ../interfaces/types_global.UnixEpochMs.md
+[6]: ../interfaces/types_global.UploadId.md
+[7]: ../interfaces/types_global.UserId.md
+[8]: types_global.md#chatsworkeroptions
+[9]: types_global.md#corpusdata
+[10]: types_global.md#corpusdialogline
+[11]: types_global.md#friendrequesttype
+[12]: types_global.md#friendsworkeroptions
+[13]: types_global.md#imgurapiresponse
+[14]: types_global.md#interactionsworkeroptions
+[15]: types_global.md#internalapikey
+[16]: types_global.md#internalinfo
+[17]: types_global.md#internallimitedlogentry
+[18]: types_global.md#internalmeme
+[19]: types_global.md#internalrequestlogentry
+[20]: types_global.md#internalupload
+[21]: types_global.md#internaluser
+[22]: types_global.md#memesworkeroptions
+[23]: types_global.md#newmeme
+[24]: types_global.md#newuser
+[25]: types_global.md#nextapistate
+[26]: types_global.md#patchmeme
+[27]: types_global.md#patchuser
+[28]: types_global.md#publicmeme
+[29]: types_global.md#publicuser
+[30]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L20
+[31]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L307
+[32]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L315
+[33]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L302
+[34]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L30
+[35]: https://apidocs.imgur.com
+[36]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L62
+[37]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L40
+[38]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L323
+[39]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L80
+[40]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L343
+[41]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L89
+[42]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L331
+[43]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L224
+[44]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L160
+[45]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L51
+[46]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L268
+[47]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L281
+[48]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L72
+[49]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L288
+[50]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L295
+[51]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L242
+[52]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/global.d.ts#L256
