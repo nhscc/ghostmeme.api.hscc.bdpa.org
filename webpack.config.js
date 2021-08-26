@@ -4,29 +4,34 @@
 // compile executables, etc
 
 const { EnvironmentPlugin, DefinePlugin, BannerPlugin } = require('webpack');
-const ThreadsPlugin = require('threads-plugin');
 const { verifyEnvironment } = require('./expect-env');
 const nodeExternals = require('webpack-node-externals');
 const debug = require('debug')(`${require('./package.json').name}:webpack-config`);
 
 let sanitizedEnv = {};
-let { NODE_ENV, ...sanitizedProcessEnv } = { ...process.env, NODE_ENV: 'production' };
+let { NODE_ENV: nodeEnv, ...sanitizedProcessEnv } = {
+  ...process.env,
+  NODE_ENV: 'production'
+};
 
 try {
   require('fs').accessSync('.env');
-  ({ NODE_ENV, ...sanitizedEnv } = require('dotenv').config().parsed);
-  debug(`NODE_ENV: ${NODE_ENV}`);
+  const { NODE_ENV: forceEnv, ...parsedEnv } = require('dotenv').config().parsed;
+  nodeEnv = forceEnv || nodeEnv;
+  sanitizedEnv = parsedEnv;
+  debug(`NODE_ENV: ${nodeEnv}`);
   debug('sanitized env: %O', sanitizedEnv);
 } catch (e) {
   debug(`env support disabled; reason: ${e}`);
 }
 
+debug('sanitized process env: %O', sanitizedProcessEnv);
 verifyEnvironment();
 
 const envPlugins = [
   // ? NODE_ENV is not a "default" (unlike below) but an explicit overwrite
   new DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+    'process.env.NODE_ENV': JSON.stringify(nodeEnv)
   }),
   // ? Load our .env results as the defaults (overridden by process.env)
   new EnvironmentPlugin({ ...sanitizedEnv, ...sanitizedProcessEnv }),
@@ -74,7 +79,6 @@ const externals = [
     rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
   },
   optimization: { usedExports: true },
-  ignoreWarnings: [/critical dependency:/i, /Conflicting values for 'process.env.NODE_ENV'/],
   plugins: [...envPlugins]
 }; */
 
@@ -87,7 +91,13 @@ const externalsConfig = {
   entry: {
     'ban-hammer': `${__dirname}/external-scripts/ban-hammer.ts`,
     'prune-data': `${__dirname}/external-scripts/prune-data.ts`,
-    'initialize-data': `${__dirname}/external-scripts/initialize-data.ts`,
+
+    'initialize-data': `${__dirname}/external-scripts/initialize-data/index.ts`,
+    'worker-friends': `${__dirname}/external-scripts/initialize-data/worker-friends.ts`,
+    'worker-memes': `${__dirname}/external-scripts/initialize-data/worker-memes.ts`,
+    'worker-interactions': `${__dirname}/external-scripts/initialize-data/worker-interactions.ts`,
+    'worker-chats': `${__dirname}/external-scripts/initialize-data/worker-chats.ts`,
+
     'simulate-activity': `${__dirname}/external-scripts/simulate-activity/index.ts`
   },
 
@@ -120,19 +130,19 @@ const externalsConfig = {
     }
   },
   module: {
-    rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
+    rules: [
+      {
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      }
+    ]
   },
   optimization: { usedExports: true },
-  ignoreWarnings: [
-    /critical dependency:/i,
-    /Conflicting values for 'process.env.NODE_ENV'/
-  ],
   plugins: [
     ...envPlugins,
     // * ▼ For non-bundled externals, make entry file executable w/ shebang
-    new BannerPlugin({ banner: '#!/usr/bin/env node', raw: true, entryOnly: true }),
-    // * ▼ For threads.js support @ https://threads.js.org/getting-started
-    new ThreadsPlugin()
+    new BannerPlugin({ banner: '#!/usr/bin/env node', raw: true, entryOnly: true })
   ]
 };
 
@@ -164,7 +174,6 @@ const externalsConfig = {
     rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
   },
   optimization: { usedExports: true },
-  ignoreWarnings: [/critical dependency:/i, /Conflicting values for 'process.env.NODE_ENV'/],
   plugins: [
     ...envPlugins,
     // * ▼ For bundled CLI applications, make entry file executable w/ shebang
