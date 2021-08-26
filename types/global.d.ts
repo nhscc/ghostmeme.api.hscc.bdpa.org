@@ -15,6 +15,47 @@ export interface FriendRequestId extends MemeId {}
 export interface UnixEpochMs extends number {}
 
 /**
+ * The shape of the options object accepted by the chats worker.
+ */
+export type ChatsWorkerOptions = {
+  debugNamespace: string;
+  user_id: string;
+  username: string;
+  startTimeMs: UnixEpochMs;
+};
+
+/**
+ * The shape of the options object accepted by the friends worker.
+ */
+export type FriendsWorkerOptions = {
+  debugNamespace: string;
+  user_id: string;
+  username: string;
+  startTimeMs: UnixEpochMs;
+};
+
+/**
+ * The shape of the options object accepted by the interactions worker.
+ */
+export type InteractionsWorkerOptions = {
+  debugNamespace: string;
+  user_id: string;
+  username: string;
+  friend_ids: string[];
+  startTimeMs: UnixEpochMs;
+};
+
+/**
+ * The shape of the options object accepted by the memes worker.
+ */
+export type MemesWorkerOptions = {
+  debugNamespace: string;
+  user_id: string;
+  username: string;
+  startTimeMs: UnixEpochMs;
+};
+
+/**
  * The shape of an imgur image upload response.
  * @see https://apidocs.imgur.com
  */
