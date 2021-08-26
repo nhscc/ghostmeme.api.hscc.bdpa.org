@@ -66,12 +66,7 @@ const COLLECTION_LIMITS = (env: ReturnType<typeof getEnv>) => {
 
 export default async function main() {
   try {
-    log('initializing');
-
     const limits = COLLECTION_LIMITS(getEnv());
-
-    log('connecting to external database');
-
     const db = await getDb({ external: true });
 
     await Promise.all(
@@ -95,9 +90,9 @@ export default async function main() {
           const result = await collection.deleteMany({
             [orderBy]: { $lte: thresholdEntry[orderBy] }
           });
-          subLog(
-            `pruned ${result.deletedCount}/${total} "${collectionName}" entries (ordered by "${orderBy}")`
-          );
+
+          subLog(`pruned ${result.deletedCount}/${total} "${collectionName}" entries`);
+          debug(`sorted "${collectionName}" by "${orderBy}"`);
         } else {
           subLog(
             `no prunable "${collectionName}" entries (${total} <= ${limitThreshold})`
@@ -108,7 +103,6 @@ export default async function main() {
       })
     );
 
-    debug('closing connection');
     await closeDb();
     log('execution complete');
   } catch (e) {
@@ -116,4 +110,5 @@ export default async function main() {
   }
 }
 
-!module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));
+!module.parent &&
+  main().catch((e) => log.extend('<exception>')(e.message || e.toString()));

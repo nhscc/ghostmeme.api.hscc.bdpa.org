@@ -88,6 +88,27 @@ export function getEnv() {
     PRUNE_DATA_MAX_UPLOADS: !!process.env.PRUNE_DATA_MAX_UPLOADS
       ? Number(process.env.PRUNE_DATA_MAX_UPLOADS)
       : null,
+    INIT_DATA_USERS: !!process.env.INIT_DATA_USERS
+      ? Number(process.env.INIT_DATA_USERS)
+      : null,
+    INIT_DATA_USER_MEMES: !!process.env.INIT_DATA_USER_MEMES
+      ? Number(process.env.INIT_DATA_USER_MEMES)
+      : null,
+    INIT_DATA_USER_MAX_FRIENDS: !!process.env.INIT_DATA_USER_MAX_FRIENDS
+      ? Number(process.env.INIT_DATA_USER_MAX_FRIENDS)
+      : null,
+    INIT_DATA_USER_MAX_REQUESTS: !!process.env.INIT_DATA_USER_MAX_REQUESTS
+      ? Number(process.env.INIT_DATA_USER_MAX_REQUESTS)
+      : null,
+    INIT_DATA_USER_MAX_CHATS: !!process.env.INIT_DATA_USER_MAX_CHATS
+      ? Number(process.env.INIT_DATA_USER_MAX_CHATS)
+      : null,
+    INIT_DATA_USER_MAX_COMMENTS: !!process.env.INIT_DATA_USER_MAX_COMMENTS
+      ? Number(process.env.INIT_DATA_USER_MAX_COMMENTS)
+      : null,
+    INIT_DATA_START_MINS_AGO: !!process.env.INIT_DATA_START_MINS_AGO
+      ? Number(process.env.INIT_DATA_START_MINS_AGO)
+      : null,
     HYDRATE_DB_ON_STARTUP:
       !!process.env.HYDRATE_DB_ON_STARTUP &&
       process.env.HYDRATE_DB_ON_STARTUP !== 'false',

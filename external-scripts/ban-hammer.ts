@@ -20,8 +20,6 @@ if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
 
 export default async function main() {
   try {
-    log('initializing');
-
     const {
       BAN_HAMMER_WILL_BE_CALLED_EVERY_SECONDS: calledEverySeconds,
       BAN_HAMMER_MAX_REQUESTS_PER_WINDOW: maxRequestsPerWindow,
@@ -63,9 +61,6 @@ export default async function main() {
     const calledEveryMs = oneSecondInMs * calledEverySeconds;
     const defaultBanTimeMs = oneSecondInMs * 60 * defaultBanTimeMinutes;
     const resolutionWindowMs = oneSecondInMs * resolutionWindowSeconds;
-
-    log('connecting to external database');
-
     const db = await getDb({ external: true });
 
     const pipeline = [
@@ -254,15 +249,16 @@ export default async function main() {
     debug('aggregation pipeline: %O', pipeline);
 
     const cursor = db.collection('request-log').aggregate(pipeline);
-    await cursor.next();
-    cursor.close();
 
-    debug('closing connection');
+    await cursor.next();
+    await cursor.close();
     await closeDb();
+
     log('execution complete');
   } catch (e) {
     throw new ExternalError(e.message || e.toString());
   }
 }
 
-!module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));
+!module.parent &&
+  main().catch((e) => log.extend('<exception>')(e.message || e.toString()));

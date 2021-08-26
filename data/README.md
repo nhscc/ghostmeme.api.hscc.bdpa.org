@@ -13,7 +13,7 @@ manually.
 Latest corpus stats:
 
 - 7318 total lines
-- 5331 generated usernames
+- 5331 unique usernames
 - 100 unique memes
 
 Movie titles used:

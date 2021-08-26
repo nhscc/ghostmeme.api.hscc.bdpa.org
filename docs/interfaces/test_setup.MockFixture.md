@@ -1,60 +1,78 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / [test/setup](../modules/test_setup.md) / MockFixture
+[ghostmeme.api.hscc.bdpa.org][1] / [test/setup][2] / MockFixture
 
-# Interface: MockFixture<Context\>
+# Interface: MockFixture\<Context>
 
-[test/setup](../modules/test_setup.md).MockFixture
+[test/setup][2].MockFixture
 
 ## Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `Context` | [`FixtureContext`](test_setup.FixtureContext.md) |
+| Name      | Type                  |
+| :-------- | :-------------------- |
+| `Context` | [`FixtureContext`][3] |
 
 ## Table of contents
 
 ### Properties
 
-- [description](test_setup.MockFixture.md#description)
-- [name](test_setup.MockFixture.md#name)
-- [setup](test_setup.MockFixture.md#setup)
-- [teardown](test_setup.MockFixture.md#teardown)
+- [description][4]
+- [name][5]
+- [setup][6]
+- [teardown][7]
 
 ## Properties
 
 ### description
 
-• **description**: `string` \| [`ReturnsString`](../modules/test_setup.md#returnsstring)<`Context`\>
+• **description**: `string` | [`ReturnsString`][8]<`Context`>
 
 #### Defined in
 
-[test/setup.ts:464](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L464)
+[test/setup.ts:464][9]
 
-___
+---
 
 ### name
 
-• **name**: `string` \| `symbol` \| [`ReturnsString`](../modules/test_setup.md#returnsstring)<`Context`\>
+• **name**: `string` | `symbol` | [`ReturnsString`][8]<`Context`>
 
 #### Defined in
 
-[test/setup.ts:463](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L463)
+[test/setup.ts:463][10]
 
-___
+---
 
 ### setup
 
-• `Optional` **setup**: [`FixtureAction`](../modules/test_setup.md#fixtureaction)<`Context`\>
+• `Optional` **setup**: [`FixtureAction`][11]<`Context`>
 
 #### Defined in
 
-[test/setup.ts:465](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L465)
+[test/setup.ts:465][12]
 
-___
+---
 
 ### teardown
 
-• `Optional` **teardown**: [`FixtureAction`](../modules/test_setup.md#fixtureaction)<`Context`\>
+• `Optional` **teardown**: [`FixtureAction`][11]<`Context`>
 
 #### Defined in
 
-[test/setup.ts:466](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/test/setup.ts#L466)
+[test/setup.ts:466][13]
+
+[1]: ../README.md
+[2]: ../modules/test_setup.md
+[3]: test_setup.FixtureContext.md
+[4]: test_setup.MockFixture.md#description
+[5]: test_setup.MockFixture.md#name
+[6]: test_setup.MockFixture.md#setup
+[7]: test_setup.MockFixture.md#teardown
+[8]: ../modules/test_setup.md#returnsstring
+[9]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L464
+[10]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L463
+[11]: ../modules/test_setup.md#fixtureaction
+[12]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L465
+[13]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/test/setup.ts#L466

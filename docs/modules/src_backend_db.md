@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / src/backend/db
+[ghostmeme.api.hscc.bdpa.org][1] / src/backend/db
 
 # Module: src/backend/db
 
@@ -6,144 +6,145 @@
 
 ### Type aliases
 
-- [IdItem](src_backend_db.md#iditem)
-- [IdItemArray](src_backend_db.md#iditemarray)
+- [IdItem][2]
+- [IdItemArray][3]
 
 ### Functions
 
-- [closeDb](src_backend_db.md#closedb)
-- [destroyDb](src_backend_db.md#destroydb)
-- [getDb](src_backend_db.md#getdb)
-- [getDbClient](src_backend_db.md#getdbclient)
-- [initializeDb](src_backend_db.md#initializedb)
-- [itemExists](src_backend_db.md#itemexists)
-- [itemToObjectId](src_backend_db.md#itemtoobjectid)
-- [itemToStringId](src_backend_db.md#itemtostringid)
-- [setClientAndDb](src_backend_db.md#setclientanddb)
+- [closeDb][4]
+- [destroyDb][5]
+- [getDb][6]
+- [getDbClient][7]
+- [initializeDb][8]
+- [itemExists][9]
+- [itemToObjectId][10]
+- [itemToStringId][11]
+- [setClientAndDb][12]
 
 ## Type aliases
 
 ### IdItem
 
-Ƭ **IdItem**<`T`\>: `WithId`<`unknown`\> \| `string` \| `T` \| `Nullish`
+Ƭ **IdItem**<`T`>: `WithId`<`unknown`> | `string` | `T` | `Nullish`
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `ObjectId` |
+| Name | Type               |
+| :--- | :----------------- |
+| `T`  | extends `ObjectId` |
 
 #### Defined in
 
-[src/backend/db.ts:149](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L149)
+[src/backend/db.ts:155][13]
 
-___
+---
 
 ### IdItemArray
 
-Ƭ **IdItemArray**<`T`\>: `WithId`<`unknown`\>[] \| `string`[] \| `T`[] \| `Nullish`
+Ƭ **IdItemArray**<`T`>: `WithId`<`unknown`>\[] | `string`\[] | `T`\[] |
+`Nullish`
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `ObjectId` |
+| Name | Type               |
+| :--- | :----------------- |
+| `T`  | extends `ObjectId` |
 
 #### Defined in
 
-[src/backend/db.ts:150](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L150)
+[src/backend/db.ts:156][14]
 
 ## Functions
 
 ### closeDb
 
-▸ **closeDb**(): `Promise`<`void`\>
+▸ **closeDb**(): `Promise`<`void`>
 
 Kills the MongoClient and closes any lingering database connections.
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`<`void`>
 
 #### Defined in
 
-[src/backend/db.ts:49](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L49)
+[src/backend/db.ts:49][15]
 
-___
+---
 
 ### destroyDb
 
-▸ **destroyDb**(`db`): `Promise`<`void`\>
+▸ **destroyDb**(`db`): `Promise`<`void`>
 
-Destroys all collections in the database. Can be called multiple times
-safely. Used primarily for testing purposes.
+Destroys all collections in the database. Can be called multiple times safely.
+Used primarily for testing purposes.
 
 #### Parameters
 
 | Name | Type |
-| :------ | :------ |
+| :--- | :--- |
 | `db` | `Db` |
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`<`void`>
 
 #### Defined in
 
-[src/backend/db.ts:68](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L68)
+[src/backend/db.ts:68][16]
 
-___
+---
 
 ### getDb
 
-▸ **getDb**(`params?`): `Promise`<`Db`\>
+▸ **getDb**(`params?`): `Promise`<`Db`>
 
-Lazily connects to the database once on-demand instead of immediately when
-the app runs.
+Lazily connects to the database once on-demand instead of immediately when the
+app runs.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params?` | `Object` |
-| `params.external` | ``true`` |
+| Name              | Type     |
+| :---------------- | :------- |
+| `params?`         | `Object` |
+| `params.external` | `true`   |
 
 #### Returns
 
-`Promise`<`Db`\>
+`Promise`<`Db`>
 
 #### Defined in
 
-[src/backend/db.ts:19](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L19)
+[src/backend/db.ts:19][17]
 
-___
+---
 
 ### getDbClient
 
-▸ **getDbClient**(`params?`): `Promise`<`MongoClient`\>
+▸ **getDbClient**(`params?`): `Promise`<`MongoClient`>
 
 Returns the MongoClient instance used to connect to the database.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params?` | `Object` | if `{external: true}`, external Mongo connect URI will be used |
-| `params.external` | ``true`` | - |
+| Name              | Type     | Description                                                    |
+| :---------------- | :------- | :------------------------------------------------------------- |
+| `params?`         | `Object` | if `{external: true}`, external Mongo connect URI will be used |
+| `params.external` | `true`   | -                                                              |
 
 #### Returns
 
-`Promise`<`MongoClient`\>
+`Promise`<`MongoClient`>
 
 #### Defined in
 
-[src/backend/db.ts:40](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L40)
+[src/backend/db.ts:40][18]
 
-___
+---
 
 ### initializeDb
 
-▸ **initializeDb**(`db`): `Promise`<`void`\>
+▸ **initializeDb**(`db`): `Promise`<`void`>
 
 Initializes the database collections and indices. This function is idempotent
 and can be called without worry of data loss.
@@ -151,22 +152,23 @@ and can be called without worry of data loss.
 #### Parameters
 
 | Name | Type |
-| :------ | :------ |
+| :--- | :--- |
 | `db` | `Db` |
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`<`void`>
 
 #### Defined in
 
-[src/backend/db.ts:84](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L84)
+[src/backend/db.ts:84][19]
 
-___
+---
 
 ### itemExists
 
-▸ **itemExists**<`T`\>(`collection`, `id`, `key?`, `options?`): `Promise`<`boolean`\>
+▸ **itemExists**<`T`>(`collection`, `id`, `key?`, `options?`):
+`Promise`<`boolean`>
 
 Checks if an item identified by some `key` (default identifier is `"_id"`)
 exists within `collection`.
@@ -174,70 +176,71 @@ exists within `collection`.
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `collection` | `Collection`<`T`\> |
-| `id` | `ObjectId` |
-| `key?` | ``"_id"`` \| ``"owner"`` \| ``"receiver"`` \| ``"replyTo"`` |
-| `options?` | `ItemExistsOptions` |
+| Name         | Type                                                |
+| :----------- | :-------------------------------------------------- |
+| `collection` | `Collection`<`T`>                                   |
+| `id`         | `ObjectId`                                          |
+| `key?`       | `"_id"` \| `"owner"` \| `"receiver"` \| `"replyTo"` |
+| `options?`   | `ItemExistsOptions`                                 |
 
 #### Returns
 
-`Promise`<`boolean`\>
+`Promise`<`boolean`>
 
 #### Defined in
 
-[src/backend/db.ts:111](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L111)
+[src/backend/db.ts:111][20]
 
-▸ **itemExists**<`T`\>(`collection`, `id`, `key`, `options?`): `Promise`<`boolean`\>
+▸ **itemExists**<`T`>(`collection`, `id`, `key`, `options?`):
+`Promise`<`boolean`>
 
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `collection` | `Collection`<`T`\> |
-| `id` | `string` |
-| `key` | `string` |
-| `options?` | `ItemExistsOptions` |
+| Name         | Type                |
+| :----------- | :------------------ |
+| `collection` | `Collection`<`T`>   |
+| `id`         | `string`            |
+| `key`        | `string`            |
+| `options?`   | `ItemExistsOptions` |
 
 #### Returns
 
-`Promise`<`boolean`\>
+`Promise`<`boolean`>
 
 #### Defined in
 
-[src/backend/db.ts:117](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L117)
+[src/backend/db.ts:117][21]
 
-___
+---
 
 ### itemToObjectId
 
-▸ **itemToObjectId**<`T`\>(`item`): `T`
+▸ **itemToObjectId**<`T`>(`item`): `T`
 
 Reduces an `item` down to its `ObjectId` instance.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `ObjectId`<`T`\> |
+| Name | Type                    |
+| :--- | :---------------------- |
+| `T`  | extends `ObjectId`<`T`> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `item` | [`IdItem`](src_backend_db.md#iditem)<`T`\> |
+| Name   | Type               |
+| :----- | :----------------- |
+| `item` | [`IdItem`][2]<`T`> |
 
 #### Returns
 
@@ -245,52 +248,51 @@ Reduces an `item` down to its `ObjectId` instance.
 
 #### Defined in
 
-[src/backend/db.ts:159](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L159)
+[src/backend/db.ts:165][22]
 
-▸ **itemToObjectId**<`T`\>(`item`): `T`[]
+▸ **itemToObjectId**<`T`>(`item`): `T`\[]
 
 Reduces an array of `item`s down to its `ObjectId` instances.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `ObjectId`<`T`\> |
+| Name | Type                    |
+| :--- | :---------------------- |
+| `T`  | extends `ObjectId`<`T`> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `item` | [`IdItemArray`](src_backend_db.md#iditemarray)<`T`\> |
+| Name   | Type                    |
+| :----- | :---------------------- |
+| `item` | [`IdItemArray`][3]<`T`> |
 
 #### Returns
 
-`T`[]
+`T`\[]
 
 #### Defined in
 
-[src/backend/db.ts:163](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L163)
+[src/backend/db.ts:169][23]
 
-___
+---
 
 ### itemToStringId
 
-▸ **itemToStringId**<`T`\>(`item`): `string`
+▸ **itemToStringId**<`T`>(`item`): `string`
 
-Reduces an `item` down to the string representation of its `ObjectId`
-instance.
+Reduces an `item` down to the string representation of its `ObjectId` instance.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `ObjectId`<`T`\> |
+| Name | Type                    |
+| :--- | :---------------------- |
+| `T`  | extends `ObjectId`<`T`> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `item` | [`IdItem`](src_backend_db.md#iditem)<`T`\> |
+| Name   | Type               |
+| :----- | :----------------- |
+| `item` | [`IdItem`][2]<`T`> |
 
 #### Returns
 
@@ -298,34 +300,34 @@ instance.
 
 #### Defined in
 
-[src/backend/db.ts:194](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L194)
+[src/backend/db.ts:200][24]
 
-▸ **itemToStringId**<`T`\>(`item`): `string`[]
+▸ **itemToStringId**<`T`>(`item`): `string`\[]
 
 Reduces an array of `item`s down to the string representations of their
 respective `ObjectId` instances.
 
 #### Type parameters
 
-| Name | Type |
-| :------ | :------ |
-| `T` | extends `ObjectId`<`T`\> |
+| Name | Type                    |
+| :--- | :---------------------- |
+| `T`  | extends `ObjectId`<`T`> |
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `item` | [`IdItemArray`](src_backend_db.md#iditemarray)<`T`\> |
+| Name   | Type                    |
+| :----- | :---------------------- |
+| `item` | [`IdItemArray`][3]<`T`> |
 
 #### Returns
 
-`string`[]
+`string`\[]
 
 #### Defined in
 
-[src/backend/db.ts:199](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L199)
+[src/backend/db.ts:205][25]
 
-___
+---
 
 ### setClientAndDb
 
@@ -336,11 +338,11 @@ purposes.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `(destructured)` | `Object` |
-| ▶ `({ client })` | `MongoClient` |
-| ▶ `({ db })` | `Db` |
+| Name             | Type          |
+| :--------------- | :------------ |
+| `(destructured)` | `Object`      |
+| `({ client })`   | `MongoClient` |
+| `({ db })`       | `Db`          |
 
 #### Returns
 
@@ -348,4 +350,45 @@ purposes.
 
 #### Defined in
 
-[src/backend/db.ts:58](https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/b50e614/src/backend/db.ts#L58)
+[src/backend/db.ts:58][26]
+
+[1]: ../README.md
+[2]: src_backend_db.md#iditem
+[3]: src_backend_db.md#iditemarray
+[4]: src_backend_db.md#closedb
+[5]: src_backend_db.md#destroydb
+[6]: src_backend_db.md#getdb
+[7]: src_backend_db.md#getdbclient
+[8]: src_backend_db.md#initializedb
+[9]: src_backend_db.md#itemexists
+[10]: src_backend_db.md#itemtoobjectid
+[11]: src_backend_db.md#itemtostringid
+[12]: src_backend_db.md#setclientanddb
+[13]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L155
+[14]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L156
+[15]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L49
+[16]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L68
+[17]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L19
+[18]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L40
+[19]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L84
+[20]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L111
+[21]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L117
+[22]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L165
+[23]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L169
+[24]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L200
+[25]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L205
+[26]:
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/src/backend/db.ts#L58
