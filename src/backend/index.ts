@@ -272,9 +272,9 @@ export async function handleImageUpload(
 export async function getSystemInfo(): Promise<InternalInfo> {
   return (
     (await (await getDb())
-      .collection<InternalInfo>('info')
+      .collection<WithId<InternalInfo>>('info')
       .find()
-      .project({ _id: false })
+      .project<InternalInfo>({ _id: false })
       .next()) ?? toss(new GuruMeditationError())
   );
 }
@@ -445,7 +445,6 @@ export async function getMemes({
       .find({ _id: { $in: meme_ids } })
       .sort({ _id: -1 })
       .limit(getEnv().RESULTS_PER_PAGE)
-      // @ts-expect-error: mongodb@4.0.0 driver typings are broken
       .project<PublicMeme>(publicMemeProjection)
       .toArray();
 
@@ -483,11 +482,8 @@ export async function getMemeLikesUserIds({
         .project<{ likes: UserId[] }>({
           likes: {
             $slice: [
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               '$likes',
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               after ? { $sum: [{ $indexOfArray: ['$likes', after] }, 1] } : 0,
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               getEnv().RESULTS_PER_PAGE
             ]
           }
@@ -526,11 +522,8 @@ export async function getUserLikedMemeIds({
         .project<{ likes: MemeId[] }>({
           likes: {
             $slice: [
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               '$liked',
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               after ? { $sum: [{ $indexOfArray: ['$liked', after] }, 1] } : 0,
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               getEnv().RESULTS_PER_PAGE
             ]
           }
@@ -852,11 +845,8 @@ export async function getUserFriendsUserIds({
       .project<{ friends: UserId[] }>({
         friends: {
           $slice: [
-            // @ts-expect-error: mongodb@4.0.0 driver typings are broken
             '$friends',
-            // @ts-expect-error: mongodb@4.0.0 driver typings are broken
             after ? { $sum: [{ $indexOfArray: ['$friends', after] }, 1] } : 0,
-            // @ts-expect-error: mongodb@4.0.0 driver typings are broken
             getEnv().RESULTS_PER_PAGE
           ]
         }
@@ -976,13 +966,10 @@ export async function getFriendRequestsOfType({
         .project<{ requests: FriendRequestId[] }>({
           requests: {
             $slice: [
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               `$requests.${request_type}`,
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               after
                 ? { $sum: [{ $indexOfArray: [`$requests.${request_type}`, after] }, 1] }
                 : 0,
-              // @ts-expect-error: mongodb@4.0.0 driver typings are broken
               getEnv().RESULTS_PER_PAGE
             ]
           }
