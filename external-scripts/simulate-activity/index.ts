@@ -18,8 +18,6 @@ if (!getEnv().DEBUG && getEnv().NODE_ENV != 'test') {
 }
 
 export default async function main() {
-  log('initializing');
-
   // eslint-disable-next-line no-empty-pattern
   const {
     // TODO: ...
@@ -28,16 +26,14 @@ export default async function main() {
   // TODO:
   void ExternalError, IllegalExternalEnvironmentError;
 
-  log('connecting to external database');
-
   const db = await getDb({ external: true });
 
   // TODO:
   void db;
 
-  debug('closing connection');
   await closeDb();
   log('execution complete');
 }
 
-!module.parent && main().catch((e) => log.extend('exception')(e.message || e.toString()));
+!module.parent &&
+  main().catch((e) => log.extend('<exception>')(e.message || e.toString()));
