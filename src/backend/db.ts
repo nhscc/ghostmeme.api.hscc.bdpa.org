@@ -134,10 +134,16 @@ export async function itemExists<T>(
     }
   }
 
+  if (key == '_id' && options?.exclude_id) {
+    throw new GuruMeditationError(
+      'assert failed: cannot use "_id" as key and use exclude_id simultaneously'
+    );
+  }
+
   const result = collection.find({
     [key]: id,
     ...(options?.exclude_id ? { _id: { $ne: options.exclude_id } } : {})
-  });
+  } as unknown as Parameters<typeof collection.find>[0]);
 
   if (options?.caseInsensitive) {
     result.collation({ locale: 'en', strength: 2 });
