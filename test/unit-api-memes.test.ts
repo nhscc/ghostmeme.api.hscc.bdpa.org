@@ -35,7 +35,7 @@ import EndpointMemesIdLikesId, {
   config as ConfigMemesIdLikesId
 } from 'universe/pages/api/v1/memes/[meme_id]/likes/[user_id]';
 
-import type { PublicMeme } from 'types/global';
+import type { PublicMeme, PublicUser } from 'types/global';
 
 jest.mock('universe/backend');
 jest.mock('universe/backend/middleware');
@@ -305,7 +305,7 @@ describe('api/v1/memes', () => {
     it('supports pagination', async () => {
       expect.hasAssertions();
 
-      await testApiHandler({
+      await testApiHandler<{ success: boolean; users: PublicUser[] }>({
         params: { meme_id: new ObjectId().toString() },
         requestPatcher: (req) => (req.url = `/?after=${new ObjectId()}`),
         handler: api.memesIdLikes,
