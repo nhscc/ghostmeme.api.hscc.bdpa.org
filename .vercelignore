@@ -11,12 +11,11 @@
 !/types
 
 # Re-add root-level files
-!/babel.config.js
-!/.changelogrc.js
 !/.gitignore
+!/babel.config.js
 !/next.config.js
-!/package.json
 !/package-lock.json
+!/package.json
 !/tsconfig.json
 
 # Custom adds

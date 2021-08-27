@@ -10,14 +10,17 @@ module.exports = {
       'always',
       [
         'feat',
+        'feature',
         'fix',
+        'perf',
+        'revert',
+        'build',
         'docs',
         'style',
         'refactor',
         'test',
-        'revert',
-        'debug',
-        'build',
+        'ci',
+        'cd',
         'chore'
       ]
     ]
