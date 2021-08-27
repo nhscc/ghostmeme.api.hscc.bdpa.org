@@ -116,7 +116,7 @@
     "fast-shuffle": "^4.5.0",
     "husky": "^7.0.2",
     "jest": "^27.0.6",
-    "jest-circus": "^27.0.6",
+    "jest-circus": "^27.1.0",
     "jest-extended": "^0.11.5",
     "jest-silent-reporter": "^0.5.0",
     "lint-staged": "^11.1.2",
