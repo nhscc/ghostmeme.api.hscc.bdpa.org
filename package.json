@@ -139,7 +139,7 @@
     "remark-reference-links": "^6.0.0",
     "remark-validate-links": "^11.0.1",
     "semantic-release": "github:xunnamius/semantic-release",
-    "simple-git": "^2.44.0",
+    "simple-git": "^2.45.0",
     "sort-package-json": "github:xunnamius/sort-package-json",
     "spellchecker": "^3.7.1",
     "test-listen": "^1.1.0",
