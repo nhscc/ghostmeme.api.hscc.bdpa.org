@@ -6,7 +6,7 @@ module.exports = {
   testEnvironment: 'node',
   testRunner: 'jest-circus/runner',
   // ? 1 hour so MMS and other tools don't choke during debugging
-  testTimeout: 3600000,
+  testTimeout: 60000,
   verbose: false,
   testPathIgnorePatterns: ['/node_modules/'],
   // ! If changed, also update these aliases in tsconfig.json,

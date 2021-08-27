@@ -45,7 +45,14 @@ module.exports = {
   plugins: [
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-function-bind',
-    '@babel/plugin-transform-typescript'
+    '@babel/plugin-transform-typescript',
+    // ? Interoperable named CJS imports for free
+    [
+      'transform-default-named-imports',
+      {
+        exclude: [/^next([/?#].+)?/, /^mongodb([/?#].+)?/]
+      }
+    ]
   ],
   // ? Sub-keys under the "env" config key will augment the above
   // ? configuration depending on the value of NODE_ENV and friends. Default
@@ -85,7 +92,7 @@ module.exports = {
       presets: [
         ['@babel/preset-env', { targets: { node: true } }],
         ['@babel/preset-typescript', { allowDeclareFields: true }]
-        // ? Webpack will handle minification
+        // ? Minification is handled by Webpack
       ]
     }
   }
