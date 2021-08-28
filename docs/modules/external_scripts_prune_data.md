@@ -25,4 +25,4 @@
 [1]: ../README.md
 [2]: external_scripts_prune_data.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/external-scripts/prune-data.ts#L67
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/314b1d1/external-scripts/prune-data.ts#L67

@@ -33,4 +33,4 @@
 [1]: ../README.md
 [2]: types_unique_filename.md#default
 [3]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/types/unique-filename.d.ts#L2
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/314b1d1/types/unique-filename.d.ts#L2
