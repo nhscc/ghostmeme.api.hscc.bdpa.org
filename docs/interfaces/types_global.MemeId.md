@@ -1,8 +1,8 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / [types/global](../modules/types_global.md) / MemeId
+[ghostmeme.api.hscc.bdpa.org][1] / [types/global][2] / MemeId
 
 # Interface: MemeId
 
-[types/global](../modules/types_global.md).MemeId
+[types/global][2].MemeId
 
 ## Hierarchy
 
@@ -10,30 +10,30 @@
 
   ↳ **`MemeId`**
 
-  ↳↳ [`FriendId`](types_global.FriendId.md)
+  ↳↳ [`FriendId`][3]
 
-  ↳↳ [`FriendRequestId`](types_global.FriendRequestId.md)
+  ↳↳ [`FriendRequestId`][4]
 
 ## Table of contents
 
 ### Properties
 
-- [\_bsontype](types_global.MemeId.md#_bsontype)
-- [generationTime](types_global.MemeId.md#generationtime)
-- [id](types_global.MemeId.md#id)
+- [\_bsontype][5]
+- [generationTime][6]
+- [id][7]
 
 ### Methods
 
-- [equals](types_global.MemeId.md#equals)
-- [getTimestamp](types_global.MemeId.md#gettimestamp)
-- [inspect](types_global.MemeId.md#inspect)
-- [toHexString](types_global.MemeId.md#tohexstring)
+- [equals][8]
+- [getTimestamp][9]
+- [inspect][10]
+- [toHexString][11]
 
 ## Properties
 
 ### \_bsontype
 
-• **\_bsontype**: ``"ObjectId"``
+• **\_bsontype**: `"ObjectId"`
 
 #### Inherited from
 
@@ -43,7 +43,7 @@ ObjectId.\_bsontype
 
 node_modules/bson/bson.d.ts:834
 
-___
+---
 
 ### generationTime
 
@@ -57,7 +57,7 @@ ObjectId.generationTime
 
 node_modules/bson/bson.d.ts:854
 
-___
+---
 
 ### id
 
@@ -81,8 +81,8 @@ Compares the equality of this ObjectId with `otherID`.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name      | Type                                     | Description                           |
+| :-------- | :--------------------------------------- | :------------------------------------ |
 | `otherId` | `string` \| `ObjectId` \| `ObjectIdLike` | ObjectId instance to compare against. |
 
 #### Returns
@@ -97,13 +97,14 @@ ObjectId.equals
 
 node_modules/bson/bson.d.ts:871
 
-___
+---
 
 ### getTimestamp
 
 ▸ **getTimestamp**(): `Date`
 
-Returns the generation date (accurate up to the second) that this ID was generated.
+Returns the generation date (accurate up to the second) that this ID was
+generated.
 
 #### Returns
 
@@ -117,7 +118,7 @@ ObjectId.getTimestamp
 
 node_modules/bson/bson.d.ts:873
 
-___
+---
 
 ### inspect
 
@@ -135,7 +136,7 @@ ObjectId.inspect
 
 node_modules/bson/bson.d.ts:895
 
-___
+---
 
 ### toHexString
 
@@ -154,3 +155,15 @@ ObjectId.toHexString
 #### Defined in
 
 node_modules/bson/bson.d.ts:856
+
+[1]: ../README.md
+[2]: ../modules/types_global.md
+[3]: types_global.FriendId.md
+[4]: types_global.FriendRequestId.md
+[5]: types_global.MemeId.md#_bsontype
+[6]: types_global.MemeId.md#generationtime
+[7]: types_global.MemeId.md#id
+[8]: types_global.MemeId.md#equals
+[9]: types_global.MemeId.md#gettimestamp
+[10]: types_global.MemeId.md#inspect
+[11]: types_global.MemeId.md#tohexstring

@@ -442,7 +442,7 @@
 `options?`): (`fn`:
 [`FixtureAction`][13]<[`FixtureContext`][4]<[`FixtureOptions`][5] &
 `Partial`<`Record`<`string`, `unknown`> & `CustomOptions`>> & `CustomContext`>)
-=> `Promise`<`void`>
+\=> `Promise`<`void`>
 
 #### Type parameters
 

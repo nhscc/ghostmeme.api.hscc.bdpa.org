@@ -1,12 +1,12 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / [types/global](../modules/types_global.md) / FriendRequestId
+[ghostmeme.api.hscc.bdpa.org][1] / [types/global][2] / FriendRequestId
 
 # Interface: FriendRequestId
 
-[types/global](../modules/types_global.md).FriendRequestId
+[types/global][2].FriendRequestId
 
 ## Hierarchy
 
-- [`MemeId`](types_global.MemeId.md)
+- [`MemeId`][3]
 
   ↳ **`FriendRequestId`**
 
@@ -14,32 +14,32 @@
 
 ### Properties
 
-- [\_bsontype](types_global.FriendRequestId.md#_bsontype)
-- [generationTime](types_global.FriendRequestId.md#generationtime)
-- [id](types_global.FriendRequestId.md#id)
+- [\_bsontype][4]
+- [generationTime][5]
+- [id][6]
 
 ### Methods
 
-- [equals](types_global.FriendRequestId.md#equals)
-- [getTimestamp](types_global.FriendRequestId.md#gettimestamp)
-- [inspect](types_global.FriendRequestId.md#inspect)
-- [toHexString](types_global.FriendRequestId.md#tohexstring)
+- [equals][7]
+- [getTimestamp][8]
+- [inspect][9]
+- [toHexString][10]
 
 ## Properties
 
 ### \_bsontype
 
-• **\_bsontype**: ``"ObjectId"``
+• **\_bsontype**: `"ObjectId"`
 
 #### Inherited from
 
-[MemeId](types_global.MemeId.md).[_bsontype](types_global.MemeId.md#_bsontype)
+[MemeId][3].[\_bsontype][11]
 
 #### Defined in
 
 node_modules/bson/bson.d.ts:834
 
-___
+---
 
 ### generationTime
 
@@ -47,13 +47,13 @@ ___
 
 #### Inherited from
 
-[MemeId](types_global.MemeId.md).[generationTime](types_global.MemeId.md#generationtime)
+[MemeId][3].[generationTime][12]
 
 #### Defined in
 
 node_modules/bson/bson.d.ts:854
 
-___
+---
 
 ### id
 
@@ -61,7 +61,7 @@ ___
 
 #### Inherited from
 
-[MemeId](types_global.MemeId.md).[id](types_global.MemeId.md#id)
+[MemeId][3].[id][13]
 
 #### Defined in
 
@@ -77,8 +77,8 @@ Compares the equality of this ObjectId with `otherID`.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name      | Type                                     | Description                           |
+| :-------- | :--------------------------------------- | :------------------------------------ |
 | `otherId` | `string` \| `ObjectId` \| `ObjectIdLike` | ObjectId instance to compare against. |
 
 #### Returns
@@ -87,19 +87,20 @@ Compares the equality of this ObjectId with `otherID`.
 
 #### Inherited from
 
-[MemeId](types_global.MemeId.md).[equals](types_global.MemeId.md#equals)
+[MemeId][3].[equals][14]
 
 #### Defined in
 
 node_modules/bson/bson.d.ts:871
 
-___
+---
 
 ### getTimestamp
 
 ▸ **getTimestamp**(): `Date`
 
-Returns the generation date (accurate up to the second) that this ID was generated.
+Returns the generation date (accurate up to the second) that this ID was
+generated.
 
 #### Returns
 
@@ -107,13 +108,13 @@ Returns the generation date (accurate up to the second) that this ID was generat
 
 #### Inherited from
 
-[MemeId](types_global.MemeId.md).[getTimestamp](types_global.MemeId.md#gettimestamp)
+[MemeId][3].[getTimestamp][15]
 
 #### Defined in
 
 node_modules/bson/bson.d.ts:873
 
-___
+---
 
 ### inspect
 
@@ -125,13 +126,13 @@ ___
 
 #### Inherited from
 
-[MemeId](types_global.MemeId.md).[inspect](types_global.MemeId.md#inspect)
+[MemeId][3].[inspect][16]
 
 #### Defined in
 
 node_modules/bson/bson.d.ts:895
 
-___
+---
 
 ### toHexString
 
@@ -145,8 +146,26 @@ Returns the ObjectId id as a 24 character hex string representation
 
 #### Inherited from
 
-[MemeId](types_global.MemeId.md).[toHexString](types_global.MemeId.md#tohexstring)
+[MemeId][3].[toHexString][17]
 
 #### Defined in
 
 node_modules/bson/bson.d.ts:856
+
+[1]: ../README.md
+[2]: ../modules/types_global.md
+[3]: types_global.MemeId.md
+[4]: types_global.FriendRequestId.md#_bsontype
+[5]: types_global.FriendRequestId.md#generationtime
+[6]: types_global.FriendRequestId.md#id
+[7]: types_global.FriendRequestId.md#equals
+[8]: types_global.FriendRequestId.md#gettimestamp
+[9]: types_global.FriendRequestId.md#inspect
+[10]: types_global.FriendRequestId.md#tohexstring
+[11]: types_global.MemeId.md#_bsontype
+[12]: types_global.MemeId.md#generationtime
+[13]: types_global.MemeId.md#id
+[14]: types_global.MemeId.md#equals
+[15]: types_global.MemeId.md#gettimestamp
+[16]: types_global.MemeId.md#inspect
+[17]: types_global.MemeId.md#tohexstring

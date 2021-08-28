@@ -1,4 +1,4 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / src/backend/error
+[ghostmeme.api.hscc.bdpa.org][1] / src/backend/error
 
 # Module: src/backend/error
 
@@ -6,34 +6,34 @@
 
 ### Classes
 
-- [AppError](../classes/src_backend_error.AppError.md)
-- [ExternalError](../classes/src_backend_error.ExternalError.md)
-- [FetchError](../classes/src_backend_error.FetchError.md)
-- [GuruMeditationError](../classes/src_backend_error.GuruMeditationError.md)
-- [HookError](../classes/src_backend_error.HookError.md)
-- [IllegalEnvironmentError](../classes/src_backend_error.IllegalEnvironmentError.md)
-- [IllegalExternalEnvironmentError](../classes/src_backend_error.IllegalExternalEnvironmentError.md)
-- [InvalidIdError](../classes/src_backend_error.InvalidIdError.md)
-- [ItemNotFoundError](../classes/src_backend_error.ItemNotFoundError.md)
-- [KeyError](../classes/src_backend_error.KeyError.md)
-- [NotAuthorizedError](../classes/src_backend_error.NotAuthorizedError.md)
-- [NotFoundError](../classes/src_backend_error.NotFoundError.md)
-- [TestError](../classes/src_backend_error.TestError.md)
-- [ValidationError](../classes/src_backend_error.ValidationError.md)
+- [AppError][2]
+- [ExternalError][3]
+- [FetchError][4]
+- [GuruMeditationError][5]
+- [HookError][6]
+- [IllegalEnvironmentError][7]
+- [IllegalExternalEnvironmentError][8]
+- [InvalidIdError][9]
+- [ItemNotFoundError][10]
+- [KeyError][11]
+- [NotAuthorizedError][12]
+- [NotFoundError][13]
+- [TestError][14]
+- [ValidationError][15]
 
 ### Variables
 
-- [InvalidKeyError](src_backend_error.md#invalidkeyerror)
+- [InvalidKeyError][16]
 
 ### Functions
 
-- [makeNamedError](src_backend_error.md#makenamederror)
+- [makeNamedError][17]
 
 ## Variables
 
 ### InvalidKeyError
 
-• `Const` **InvalidKeyError**: typeof [`KeyError`](../classes/src_backend_error.KeyError.md)
+• `Const` **InvalidKeyError**: typeof [`KeyError`][11]
 
 An alias of KeyError.
 
@@ -51,10 +51,10 @@ Defines a special `name` property on an error class that improves DX.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name         | Type       |
+| :----------- | :--------- |
 | `ErrorClass` | `AnyClass` |
-| `name` | `string` |
+| `name`       | `string`   |
 
 #### Returns
 
@@ -63,3 +63,21 @@ Defines a special `name` property on an error class that improves DX.
 #### Defined in
 
 node_modules/named-app-errors/dist/modules/index.d.ts:5
+
+[1]: ../README.md
+[2]: ../classes/src_backend_error.AppError.md
+[3]: ../classes/src_backend_error.ExternalError.md
+[4]: ../classes/src_backend_error.FetchError.md
+[5]: ../classes/src_backend_error.GuruMeditationError.md
+[6]: ../classes/src_backend_error.HookError.md
+[7]: ../classes/src_backend_error.IllegalEnvironmentError.md
+[8]: ../classes/src_backend_error.IllegalExternalEnvironmentError.md
+[9]: ../classes/src_backend_error.InvalidIdError.md
+[10]: ../classes/src_backend_error.ItemNotFoundError.md
+[11]: ../classes/src_backend_error.KeyError.md
+[12]: ../classes/src_backend_error.NotAuthorizedError.md
+[13]: ../classes/src_backend_error.NotFoundError.md
+[14]: ../classes/src_backend_error.TestError.md
+[15]: ../classes/src_backend_error.ValidationError.md
+[16]: src_backend_error.md#invalidkeyerror
+[17]: src_backend_error.md#makenamederror
