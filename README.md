@@ -54,6 +54,8 @@ To run a local instance of the API:
         `mongodb://your-server-uri:your-port-number/your-test-db-name`
       - It is important that you include **the name of the test database** after
         the slash (you can just make something up) like in the above examples.
+    - You may need to add values for a few other environment variables. Pay
+      attention to any error messages you receive.
 5.  At this point you should test that the API will work on your system. To do
     this, run the command `npm test` in your terminal.
 6.  If all tests passed, you can start up the API in development mode by running
