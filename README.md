@@ -45,7 +45,7 @@ To run a local instance of the API:
 2.  Clone this repo using your favorite terminal.
 3.  From the terminal, with the repo as the current working directory, run
     `npm install`.
-4.  Copy the file `dist.env` to `.env`.
+4.  Copy the file `.env.example` to `.env`.
     - Add your MongoDB connect URI to the MONGODB_URI environment variable in
       `.env`.
       - Using `mongodb://127.0.0.1:27017/test` as the connect URI should work
@@ -149,7 +149,7 @@ standalone executables meant to be invoked manually by processes external to the
 app itself (usually as cron jobs).
 
 These scripts must be configured using the appropriate `.env` variables. See
-`dist.env` for details.
+`.env.example` for details.
 
 You can use `npm run` to build any external scripts. The executable will be
 placed in `external-scripts/bin`:
