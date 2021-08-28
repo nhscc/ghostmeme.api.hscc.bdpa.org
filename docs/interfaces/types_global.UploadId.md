@@ -1,8 +1,8 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / [types/global](../modules/types_global.md) / UploadId
+[ghostmeme.api.hscc.bdpa.org][1] / [types/global][2] / UploadId
 
 # Interface: UploadId
 
-[types/global](../modules/types_global.md).UploadId
+[types/global][2].UploadId
 
 ## Hierarchy
 
@@ -14,22 +14,22 @@
 
 ### Properties
 
-- [\_bsontype](types_global.UploadId.md#_bsontype)
-- [generationTime](types_global.UploadId.md#generationtime)
-- [id](types_global.UploadId.md#id)
+- [\_bsontype][3]
+- [generationTime][4]
+- [id][5]
 
 ### Methods
 
-- [equals](types_global.UploadId.md#equals)
-- [getTimestamp](types_global.UploadId.md#gettimestamp)
-- [inspect](types_global.UploadId.md#inspect)
-- [toHexString](types_global.UploadId.md#tohexstring)
+- [equals][6]
+- [getTimestamp][7]
+- [inspect][8]
+- [toHexString][9]
 
 ## Properties
 
 ### \_bsontype
 
-• **\_bsontype**: ``"ObjectId"``
+• **\_bsontype**: `"ObjectId"`
 
 #### Inherited from
 
@@ -39,7 +39,7 @@ ObjectId.\_bsontype
 
 node_modules/bson/bson.d.ts:834
 
-___
+---
 
 ### generationTime
 
@@ -53,7 +53,7 @@ ObjectId.generationTime
 
 node_modules/bson/bson.d.ts:854
 
-___
+---
 
 ### id
 
@@ -77,8 +77,8 @@ Compares the equality of this ObjectId with `otherID`.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name      | Type                                     | Description                           |
+| :-------- | :--------------------------------------- | :------------------------------------ |
 | `otherId` | `string` \| `ObjectId` \| `ObjectIdLike` | ObjectId instance to compare against. |
 
 #### Returns
@@ -93,13 +93,14 @@ ObjectId.equals
 
 node_modules/bson/bson.d.ts:871
 
-___
+---
 
 ### getTimestamp
 
 ▸ **getTimestamp**(): `Date`
 
-Returns the generation date (accurate up to the second) that this ID was generated.
+Returns the generation date (accurate up to the second) that this ID was
+generated.
 
 #### Returns
 
@@ -113,7 +114,7 @@ ObjectId.getTimestamp
 
 node_modules/bson/bson.d.ts:873
 
-___
+---
 
 ### inspect
 
@@ -131,7 +132,7 @@ ObjectId.inspect
 
 node_modules/bson/bson.d.ts:895
 
-___
+---
 
 ### toHexString
 
@@ -150,3 +151,13 @@ ObjectId.toHexString
 #### Defined in
 
 node_modules/bson/bson.d.ts:856
+
+[1]: ../README.md
+[2]: ../modules/types_global.md
+[3]: types_global.UploadId.md#_bsontype
+[4]: types_global.UploadId.md#generationtime
+[5]: types_global.UploadId.md#id
+[6]: types_global.UploadId.md#equals
+[7]: types_global.UploadId.md#gettimestamp
+[8]: types_global.UploadId.md#inspect
+[9]: types_global.UploadId.md#tohexstring

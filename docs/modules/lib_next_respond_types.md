@@ -46,6 +46,6 @@ Re-exports: [HttpStatusCode][5]
 [4]: lib_next_respond_types.md#successjsonresponse
 [5]: lib_next_isomorphic_redirect_types.md#httpstatuscode
 [6]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/types.ts#L2
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/314b1d1/lib/next-respond/types.ts#L2
 [7]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-respond/types.ts#L1
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/314b1d1/lib/next-respond/types.ts#L1

@@ -40,11 +40,11 @@ false - not redirecting error is defined - error occurred
 
 `Object`
 
-| Name          | Type                                                                                                                                                                                                                                                              |
-| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `error`       | `any`                                                                                                                                                                                                                                                             |
-| `mutate`      | (`data?`: `Record`<`string`, `unknown`> \| `Promise`<`undefined` \| `Record`<`string`, `unknown`>> \| `MutatorCallback`<`undefined` \| `Record`<`string`, `unknown`>>, `shouldRevalidate?`: `boolean`) => `Promise`<`undefined` \| `Record`<`string`, `unknown`>> |
-| `redirecting` | `null` \| `boolean`                                                                                                                                                                                                                                               |
+| Name          | Type                                                         |
+| :------------ | :----------------------------------------------------------- |
+| `error`       | `any`                                                        |
+| `mutate`      | `KeyedMutator`<`undefined` \| `Record`<`string`, `unknown`>> |
+| `redirecting` | `null` \| `boolean`                                          |
 
 #### Defined in
 
@@ -54,4 +54,4 @@ false - not redirecting error is defined - error occurred
 [2]: lib_next_use_redirection.md#useredirection
 [3]: lib_next_isomorphic_redirect_types.md#frontendredirectconfig
 [4]:
-  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/331c113/lib/next-use-redirection/index.ts#L18
+  https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org/blob/314b1d1/lib/next-use-redirection/index.ts#L18

@@ -1,34 +1,34 @@
-[ghostmeme.api.hscc.bdpa.org](../README.md) / [src/backend/error](../modules/src_backend_error.md) / TestError
+[ghostmeme.api.hscc.bdpa.org][1] / [src/backend/error][2] / TestError
 
 # Class: TestError
 
-[src/backend/error](../modules/src_backend_error.md).TestError
+[src/backend/error][2].TestError
 
 ## Hierarchy
 
-- [`AppError`](src_backend_error.AppError.md)
+- [`AppError`][3]
 
   ↳ **`TestError`**
 
-  ↳↳ [`FactoryExhaustionError`](test_setup.FactoryExhaustionError.md)
+  ↳↳ [`FactoryExhaustionError`][4]
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](src_backend_error.TestError.md#constructor)
+- [constructor][5]
 
 ### Properties
 
-- [message](src_backend_error.TestError.md#message)
-- [name](src_backend_error.TestError.md#name)
-- [stack](src_backend_error.TestError.md#stack)
-- [prepareStackTrace](src_backend_error.TestError.md#preparestacktrace)
-- [stackTraceLimit](src_backend_error.TestError.md#stacktracelimit)
+- [message][6]
+- [name][7]
+- [stack][8]
+- [prepareStackTrace][9]
+- [stackTraceLimit][10]
 
 ### Methods
 
-- [captureStackTrace](src_backend_error.TestError.md#capturestacktrace)
+- [captureStackTrace][11]
 
 ## Constructors
 
@@ -38,13 +38,13 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type     |
+| :--------- | :------- |
 | `message?` | `string` |
 
 #### Inherited from
 
-[AppError](src_backend_error.AppError.md).[constructor](src_backend_error.AppError.md#constructor)
+[AppError][3].[constructor][12]
 
 #### Defined in
 
@@ -58,13 +58,13 @@ node_modules/typescript/lib/lib.es5.d.ts:979
 
 #### Inherited from
 
-[AppError](src_backend_error.AppError.md).[message](src_backend_error.AppError.md#message)
+[AppError][3].[message][13]
 
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:974
 
-___
+---
 
 ### name
 
@@ -72,13 +72,13 @@ ___
 
 #### Inherited from
 
-[AppError](src_backend_error.AppError.md).[name](src_backend_error.AppError.md#name)
+[AppError][3].[name][14]
 
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:973
 
-___
+---
 
 ### stack
 
@@ -86,17 +86,18 @@ ___
 
 #### Inherited from
 
-[AppError](src_backend_error.AppError.md).[stack](src_backend_error.AppError.md#stack)
+[AppError][3].[stack][15]
 
 #### Defined in
 
 node_modules/typescript/lib/lib.es5.d.ts:975
 
-___
+---
 
 ### prepareStackTrace
 
-▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`: `CallSite`[]) => `any`
+▪ `Static` `Optional` **prepareStackTrace**: (`err`: `Error`, `stackTraces`:
+`CallSite`\[]) => `any`
 
 Optional override for formatting stack traces
 
@@ -108,10 +109,10 @@ Optional override for formatting stack traces
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `err` | `Error` |
-| `stackTraces` | `CallSite`[] |
+| Name          | Type          |
+| :------------ | :------------ |
+| `err`         | `Error`       |
+| `stackTraces` | `CallSite`\[] |
 
 ##### Returns
 
@@ -119,13 +120,13 @@ Optional override for formatting stack traces
 
 #### Inherited from
 
-[AppError](src_backend_error.AppError.md).[prepareStackTrace](src_backend_error.AppError.md#preparestacktrace)
+[AppError][3].[prepareStackTrace][16]
 
 #### Defined in
 
 node_modules/@types/node/globals.d.ts:11
 
-___
+---
 
 ### stackTraceLimit
 
@@ -133,7 +134,7 @@ ___
 
 #### Inherited from
 
-[AppError](src_backend_error.AppError.md).[stackTraceLimit](src_backend_error.AppError.md#stacktracelimit)
+[AppError][3].[stackTraceLimit][17]
 
 #### Defined in
 
@@ -149,9 +150,9 @@ Create .stack property on a target object
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `targetObject` | `object` |
+| Name              | Type       |
+| :---------------- | :--------- |
+| `targetObject`    | `object`   |
 | `constructorOpt?` | `Function` |
 
 #### Returns
@@ -160,8 +161,27 @@ Create .stack property on a target object
 
 #### Inherited from
 
-[AppError](src_backend_error.AppError.md).[captureStackTrace](src_backend_error.AppError.md#capturestacktrace)
+[AppError][3].[captureStackTrace][18]
 
 #### Defined in
 
 node_modules/@types/node/globals.d.ts:4
+
+[1]: ../README.md
+[2]: ../modules/src_backend_error.md
+[3]: src_backend_error.AppError.md
+[4]: test_setup.FactoryExhaustionError.md
+[5]: src_backend_error.TestError.md#constructor
+[6]: src_backend_error.TestError.md#message
+[7]: src_backend_error.TestError.md#name
+[8]: src_backend_error.TestError.md#stack
+[9]: src_backend_error.TestError.md#preparestacktrace
+[10]: src_backend_error.TestError.md#stacktracelimit
+[11]: src_backend_error.TestError.md#capturestacktrace
+[12]: src_backend_error.AppError.md#constructor
+[13]: src_backend_error.AppError.md#message
+[14]: src_backend_error.AppError.md#name
+[15]: src_backend_error.AppError.md#stack
+[16]: src_backend_error.AppError.md#preparestacktrace
+[17]: src_backend_error.AppError.md#stacktracelimit
+[18]: src_backend_error.AppError.md#capturestacktrace
