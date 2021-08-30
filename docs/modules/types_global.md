@@ -455,7 +455,7 @@ The shape of a publicly available meme.
 ### PublicUser
 
 Ƭ **PublicUser**: `Pick`<[`InternalUser`][21], `"name"` | `"email"` | `"phone"`
-| `"username"` | `"deleted"` | `"imageUrl"`> & { `friends`: `number` ; `liked`:
+\| `"username"` | `"deleted"` | `"imageUrl"`> & { `friends`: `number` ; `liked`:
 `number` ; `user_id`: `string` }
 
 The shape of a publicly available user.

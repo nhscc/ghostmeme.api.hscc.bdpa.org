@@ -8,6 +8,15 @@ const { verifyEnvironment } = require('./expect-env');
 const nodeExternals = require('webpack-node-externals');
 const debug = require('debug')(`${require('./package.json').name}:webpack-config`);
 
+const IMPORT_ALIASES = {
+  universe: `${__dirname}/src/`,
+  multiverse: `${__dirname}/lib/`,
+  testverse: `${__dirname}/test/`,
+  externals: `${__dirname}/external-scripts/`,
+  types: `${__dirname}/types/`,
+  package: `${__dirname}/package.json`
+};
+
 let sanitizedEnv = {};
 let { NODE_ENV: nodeEnv, ...sanitizedProcessEnv } = {
   ...process.env,
@@ -74,7 +83,12 @@ const externals = [
     errorDetails: true
   },
 
-  resolve: { extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'] },
+  resolve: {
+    extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'],
+    // ! If changed, also update these aliases in tsconfig.json,
+    // ! jest.config.js, next.config.ts, and .eslintrc.js
+    alias: IMPORT_ALIASES
+  },
   module: {
     rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
   },
@@ -120,14 +134,7 @@ const externalsConfig = {
     extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'],
     // ! If changed, also update these aliases in tsconfig.json,
     // ! jest.config.js, next.config.ts, and .eslintrc.js
-    alias: {
-      universe: `${__dirname}/src/`,
-      multiverse: `${__dirname}/lib/`,
-      testverse: `${__dirname}/test/`,
-      externals: `${__dirname}/external-scripts/`,
-      types: `${__dirname}/types/`,
-      package: `${__dirname}/package.json`
-    }
+    alias: IMPORT_ALIASES
   },
   module: {
     rules: [
@@ -146,7 +153,7 @@ const externalsConfig = {
   ]
 };
 
-/*const cliConfig = {
+/* const cliConfig = {
   name: 'cli',
   mode: 'production',
   target: 'node',
@@ -169,7 +176,12 @@ const externalsConfig = {
     errorDetails: true
   },
 
-  resolve: { extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'] },
+  resolve: {
+    extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'],
+    // ! If changed, also update these aliases in tsconfig.json,
+    // ! jest.config.js, next.config.ts, and .eslintrc.js
+    alias: IMPORT_ALIASES
+  },
   module: {
     rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
   },
@@ -179,7 +191,7 @@ const externalsConfig = {
     // * ▼ For bundled CLI applications, make entry file executable w/ shebang
     new BannerPlugin({ banner: '#!/usr/bin/env node', raw: true, entryOnly: true })
   ]
-};*/
+}; */
 
 module.exports = [/*libConfig,*/ externalsConfig /*, cliConfig*/];
 debug('exports: %O', module.exports);
