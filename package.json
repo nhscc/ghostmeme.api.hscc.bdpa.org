@@ -8,7 +8,7 @@
     "url": "https://github.com/nhscc/ghostmeme.api.hscc.bdpa.org",
     "lens": "next"
   },
-  "license": "Unlicense",
+  "license": "MIT",
   "author": "Xunnamius",
   "type": "commonjs",
   "scripts": {
