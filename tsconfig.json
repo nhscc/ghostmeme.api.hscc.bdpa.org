@@ -17,12 +17,24 @@
     "paths": {
       // ! If changed, also update these aliases in jest.config.js,
       // ! webpack.config.js, next.config.ts, and .eslintrc.js
-      "universe/*": ["src/*"],
-      "multiverse/*": ["lib/*"],
-      "testverse/*": ["test/*"],
-      "externals/*": ["external-scripts/*"],
-      "types/*": ["types/*"],
-      "package": ["package.json"]
+      "universe/*": [
+        "src/*"
+      ],
+      "multiverse/*": [
+        "lib/*"
+      ],
+      "testverse/*": [
+        "test/*"
+      ],
+      "externals/*": [
+        "external-scripts/*"
+      ],
+      "types/*": [
+        "types/*"
+      ],
+      "package": [
+        "package.json"
+      ]
     },
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -46,5 +58,7 @@
     "test/**/*.ts*",
     "external-scripts/**/*.ts*"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
