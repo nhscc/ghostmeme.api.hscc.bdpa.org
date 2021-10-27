@@ -10,6 +10,7 @@ import execa from 'execa';
 import uniqueFilename from 'unique-filename';
 import debugFactory from 'debug';
 import gitFactory from 'simple-git';
+import 'jest-extended/all';
 import 'jest-extended';
 
 import type { ExecaReturnValue } from 'execa';
