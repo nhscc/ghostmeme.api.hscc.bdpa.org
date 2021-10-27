@@ -30,10 +30,6 @@ const nextBabelPreset = [
       // ? Exclude transforms that make all code slower
       exclude: ['transform-typeof-symbol']
     },
-    'class-properties': {
-      // ? Justification: https://github.com/facebook/create-react-app/issues/4263
-      loose: true
-    },
     'preset-typescript': {
       allowDeclareFields: true
     }
