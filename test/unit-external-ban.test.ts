@@ -40,7 +40,7 @@ describe('external-scripts/ban-hammer', () => {
     // ? Since ban-hammer closes the database connection after executing, we
     // ? reopen it or funky things happen
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toIncludeSameMembers([
+    await expect(getRateLimits()).resolves.toIncludeSameMembers([
       { ip: '1.2.3.4' },
       { key: BANNED_KEY }
     ]);
@@ -60,7 +60,7 @@ describe('external-scripts/ban-hammer', () => {
     );
 
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toIncludeSameMembers([
+    await expect(getRateLimits()).resolves.toIncludeSameMembers([
       { ip: '1.2.3.4' },
       { ip: '9.8.7.6' },
       { key: BANNED_KEY }
@@ -88,7 +88,7 @@ describe('external-scripts/ban-hammer', () => {
     );
 
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toBeArrayOfSize(0);
+    await expect(getRateLimits()).resolves.toBeArrayOfSize(0);
 
     await withMockedEnv(
       banHammer,
@@ -100,7 +100,7 @@ describe('external-scripts/ban-hammer', () => {
     );
 
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toIncludeSameMembers([
+    await expect(getRateLimits()).resolves.toIncludeSameMembers([
       { ip: '1.2.3.4' },
       { key: BANNED_KEY }
     ]);
@@ -117,7 +117,7 @@ describe('external-scripts/ban-hammer', () => {
     );
 
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toBeArrayOfSize(0);
+    await expect(getRateLimits()).resolves.toBeArrayOfSize(0);
   });
 
   it('rate limits with respect to invocation interval', async () => {
@@ -146,7 +146,7 @@ describe('external-scripts/ban-hammer', () => {
     );
 
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toBeArrayOfSize(0);
+    await expect(getRateLimits()).resolves.toBeArrayOfSize(0);
 
     await withMockedEnv(
       banHammer,
@@ -159,7 +159,7 @@ describe('external-scripts/ban-hammer', () => {
     );
 
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toIncludeSameMembers([
+    await expect(getRateLimits()).resolves.toIncludeSameMembers([
       { key: BANNED_KEY },
       { ip: '9.8.7.6' },
       { ip: '1.2.3.4' }
@@ -224,7 +224,7 @@ describe('external-scripts/ban-hammer', () => {
   it('does not replace longer bans with shorter bans', async () => {
     expect.hasAssertions();
 
-    expect(await getRateLimits()).toBeArrayOfSize(3);
+    await expect(getRateLimits()).resolves.toBeArrayOfSize(3);
 
     await (
       await getRateLimitsDb()
@@ -236,19 +236,19 @@ describe('external-scripts/ban-hammer', () => {
     let saw = 0;
     (await getRateLimitUntils()).forEach((u) => u.until == 9998784552826 && saw++);
 
-    expect(saw).toStrictEqual(2);
+    expect(saw).toBe(2);
   });
 
   it('deletes outdated entries outside the punishment period', async () => {
     expect.hasAssertions();
 
-    expect(await getRateLimits()).toBeArrayOfSize(3);
+    await expect(getRateLimits()).resolves.toBeArrayOfSize(3);
 
     await (await getRateLimitsDb()).updateMany({ ip: '5.6.7.8' }, { $set: { until: 0 } });
     await banHammer();
 
     setClientAndDb(await getNewClientAndDb());
-    expect(await getRateLimits()).toIncludeSameMembers([
+    await expect(getRateLimits()).resolves.toIncludeSameMembers([
       { ip: '1.2.3.4' },
       { key: BANNED_KEY }
     ]);

@@ -148,13 +148,16 @@ describe('api/v1/memes', () => {
       await testApiHandler({
         handler: api.memes,
         test: async ({ fetch }) => {
-          expect(
-            await fetch({
+          await expect(
+            fetch({
               method: 'POST',
               headers: { KEY, 'content-type': 'application/json' },
               body: JSON.stringify({})
             }).then(async (r) => [r.status, await r.json()])
-          ).toStrictEqual([200, expect.objectContaining({ meme: expect.anything() })]);
+          ).resolves.toStrictEqual([
+            200,
+            expect.objectContaining({ meme: expect.anything() })
+          ]);
         }
       });
     });
@@ -185,9 +188,9 @@ describe('api/v1/memes', () => {
               >
             );
 
-            expect(await fetch({ headers: { KEY } }).then((r) => r.json())).toStrictEqual(
-              { success: true, memes: expect.any(Array) }
-            );
+            await expect(
+              fetch({ headers: { KEY } }).then((r) => r.json())
+            ).resolves.toStrictEqual({ success: true, memes: expect.any(Array) });
           }
         }
       });
@@ -204,7 +207,7 @@ describe('api/v1/memes', () => {
             Promise.resolve([]) as unknown as ReturnType<typeof mockedGetMemes>
           );
 
-          expect(await fetch().then((r) => r.status)).toStrictEqual(404);
+          await expect(fetch().then((r) => r.status)).resolves.toBe(404);
         }
       });
     });
@@ -216,7 +219,7 @@ describe('api/v1/memes', () => {
         params: { meme_ids: ['invalid-id'] },
         handler: api.memesIds,
         test: async ({ fetch }) => {
-          expect(await fetch({ headers: { KEY } }).then((r) => r.status)).toStrictEqual(
+          await expect(fetch({ headers: { KEY } }).then((r) => r.status)).resolves.toBe(
             400
           );
         }
@@ -262,9 +265,9 @@ describe('api/v1/memes', () => {
         params: { meme_ids: ['invalid-id'] },
         handler: api.memesIds,
         test: async ({ fetch }) => {
-          expect(
-            await fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
-          ).toStrictEqual(400);
+          await expect(
+            fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
+          ).resolves.toBe(400);
         }
       });
     });
@@ -287,11 +290,12 @@ describe('api/v1/memes', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(
-                async (r) => [r.status, await r.json()]
-              )
-            ).toStrictEqual([
+            await expect(
+              fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(async (r) => [
+                r.status,
+                await r.json()
+              ])
+            ).resolves.toStrictEqual([
               expectedStatus,
               expectedStatus == 200
                 ? { success: true, users: expect.any(Array) }
@@ -378,7 +382,9 @@ describe('api/v1/memes', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(await fetch().then((r) => r.status)).toStrictEqual(expectedStatus);
+            await expect(fetch().then((r) => r.status)).resolves.toStrictEqual(
+              expectedStatus
+            );
           }
         }
       });
@@ -396,7 +402,7 @@ describe('api/v1/memes', () => {
         },
         handler: api.memesIdLikesId,
         test: async ({ fetch }) => {
-          expect(await fetch({ headers: { KEY } }).then((r) => r.status)).toStrictEqual(
+          await expect(fetch({ headers: { KEY } }).then((r) => r.status)).resolves.toBe(
             404
           );
         }
@@ -429,9 +435,9 @@ describe('api/v1/memes', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
+            await expect(
+              fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
+            ).resolves.toStrictEqual(expectedStatus);
           }
         }
       });
@@ -463,9 +469,9 @@ describe('api/v1/memes', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
+            await expect(
+              fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
+            ).resolves.toStrictEqual(expectedStatus);
           }
         }
       });

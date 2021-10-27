@@ -190,13 +190,16 @@ describe('api/v1/users', () => {
       await testApiHandler({
         handler: api.users,
         test: async ({ fetch }) => {
-          expect(
-            await fetch({
+          await expect(
+            fetch({
               method: 'POST',
               headers: { KEY, 'content-type': 'application/json' },
               body: JSON.stringify({})
             }).then(async (r) => [r.status, await r.json()])
-          ).toStrictEqual([200, expect.objectContaining({ user: expect.anything() })]);
+          ).resolves.toStrictEqual([
+            200,
+            expect.objectContaining({ user: expect.anything() })
+          ]);
         }
       });
     });
@@ -226,7 +229,7 @@ describe('api/v1/users', () => {
         params: { user_id: '' },
         handler: api.usersId,
         test: async ({ fetch }) =>
-          expect(await fetch().then((r) => r.status)).toStrictEqual(400)
+          expect(fetch().then((r) => r.status)).resolves.toBe(400)
       });
     });
   });
@@ -275,12 +278,12 @@ describe('api/v1/users', () => {
 
             Object.assign(params, expectedParams);
 
-            expect(
-              await fetch({
+            await expect(
+              fetch({
                 method: 'DELETE',
                 ...(expectedStatus == 200 ? { headers: { KEY } } : {})
               }).then(async (r) => [r.status, await r.json()])
-            ).toStrictEqual([
+            ).resolves.toStrictEqual([
               expectedStatus,
               expect.objectContaining({ success: expectedStatus == 200 })
             ]);
@@ -307,8 +310,8 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch({
+            await expect(
+              fetch({
                 method: 'PUT',
                 headers: {
                   ...(expectedStatus == 200 ? { KEY } : {}),
@@ -316,7 +319,7 @@ describe('api/v1/users', () => {
                 },
                 body: JSON.stringify({})
               }).then(async (r) => [r.status, await r.json()])
-            ).toStrictEqual([
+            ).resolves.toStrictEqual([
               expectedStatus,
               expect.objectContaining({ success: expectedStatus == 200 })
             ]);
@@ -343,11 +346,12 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(
-                async (r) => [r.status, await r.json()]
-              )
-            ).toStrictEqual([
+            await expect(
+              fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(async (r) => [
+                r.status,
+                await r.json()
+              ])
+            ).resolves.toStrictEqual([
               expectedStatus,
               expectedStatus == 200
                 ? { success: true, memes: expect.any(Array) }
@@ -434,7 +438,9 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(await fetch().then((r) => r.status)).toStrictEqual(expectedStatus);
+            await expect(fetch().then((r) => r.status)).resolves.toStrictEqual(
+              expectedStatus
+            );
           }
         }
       });
@@ -452,7 +458,7 @@ describe('api/v1/users', () => {
         },
         handler: api.usersIdLikedId,
         test: async ({ fetch }) => {
-          expect(await fetch({ headers: { KEY } }).then((r) => r.status)).toStrictEqual(
+          await expect(fetch({ headers: { KEY } }).then((r) => r.status)).resolves.toBe(
             404
           );
         }
@@ -477,11 +483,12 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(
-                async (r) => [r.status, await r.json()]
-              )
-            ).toStrictEqual([
+            await expect(
+              fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(async (r) => [
+                r.status,
+                await r.json()
+              ])
+            ).resolves.toStrictEqual([
               expectedStatus,
               expectedStatus == 200
                 ? { success: true, users: expect.any(Array) }
@@ -568,7 +575,9 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(await fetch().then((r) => r.status)).toStrictEqual(expectedStatus);
+            await expect(fetch().then((r) => r.status)).resolves.toStrictEqual(
+              expectedStatus
+            );
           }
         }
       });
@@ -586,7 +595,7 @@ describe('api/v1/users', () => {
         },
         handler: api.usersIdFriendsId,
         test: async ({ fetch }) => {
-          expect(await fetch({ headers: { KEY } }).then((r) => r.status)).toStrictEqual(
+          await expect(fetch({ headers: { KEY } }).then((r) => r.status)).resolves.toBe(
             404
           );
         }
@@ -619,9 +628,9 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
+            await expect(
+              fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
+            ).resolves.toStrictEqual(expectedStatus);
           }
         }
       });
@@ -653,9 +662,9 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
+            await expect(
+              fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
+            ).resolves.toStrictEqual(expectedStatus);
           }
         }
       });
@@ -679,11 +688,12 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(
-                async (r) => [r.status, await r.json()]
-              )
-            ).toStrictEqual([
+            await expect(
+              fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(async (r) => [
+                r.status,
+                await r.json()
+              ])
+            ).resolves.toStrictEqual([
               expectedStatus,
               expectedStatus == 200
                 ? { success: true, users: expect.any(Array) }
@@ -710,11 +720,12 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(
-                async (r) => [r.status, await r.json()]
-              )
-            ).toStrictEqual([
+            await expect(
+              fetch(expectedStatus != 200 ? { headers: { KEY } } : {}).then(async (r) => [
+                r.status,
+                await r.json()
+              ])
+            ).resolves.toStrictEqual([
               expectedStatus,
               expectedStatus == 200
                 ? { success: true, users: expect.any(Array) }
@@ -827,7 +838,9 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(await fetch().then((r) => r.status)).toStrictEqual(expectedStatus);
+            await expect(fetch().then((r) => r.status)).resolves.toStrictEqual(
+              expectedStatus
+            );
           }
         }
       });
@@ -846,7 +859,7 @@ describe('api/v1/users', () => {
         },
         handler: api.usersIdRequestsTypeId,
         test: async ({ fetch }) => {
-          expect(await fetch({ headers: { KEY } }).then((r) => r.status)).toStrictEqual(
+          await expect(fetch({ headers: { KEY } }).then((r) => r.status)).resolves.toBe(
             404
           );
         }
@@ -905,9 +918,9 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
+            await expect(
+              fetch({ method: 'DELETE', headers: { KEY } }).then((r) => r.status)
+            ).resolves.toStrictEqual(expectedStatus);
           }
         }
       });
@@ -965,9 +978,9 @@ describe('api/v1/users', () => {
         test: async ({ fetch }) => {
           for (const [expectedParams, expectedStatus] of factory) {
             Object.assign(params, expectedParams);
-            expect(
-              await fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
-            ).toStrictEqual(expectedStatus);
+            await expect(
+              fetch({ method: 'PUT', headers: { KEY } }).then((r) => r.status)
+            ).resolves.toStrictEqual(expectedStatus);
           }
         }
       });

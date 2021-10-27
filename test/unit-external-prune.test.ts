@@ -34,7 +34,7 @@ describe('external-scripts/prune-data', () => {
   it('ensures at most PRUNE_DATA_MAX_X entries exist', async () => {
     expect.hasAssertions();
 
-    expect(await countCollection(testCollections)).toStrictEqual({
+    await expect(countCollection(testCollections)).resolves.toStrictEqual({
       'request-log': dummyDbData.logs.length,
       'limited-log-mview': dummyDbData.bans.length,
       users: dummyDbData.users.length,
@@ -46,7 +46,7 @@ describe('external-scripts/prune-data', () => {
       async () => {
         await pruneData();
         setClientAndDb(await getNewClientAndDb());
-        expect(await countCollection(testCollections)).toStrictEqual({
+        await expect(countCollection(testCollections)).resolves.toStrictEqual({
           'request-log': 10,
           'limited-log-mview': 2,
           users: 2,
@@ -68,7 +68,7 @@ describe('external-scripts/prune-data', () => {
       async () => {
         await pruneData();
         setClientAndDb(await getNewClientAndDb());
-        expect(await countCollection(testCollections)).toStrictEqual({
+        await expect(countCollection(testCollections)).resolves.toStrictEqual({
           'request-log': 1,
           'limited-log-mview': 1,
           users: 1,
@@ -90,7 +90,7 @@ describe('external-scripts/prune-data', () => {
   it('only deletes entries if necessary', async () => {
     expect.hasAssertions();
 
-    expect(await countCollection(testCollections)).toStrictEqual({
+    await expect(countCollection(testCollections)).resolves.toStrictEqual({
       'request-log': dummyDbData.logs.length,
       'limited-log-mview': dummyDbData.bans.length,
       users: dummyDbData.users.length,
@@ -102,7 +102,7 @@ describe('external-scripts/prune-data', () => {
       async () => {
         await pruneData();
         setClientAndDb(await getNewClientAndDb());
-        expect(await countCollection(testCollections)).toStrictEqual({
+        await expect(countCollection(testCollections)).resolves.toStrictEqual({
           'request-log': dummyDbData.logs.length,
           'limited-log-mview': dummyDbData.bans.length,
           users: dummyDbData.users.length,

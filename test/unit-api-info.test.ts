@@ -33,7 +33,9 @@ describe('api/v1/info', () => {
       await testApiHandler({
         handler: api.info,
         test: async ({ fetch }) => {
-          expect(await fetch({ headers: { KEY } }).then((r) => r.json())).toStrictEqual({
+          await expect(
+            fetch({ headers: { KEY } }).then((r) => r.json())
+          ).resolves.toStrictEqual({
             success: true,
             totalMemes: dummyDbData.memes.length,
             totalUsers: dummyDbData.users.length,

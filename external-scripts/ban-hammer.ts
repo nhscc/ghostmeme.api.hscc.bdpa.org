@@ -256,7 +256,7 @@ export default async function main() {
 
     log('execution complete');
   } catch (e) {
-    throw new ExternalError(e.message || e.toString());
+    throw new ExternalError(`${e instanceof Error ? e.message : e}`);
   }
 }
 

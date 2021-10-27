@@ -79,14 +79,14 @@ describe('::handleEndpoint', () => {
         wrapHandler(noop, { req, res, methods: ['POST'] })
       ),
       test: async ({ fetch }) => {
-        expect(
-          await fetch({
+        await expect(
+          fetch({
             method: 'POST',
             body: Array.from({ length: getEnv().MAX_CONTENT_LENGTH_BYTES + 1 })
               .map(() => 'x')
               .join('')
           }).then((r) => r.status)
-        ).toStrictEqual(413);
+        ).resolves.toBe(413);
       }
     });
   });
@@ -130,7 +130,7 @@ describe('::handleEndpoint', () => {
           methods: ['GET']
         })
       ),
-      test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(501)
+      test: async ({ fetch }) => expect((await fetch()).status).toBe(501)
     });
   });
 
@@ -146,7 +146,7 @@ describe('::handleEndpoint', () => {
           methods: ['GET']
         })
       ),
-      test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(501)
+      test: async ({ fetch }) => expect((await fetch()).status).toBe(501)
     });
   });
 
@@ -200,10 +200,10 @@ describe('::handleEndpoint', () => {
         })
       ),
       test: async ({ fetch }) => {
-        expect((await fetch({ method: 'GET' })).status).toStrictEqual(405);
-        expect((await fetch({ method: 'POST' })).status).toStrictEqual(200);
-        expect((await fetch({ method: 'PUT' })).status).toStrictEqual(200);
-        expect((await fetch({ method: 'DELETE' })).status).toStrictEqual(405);
+        expect((await fetch({ method: 'GET' })).status).toBe(405);
+        expect((await fetch({ method: 'POST' })).status).toBe(200);
+        expect((await fetch({ method: 'PUT' })).status).toBe(200);
+        expect((await fetch({ method: 'DELETE' })).status).toBe(405);
       }
     });
   });
@@ -223,10 +223,10 @@ describe('::handleEndpoint', () => {
             })
           ),
           test: async ({ fetch }) => {
-            expect((await fetch({ method: 'GET' })).status).toStrictEqual(200);
-            expect((await fetch({ method: 'POST' })).status).toStrictEqual(405);
-            expect((await fetch({ method: 'PUT' })).status).toStrictEqual(405);
-            expect((await fetch({ method: 'DELETE' })).status).toStrictEqual(405);
+            expect((await fetch({ method: 'GET' })).status).toBe(200);
+            expect((await fetch({ method: 'POST' })).status).toBe(405);
+            expect((await fetch({ method: 'PUT' })).status).toBe(405);
+            expect((await fetch({ method: 'DELETE' })).status).toBe(405);
           }
         });
       },
@@ -249,10 +249,10 @@ describe('::handleEndpoint', () => {
             })
           ),
           test: async ({ fetch }) => {
-            expect((await fetch({ method: 'GET' })).status).toStrictEqual(405);
-            expect((await fetch({ method: 'POST' })).status).toStrictEqual(405);
-            expect((await fetch({ method: 'PUT' })).status).toStrictEqual(405);
-            expect((await fetch({ method: 'DELETE' })).status).toStrictEqual(200);
+            expect((await fetch({ method: 'GET' })).status).toBe(405);
+            expect((await fetch({ method: 'POST' })).status).toBe(405);
+            expect((await fetch({ method: 'PUT' })).status).toBe(405);
+            expect((await fetch({ method: 'DELETE' })).status).toBe(200);
           }
         });
       },
@@ -305,7 +305,7 @@ describe('::handleEndpoint', () => {
           methods: ['GET']
         })
       ),
-      test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(401)
+      test: async ({ fetch }) => expect((await fetch()).status).toBe(401)
     });
 
     await testApiHandler({
@@ -316,7 +316,7 @@ describe('::handleEndpoint', () => {
           methods: ['GET']
         })
       ),
-      test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(401)
+      test: async ({ fetch }) => expect((await fetch()).status).toBe(401)
     });
   });
 
@@ -334,18 +334,14 @@ describe('::handleEndpoint', () => {
       test: async ({ fetch }) => {
         await withMockedEnv(
           async () => {
-            expect((await fetch({ headers: { key: DUMMY_KEY } })).status).toStrictEqual(
-              401
-            );
+            expect((await fetch({ headers: { key: DUMMY_KEY } })).status).toBe(401);
           },
           { LOCKOUT_ALL_KEYS: 'true' }
         );
 
         await withMockedEnv(
           async () => {
-            expect((await fetch({ headers: { key: DUMMY_KEY } })).status).toStrictEqual(
-              200
-            );
+            expect((await fetch({ headers: { key: DUMMY_KEY } })).status).toBe(200);
           },
           { LOCKOUT_ALL_KEYS: 'false' }
         );
@@ -371,7 +367,7 @@ describe('::handleEndpoint', () => {
               headers: { KEY: DUMMY_KEY }
             })
           ).status
-        ).toStrictEqual(200)
+        ).toBe(200)
     });
   });
 
@@ -453,28 +449,28 @@ describe('::handleEndpoint', () => {
       test: async ({ fetch }) => {
         await withMockedEnv(
           async () => {
-            expect((await fetch()).status).toStrictEqual(404);
+            expect((await fetch()).status).toBe(404);
           },
           { DISABLED_API_VERSIONS: '1' }
         );
 
         await withMockedEnv(
           async () => {
-            expect((await fetch()).status).toStrictEqual(200);
+            expect((await fetch()).status).toBe(200);
           },
           { DISABLED_API_VERSIONS: '2' }
         );
 
         await withMockedEnv(
           async () => {
-            expect((await fetch()).status).toStrictEqual(404);
+            expect((await fetch()).status).toBe(404);
           },
           { DISABLED_API_VERSIONS: '2,1' }
         );
 
         await withMockedEnv(
           async () => {
-            expect((await fetch()).status).toStrictEqual(200);
+            expect((await fetch()).status).toBe(200);
           },
           { DISABLED_API_VERSIONS: '3,2' }
         );
@@ -493,7 +489,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(200)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(200)
         });
 
         await testApiHandler({
@@ -506,7 +502,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(404)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(404)
         });
 
         await testApiHandler({
@@ -519,7 +515,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(404)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(404)
         });
 
         await testApiHandler({
@@ -532,7 +528,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(404)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(404)
         });
 
         await testApiHandler({
@@ -545,7 +541,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(404)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(404)
         });
 
         await testApiHandler({
@@ -557,7 +553,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(200)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(200)
         });
       },
       { DISABLED_API_VERSIONS: '3,4,2' }
@@ -575,7 +571,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(200)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(200)
         });
 
         await testApiHandler({
@@ -587,7 +583,7 @@ describe('::handleEndpoint', () => {
               methods: ['GET']
             })
           ),
-          test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(200)
+          test: async ({ fetch }) => expect((await fetch()).status).toBe(200)
         });
       },
       { DISABLED_API_VERSIONS: '' }
@@ -612,7 +608,7 @@ describe('::handleEndpoint', () => {
         )
       ),
       test: async ({ fetch }) => {
-        expect((await fetch()).status).toStrictEqual(200);
+        expect((await fetch()).status).toBe(200);
       }
     });
   });
@@ -637,7 +633,7 @@ describe('::handleEndpoint', () => {
           methods: ['GET']
         })
       ),
-      test: async ({ fetch }) => expect((await fetch()).status).toStrictEqual(500)
+      test: async ({ fetch }) => expect((await fetch()).status).toBe(500)
     });
 
     jest.dontMock('cors');
@@ -656,7 +652,7 @@ describe('::handleEndpoint', () => {
         })
       ),
       test: async ({ fetch }) => {
-        expect((await fetch()).status).toStrictEqual(200);
+        expect((await fetch()).status).toBe(200);
       }
     });
   });

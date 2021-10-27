@@ -232,7 +232,7 @@ export async function handleImageUpload(
             body
           });
 
-          const json: ImgurApiResponse = await res.json();
+          const json = (await res.json()) as ImgurApiResponse;
 
           imageUrl =
             json.data.link ||
@@ -241,7 +241,9 @@ export async function handleImageUpload(
             );
         } catch (e) {
           // eslint-disable-next-line no-console
-          console.error(`image upload failure reason: ${e.message || e}`);
+          console.error(
+            `image upload failure reason: ${e instanceof Error ? e.message : e}`
+          );
           throw new AppError('image upload failed');
         }
 

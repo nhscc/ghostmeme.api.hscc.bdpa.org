@@ -164,7 +164,9 @@ export default async function main() {
     };
 
     log('shuffling corpus data');
-    const usernames = fastShuffle(rawUsernames).slice(INIT_DATA_USERS);
+    const usernames = fastShuffle<string>(Date.now(), rawUsernames).slice(
+      INIT_DATA_USERS
+    );
 
     log(`selecting ${INIT_DATA_USERS}/${rawUsernames.length} usernames`);
     log(
@@ -239,7 +241,7 @@ export default async function main() {
           ]);
         } catch (e) {
           errorCount += 1;
-          logUser.extend('<exception>')(e.message || e);
+          logUser.extend('<exception>')(e instanceof Error ? e.message : e);
           debug(e);
 
           if (errorCount >= MAX_ERROR_THRESHOLD) {

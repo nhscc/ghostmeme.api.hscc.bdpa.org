@@ -51,7 +51,7 @@ beforeEach(() =>
 describe('::getSystemInfo', () => {
   it('returns summary system metadata', async () => {
     expect.hasAssertions();
-    expect(await Backend.getSystemInfo()).toStrictEqual<InternalInfo>({
+    await expect(Backend.getSystemInfo()).resolves.toStrictEqual<InternalInfo>({
       totalMemes: dummyDbData.info.totalMemes,
       totalUsers: dummyDbData.info.totalUsers,
       totalUploads: dummyDbData.info.totalUploads
@@ -65,7 +65,7 @@ describe('::getSystemInfo', () => {
       .collection('info')
       .updateOne({}, { $set: { totalMemes: 0, totalUsers: 0, totalUploads: 0 } });
 
-    expect(await Backend.getSystemInfo()).toStrictEqual<InternalInfo>({
+    await expect(Backend.getSystemInfo()).resolves.toStrictEqual<InternalInfo>({
       totalMemes: 0,
       totalUsers: 0,
       totalUploads: 0
@@ -143,12 +143,12 @@ describe('::updateMemes', () => {
       testIds.map((meme_ids) => Backend.updateMemes({ meme_ids, data: { expiredAt: 0 } }))
     );
 
-    expect(
-      await db
+    await expect(
+      db
         .collection('memes')
         .find({ _id: { $in: testIds.flat() }, expiredAt: -10 })
         .count()
-    ).toStrictEqual(0);
+    ).resolves.toBe(0);
   });
 
   it('leaves summary system metadata unchanged', async () => {
@@ -159,12 +159,12 @@ describe('::updateMemes', () => {
 
     await Backend.updateMemes({ meme_ids: testIds, data: { expiredAt: -1 } });
 
-    expect(
-      await db
+    await expect(
+      db
         .collection<InternalInfo>('info')
         .findOne({})
         .then((r) => r?.totalMemes)
-    ).toStrictEqual(dummyDbData.info.totalMemes);
+    ).resolves.toStrictEqual(dummyDbData.info.totalMemes);
   });
 
   it('does not reject if meme_ids not found', async () => {
@@ -201,9 +201,9 @@ describe('::getMemeLikesUserIds', () => {
     const memes = dummyDbData.memes.map<[ObjectId, UserId[]]>((b) => [b._id, b.likes]);
 
     for (const [meme_id, expectedIds] of memes) {
-      expect(await Backend.getMemeLikesUserIds({ meme_id, after: null })).toStrictEqual(
-        itemToStringId(expectedIds)
-      );
+      await expect(
+        Backend.getMemeLikesUserIds({ meme_id, after: null })
+      ).resolves.toStrictEqual(itemToStringId(expectedIds));
     }
   });
 
@@ -221,12 +221,12 @@ describe('::getMemeLikesUserIds', () => {
 
     await withMockedEnv(
       async () => {
-        expect(
-          await Backend.getMemeLikesUserIds({
+        await expect(
+          Backend.getMemeLikesUserIds({
             meme_id: dummyDbData.memes[10]._id,
             after: dummyDbData.users[2]._id
           })
-        ).toStrictEqual(itemToStringId(dummyDbData.users.slice(3, 6)));
+        ).resolves.toStrictEqual(itemToStringId(dummyDbData.users.slice(3, 6)));
       },
       { RESULTS_PER_PAGE: '3' }
     );
@@ -252,9 +252,9 @@ describe('::getUserLikedMemeIds', () => {
     const users = dummyDbData.users.map<[ObjectId, MemeId[]]>((u) => [u._id, u.liked]);
 
     for (const [user_id, expectedIds] of users) {
-      expect(await Backend.getUserLikedMemeIds({ user_id, after: null })).toStrictEqual(
-        itemToStringId(expectedIds)
-      );
+      await expect(
+        Backend.getUserLikedMemeIds({ user_id, after: null })
+      ).resolves.toStrictEqual(itemToStringId(expectedIds));
     }
   });
 
@@ -263,12 +263,12 @@ describe('::getUserLikedMemeIds', () => {
 
     await withMockedEnv(
       async () => {
-        expect(
-          await Backend.getUserLikedMemeIds({
+        await expect(
+          Backend.getUserLikedMemeIds({
             user_id: dummyDbData.users[0]._id,
             after: dummyDbData.users[0].liked[3]
           })
-        ).toStrictEqual(itemToStringId(dummyDbData.users[0].liked.slice(4, 7)));
+        ).resolves.toStrictEqual(itemToStringId(dummyDbData.users[0].liked.slice(4, 7)));
       },
       { RESULTS_PER_PAGE: '3' }
     );
@@ -281,12 +281,12 @@ describe('::getUserLikedMemeIds', () => {
       .collection<InternalUser>('users')
       .updateOne({ _id: dummyDbData.users[0]._id }, { $set: { liked: [] } });
 
-    expect(
-      await Backend.getUserLikedMemeIds({
+    await expect(
+      Backend.getUserLikedMemeIds({
         user_id: dummyDbData.users[0]._id,
         after: null
       })
-    ).toStrictEqual([]);
+    ).resolves.toStrictEqual([]);
   });
 
   it('rejects if user_id not found', async () => {
@@ -347,15 +347,13 @@ describe('::removeLikedMeme', () => {
     const users = await db.collection<InternalUser>('users');
     const testMemes = itemToObjectId(dummyDbData.users[0].liked);
 
-    expect(
-      await users.findOne({ _id: dummyDbData.users[0]._id }).then((r) => r?.liked)
+    await expect(
+      users.findOne({ _id: dummyDbData.users[0]._id }).then((r) => r?.liked)
     ).not.toStrictEqual([]);
 
-    expect(
-      await memes
-        .find({ _id: { $in: testMemes }, likes: dummyDbData.users[0]._id })
-        .count()
-    ).not.toStrictEqual(0);
+    await expect(
+      memes.find({ _id: { $in: testMemes }, likes: dummyDbData.users[0]._id }).count()
+    ).resolves.not.toBe(0);
 
     const totalLikes =
       (await memes
@@ -370,22 +368,17 @@ describe('::removeLikedMeme', () => {
       )
     );
 
-    expect(
-      await users.findOne({ _id: dummyDbData.users[0]._id }).then((r) => r?.liked)
-    ).toStrictEqual([]);
+    await expect(
+      users.findOne({ _id: dummyDbData.users[0]._id }).then((r) => r?.liked)
+    ).resolves.toStrictEqual([]);
 
-    expect(
-      await memes
-        .find({ _id: { $in: testMemes }, likes: dummyDbData.users[0]._id })
-        .count()
-    ).toStrictEqual(0);
+    await expect(
+      memes.find({ _id: { $in: testMemes }, likes: dummyDbData.users[0]._id }).count()
+    ).resolves.toBe(0);
 
-    expect(
-      await memes
-        .find({ _id: testMemes[0] })
-        .project({ _id: false, totalLikes: true })
-        .next()
-    ).toStrictEqual({ totalLikes: totalLikes - 1 });
+    await expect(
+      memes.find({ _id: testMemes[0] }).project({ _id: false, totalLikes: true }).next()
+    ).resolves.toStrictEqual({ totalLikes: totalLikes - 1 });
   });
 
   it('does not error if the user never liked the meme', async () => {
@@ -431,17 +424,17 @@ describe('::addLikedMeme', () => {
       )
       .map<ObjectId>(itemToObjectId);
 
-    expect(
-      await users
+    await expect(
+      users
         .findOne({ _id: dummyDbData.users[0]._id })
         .then((r) => itemToObjectId(r?.liked))
-    ).toIncludeSameMembers(originallyLikedMemes);
+    ).resolves.toIncludeSameMembers(originallyLikedMemes);
 
-    expect(
-      await memes
+    await expect(
+      memes
         .find({ _id: { $in: newlyLikedMemes }, likes: dummyDbData.users[0]._id })
         .toArray()
-    ).toIncludeSameMembers([]);
+    ).resolves.toIncludeSameMembers([]);
 
     const totalLikes =
       (await memes
@@ -456,25 +449,25 @@ describe('::addLikedMeme', () => {
       )
     );
 
-    expect(
-      await users
+    await expect(
+      users
         .findOne({ _id: dummyDbData.users[0]._id })
         .then((r) => itemToObjectId(r?.liked))
-    ).toIncludeSameMembers([...originallyLikedMemes, ...newlyLikedMemes]);
+    ).resolves.toIncludeSameMembers([...originallyLikedMemes, ...newlyLikedMemes]);
 
-    expect(
-      await memes
+    await expect(
+      memes
         .find({ _id: { $in: newlyLikedMemes }, likes: dummyDbData.users[0]._id })
         .toArray()
         .then((b) => itemToObjectId(b))
-    ).toIncludeSameMembers(newlyLikedMemes);
+    ).resolves.toIncludeSameMembers(newlyLikedMemes);
 
-    expect(
-      await memes
+    await expect(
+      memes
         .find({ _id: newlyLikedMemes[0] })
         .project({ _id: false, totalLikes: true })
         .next()
-    ).toStrictEqual({ totalLikes: totalLikes + 1 });
+    ).resolves.toStrictEqual({ totalLikes: totalLikes + 1 });
   });
 
   it('does not error if the user already liked the meme', async () => {
@@ -633,14 +626,14 @@ describe('::createMeme', () => {
       return internal;
     });
 
-    expect(
-      await (
+    await expect(
+      (
         await getDb()
       )
         .collection<InternalMeme>('memes')
         .find({ _id: { $in: newMemes.map((b) => new ObjectId(b.meme_id)) } })
         .toArray()
-    ).toIncludeSameMembers(expectedInternalMemes);
+    ).resolves.toIncludeSameMembers(expectedInternalMemes);
   });
 
   it('errors if request body is invalid', async () => {
@@ -987,12 +980,12 @@ describe('::createMeme', () => {
       }
     });
 
-    expect(
-      await db
+    await expect(
+      db
         .collection<InternalInfo>('info')
         .findOne({})
         .then((r) => r?.totalMemes)
-    ).toStrictEqual(dummyDbData.info.totalMemes + 2);
+    ).resolves.toStrictEqual(dummyDbData.info.totalMemes + 2);
   });
 
   it('handles imageBase64 uploads', async () => {
@@ -1052,14 +1045,14 @@ describe('::createMeme', () => {
       return internal;
     });
 
-    expect(
-      await (
+    await expect(
+      (
         await getDb()
       )
         .collection<InternalMeme>('memes')
         .find({ _id: { $in: newMemes.map((b) => new ObjectId(b.meme_id)) } })
         .toArray()
-    ).toIncludeSameMembers(expectedInternalMemes);
+    ).resolves.toIncludeSameMembers(expectedInternalMemes);
   });
 });
 
@@ -1082,11 +1075,11 @@ describe('::updateMeme', () => {
     await Promise.all(
       items.map(async ([meme_ids, { expiredAt }]) =>
         expect(
-          await memes
+          memes
             .find({ _id: { $in: meme_ids }, expiredAt })
             .toArray()
             .then((r) => r.map((m) => m._id))
-        ).toIncludeSameMembers(meme_ids)
+        ).resolves.toIncludeSameMembers(meme_ids)
       )
     );
   });
@@ -1146,7 +1139,7 @@ describe('::getAllUsers', () => {
   it('returns all users', async () => {
     expect.hasAssertions();
 
-    expect(await Backend.getAllUsers({ after: null })).toStrictEqual(
+    await expect(Backend.getAllUsers({ after: null })).resolves.toStrictEqual(
       reversedUsers.map(toPublicUser)
     );
   });
@@ -1156,11 +1149,11 @@ describe('::getAllUsers', () => {
 
     await withMockedEnv(
       async () => {
-        expect(
-          await Backend.getAllUsers({
+        await expect(
+          Backend.getAllUsers({
             after: reversedUsers[1]._id
           }).then((users) => users)
-        ).toStrictEqual(reversedUsers.slice(2, 5).map(toPublicUser));
+        ).resolves.toStrictEqual(reversedUsers.slice(2, 5).map(toPublicUser));
       },
       { RESULTS_PER_PAGE: '3' }
     );
@@ -1173,7 +1166,7 @@ describe('::getAllUsers', () => {
     await db.collection('memes').deleteMany({});
     await db.collection('users').deleteMany({});
 
-    expect(await Backend.getAllUsers({ after: null })).toStrictEqual([]);
+    await expect(Backend.getAllUsers({ after: null })).resolves.toStrictEqual([]);
   });
 });
 
@@ -1181,17 +1174,17 @@ describe('::getUser', () => {
   it('returns user by user_id', async () => {
     expect.hasAssertions();
 
-    expect(await Backend.getUser({ user_id: dummyDbData.users[0]._id })).toStrictEqual(
-      toPublicUser(dummyDbData.users[0])
-    );
+    await expect(
+      Backend.getUser({ user_id: dummyDbData.users[0]._id })
+    ).resolves.toStrictEqual(toPublicUser(dummyDbData.users[0]));
   });
 
   it('returns user by username', async () => {
     expect.hasAssertions();
 
-    expect(
-      await Backend.getUser({ username: dummyDbData.users[0].username })
-    ).toStrictEqual(toPublicUser(dummyDbData.users[0]));
+    await expect(
+      Backend.getUser({ username: dummyDbData.users[0].username })
+    ).resolves.toStrictEqual(toPublicUser(dummyDbData.users[0]));
   });
 
   it('rejects if id not found', async () => {
@@ -1233,7 +1226,7 @@ describe('::deleteUser', () => {
     await users.updateOne({ _id: user_id }, { $set: { deleted: false } });
     await Backend.deleteUser({ user_id });
 
-    expect(await users.find({ _id: user_id, deleted: false }).count()).toStrictEqual(0);
+    await expect(users.find({ _id: user_id, deleted: false }).count()).resolves.toBe(0);
   });
 
   it('updates summary system metadata', async () => {
@@ -1241,14 +1234,14 @@ describe('::deleteUser', () => {
 
     await Backend.deleteUser({ user_id: dummyDbData.users[1]._id });
 
-    expect(
-      await (
+    await expect(
+      (
         await getDb()
       )
         .collection<InternalInfo>('info')
         .findOne({})
         .then((r) => r?.totalUsers)
-    ).toStrictEqual(dummyDbData.info.totalUsers - 1);
+    ).resolves.toStrictEqual(dummyDbData.info.totalUsers - 1);
   });
 
   it('rejects if id not found', async () => {
@@ -1269,12 +1262,12 @@ describe('::getUserFriendsUserIds', () => {
     const users = dummyDbData.users.map<[ObjectId, UserId[]]>((u) => [u._id, u.friends]);
 
     for (const [user_id, expectedIds] of users) {
-      expect(
-        await Backend.getUserFriendsUserIds({
+      await expect(
+        Backend.getUserFriendsUserIds({
           user_id,
           after: null
         })
-      ).toStrictEqual(itemToStringId(expectedIds));
+      ).resolves.toStrictEqual(itemToStringId(expectedIds));
     }
   });
 
@@ -1292,12 +1285,12 @@ describe('::getUserFriendsUserIds', () => {
 
     await withMockedEnv(
       async () => {
-        expect(
-          await Backend.getUserFriendsUserIds({
+        await expect(
+          Backend.getUserFriendsUserIds({
             user_id: dummyDbData.users[9]._id,
             after: dummyDbData.users[9].friends[0]
           })
-        ).toStrictEqual(
+        ).resolves.toStrictEqual(
           [
             itemToStringId(dummyDbData.users[9].friends.slice(1)),
             itemToStringId(extraUsers)
@@ -1317,12 +1310,12 @@ describe('::getUserFriendsUserIds', () => {
       .collection<InternalUser>('users')
       .updateOne({ _id: dummyDbData.users[9]._id }, { $set: { friends: [] } });
 
-    expect(
-      await Backend.getUserFriendsUserIds({
+    await expect(
+      Backend.getUserFriendsUserIds({
         user_id: dummyDbData.users[9]._id,
         after: null
       })
-    ).toStrictEqual([]);
+    ).resolves.toStrictEqual([]);
   });
 
   it('rejects if ids not found', async () => {
@@ -1387,8 +1380,8 @@ describe('::removeUserAsFriend', () => {
     const users = await db.collection<InternalUser>('users');
     const testUsers = itemToObjectId(dummyDbData.users[9].friends);
 
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.friends)
+    await expect(
+      users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.friends)
     ).not.toStrictEqual([]);
 
     await Promise.all(
@@ -1397,9 +1390,9 @@ describe('::removeUserAsFriend', () => {
       )
     );
 
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.friends)
-    ).toStrictEqual([]);
+    await expect(
+      users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.friends)
+    ).resolves.toStrictEqual([]);
   });
 
   it('does not error if the users were never friends', async () => {
@@ -1438,19 +1431,19 @@ describe('::addUserAsFriend', () => {
     const users = await (await getDb()).collection<InternalUser>('users');
     const friend_id = itemToObjectId(dummyDbData.users[6]);
 
-    expect(
-      await users
+    await expect(
+      users
         .findOne({ _id: dummyDbData.users[0]._id })
         .then((r) => itemToStringId(r?.friends))
     ).not.toStrictEqual(expect.arrayContaining([friend_id.toString()]));
 
     await Backend.addUserAsFriend({ user_id: dummyDbData.users[0]._id, friend_id });
 
-    expect(
-      await users
+    await expect(
+      users
         .findOne({ _id: dummyDbData.users[0]._id })
         .then((r) => itemToStringId(r?.friends))
-    ).toStrictEqual(expect.arrayContaining([friend_id.toString()]));
+    ).resolves.toStrictEqual(expect.arrayContaining([friend_id.toString()]));
   });
 
   it('does not error if the users are already friends', async () => {
@@ -1505,21 +1498,21 @@ describe('::getFriendRequestsOfType', () => {
     ]);
 
     for (const [user_id, expectedIds] of users) {
-      expect(
-        await Backend.getFriendRequestsOfType({
+      await expect(
+        Backend.getFriendRequestsOfType({
           user_id,
           request_type: 'incoming',
           after: null
         })
-      ).toStrictEqual(itemToStringId(expectedIds.incoming));
+      ).resolves.toStrictEqual(itemToStringId(expectedIds.incoming));
 
-      expect(
-        await Backend.getFriendRequestsOfType({
+      await expect(
+        Backend.getFriendRequestsOfType({
           user_id,
           request_type: 'outgoing',
           after: null
         })
-      ).toStrictEqual(itemToStringId(expectedIds.outgoing));
+      ).resolves.toStrictEqual(itemToStringId(expectedIds.outgoing));
     }
   });
 
@@ -1540,21 +1533,21 @@ describe('::getFriendRequestsOfType', () => {
 
     await withMockedEnv(
       async () => {
-        expect(
-          await Backend.getFriendRequestsOfType({
+        await expect(
+          Backend.getFriendRequestsOfType({
             user_id: dummyDbData.users[9]._id,
             request_type: 'incoming',
             after: dummyDbData.users[0]._id
           })
-        ).toStrictEqual(itemToStringId(extraUsers.slice(0, 2)));
+        ).resolves.toStrictEqual(itemToStringId(extraUsers.slice(0, 2)));
 
-        expect(
-          await Backend.getFriendRequestsOfType({
+        await expect(
+          Backend.getFriendRequestsOfType({
             user_id: dummyDbData.users[9]._id,
             request_type: 'outgoing',
             after: dummyDbData.users[0]._id
           })
-        ).toStrictEqual(itemToStringId(extraUsers.slice(0, 2)));
+        ).resolves.toStrictEqual(itemToStringId(extraUsers.slice(0, 2)));
       },
       { RESULTS_PER_PAGE: '2' }
     );
@@ -1570,21 +1563,21 @@ describe('::getFriendRequestsOfType', () => {
         { $set: { incoming: [], outgoing: [] } }
       );
 
-    expect(
-      await Backend.getFriendRequestsOfType({
+    await expect(
+      Backend.getFriendRequestsOfType({
         user_id: dummyDbData.users[9]._id,
         request_type: 'incoming',
         after: null
       })
-    ).toStrictEqual([]);
+    ).resolves.toStrictEqual([]);
 
-    expect(
-      await Backend.getFriendRequestsOfType({
+    await expect(
+      Backend.getFriendRequestsOfType({
         user_id: dummyDbData.users[9]._id,
         request_type: 'outgoing',
         after: null
       })
-    ).toStrictEqual([]);
+    ).resolves.toStrictEqual([]);
   });
 
   it('rejects if ids not found', async () => {
@@ -1731,8 +1724,8 @@ describe('::removeFriendRequest', () => {
       }
     );
 
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.requests)
+    await expect(
+      users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.requests)
     ).not.toStrictEqual({ incoming: [], outgoing: [] });
 
     await Promise.all(
@@ -1754,9 +1747,9 @@ describe('::removeFriendRequest', () => {
         .flat()
     );
 
-    expect(
-      await users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.requests)
-    ).toStrictEqual({ incoming: [], outgoing: [] });
+    await expect(
+      users.findOne({ _id: dummyDbData.users[9]._id }).then((r) => r?.requests)
+    ).resolves.toStrictEqual({ incoming: [], outgoing: [] });
   });
 
   it('does not error if the friend request does not exist', async () => {
@@ -1839,17 +1832,13 @@ describe('::addFriendRequest', () => {
         .flat()
     );
 
-    expect(
-      await users
-        .findOne({ _id: user._id })
-        .then((r) => itemToObjectId(r?.requests.incoming))
-    ).toIncludeSameMembers(testUsers);
+    await expect(
+      users.findOne({ _id: user._id }).then((r) => itemToObjectId(r?.requests.incoming))
+    ).resolves.toIncludeSameMembers(testUsers);
 
-    expect(
-      await users
-        .findOne({ _id: user._id })
-        .then((r) => itemToObjectId(r?.requests.outgoing))
-    ).toIncludeSameMembers(testUsers);
+    await expect(
+      users.findOne({ _id: user._id }).then((r) => itemToObjectId(r?.requests.outgoing))
+    ).resolves.toIncludeSameMembers(testUsers);
   });
 
   it('does not error if the friend request already exists', async () => {
@@ -1992,14 +1981,14 @@ describe('::createUser', () => {
       })
     );
 
-    expect(
-      await (
+    await expect(
+      (
         await getDb()
       )
         .collection<InternalUser>('users')
         .find({ _id: { $in: newUsers.map((b) => new ObjectId(b.user_id)) } })
         .toArray()
-    ).toIncludeSameMembers(expectedInternalUsers);
+    ).resolves.toIncludeSameMembers(expectedInternalUsers);
   });
 
   it('errors if request body is invalid', async () => {
@@ -2228,12 +2217,12 @@ describe('::createUser', () => {
       }
     });
 
-    expect(
-      await db
+    await expect(
+      db
         .collection<InternalInfo>('info')
         .findOne({})
         .then((r) => r?.totalUsers)
-    ).toStrictEqual(dummyDbData.info.totalUsers + 1);
+    ).resolves.toStrictEqual(dummyDbData.info.totalUsers + 1);
   });
 
   it('handles imageBase64 uploads', async () => {
@@ -2282,14 +2271,14 @@ describe('::createUser', () => {
       })
     );
 
-    expect(
-      await (
+    await expect(
+      (
         await getDb()
       )
         .collection<InternalUser>('users')
         .find({ _id: { $in: newUsers.map((b) => new ObjectId(b.user_id)) } })
         .toArray()
-    ).toIncludeSameMembers(expectedInternalUsers);
+    ).resolves.toIncludeSameMembers(expectedInternalUsers);
   });
 });
 
@@ -2342,9 +2331,9 @@ describe('::updateUser', () => {
     const users = (await getDb()).collection<InternalUser>('users');
     const patchedUserIds = itemToObjectId(dummyDbData.users.slice(0, items.length));
 
-    expect(
-      await users.find({ _id: { $in: patchedUserIds } }).toArray()
-    ).toIncludeSameMembers(
+    await expect(
+      users.find({ _id: { $in: patchedUserIds } }).toArray()
+    ).resolves.toIncludeSameMembers(
       items.map((item) => {
         const { imageBase64: _, ...rest } = item;
         return expect.objectContaining(rest);
@@ -2576,9 +2565,9 @@ describe('::updateUser', () => {
     const users = (await getDb()).collection<InternalUser>('users');
     const patchedUserIds = itemToObjectId(dummyDbData.users.slice(0, items.length));
 
-    expect(
-      await users.find({ _id: { $in: patchedUserIds } }).toArray()
-    ).toIncludeSameMembers(
+    await expect(
+      users.find({ _id: { $in: patchedUserIds } }).toArray()
+    ).resolves.toIncludeSameMembers(
       items.map((item) => {
         const { imageBase64: _, ...rest } = item;
         return expect.objectContaining({
@@ -2598,9 +2587,9 @@ describe('::searchMemes', () => {
 
     await withMockedEnv(
       async () => {
-        expect(
-          await Backend.searchMemes({ after: null, match: {}, regexMatch: {} })
-        ).toStrictEqual(reversedMemes.slice(0, 5).map(toPublicMeme));
+        await expect(
+          Backend.searchMemes({ after: null, match: {}, regexMatch: {} })
+        ).resolves.toStrictEqual(reversedMemes.slice(0, 5).map(toPublicMeme));
       },
       { RESULTS_PER_PAGE: '5' }
     );
@@ -2662,25 +2651,25 @@ describe('::searchMemes', () => {
 
     await withMockedEnv(
       async () => {
-        expect(
-          await Backend.searchMemes({ after: null, match: {}, regexMatch: {} })
-        ).toStrictEqual(reversedMemes.slice(0, 5).map(toPublicMeme));
+        await expect(
+          Backend.searchMemes({ after: null, match: {}, regexMatch: {} })
+        ).resolves.toStrictEqual(reversedMemes.slice(0, 5).map(toPublicMeme));
 
-        expect(
-          await Backend.searchMemes({
+        await expect(
+          Backend.searchMemes({
             after: reversedMemes[4]._id,
             match: {},
             regexMatch: {}
           })
-        ).toStrictEqual(reversedMemes.slice(5, 10).map(toPublicMeme));
+        ).resolves.toStrictEqual(reversedMemes.slice(5, 10).map(toPublicMeme));
 
-        expect(
-          await Backend.searchMemes({
+        await expect(
+          Backend.searchMemes({
             after: reversedMemes[9]._id,
             match: {},
             regexMatch: {}
           })
-        ).toStrictEqual(reversedMemes.slice(10, 15).map(toPublicMeme));
+        ).resolves.toStrictEqual(reversedMemes.slice(10, 15).map(toPublicMeme));
       },
       { RESULTS_PER_PAGE: '5' }
     );
@@ -2693,23 +2682,23 @@ describe('::searchMemes', () => {
     await db.collection('memes').deleteMany({});
     await db.collection('users').deleteMany({});
 
-    expect(
-      await Backend.searchMemes({ after: null, match: {}, regexMatch: {} })
-    ).toStrictEqual([]);
+    await expect(
+      Backend.searchMemes({ after: null, match: {}, regexMatch: {} })
+    ).resolves.toStrictEqual([]);
   });
 
   it('returns expected memes when using match and regexMatch simultaneously', async () => {
     expect.hasAssertions();
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: { likes: { $lt: 100 } },
         regexMatch: {
           owner: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}`
         }
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) =>
@@ -2723,8 +2712,8 @@ describe('::searchMemes', () => {
   it('returns expected memes when matching ID-related fields', async () => {
     expect.hasAssertions();
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           likes: { $lt: 100 },
@@ -2732,7 +2721,7 @@ describe('::searchMemes', () => {
         },
         regexMatch: {}
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) =>
@@ -2742,15 +2731,15 @@ describe('::searchMemes', () => {
       )
     );
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           likes: { $lt: 100 }
         },
         regexMatch: { owner: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}` }
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) =>
@@ -2760,8 +2749,8 @@ describe('::searchMemes', () => {
       )
     );
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           likes: { $lt: 100 },
@@ -2769,7 +2758,7 @@ describe('::searchMemes', () => {
         },
         regexMatch: {}
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) =>
@@ -2780,8 +2769,8 @@ describe('::searchMemes', () => {
       )
     );
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           likes: { $lt: 100 }
@@ -2790,7 +2779,7 @@ describe('::searchMemes', () => {
           receiver: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}`
         }
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) =>
@@ -2801,8 +2790,8 @@ describe('::searchMemes', () => {
       )
     );
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           likes: { $lt: 100 },
@@ -2810,7 +2799,7 @@ describe('::searchMemes', () => {
         },
         regexMatch: {}
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) =>
@@ -2820,15 +2809,15 @@ describe('::searchMemes', () => {
       )
     );
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           likes: { $lt: 100 }
         },
         regexMatch: { owner: `${dummyDbData.users[0]._id}|${dummyDbData.users[1]._id}` }
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) =>
@@ -2844,29 +2833,29 @@ describe('::searchMemes', () => {
 
     const now = Date.now();
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           createdAt: { $lt: now, $gt: now / 2 }
         },
         regexMatch: {}
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter((b) => b.createdAt < now && b.createdAt > now / 2)
       )
     );
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           expiredAt: { $gte: now, $lte: now + now / 2 }
         },
         regexMatch: {}
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter(
           (b) => b.expiredAt >= now && b.expiredAt <= now + now / 2
@@ -2880,15 +2869,15 @@ describe('::searchMemes', () => {
 
     const now = Date.now();
 
-    expect(
-      await Backend.searchMemes({
+    await expect(
+      Backend.searchMemes({
         after: null,
         match: {
           createdAt: { $or: [{ $lt: now }, { $gt: now / 2 }] }
         },
         regexMatch: {}
       }).then((r) => r.map((b) => b.meme_id.toString()))
-    ).toIncludeSameMembers(
+    ).resolves.toIncludeSameMembers(
       itemToStringId(
         dummyDbData.memes.filter((b) => b.createdAt < now || b.createdAt > now / 2)
       )
@@ -3037,8 +3026,8 @@ describe('::isKeyAuthentic', () => {
   it('returns true iff an API key is found in the system', async () => {
     expect.hasAssertions();
 
-    expect(await Backend.isKeyAuthentic(Backend.NULL_KEY)).toBeFalse();
-    expect(await Backend.isKeyAuthentic(Backend.DUMMY_KEY)).toBeTrue();
+    await expect(Backend.isKeyAuthentic(Backend.NULL_KEY)).resolves.toBeFalse();
+    await expect(Backend.isKeyAuthentic(Backend.DUMMY_KEY)).resolves.toBeTrue();
   });
 });
 
@@ -3181,11 +3170,11 @@ describe('::isRateLimited', () => {
       url: '/api/route/path2'
     } as unknown as NextApiRequest;
 
-    expect(await Backend.isRateLimited(req1)).toStrictEqual({
+    await expect(Backend.isRateLimited(req1)).resolves.toStrictEqual({
       limited: false,
       retryAfter: 0
     });
-    expect(await Backend.isRateLimited(req2)).toStrictEqual({
+    await expect(Backend.isRateLimited(req2)).resolves.toStrictEqual({
       limited: false,
       retryAfter: 0
     });
@@ -3199,13 +3188,13 @@ describe('::isRateLimited', () => {
       url: '/api/route/path1'
     } as unknown as NextApiRequest;
 
-    expect(await Backend.isRateLimited(req)).toContainEntry(['limited', true]);
+    await expect(Backend.isRateLimited(req)).resolves.toContainEntry(['limited', true]);
 
     await (await getDb())
       .collection<InternalLimitedLogEntry>('limited-log-mview')
       .updateOne({ ip: '1.2.3.4' }, { $set: { until: Date.now() - 10 ** 5 } });
 
-    expect(await Backend.isRateLimited(req)).toStrictEqual({
+    await expect(Backend.isRateLimited(req)).resolves.toStrictEqual({
       limited: false,
       retryAfter: 0
     });
@@ -3235,7 +3224,7 @@ describe('::handleImageUpload', () => {
 
     const listen = (await import('test-listen')).default;
     const http = await import('http');
-    const fetchActual = jest.requireActual('node-fetch');
+    const fetchActual = jest.requireActual('node-fetch').default;
     const uploadsDb = (await getDb()).collection<WithId<InternalUpload>>('uploads');
     let server: ReturnType<typeof http.createServer> | undefined;
 
@@ -3254,9 +3243,11 @@ describe('::handleImageUpload', () => {
 
       await expect(
         Backend.handleImageUpload(Backend.DUMMY_KEY, imageBase64)
-      ).resolves.toStrictEqual('https://i.imgur.com/fake');
+      ).resolves.toBe('https://i.imgur.com/fake');
 
-      expect(await uploadsDb.countDocuments({ uri: 'https://i.imgur.com/fake' })).toBe(1);
+      await expect(
+        uploadsDb.countDocuments({ uri: 'https://i.imgur.com/fake' })
+      ).resolves.toBe(1);
 
       const then =
         (await uploadsDb
@@ -3266,9 +3257,11 @@ describe('::handleImageUpload', () => {
 
       await expect(
         Backend.handleImageUpload(Backend.DUMMY_KEY, imageBase64)
-      ).resolves.toStrictEqual('https://i.imgur.com/fake');
+      ).resolves.toBe('https://i.imgur.com/fake');
 
-      expect(await uploadsDb.countDocuments({ uri: 'https://i.imgur.com/fake' })).toBe(1);
+      await expect(
+        uploadsDb.countDocuments({ uri: 'https://i.imgur.com/fake' })
+      ).resolves.toBe(1);
 
       const now =
         (await uploadsDb

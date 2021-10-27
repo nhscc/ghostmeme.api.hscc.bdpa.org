@@ -147,6 +147,6 @@ export async function wrapHandler(
       }
     }
   } catch (error) {
-    await handleError(res, error);
+    await handleError(res, error as Error);
   }
 }

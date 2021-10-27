@@ -106,7 +106,7 @@ export default async function main() {
     await closeDb();
     log('execution complete');
   } catch (e) {
-    throw new ExternalError(e.message || e.toString());
+    throw new ExternalError(`${e instanceof Error ? e.message : e}`);
   }
 }
 
