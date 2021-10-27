@@ -49,7 +49,8 @@
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "incremental": true
   },
   "include": [
     "types/**/*.ts*",
