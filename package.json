@@ -121,7 +121,7 @@
     "jest-extended": "^1.1.0",
     "jest-silent-reporter": "^0.5.0",
     "lint-staged": "^11.2.6",
-    "mongodb-memory-server": "^8.0.1",
+    "mongodb-memory-server": "^8.0.2",
     "next-test-api-route-handler": "^2.3.0",
     "prettier": "^2.4.1",
     "remark-cli": "^10.0.0",
