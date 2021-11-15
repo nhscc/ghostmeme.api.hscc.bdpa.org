@@ -147,7 +147,7 @@
     "text-extensions": "^2.4.0",
     "threads": "^1.7.0",
     "type-fest": "^2.5.2",
-    "typedoc": "^0.22.7",
+    "typedoc": "^0.22.9",
     "typedoc-plugin-markdown": "^3.11.3",
     "unique-filename": "^1.1.1",
     "webpack": "^5.62.1",
