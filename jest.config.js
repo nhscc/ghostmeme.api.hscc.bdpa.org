@@ -21,5 +21,12 @@ module.exports = {
   },
   setupFilesAfterEnv: ['./test/setup.ts'],
   collectCoverageFrom: ['src/**/*.ts?(x)', 'external-scripts/**/*.ts?(x)'],
-  transformIgnorePatterns: [`/node_modules/(?!${['node-fetch', 'fetch-blob'].join('|')})`]
+  transformIgnorePatterns: [
+    `/node_modules/(?!${[
+      'node-fetch',
+      'fetch-blob',
+      'data-uri-to-buffer',
+      'formdata-polyfill'
+    ].join('|')})`
+  ]
 };
