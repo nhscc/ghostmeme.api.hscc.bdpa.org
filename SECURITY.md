@@ -7,9 +7,9 @@ security-related incident, or otherwise sensitive subject to us [via email][5].
 
 Thank you for your contribution!
 
-[1]: https://snyk.io/test/github/Xunnamius/next-test-api-route-handler
-[2]: https://snyk.io/test/github/Xunnamius/next-test-api-route-handler/badge.svg
-[3]: https://github.com/Xunnamius/next-test-api-route-handler/issues?q=
-[4]: https://github.com/Xunnamius/next-test-api-route-handler/issues/new/choose
+[1]: https://snyk.io/test/github/Xunnamius/ghostmeme.api.hscc.bdpa.org
+[2]: https://snyk.io/test/github/Xunnamius/ghostmeme.api.hscc.bdpa.org/badge.svg
+[3]: https://github.com/Xunnamius/ghostmeme.api.hscc.bdpa.org/issues?q=
+[4]: https://github.com/Xunnamius/ghostmeme.api.hscc.bdpa.org/issues/new/choose
 [5]:
   mailto:security@ergodark.com?subject=ALERT%3A%20SECURITY%20INCIDENT%3A%20%28five%20word%20summary%29

@@ -74,11 +74,12 @@ module.exports = () => {
       ];
     },
 
+    // TODO: remove this after competition ends
     async headers() {
       return [
         {
           // ? https://github.com/vercel/next.js/discussions/17991
-          source: '/(.*?)',
+          source: '/:path*',
           headers: [
             {
               // ! Prevents all SEO and hides site from search engines

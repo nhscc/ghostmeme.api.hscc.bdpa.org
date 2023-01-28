@@ -20,13 +20,5 @@ module.exports = {
     '^package$': '<rootDir>/package.json'
   },
   setupFilesAfterEnv: ['./test/setup.ts'],
-  collectCoverageFrom: ['src/**/*.ts?(x)', 'external-scripts/**/*.ts?(x)'],
-  transformIgnorePatterns: [
-    `/node_modules/(?!${[
-      'node-fetch',
-      'fetch-blob',
-      'data-uri-to-buffer',
-      'formdata-polyfill'
-    ].join('|')})`
-  ]
+  collectCoverageFrom: ['src/**/*.ts?(x)', 'external-scripts/**/*.ts?(x)']
 };

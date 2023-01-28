@@ -2580,7 +2580,7 @@ describe('::updateUser', () => {
 });
 
 describe('::searchMemes', () => {
-  const reversedMemes = dummyDbData.memes.reverse();
+  const reversedMemes = [...dummyDbData.memes].reverse();
 
   it('returns all memes if no query params given', async () => {
     expect.hasAssertions();

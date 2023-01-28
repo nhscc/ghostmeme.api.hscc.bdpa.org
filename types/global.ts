@@ -12,7 +12,7 @@ export interface FriendId extends MemeId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FriendRequestId extends MemeId {}
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface UnixEpochMs extends number {}
+export interface UnixEpochMs extends Number {}
 
 /**
  * The shape of the options object accepted by the chats worker.

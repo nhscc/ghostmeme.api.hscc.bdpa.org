@@ -1,43 +1,18 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "baseUrl": ".",
     "checkJs": false,
     // ? Only for Next.js
     "jsx": "preserve",
     "declaration": true,
-    "isolatedModules": true,
-    "strict": true,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      // ! If changed, also update these aliases in jest.config.js,
-      // ! webpack.config.js, next.config.ts, and .eslintrc.js
-      "universe/*": [
-        "src/*"
-      ],
-      "multiverse/*": [
-        "lib/*"
-      ],
-      "testverse/*": [
-        "test/*"
-      ],
-      "externals/*": [
-        "external-scripts/*"
-      ],
-      "types/*": [
-        "types/*"
-      ],
-      "package": [
-        "package.json"
-      ]
-    },
-    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "inlineSourceMap": true,
+    "isolatedModules": true,
     "lib": [
       "ESNext",
       "DOM",
@@ -45,21 +20,34 @@
       "ScriptHost",
       "DOM.Iterable"
     ],
-    "skipLibCheck": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "noEmit": true,
-    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      // ! If changed, also update these aliases in jest.config.js,
+      // ! webpack.config.js, next.config.ts, and .eslintrc.js
+      "externals/*": ["external-scripts/*"],
+      "multiverse/*": ["lib/*"],
+      "package": ["package.json"],
+      "pkgverse/*": ["packages/*"],
+      "testverse/*": ["test/*"],
+      "types/*": ["types/*"],
+      "universe/*": ["src/*"]
+    },
     "resolveJsonModule": true,
-    "inlineSourceMap": true,
-    "incremental": true
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext"
   },
+  "exclude": ["node_modules"],
   "include": [
-    "types/**/*.ts*",
-    "lib/**/*.ts*",
-    "src/**/*.ts*",
-    "test/**/*.ts*",
-    "external-scripts/**/*.ts*"
-  ],
-  "exclude": [
-    "node_modules"
+    "types/**/*",
+    "lib/**/*",
+    "src/**/*",
+    "test/**/*",
+    "external-scripts/**/*",
+    "packages/**/*"
   ]
 }

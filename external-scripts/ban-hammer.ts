@@ -4,7 +4,7 @@ import { ExternalError, IllegalExternalEnvironmentError } from 'universe/backend
 import { getDb, closeDb } from 'universe/backend/db';
 import debugFactory from 'debug';
 
-const debugNamespace = `${pkgName}:prune-data`;
+const debugNamespace = `${pkgName}:ban-hammer`;
 
 const oneSecondInMs = 1000;
 const log = debugFactory(debugNamespace);

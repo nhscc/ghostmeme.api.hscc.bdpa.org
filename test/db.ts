@@ -244,8 +244,14 @@ export async function hydrateDb(db: Db, data: DummyDbData) {
     ...[
       newData.uploads.length ? db.collection('uploads').insertMany(newData.uploads) : null
     ],
-    ...[newData.logs ? db.collection('request-log').insertMany(newData.logs) : null],
-    ...[newData.bans ? db.collection('limited-log-mview').insertMany(newData.bans) : null]
+    ...[
+      newData.logs.length ? db.collection('request-log').insertMany(newData.logs) : null
+    ],
+    ...[
+      newData.bans.length
+        ? db.collection('limited-log-mview').insertMany(newData.bans)
+        : null
+    ]
   ]);
 
   return newData;

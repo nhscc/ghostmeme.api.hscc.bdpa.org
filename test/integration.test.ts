@@ -1,3 +1,4 @@
+/* eslint-disable jest/require-hook */
 import { testApiHandler } from 'next-test-api-route-handler';
 import { get as dotPath } from 'dot-prop';
 import { toss } from 'toss-expression';

@@ -2,7 +2,10 @@
 
 module.exports = {
   reject: [
-    // ? Pin eslint to ^7 until eslint-config-next updates its peer deps
-    'eslint'
+    // ? Pin the CJS version of execa
+    'execa',
+    // ? Pin the CJS version of node-fetch (and its types)
+    'node-fetch',
+    '@types/node-fetch'
   ]
 };
